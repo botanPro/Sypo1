@@ -1,0 +1,6 @@
+framework module Pods_RealEstates {
+  umbrella header "Pods-RealEstates-umbrella.h"
+
+  export *
+  module * { export * }
+}
