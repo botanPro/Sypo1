@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ExpImagesCollectionViewCell" customModule="RealEstates" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="189" height="124"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="189" height="124"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dRN-dN-cdp">
+                        <rect key="frame" x="0.0" y="0.0" width="189" height="90"/>
+                        <color key="backgroundColor" red="0.83398738049999999" green="0.83398738049999999" blue="0.83398738049999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lti-d1-vH5">
+                        <rect key="frame" x="74.5" y="92" width="40" height="26"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="cKk-uo-Sek"/>
+                            <constraint firstAttribute="height" constant="26" id="dR8-hq-Pbh"/>
+                        </constraints>
+                        <color key="tintColor" red="0.60332480430000002" green="0.62546936850000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <state key="normal" image="vuesax-bold-close-circle">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="CornerRadius">
+                                <integer key="value" value="7"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Lti-d1-vH5" secondAttribute="bottom" constant="6" id="O5Z-rT-4Vb"/>
+                <constraint firstItem="Lti-d1-vH5" firstAttribute="top" secondItem="dRN-dN-cdp" secondAttribute="bottom" constant="2" id="Q49-eH-Dh8"/>
+                <constraint firstItem="dRN-dN-cdp" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="jA2-D1-pVT"/>
+                <constraint firstAttribute="trailing" secondItem="dRN-dN-cdp" secondAttribute="trailing" id="mAU-yf-c4L"/>
+                <constraint firstItem="dRN-dN-cdp" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="zf6-ha-t0g"/>
+                <constraint firstItem="Lti-d1-vH5" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="zp8-9z-j94"/>
+            </constraints>
+            <size key="customSize" width="189" height="124"/>
+            <connections>
+                <outlet property="Delete" destination="Lti-d1-vH5" id="lxh-kE-aeW"/>
+                <outlet property="Imagee" destination="dRN-dN-cdp" id="ie0-I1-t3G"/>
+            </connections>
+            <point key="canvasLocation" x="122.46376811594205" y="155.35714285714286"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="vuesax-bold-close-circle" width="24" height="24"/>
+    </resources>
+</document>

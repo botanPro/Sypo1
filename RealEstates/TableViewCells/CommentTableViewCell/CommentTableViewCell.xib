@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="80" id="KGk-i7-Jjw" customClass="CommentTableViewCell" customModule="RealEstates" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="327" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="327" height="80"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-user-2" translatesAutoresizingMaskIntoConstraints="NO" id="rQd-8l-ZG0">
+                        <rect key="frame" x="16" y="10" width="60" height="60"/>
+                        <color key="backgroundColor" red="0.7803398512803319" green="0.77444148502962029" blue="0.81760768225017366" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="LHp-ha-zHA"/>
+                            <constraint firstAttribute="width" constant="60" id="wgR-Gb-ctl"/>
+                        </constraints>
+                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="J45-Io-EyN">
+                        <rect key="frame" x="87" y="14" width="230" height="15"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anderio Ludes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61H-St-pGT">
+                                <rect key="frame" x="0.0" y="0.0" width="162" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="11i-mR-9ue"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                <color key="textColor" red="0.24434005282049098" green="0.28621645242188615" blue="0.33197414513790247" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20-21-3" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QGo-te-S6r">
+                                <rect key="frame" x="170" y="0.0" width="60" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="3nt-g5-CfL"/>
+                                    <constraint firstAttribute="width" constant="60" id="sPo-6T-BFo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                <color key="textColor" red="0.37162511040000001" green="0.43531635320000001" blue="0.50491078690000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello everyone Hello everyone Hello everyone Hello everyone Hello everyone Hello everyone Hello everyone" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="och-6p-J0h">
+                        <rect key="frame" x="92" y="34" width="225" height="36"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="wLX-I1-qoW"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.37162511044624708" green="0.43531635323398926" blue="0.50491078694661451" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="och-6p-J0h" firstAttribute="leading" secondItem="rQd-8l-ZG0" secondAttribute="trailing" constant="16" id="6LK-oo-SJ7"/>
+                    <constraint firstAttribute="trailing" secondItem="och-6p-J0h" secondAttribute="trailing" constant="10" id="7u0-mq-K61"/>
+                    <constraint firstItem="rQd-8l-ZG0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="9tC-Sf-i5B"/>
+                    <constraint firstItem="J45-Io-EyN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="Dgc-c3-cce"/>
+                    <constraint firstAttribute="trailing" secondItem="J45-Io-EyN" secondAttribute="trailing" constant="10" id="FNT-4c-btl"/>
+                    <constraint firstItem="och-6p-J0h" firstAttribute="top" secondItem="J45-Io-EyN" secondAttribute="bottom" constant="5" id="NxJ-4R-5TD"/>
+                    <constraint firstItem="J45-Io-EyN" firstAttribute="leading" secondItem="rQd-8l-ZG0" secondAttribute="trailing" constant="11" id="TDR-Om-2p0"/>
+                    <constraint firstAttribute="bottom" secondItem="och-6p-J0h" secondAttribute="bottom" constant="10" id="lFN-lJ-5s9"/>
+                    <constraint firstItem="rQd-8l-ZG0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="vaw-zE-Nhg"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="Comment" destination="och-6p-J0h" id="rna-Gm-LqD"/>
+                <outlet property="Datee" destination="QGo-te-S6r" id="lLs-BB-KcL"/>
+                <outlet property="Imagee" destination="rQd-8l-ZG0" id="AjL-fL-CQ3"/>
+                <outlet property="Name" destination="61H-St-pGT" id="1nL-qo-lLd"/>
+            </connections>
+            <point key="canvasLocation" x="16.666666666666668" y="139.95535714285714"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icons8-user-2" width="33.333332061767578" height="33.333332061767578"/>
+    </resources>
+</document>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>477851249108-25k59tiact54o206im2bp71tq82s976p.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.477851249108-25k59tiact54o206im2bp71tq82s976p</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>477851249108-3ed11me0vhkuhvr14rl155r9p1926lde.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCUL1EGBLmbmTL-q3kSFoY3y36NIwsjxag</string>
+	<key>GCM_SENDER_ID</key>
+	<string>477851249108</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.maskani.sharkteam</string>
+	<key>PROJECT_ID</key>
+	<string>aqarat-spot</string>
+	<key>STORAGE_BUCKET</key>
+	<string>aqarat-spot.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:477851249108:ios:1452059aa208937204ce41</string>
+</dict>
+</plist>

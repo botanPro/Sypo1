@@ -1,0 +1,937 @@
+//
+//  EstateProfileVc.swift
+//  RealEstates
+//
+//  Created by botan pro on 1/9/22.
+//
+
+import UIKit
+import FSPagerView
+import SDWebImage
+import CRRefresh
+import Alamofire
+import SwiftyJSON
+import CollieGallery
+import MapKit
+import ScrollingPageControl
+import SKPhotoBrowser
+import YoutubePlayer_in_WKWebView
+import FirebaseDynamicLinks
+import FCAlertView
+class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDelegate , FCAlertViewDelegate, MKMapViewDelegate, CLLocationManagerDelegate{
+
+    
+    func playerViewDidBecomeReady(_ playerView: WKYTPlayerView) {
+    player.stopVideo()
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+    player.stopVideo()
+    }
+    
+    
+    
+    @IBAction func Dismiss(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    @IBOutlet weak var AddToFav: UIButton!
+    @IBAction func AddToFav(_ sender: Any) {
+        if UserDefaults.standard.bool(forKey: "Login") == true {
+            if let FireId = UserDefaults.standard.string(forKey: "UserId"){
+                FavoriteItemsObjectAip.GetFavoriteItemsById(fire_id: FireId) { item in
+                    if item.fire_id == FireId && item.estate_id == self.CommingEstate?.id ?? ""{
+                        FavoriteItemsObject.init(fire_id: "", estate_id: "", id:item.id ?? "").Remov()
+                        self.AddToFav.setImage(UIImage(named: "Heart"), for: .normal)
+                    }else{
+                        FavoriteItemsObject.init(fire_id: FireId, estate_id: self.CommingEstate?.id ?? "", id:UUID().uuidString).Upload()
+                        self.AddToFav.setImage(UIImage(named: "fill_heart"), for: .normal)
+                    }
+                }
+                
+            }
+        }else{
+            let vc = storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVCViewController
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }
+    }
+    
+    @IBAction func Share(_ sender: Any) {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "example.com"
+        components.path = "/maskani"
+        if let estateid = self.CommingEstate{
+            let maskaniIdQueryItem = URLQueryItem(name: "estate_id", value: "\(estateid.id ?? "")")
+            components.queryItems = [maskaniIdQueryItem]
+            
+            
+            guard let linkParameter =  components.url else{return}
+            print("i'm sharing \(linkParameter.absoluteString)")
+            
+            guard let shareLink = DynamicLinkComponents.init(link: linkParameter, domainURIPrefix: "https://maskanir.page.link") else {
+                print("could not create FDL components")
+                return
+            }
+            
+            
+            
+            if let bundleId = Bundle.main.bundleIdentifier{
+                shareLink.iOSParameters = DynamicLinkIOSParameters(bundleID: bundleId)
+            }
+            shareLink.iOSParameters?.appStoreID = "1602905831"
+            shareLink.androidParameters = DynamicLinkAndroidParameters(packageName: "com.alend.maskani")
+            
+            shareLink.socialMetaTagParameters = DynamicLinkSocialMetaTagParameters()
+            
+            shareLink.socialMetaTagParameters?.title = estateid.name
+            
+            shareLink.socialMetaTagParameters?.descriptionText = String(estateid.price ?? 0.0).currencyFormatting()
+            let urlImage = URL(string: estateid.ImageURL?[0] ?? "")
+            shareLink.socialMetaTagParameters?.imageURL = urlImage
+            
+            shareLink.shorten { [weak self] (url, warnings, error) in
+                if let error = error {
+                    print("found error \(error.localizedDescription)")
+                    return
+                }
+                
+                if let warnings = warnings{
+                    for warning in warnings{
+                        print("warning : \(warning)")
+                    }
+                }
+                guard let url = url else{return}
+                print("short url : \(url)")
+                self?.ShowShareSheet(url)
+            }
+        }
+    }
+    
+    func ShowShareSheet(_ url : URL){
+        let image = UIImageView()
+        print("alan is bak home --------------------")
+        guard let estate = self.CommingEstate else{return}
+       
+        let urlImage = URL(string: estate.ImageURL?[0] ?? "")
+        let promtTex = "\(estate.name ?? "")"
+        let activity = UIActivityViewController(activityItems: [promtTex , url , image.sd_setImage(with: urlImage, completed: nil)], applicationActivities: nil)
+        
+        activity.excludedActivityTypes = [
+            UIActivity.ActivityType.postToWeibo,
+            UIActivity.ActivityType.print,
+            UIActivity.ActivityType.assignToContact,
+            UIActivity.ActivityType.saveToCameraRoll,
+            UIActivity.ActivityType.addToReadingList,
+            UIActivity.ActivityType.postToFlickr,
+            UIActivity.ActivityType.postToVimeo,
+            UIActivity.ActivityType.postToTencentWeibo
+        ]
+        present(activity, animated: true)
+    }
+    
+    
+    
+    let alert = FCAlertView()
+    @IBAction func View365(_ sender: Any) {
+        alert.titleColor = .black
+        alert.subTitleColor = .darkGray
+        alert.makeAlertTypeCaution()
+        alert.fullCircleCustomImage = false
+        alert.dismissOnOutsideTouch = true
+        alert.showAlert(
+            inView: self,
+            withTitle: "365 Image",
+            withSubtitle: "This feature will be available soon.",
+            withCustomImage: nil,
+            withDoneButtonTitle: nil,
+            andButtons: nil)
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+//            self.alert.removeFromSuperview()
+//        }
+        
+    }
+    
+    
+    
+    @IBOutlet weak var Dismiss: UIButton!
+    @IBOutlet weak var MapView: MKMapView!
+    
+    var EstateId = ""
+    var sliderImages : [String] = []
+    var SimilarArray : [EstateObject] = []
+    var pictures : [CollieGalleryPicture] = []
+    var NighborArray : [EstateTypeObject] = []
+    var selecteCell : EstateTypeObject?
+    var SCell = ""
+    let sectionInsets = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
+    var numberOfItemsPerRow: CGFloat = 2
+    let spacingBetweenCells: CGFloat = 10
+    
+    
+    
+    
+    @IBOutlet weak var EstateName: UILabel!
+    
+    @IBOutlet weak var OfficeLocation: UILabel!
+    @IBOutlet weak var OfficeName: UILabel!
+    @IBOutlet weak var OfficeImage: UIImageView!
+    @IBOutlet weak var OfficeRate: UILabel!
+    
+    @IBOutlet weak var RoomNo: UILabel!
+    @IBOutlet weak var propertyNo: UILabel!
+    @IBOutlet weak var Meters: UILabel!
+    
+    @IBOutlet weak var Description: UITextView!
+    @IBOutlet weak var Location: UILabel!
+    @IBOutlet weak var Price: UILabel!
+    @IBOutlet weak var RelatedCollectionView: UICollectionView!
+    @IBOutlet weak var DataCollectionView: UICollectionView!
+    @IBOutlet weak var ImageCollectionView: UICollectionView!
+    @IBOutlet weak var NighboresCollectionView: UICollectionView!
+    
+    
+    @IBOutlet weak var PagerControl: ScrollingPageControl!{
+        didSet {
+            self.PagerControl.dotColor = #colorLiteral(red: 0.7037086487, green: 0.7125672698, blue: 0.7124114633, alpha: 0.4034000422)
+            self.PagerControl.selectedColor = #colorLiteral(red: 1, green: 0.9771955609, blue: 1, alpha: 1)
+            self.PagerControl.dotSize = CGFloat(8)
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NighboresCollectionView.register(UINib(nibName: "EstateTypeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "NCell")
+        RelatedCollectionView.register(UINib(nibName: "AllEstatessCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "RelatedCell")
+        DataCollectionView.register(UINib(nibName: "DataCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "DataCell")
+        ImageCollectionView.register(UINib(nibName: "ImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
+        
+        self.MapView.layer.cornerRadius = 10
+        self.MapView.delegate = self
+        if sliderImages.count <= 5 {
+            self.PagerControl.maxDots = 5
+            self.PagerControl.centerDots = 5
+        } else {
+            self.PagerControl.maxDots = 7
+            self.PagerControl.centerDots = 3
+        }
+        self.Description.delegate = self
+        self.PagerControl.pages = 10
+        
+        GetData()
+        GetEstateType()
+        
+        
+        
+        
+        if let FireId = UserDefaults.standard.string(forKey: "UserId"){
+            FavoriteItemsObjectAip.GetFavoriteItemsById(fire_id: FireId) { item in
+                if item.fire_id == FireId && item.estate_id == self.CommingEstate?.id ?? ""{
+                    self.AddToFav.setImage(UIImage(named: "fill_heart"), for: .normal)
+                }else{
+                    self.AddToFav.setImage(UIImage(named: "Heart"), for: .normal)
+                }
+            }
+        }
+    }
+    
+    
+    
+    func GetEstateType(){
+        EstateTypeAip.GetEstateType { types in
+            self.NighborArray = types
+            self.NighboresCollectionView.reloadData()
+        }
+    }
+    
+    
+    func GetRelated(type:String){
+            self.SimilarArray.removeAll()
+            ProductAip.GetAllSectionProducts(TypeId: type) { Product in
+                self.SimilarArray.append(Product)
+                self.RelatedCollectionView.reloadData()
+            }
+    }
+    
+    var EstateForMap : [EstateObject] = []
+    var youtubeUrl = ""
+    var youtubeId = ""
+    @IBOutlet weak var player: WKYTPlayerView!
+    var lat = ""
+    var long = ""
+    var count = 0.0
+    var RateValue = 0.0
+    var OfficeData : OfficesObject?
+    var CommingEstate : EstateObject?
+    var RealDirection  = ""
+    var lang : Int = UserDefaults.standard.integer(forKey: "language")
+    var m2 = ""
+    func GetData(){
+        if let data = CommingEstate{
+            
+            self.profileID = data.id ?? ""
+            self.sliderImages = data.ImageURL ?? []
+           
+            
+            
+            self.PagerControl.pages = data.ImageURL?.count ?? 0
+            self.ImageCollectionView.reloadData()
+            self.GetRelated(type:data.estate_type_id ?? "")
+            self.EstateName.text = data.name
+            
+            self.RoomNo.text = data.RoomNo
+            let font:UIFont? = UIFont(name: "ArialRoundedMTBold", size: 23)!
+            let fontSuper:UIFont? = UIFont(name: "ArialRoundedMTBold", size: 15)!
+            if self.lang == 2{
+                self.m2 = "m2"
+            }else if lang == 3{
+                self.m2 = "م٢"
+            }else{
+                self.m2 = "م٢"
+            }
+            let attString:NSMutableAttributedString = NSMutableAttributedString(string: "\(data.space ?? "")\(self.m2)", attributes: [.font:font!])
+            attString.setAttributes([.font:fontSuper!,.baselineOffset:4], range: NSRange(location:(data.space?.count ?? 0) + 1,length:1))
+            self.Meters.attributedText = attString
+            self.propertyNo.text = data.propertyNo
+            
+            self.Location.text = data.address
+            
+            self.Description.text = data.desc
+            self.DescHight.constant = self.Description.contentSize.height
+            self.view.layoutIfNeeded()
+
+            
+            if XLanguage.get() == .Kurdish{
+                self.keys.append("مۆبیلیات کراوە")
+                self.keys.append("جۆری بەند")
+                self.keys.append("ژمارەی خانووبەر.")
+                self.keys.append("ساڵی دروست کردن")
+                self.keys.append("ئاڕاستە")
+                self.keys.append("ئەم خانووبەرە")
+            }else if XLanguage.get() == .English{
+                self.keys.append("Furnished")
+                self.keys.append("Bond Type")
+                self.keys.append("Property No.")
+                self.keys.append("Constraction year")
+                self.keys.append("Direction")
+                self.keys.append("This estate is")
+            }else{
+                self.keys.append("مفروشة")
+                self.keys.append("نوع السند")
+                self.keys.append("رقم العقار")
+                self.keys.append("سنة البناء")
+                self.keys.append("الاتجاه")
+                self.keys.append("هذا العقار")
+            }
+            
+            
+            
+            if data.Furnished == "0" && XLanguage.get() == .English{
+                self.value.append("Furnished")
+            }else if data.Furnished == "1" && XLanguage.get() == .English{
+                self.value.append("Not Furnished")
+            }
+            if data.Furnished == "0" && XLanguage.get() == .Kurdish{
+                self.value.append("مۆبیلیات کراوە")
+            }else if data.Furnished == "1" && XLanguage.get() == .Kurdish{
+                self.value.append("مۆبیلیات نییە")
+            }
+            if data.Furnished == "0" && XLanguage.get() == .Arabic{
+                self.value.append("مفروشة")
+            }else if data.Furnished == "1" && XLanguage.get() == .Arabic{
+                self.value.append("غير مفروشة")
+            }
+            
+            
+            
+            if data.BondType == "0" && XLanguage.get() == .English{
+                self.value.append("Own It")
+            }else if data.BondType == "1" && XLanguage.get() == .English{
+                self.value.append("Sell")
+            }
+            if data.BondType == "0" && XLanguage.get() == .Kurdish{
+                self.value.append("فرۆشتنی")
+            }else if data.BondType == "1" && XLanguage.get() == .Kurdish{
+                self.value.append("خاوەندارێتی بکە")
+            }
+            if data.BondType == "0" && XLanguage.get() == .Arabic{
+                self.value.append("تملكها")
+            }else if data.BondType == "1" && XLanguage.get() == .Arabic{
+                self.value.append("بيع")
+            }
+            
+            
+
+            self.value.append(data.propertyNo ?? "")
+            
+            self.value.append(data.Year ?? "")
+            
+
+            
+            if data.Direction == "N"{
+                if self.lang == 2{
+                    self.value.append("North")
+                }else if lang == 3{
+                    self.value.append("شمال")
+                }else{
+                    self.value.append("باکور")
+                }
+            }
+            
+            if data.Direction == "NE"{
+                if self.lang == 2{
+                    self.value.append("Northeast")
+                }else if lang == 3{
+                    self.value.append("الشمال الشرقي")
+                }else{
+                    self.value.append("باکوورێ رۆژهەڵات")
+                }
+            }
+            
+            if data.Direction == "E"{
+                if self.lang == 2{
+                    self.value.append("East")
+                }else if lang == 3{
+                    self.value.append("شرق")
+                }else{
+                    self.value.append("رۆژهەڵات")
+                }
+            }
+            
+            
+            if data.Direction == "SE"{
+                if self.lang == 2{
+                    self.value.append("Southeast")
+                }else if lang == 3{
+                    self.value.append("الجنوب الشرقي")
+                }else{
+                    self.value.append("باشوورێ رۆژهەڵات")
+                }
+            }
+            
+            
+            if data.Direction == "S"{
+                if self.lang == 2{
+                    self.value.append("South")
+                }else if lang == 3{
+                    self.value.append("الجنوب")
+                }else{
+                    self.value.append("باشور")
+                }
+            }
+            
+            if data.Direction == "SW"{
+                if self.lang == 2{
+                    self.value.append("Southwest")
+                }else if lang == 3{
+                    self.value.append("جنوب غرب")
+                }else{
+                    self.value.append("باشوورێ رۆژئاڤا")
+                }
+            }
+            
+            if data.Direction == "W"{
+                if self.lang == 2{
+                    self.value.append("West")
+                }else if lang == 3{
+                    self.value.append("الغرب")
+                }else{
+                    self.value.append("رۆژئاڤا")
+                }
+            }
+            
+            if data.Direction == "NW"{
+                if self.lang == 2{
+                    self.value.append("Northwest")
+                }else if lang == 3{
+                    self.value.append("الشمال الغربي")
+                }else{
+                    self.value.append("باکوورێ رۆژئاڤا")
+                }
+            }
+            
+            
+            if data.RentOrSell == "0"{
+                if XLanguage.get() == .Kurdish{
+                    let longString = "\(data.price?.description.currencyFormatting() ?? "")/ مانگانە"
+                    let longestWord = "مانگانە"
+                    let longestWordRange = (longString as NSString).range(of: longestWord)
+
+                    let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 24)!])
+
+                    attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "PeshangDes2", size: 18)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
+                    
+                    self.Price.attributedText = attributedString
+                }else if XLanguage.get() == .English{
+                    let longString = "\(data.price?.description.currencyFormatting() ?? "")/ Monthly"
+                    let longestWord = "Monthly"
+                    let longestWordRange = (longString as NSString).range(of: longestWord)
+
+                    let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 24)!])
+
+                    attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 10)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
+                    
+                    self.Price.attributedText = attributedString
+                }else{
+                    let longString = "\(data.price?.description.currencyFormatting() ?? "")/ شهريا"
+                    let longestWord  = "شهريا"
+                    let longestWordRange = (longString as NSString).range(of: longestWord)
+
+                    let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 24)!])
+
+                    attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "PeshangDes2", size: 18)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
+                    
+                    self.Price.attributedText = attributedString
+                }
+                
+                if XLanguage.get() == .Kurdish{
+                    self.value.append("بۆ کرێ")
+                }else if XLanguage.get() == .English{
+                    self.value.append("For Rent")
+                }else{
+                    self.value.append("للايجار")
+                }
+            }else{
+                if XLanguage.get() == .Kurdish{
+                    self.value.append("بۆ فرۆشتن")
+                }else if XLanguage.get() == .English{
+                    self.value.append("For Sell")
+                }else{
+                    self.value.append("للبيع")
+                }
+                self.Price.text = data.price?.description.currencyFormatting()
+            }
+           
+            
+            
+            
+            
+            self.youtubeUrl = data.video_link ?? ""
+            self.youtubeId = youtubeUrl.youtubeID ?? ""
+            player.load(withVideoId: self.youtubeId, playerVars: ["playsinline":"1"])
+            player.delegate = self
+            player.layer.masksToBounds = true
+            
+            
+            
+            if data.estate_type_id == "UTY25FYJHkliygt4nvPP"{
+                
+                if XLanguage.get() == .Kurdish{
+                    self.keys.append("کرێی خزمەتگوزارییەکانی مانگانە")
+                    self.keys.append("باڵەخانە")
+                    self.keys.append("نهۆم")
+                }else if XLanguage.get() == .English{
+                    self.keys.append("Monthly Services Fee")
+                    self.keys.append("Building")
+                    self.keys.append("Floor")
+                }else{
+                    self.keys.append("رسوم الخدمات الشهرية")
+                    self.keys.append("عمارة")
+                    self.keys.append("الطابق")
+                }
+                
+                self.value.append(data.MonthlyService?.description.currencyFormattingIQD() ?? "")
+                
+                self.value.append(data.Building ?? "")
+                
+                self.value.append(data.floor ?? "")
+                
+
+            }
+            
+            self.DataCollectionView.reloadData()
+            
+            
+                OfficeAip.GetOffice(ID: data.office_id ?? "") { office in
+                    self.OfficeData = office
+                    let url = URL(string: office.ImageURL ?? "")
+                    self.OfficeImage.sd_setImage(with: url, completed: nil)
+                    self.OfficeName.text = office.name?.description.uppercased()
+                    self.OfficeLocation.text = office.address
+                    
+                    OfficeRatingAip.GetRatingByOfficeId(office_id: office.id ?? "") { arr in
+                        if arr.office_id == office.id ?? ""{
+                            self.count += 1
+                            self.RateValue += arr.rate ?? 0.0
+                        }
+                        self.RateValue = self.RateValue / self.count
+                        print("RateValue : \(self.RateValue)")
+                        self.OfficeRate.text = "\(self.RateValue)"
+                    }
+                    
+                }
+                self.lat = data.lat ?? ""
+                self.long = data.long ?? ""
+                let dbLat = Double(data.lat ?? "")
+                let dbLong = Double(data.long ?? "")
+                self.zoomToLocation(with: CLLocationCoordinate2D(latitude: dbLat!, longitude: dbLong!))
+            
+            
+            
+            }
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+    func zoomToLocation(with coordinate: CLLocationCoordinate2D) {
+        let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 10000, longitudinalMeters: 10000)
+        self.MapView.setRegion(region, animated: true)
+        let objectAnnotation = MKPointAnnotation()
+        objectAnnotation.coordinate = coordinate
+        objectAnnotation.title = ""
+        self.MapView.addAnnotation(objectAnnotation)
+    }
+
+    
+    
+    
+    @IBAction func GoToLocation(_ sender: Any) {
+        if let UrlNavigation = URL.init(string: "comgooglemaps://") {
+            if UIApplication.shared.canOpenURL(UrlNavigation){
+                if let urlDestination = URL.init(string: "comgooglemaps://?saddr=&daddr=\(self.lat.trimmingCharacters(in: .whitespaces)),\(self.long.trimmingCharacters(in: .whitespaces))&directionsmode=driving") {
+                    UIApplication.shared.open(urlDestination)
+                }
+            }else {print("opopopopop")
+                NSLog("Can't use comgooglemaps://");
+                self.openTrackerInBrowser()
+            }
+        }else{print("lkklklklkl")
+            NSLog("Can't use comgooglemaps://");
+            self.openTrackerInBrowser()
+        }
+    }
+    
+    
+    
+    func openTrackerInBrowser(){
+       if let urlDestination = URL.init(string: "http://maps.google.com/maps?q=loc:\(self.lat.trimmingCharacters(in: .whitespaces)),\(self.long.trimmingCharacters(in: .whitespaces))&directionsmode=driving") {
+              UIApplication.shared.open(urlDestination)
+          }
+      }
+    
+    
+    
+    
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if view.annotation is MKUserLocation{
+            return
+        }
+        
+        if let profileID = view.annotation as? profile {
+            ProductAip.GetProduct(ID: profileID.profileId) { product in
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let myVC = storyboard.instantiateViewController(withIdentifier: "GoToEstateProfileVc") as! EstateProfileVc
+                myVC.CommingEstate = product
+                myVC.modalPresentationStyle = .fullScreen
+                self.present(myVC, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    @IBAction func GoToOffice(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let myVC = storyboard.instantiateViewController(withIdentifier: "OfficeVC") as! OfficeVC
+        myVC.modalPresentationStyle = .fullScreen
+        myVC.OfficeData = self.OfficeData
+        self.present(myVC, animated: true, completion: nil)
+    }
+    
+    
+    @IBOutlet weak var DescHight: NSLayoutConstraint!
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+            UIView.animate(withDuration: 0.2) {
+                self.DescHight.constant = self.Description.contentSize.height
+                //self.view.layoutIfNeeded()
+            }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            let height = self.RelatedCollectionView.collectionViewLayout.collectionViewContentSize.height
+            self.RelatedEstatesCollectionLayout.constant = height
+        }
+    }
+    
+    
+    
+    func GetImages(){
+        if self.profileID != ""{
+//            self.sliderImages.removeAll()
+//            profileImageObjectAPI.GetprofileImage(profileId: (self.profileID as NSString).integerValue) { (images) in
+//                self.sliderImages = images
+//                //self.SliderController.numberOfPages = self.sliderImages.count
+//                for image in images{
+//                    let strUrl = "\(API.RealEstateImages)\(image.image)"
+//                    let picture = CollieGalleryPicture(url: strUrl.replacingOccurrences(of: " ", with: "%20"))
+//                    print(strUrl)
+//                    self.pictures.append(picture)
+//                }
+//                self.ImageCollectionView.reloadData()
+//            }
+        }
+    }
+    
+    
+    
+    
+    
+    var keys : [String] = []
+    var value  : [String] = []
+    var profileID = ""
+    
+
+    
+    
+    
+    @IBOutlet weak var RelatedEstatesCollectionLayout: NSLayoutConstraint!
+    
+ 
+    
+}
+
+
+
+
+
+
+
+
+
+extension EstateProfileVc : UICollectionViewDataSource, UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == NighboresCollectionView{
+            print("[][][][][][]-------------[")
+            print(NighborArray.count)
+            if NighborArray.count == 0 {
+                return 0
+            }else{
+                return NighborArray.count
+            }
+        }
+        if collectionView == ImageCollectionView{
+            if sliderImages.count == 0 {
+                return 0
+            }else{
+                return sliderImages.count
+            }
+        }
+        
+        if collectionView == DataCollectionView{
+            if keys.count == 0{
+                return 0
+            }
+            return keys.count
+        }
+        
+        if collectionView == RelatedCollectionView{
+            if SimilarArray.count == 0{
+                return 0
+            }
+            return SimilarArray.count
+        }
+        return 0
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if collectionView == ImageCollectionView{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ImageCollectionViewCell
+            if self.sliderImages.count != 0{
+                let url = URL(string: sliderImages[indexPath.row])
+                cell.imagee.sd_setImage(with: url, completed: nil)
+            }
+            return cell
+        }
+        
+        
+        if collectionView == DataCollectionView{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DataCell", for: indexPath) as! DataCollectionViewCell
+            cell.updateKey(cell: self.keys[indexPath.row])
+            cell.updateValue(cell: self.value[indexPath.row])
+            
+            if XLanguage.get() == .Kurdish{
+                cell.Typee.font = UIFont(name: "PeshangDes2", size: 10)!
+            }else if XLanguage.get() == .Kurdish{
+                cell.Typee.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            }else{
+                cell.Typee.font = UIFont(name: "PeshangDes2", size: 10)!
+            }
+            return cell
+        }
+        
+        if collectionView == NighboresCollectionView{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NCell", for: indexPath) as! EstateTypeCollectionViewCell
+            if self.NighborArray.count != 0{
+                if self.selecteCell?.id == NighborArray[indexPath.row].id{
+                    UIView.animate(withDuration: 0.3) {
+                        cell.Vieww.backgroundColor = #colorLiteral(red: 0, green: 0.6025940776, blue: 0.9986988902, alpha: 1)
+                        cell.Name.textColor = .white
+                    }
+                }else{
+                    cell.Vieww.backgroundColor = .white
+                    cell.Name.textColor = #colorLiteral(red: 0.4430069923, green: 0.4869378209, blue: 0.5339931846, alpha: 1)
+                }
+                cell.Name.text = NighborArray[indexPath.row].name
+            }
+            return cell
+        }
+        if collectionView == RelatedCollectionView{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RelatedCell", for: indexPath) as! AllEstatessCollectionViewCell
+            cell.update(self.SimilarArray[indexPath.row])
+            return cell
+        }
+        
+        return UICollectionViewCell()
+    }
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == NighboresCollectionView{
+            return CGSize(width: collectionView.frame.size.width / 4, height: 40)
+        }
+        if collectionView == ImageCollectionView{
+            return CGSize(width: collectionView.frame.size.width, height: 480)
+        }
+        
+        if collectionView == DataCollectionView{
+            return CGSize(width: collectionView.frame.size.width / 4, height: 65)
+        }
+        
+        if collectionView == RelatedCollectionView{
+            let totalSpacing = (2 * sectionInsets.left) + ((numberOfItemsPerRow - 1) * spacingBetweenCells)
+            let width = (collectionView.bounds.width - totalSpacing)/numberOfItemsPerRow
+            return CGSize(width: width, height: 250)
+        }
+        
+        return CGSize()
+    }
+
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if collectionView == ImageCollectionView{
+             self.PagerControl.selectedPage = indexPath.row
+        }
+    }
+    
+    
+     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+         if collectionView == NighboresCollectionView{
+         return 5
+         }
+         if collectionView == ImageCollectionView{
+         return 0
+         }
+         if collectionView == DataCollectionView{
+             return 0
+         }
+         if collectionView == RelatedCollectionView{
+             return spacingBetweenCells
+         }
+         return CGFloat()
+     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        if collectionView == RelatedCollectionView ||  collectionView == DataCollectionView || collectionView == NighboresCollectionView{
+            return UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
+        }
+        return UIEdgeInsets()
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == self.NighboresCollectionView{
+            if self.NighborArray.count != 0  && indexPath.row <= self.NighborArray.count{
+                self.SCell = NighborArray[indexPath.row].id ?? ""
+                self.selecteCell = self.NighborArray[indexPath.row]
+                
+                ProductAip.GetAllSectionProducts(TypeId: self.NighborArray[indexPath.row].id ?? "") { Product in
+                    self.EstateForMap.append(Product)
+                }
+                
+                if self.EstateForMap.count != 0{
+                    for loc in self.EstateForMap{
+                        let lat = Double(loc.lat ?? "")
+                        let long = Double(loc.long ?? "")
+                        if let latt = lat, let longg = long{
+                            let profileInfo = profile()
+                            profileInfo.profileId = loc.id ?? ""
+                            profileInfo.coordinate = CLLocationCoordinate2D(latitude: latt, longitude: longg)
+                            self.MapView.addAnnotation(profileInfo)
+                        }
+                    }
+                }
+                
+                self.NighboresCollectionView.reloadData()
+            }
+        }
+        
+        if collectionView == RelatedCollectionView{
+            if self.SimilarArray.count != 0 && indexPath.row <= self.SimilarArray.count{
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let myVC = storyboard.instantiateViewController(withIdentifier: "GoToEstateProfileVc") as! EstateProfileVc
+                myVC.CommingEstate = self.SimilarArray[indexPath.row]
+                myVC.modalPresentationStyle = .fullScreen
+                self.present(myVC, animated: true, completion: nil)
+            }
+        }
+        
+        if collectionView == ImageCollectionView{
+            var images = [SKPhoto]()
+            for img in self.sliderImages{
+                let photo = SKPhoto.photoWithImageURL(img)
+                photo.shouldCachePhotoURLImage = false
+                images.append(photo)
+            }
+            
+            let browser = SKPhotoBrowser(photos: images)
+            browser.initializePageIndex(indexPath.row)
+            present(browser, animated: true, completion: {})
+        }
+    }
+ 
+    
+}
+
+
+
+
+extension String {
+    var youtubeID: String? {
+        let pattern = "((?<=(v|V)/)|(?<=be/)|(?<=(\\?|\\&)v=)|(?<=embed/))([\\w-]++)"
+        
+        let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+        let range = NSRange(location: 0, length: count)
+        
+        guard let result = regex?.firstMatch(in: self, range: range) else {
+            return nil
+        }
+        
+        return (self as NSString).substring(with: result.range)
+    }
+    
+}
+

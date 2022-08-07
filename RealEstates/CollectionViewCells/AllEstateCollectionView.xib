@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="AllEstateCollectionView" customModule="RealEstates" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="380" height="120"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="380" height="120"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z3p-16-oTD">
+                        <rect key="frame" x="0.0" y="0.0" width="380" height="120"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo-1558472306-75b150ac26eb" translatesAutoresizingMaskIntoConstraints="NO" id="HMB-PF-FaC">
+                                <rect key="frame" x="10" y="10" width="112" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="112" id="6ta-sJ-oAG"/>
+                                    <constraint firstAttribute="height" constant="100" id="MVs-c7-vAg"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="qXv-3I-OKl">
+                                <rect key="frame" x="130" y="16.5" width="245" height="87"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="irV-Ex-OOU">
+                                        <rect key="frame" x="0.0" y="0.0" width="245" height="34"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="jbE-J7-3k4">
+                                                <rect key="frame" x="0.0" y="0.0" width="245" height="15"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4k-ap-yF0">
+                                                        <rect key="frame" x="0.0" y="0.0" width="181" height="15"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="15" id="S9n-45-cb8"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="14"/>
+                                                        <color key="textColor" red="0.1176470588" green="0.22352941179999999" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zLG-kr-dss">
+                                                        <rect key="frame" x="185" y="0.0" width="60" height="15"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="60" id="nFF-V9-WLZ"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="10"/>
+                                                        <color key="textColor" red="0.50618304628314392" green="0.50618304628314392" blue="0.50618304628314392" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4YB-mo-uGQ">
+                                                <rect key="frame" x="0.0" y="19" width="245" height="15"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="15" id="gZ1-6r-5Fn"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="11"/>
+                                                <color key="textColor" red="0.51624475339999998" green="0.51624475339999998" blue="0.51624475339999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="chw-e7-Rjs">
+                                        <rect key="frame" x="0.0" y="39" width="245" height="28"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="E8Y-h3-bVh">
+                                                <rect key="frame" x="0.0" y="0.0" width="75" height="28"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="roomno" translatesAutoresizingMaskIntoConstraints="NO" id="hpx-Lf-22i">
+                                                        <rect key="frame" x="0.0" y="4" width="20" height="20"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="20" id="7T9-lq-e8f"/>
+                                                            <constraint firstAttribute="height" constant="20" id="yQ9-wQ-o9t"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="erK-iE-Dxo">
+                                                        <rect key="frame" x="25" y="6.5" width="50" height="15"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="50" id="dcw-Fa-1xo"/>
+                                                            <constraint firstAttribute="height" constant="15" id="qVJ-kP-bTX"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="10"/>
+                                                        <color key="textColor" red="0.1176470588" green="0.22352941179999999" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Wzq-EK-v1S">
+                                                <rect key="frame" x="80" y="0.0" width="67" height="28"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Roomsize" translatesAutoresizingMaskIntoConstraints="NO" id="86E-Om-3Ri">
+                                                        <rect key="frame" x="0.0" y="4" width="20" height="20"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="20" id="Ues-zt-nJc"/>
+                                                            <constraint firstAttribute="height" constant="20" id="Y1o-Ag-Fn7"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ldE-dx-MPw">
+                                                        <rect key="frame" x="25" y="6.5" width="42" height="15"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="15" id="RU7-Jh-8qp"/>
+                                                            <constraint firstAttribute="width" constant="42" id="xpI-bt-ITA"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="10"/>
+                                                        <color key="textColor" red="0.1176470588" green="0.22352941179999999" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="wfT-1o-iao">
+                                                <rect key="frame" x="152" y="0.0" width="93" height="28"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fronticon" translatesAutoresizingMaskIntoConstraints="NO" id="ehK-mj-pTt">
+                                                        <rect key="frame" x="0.0" y="4" width="20" height="20"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="20" id="A73-xz-Rey"/>
+                                                            <constraint firstAttribute="height" constant="20" id="IcQ-49-cHZ"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFv-SO-qHM">
+                                                        <rect key="frame" x="25" y="6.5" width="68" height="15"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="15" id="QjV-gz-WTs"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="10"/>
+                                                        <color key="textColor" red="0.1176470588" green="0.22352941179999999" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjr-t2-Gl5">
+                                        <rect key="frame" x="0.0" y="72" width="245" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="Wvj-V2-KcP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="16"/>
+                                        <color key="textColor" red="0.1176470588" green="0.22352941179999999" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="qXv-3I-OKl" firstAttribute="top" secondItem="z3p-16-oTD" secondAttribute="top" constant="16.5" id="7lZ-vG-UjF"/>
+                            <constraint firstItem="HMB-PF-FaC" firstAttribute="leading" secondItem="z3p-16-oTD" secondAttribute="leading" constant="10" id="MDg-i4-VEv"/>
+                            <constraint firstAttribute="trailing" secondItem="qXv-3I-OKl" secondAttribute="trailing" constant="5" id="O4h-K1-xAa"/>
+                            <constraint firstAttribute="height" constant="120" id="T6k-Jr-Gbq"/>
+                            <constraint firstAttribute="bottom" secondItem="HMB-PF-FaC" secondAttribute="bottom" constant="10" id="UeS-I6-Gxl"/>
+                            <constraint firstItem="HMB-PF-FaC" firstAttribute="top" secondItem="z3p-16-oTD" secondAttribute="top" constant="10" id="XrU-IQ-FQq"/>
+                            <constraint firstAttribute="bottom" secondItem="qXv-3I-OKl" secondAttribute="bottom" constant="16.5" id="aev-pA-NId"/>
+                            <constraint firstItem="qXv-3I-OKl" firstAttribute="leading" secondItem="HMB-PF-FaC" secondAttribute="trailing" constant="8" symbolic="YES" id="lVo-M9-Lh8"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="z3p-16-oTD" secondAttribute="trailing" id="LPR-WV-pWA"/>
+                <constraint firstItem="z3p-16-oTD" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="inm-3W-bFA"/>
+                <constraint firstAttribute="bottom" secondItem="z3p-16-oTD" secondAttribute="bottom" id="kOz-41-i24"/>
+                <constraint firstItem="z3p-16-oTD" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="tLN-o6-peN"/>
+            </constraints>
+            <size key="customSize" width="380" height="120"/>
+            <connections>
+                <outlet property="BackView" destination="z3p-16-oTD" id="C0y-qb-QnX"/>
+                <outlet property="Date" destination="zLG-kr-dss" id="mie-5P-gTR"/>
+                <outlet property="Direction" destination="uFv-SO-qHM" id="zcK-kO-Cj6"/>
+                <outlet property="Front" destination="uFv-SO-qHM" id="3Ps-xN-W9q"/>
+                <outlet property="HomeSize" destination="ldE-dx-MPw" id="2b7-ja-s60"/>
+                <outlet property="Imagee" destination="HMB-PF-FaC" id="s9e-oU-BpV"/>
+                <outlet property="Location" destination="4YB-mo-uGQ" id="nTy-mP-ewc"/>
+                <outlet property="Name" destination="c4k-ap-yF0" id="2bU-Gj-FOv"/>
+                <outlet property="Price" destination="gjr-t2-Gl5" id="Uqw-fh-SAO"/>
+                <outlet property="RoomNumber" destination="erK-iE-Dxo" id="jSG-BV-Qnm"/>
+            </connections>
+            <point key="canvasLocation" x="371.01449275362324" y="154.01785714285714"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="Roomsize" width="32" height="32"/>
+        <image name="fronticon" width="32" height="32"/>
+        <image name="photo-1558472306-75b150ac26eb" width="1000" height="1400"/>
+        <image name="roomno" width="32" height="32"/>
+    </resources>
+</document>
