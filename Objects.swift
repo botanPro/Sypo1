@@ -1133,3 +1133,156 @@ class UsersTypeAip{
     }
     
 }
+
+
+
+
+class SubscriptionsObject{
+    
+    var end_date : TimeInterval?
+    var start_date : TimeInterval?
+    var subscription_type_id : String?
+    var user_id : String?
+    var id : String?
+    
+    init(end_date : TimeInterval,start_date : TimeInterval,subscription_type_id : String,user_id : String,id : String) {
+        self.end_date           = end_date
+        self.start_date           = start_date
+        self.subscription_type_id           = subscription_type_id
+        self.user_id           = user_id
+        self.id                 = id
+    }
+    
+    
+    
+    init(Dictionary : [String : AnyObject]) {
+        self.id   = Dictionary[ "Id" ]   as? String
+        self.end_date = Dictionary[ "end_date" ] as? TimeInterval
+        self.start_date = Dictionary[ "start_date" ] as? TimeInterval
+        self.subscription_type_id = Dictionary[ "subscription_type_id" ] as? String
+        self.user_id = Dictionary[ "user_id" ] as? String
+    }
+    
+
+    func MakeDictionary() -> [String : AnyObject] {
+        var New  : [String : AnyObject]  = [:]
+        New["Id"]   = self.id       as AnyObject
+        New["end_date"] = self.end_date     as AnyObject
+        New["start_date"] = self.start_date     as AnyObject
+        New["subscription_type_id"] = self.subscription_type_id     as AnyObject
+        New["user_id"] = self.user_id     as AnyObject
+        return New
+    }
+    
+    
+}
+
+class SubscriptionAip{
+    static func GetAllSubscriptionsType(completion : @escaping (_ Product : [SubscriptionsObject])->()){
+        var New : [SubscriptionsObject] = []
+        Firestore.firestore().collection("Subscription").getDocuments { (Snapshot, error) in
+            if error != nil { print("Error") ; return }
+            guard let documents = Snapshot?.documents else { return }
+            for P in documents {
+                if let data = P.data() as [String : AnyObject]? {
+                    New.append(SubscriptionsObject(Dictionary: data))
+                }
+            }
+            completion(New)
+        }
+    }
+    
+    
+    
+    
+    static func GetSubscriptionsByOfficeId(Office_id : String , completion : @escaping (_ Product : SubscriptionsObject)->()){
+        Firestore.firestore().collection("Subscription").whereField("user_id", isEqualTo: Office_id).getDocuments { (Snapshot, error) in
+            if error != nil { print(error.debugDescription) ; return }
+            guard let documents = Snapshot?.documents else { return }
+            if documents != []{
+            for P in documents {
+                if let data = P.data() as [String : AnyObject]? {
+                    let New = SubscriptionsObject(Dictionary: data)
+                    completion(New)
+                }
+            }
+            }else{
+                completion(SubscriptionsObject.init(end_date: 0.0, start_date: 0.0, subscription_type_id: "", user_id: "", id: ""))
+            }
+        }
+    }
+    
+    
+    
+    
+}
+
+
+class SubscriptionsTypeObject{
+    
+    var title : String?
+    var number_of_post : String?
+    var id : String?
+    
+    init(title : String,id : String , number_of_post : String) {
+        self.title               = title
+        self.id                 = id
+        self.number_of_post      = number_of_post
+    }
+    
+    
+    
+    init(Dictionary : [String : AnyObject]) {
+        self.id   = Dictionary[ "Id" ]   as? String
+        self.title = Dictionary[ "title" ] as? String
+        self.number_of_post = Dictionary[ "number_of_post" ] as? String
+    }
+    
+
+    func MakeDictionary() -> [String : AnyObject] {
+        var New  : [String : AnyObject]  = [:]
+        New["Id"]   = self.id       as AnyObject
+        New["type"] = self.title     as AnyObject
+        New["number_of_post"] = self.number_of_post  as AnyObject
+        return New
+    }
+    
+    
+}
+
+class SubscriptionsTypeAip{
+    static func GetAllSubscriptionsTypeType(completion : @escaping (_ Product : [SubscriptionsTypeObject])->()){
+        var New : [SubscriptionsTypeObject] = []
+        Firestore.firestore().collection("SubscriptionTypes").getDocuments { (Snapshot, error) in
+            if error != nil { print("Error") ; return }
+            guard let documents = Snapshot?.documents else { return }
+            for P in documents {
+                if let data = P.data() as [String : AnyObject]? {
+                    New.append(SubscriptionsTypeObject(Dictionary: data))
+                }
+            }
+            completion(New)
+        }
+    }
+    
+    
+    static func GetSubscriptionsTypeByOfficeId(id : String , completion : @escaping (_ Product : SubscriptionsTypeObject)->()){
+        Firestore.firestore().collection("SubscriptionTypes").whereField("id", isEqualTo: id).getDocuments { (Snapshot, error) in
+            if error != nil { print(error.debugDescription) ; return }
+            guard let documents = Snapshot?.documents else { return }
+            if documents != []{
+            for P in documents {
+                if let data = P.data() as [String : AnyObject]? {
+                    let New = SubscriptionsTypeObject(Dictionary: data)
+                    completion(New)
+                }
+            }
+            }else{
+                completion(SubscriptionsTypeObject.init(title: "", id: "", number_of_post: ""))
+            }
+        }
+    }
+    
+}
+
+

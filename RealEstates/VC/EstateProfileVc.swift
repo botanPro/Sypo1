@@ -148,11 +148,9 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
             withCustomImage: nil,
             withDoneButtonTitle: nil,
             andButtons: nil)
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-//            self.alert.removeFromSuperview()
-//        }
-        
+        alert.doneActionBlock({
+           // self.alert.dismiss()
+        })
     }
     
     
@@ -761,11 +759,6 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-            UIView.animate(withDuration: 0.2) {
-                self.DescHight.constant = self.Description.contentSize.height
-                //self.view.layoutIfNeeded()
-            }
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
             let height = self.RelatedCollectionView.collectionViewLayout.collectionViewContentSize.height
             self.RelatedEstatesCollectionLayout.constant = height

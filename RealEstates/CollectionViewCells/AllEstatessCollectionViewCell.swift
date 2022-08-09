@@ -69,7 +69,7 @@ class AllEstatessCollectionViewCell: UICollectionViewCell {
                 let longestWord = "مانگانە"
                 let longestWordRange = (longString as NSString).range(of: longestWord)
 
-                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 15)!])
+                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "PeshangDes2", size: 15)!])
 
                 attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "PeshangDes2", size: 12)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
                 
@@ -89,7 +89,7 @@ class AllEstatessCollectionViewCell: UICollectionViewCell {
                 let longestWord  = "شهريا"
                 let longestWordRange = (longString as NSString).range(of: longestWord)
 
-                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 15)!])
+                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "PeshangDes2", size: 15)!])
 
                 attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "PeshangDes2", size: 12)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
                 

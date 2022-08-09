@@ -13,6 +13,7 @@ import SDWebImage
 import SwiftyJSON
 import AAShimmerView
 import ShimmerLabel
+
 class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -21,7 +22,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return CityArray.count
     }
- 
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         UserDefaults.standard.set(self.CityArray[row].name, forKey: "CityName")
         self.Location.text = "\("IRAQ-\(self.CityArray[row].name ?? "")")".uppercased()
@@ -40,12 +41,12 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             pickerLabel?.textAlignment = .center
         }
         pickerLabel?.text = self.CityArray[row].name
-
+        
         return pickerLabel!
     }
     
-
-
+    
+    
     
     @IBAction func SharkTeam(_ sender: Any) {
         if let url = NSURL(string: "http://www.shark-team.com"){
@@ -54,27 +55,27 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     }
     
     
-//    @IBAction func Logout(_ sender: Any) {
-//        if UserDefaults.standard.bool(forKey: "Login") == true{
-//            let myAlert = UIAlertController(title: "Logout?", message: nil, preferredStyle: UIAlertController.Style.alert)
-//            myAlert.addAction(UIAlertAction(title: "Ok", style:  UIAlertAction.Style.default, handler: { _ in
-//                let firebaseAuth = Auth.auth()
-//                do {
-//                    try firebaseAuth.signOut()
-//                    UserDefaults.standard.set(false, forKey: "Login")
-//                    UserDefaults.standard.set("", forKey: "UserId")
-//
-//                    self.LangChanged()
-//                } catch let signOutError as NSError {
-//                    print ("Error signing out: %@", signOutError)
-//                }
-//            }))
-//
-//
-//            myAlert.addAction(UIAlertAction(title: "No", style:  UIAlertAction.Style.cancel, handler: nil))
-//            self.present(myAlert, animated: true, completion: nil)
-//        }
-//    }
+    //    @IBAction func Logout(_ sender: Any) {
+    //        if UserDefaults.standard.bool(forKey: "Login") == true{
+    //            let myAlert = UIAlertController(title: "Logout?", message: nil, preferredStyle: UIAlertController.Style.alert)
+    //            myAlert.addAction(UIAlertAction(title: "Ok", style:  UIAlertAction.Style.default, handler: { _ in
+    //                let firebaseAuth = Auth.auth()
+    //                do {
+    //                    try firebaseAuth.signOut()
+    //                    UserDefaults.standard.set(false, forKey: "Login")
+    //                    UserDefaults.standard.set("", forKey: "UserId")
+    //
+    //                    self.LangChanged()
+    //                } catch let signOutError as NSError {
+    //                    print ("Error signing out: %@", signOutError)
+    //                }
+    //            }))
+    //
+    //
+    //            myAlert.addAction(UIAlertAction(title: "No", style:  UIAlertAction.Style.cancel, handler: nil))
+    //            self.present(myAlert, animated: true, completion: nil)
+    //        }
+    //    }
     
     
     
@@ -87,38 +88,38 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     @IBAction func ChangLang(_ sender: Any) {
         let dialog = AZDialogViewController(title: titlee, message: message)
         dialog.titleColor = .black
-
+        
         //set the message color
         dialog.messageColor = .black
-
+        
         //set the dialog background color
         dialog.alertBackgroundColor = .white
-
+        
         //set the gesture dismiss direction
         dialog.dismissDirection = .bottom
-
+        
         //allow dismiss by touching the background
         dialog.dismissWithOutsideTouch = true
-
+        
         //show seperator under the title
         dialog.showSeparator = false
-
+        
         //set the seperator color
         dialog.separatorColor = UIColor.blue
-
+        
         //enable/disable drag
         dialog.allowDragGesture = false
-
+        
         //enable rubber (bounce) effect
         dialog.rubberEnabled = true
-
+        
         //enable/disable backgroud blur
         dialog.blurBackground = false
-
+        
         //set the background blur style
         dialog.blurEffectStyle = .light
-
-       
+        
+        
         
         dialog.addAction(AZDialogAction(title: self.Ktitle) { (dialog) -> (Void) in
             self.LoadingView()
@@ -128,9 +129,9 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             self.LangChanged()
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LanguageChanged"), object: nil)
             self.alert.dismiss(animated: true, completion: nil)
-                dialog.dismiss()
+            dialog.dismiss()
         })
-                
+        
         dialog.addAction(AZDialogAction(title: self.Etitle) { (dialog) -> (Void) in
             self.LoadingView()
             XLanguage.set(Language: .English)
@@ -139,9 +140,9 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             self.LangChanged()
             self.alert.dismiss(animated: true, completion: nil)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LanguageChanged"), object: nil)
-                dialog.dismiss()
+            dialog.dismiss()
         })
-                
+        
         dialog.addAction(AZDialogAction(title: self.Atitle) { (dialog) -> (Void) in
             self.LoadingView()
             XLanguage.set(Language: .Arabic)
@@ -150,7 +151,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             self.LangChanged()
             self.alert.dismiss(animated: true, completion: nil)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LanguageChanged"), object: nil)
-                dialog.dismiss()
+            dialog.dismiss()
         })
         
         self.present(dialog, animated: false, completion: nil)
@@ -161,11 +162,11 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     @IBOutlet weak var Phone: UILabel!
     @IBOutlet weak var Image: UIImageView!
     
- 
+    
     @IBAction func Fav(_ sender: Any) {
         if UserDefaults.standard.bool(forKey: "Login") == true {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let myVC = storyboard.instantiateViewController(withIdentifier: "ItemsVc") as! FavoritesVC
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let myVC = storyboard.instantiateViewController(withIdentifier: "ItemsVc") as! FavoritesVC
             if XLanguage.get() == .Kurdish{
                 myVC.title = "خوازراوەکان"
             }else if XLanguage.get() == .Arabic{
@@ -173,14 +174,14 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             }else{
                 myVC.title = "Favorite Items"
             }
-        self.navigationController?.pushViewController(myVC, animated: true)
+            self.navigationController?.pushViewController(myVC, animated: true)
         }
     }
     
     @IBAction func ViewdItem(_ sender: Any) {
         if UserDefaults.standard.bool(forKey: "Login") == true {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let myVC = storyboard.instantiateViewController(withIdentifier: "ViewdItemsVc") as! ViewdVC
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let myVC = storyboard.instantiateViewController(withIdentifier: "ViewdItemsVc") as! ViewdVC
             if XLanguage.get() == .Kurdish{
                 myVC.title = "بینراوەکان"
             }else if XLanguage.get() == .Arabic{
@@ -188,7 +189,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             }else{
                 myVC.title = "Viewd Items"
             }
-        self.navigationController?.pushViewController(myVC, animated: true)
+            self.navigationController?.pushViewController(myVC, animated: true)
         }
     }
     
@@ -227,6 +228,16 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     
     
     
+    @IBOutlet weak var SubscriptionView             : UIView!
+    @IBOutlet weak var SubscriptionDays             : UILabel!
+    @IBOutlet weak var SubscriptionPosts            : UILabel!
+    @IBOutlet weak var StartDate                    : UILabel!
+    @IBOutlet weak var EndDate                      : UILabel!
+    @IBOutlet weak var SubscriptionViewHeightLyout  : NSLayoutConstraint!
+    @IBOutlet weak var SubscriptionViewTopLyout     : NSLayoutConstraint!
+    @IBOutlet weak var SubscriptionViewBottomLyout  : NSLayoutConstraint!
+    
+    
     
     
     @IBOutlet weak var NavTitle: LanguageBarItem!
@@ -251,6 +262,14 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             self.titlee = "تغيير اللغة"
             self.message = "لغة"
         }
+        
+        self.SubscriptionView.isHidden             = true
+        self.SubscriptionViewHeightLyout.constant  = 0
+        self.SubscriptionViewTopLyout.constant     = 0
+        self.SubscriptionViewBottomLyout.constant  = 0
+        
+        
+        
         self.EditProfile.isEnabled = true
         self.GetYATop.constant = 0
         self.GetYABottom.constant = 16
@@ -264,11 +283,11 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             print("--=-=-=-=-=-=-=-=-=-=- \(self.AllEstate.count)")
         }
         self.Image.layer.cornerRadius = self.Image.bounds.width / 2
-//        NavTitle.setTitleTextAttributes(
-//                [
-//                    NSAttributedString.Key.font: UIFont(name: "ArialRoundedMTBold", size: 20)!,
-//                    NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.07560480386, green: 0.2257080078, blue: 0.3554315865, alpha: 1)
-//                ], for: .normal)
+        //        NavTitle.setTitleTextAttributes(
+        //                [
+        //                    NSAttributedString.Key.font: UIFont(name: "ArialRoundedMTBold", size: 20)!,
+        //                    NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.07560480386, green: 0.2257080078, blue: 0.3554315865, alpha: 1)
+        //                ], for: .normal)
         
         
         navigationController?.navigationBar.shadowImage = UIImage.imageWithColor(color: .darkGray)
@@ -293,7 +312,6 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     }
     
     
-
     
     @IBOutlet weak var GetYATop   : NSLayoutConstraint!
     @IBOutlet weak var GetYABottom: NSLayoutConstraint!
@@ -313,6 +331,22 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     var lang : Int = UserDefaults.standard.integer(forKey: "language")
     @IBOutlet weak var ProfileRightImage: UIImageView!
     var AllEstate : [EstateObject] = []
+    
+    
+    var MyEstates : [EstateObject] = []
+    func GetMyEstates(){
+        self.MyEstates.removeAll()
+        if let FireId = UserDefaults.standard.string(forKey: "UserId"){
+            OfficeAip.GetOfficeById(Id: FireId) { office in
+                ProductAip.GetMyEstates(office_id: office.id ?? "") { estates in
+                    self.MyEstates.append(estates)
+                }
+            }
+        }
+    }
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if !CheckInternet.Connection(){
@@ -372,6 +406,13 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             self.GetYAHeight.constant = 0
             self.GetYAView.isHidden = true
             
+            self.SubscriptionView.isHidden             = true
+            self.SubscriptionViewHeightLyout.constant  = 0
+            self.SubscriptionViewTopLyout.constant     = 0
+            self.SubscriptionViewBottomLyout.constant  = 0
+            
+            
+            
         }else{
             if lang == 1{
                 self.LoginOrLogoutLable.text = "چوونە دەرەوە"
@@ -400,10 +441,92 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             self.Phone.layer.cornerRadius = 3
             
             
-            if let FireId = UserDefaults.standard.string(forKey: "UserId"){print("[][][][][][======================][][][][][]-------------------------------------------00000")
-                if let officeId = UserDefaults.standard.string(forKey: "OfficeId"){print("[][][][][][======================][][][][][]-------------------------------------------")
+            if let FireId = UserDefaults.standard.string(forKey: "UserId"){
+                if let officeId = UserDefaults.standard.string(forKey: "OfficeId"){
                     OfficeAip.GetOffice(ID: officeId) { [self] office in
-                        if office.type_id == "h9nFfUrHgSwIg17uRwTD"{print("[][][][][][======================][][][][][]-----------------------------------fererer--------")
+                        if office.type_id == "h9nFfUrHgSwIg17uRwTD"{
+                            
+                            SubscriptionAip.GetAllSubscriptionsType { subscription in
+                                for sub in subscription{
+                                    if sub.user_id == officeId{
+                                        UIView.animate(withDuration:0.2, delay: 0.0) {
+                                            UIView.animate(withDuration: 0.2, delay: 0.0) {
+                                                self.SubscriptionView.isHidden  = false
+                                                self.SubscriptionViewHeightLyout.constant  = 85
+                                                self.SubscriptionViewTopLyout.constant  = 12
+                                                self.SubscriptionViewBottomLyout.constant  = 12
+                                                self.view.layoutIfNeeded()
+                                            }
+                                            
+                                            
+                                            let date = NSDate(timeIntervalSince1970: sub.start_date ?? 0.0)
+                                            let dayTimePeriodFormatter = DateFormatter()
+                                            dayTimePeriodFormatter.dateFormat = "dd-MM-YYYY"
+                                            let dateTimeString = dayTimePeriodFormatter.string(from: date as Date)
+                                            let dateTime = dateTimeString.split(separator: ".")
+                                            self.StartDate.text = "\(dateTime[0])"
+                                            
+                                            
+                                            let date1 = NSDate(timeIntervalSince1970: sub.end_date ?? 0.0)
+                                            let dayTimePeriodFormatter1 = DateFormatter()
+                                            dayTimePeriodFormatter1.dateFormat = "dd-MM-YYYY"
+                                            let dateTimeString1 = dayTimePeriodFormatter1.string(from: date1 as Date)
+                                            let dateTime1 = dateTimeString1.split(separator: ".")
+                                            self.EndDate.text = "\(dateTime1[0])"
+                                            
+                                            
+                                            print("dayyyssssss-----------------")
+                                            let days = (Date().days(sinceDate: date1 as Date) ?? 0) * -1
+                                            self.SubscriptionDays.text = "\(days)"
+                                            print((Date().days(sinceDate: date1 as Date) ?? 0) * -1)
+                                            
+                                            
+                                            
+                                            
+                                            self.MyEstates.removeAll()
+                                            if let FireId = UserDefaults.standard.string(forKey: "UserId"){
+                                                OfficeAip.GetOfficeById(Id: FireId) { office in
+                                                    ProductAip.GetMyEstates(office_id: office.id ?? "") { estates in
+                                                        self.MyEstates.append(estates)
+                                                        SubscriptionsTypeAip.GetSubscriptionsTypeByOfficeId(id: sub.subscription_type_id ?? "") { posts in
+                                                            if XLanguage.get() == .Kurdish{
+                                                                self.SubscriptionPosts.text = "\(self.MyEstates.count)/ پۆست \(posts.number_of_post ?? "")"
+                                                                self.SubscriptionPosts.font = UIFont(name: "PeshangDes2", size: 11)!
+                                                            }else if XLanguage.get() == .English{
+                                                                self.SubscriptionPosts.text = "\(self.MyEstates.count) Post /\(posts.number_of_post ?? "")"
+                                                                self.SubscriptionPosts.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+                                                            }else{
+                                                                self.SubscriptionPosts.text = "\(self.MyEstates.count)/ منشور \(posts.number_of_post ?? "")"
+                                                                self.SubscriptionPosts.font = UIFont(name: "PeshangDes2", size: 11)!
+                                                            }
+                                                            
+                                                            if days == 0 || Int(posts.number_of_post ?? "") == self.MyEstates.count{
+                                                                self.AddPropertyView.alpha = 0.5
+                                                                self.ViewPropertyVicew.alpha = 0.5
+                                                                self.MyPropertiesAction.isEnabled = false
+                                                                self.AddPropetiesAction.isEnabled = false
+                                                            }else{
+                                                                self.AddPropertyView.alpha = 1
+                                                                self.ViewPropertyVicew.alpha = 1
+                                                                self.MyPropertiesAction.isEnabled = true
+                                                                self.AddPropetiesAction.isEnabled = true
+                                                            }
+                                                        }
+                                                        
+                                                    }
+                                                }
+                                            }
+                                            
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            
+                            
+                            
+                            
+                            
                             self.EditProfile.isEnabled = true
                             self.GetYATop.constant = 0
                             self.GetYABottom.constant = 16
@@ -413,11 +536,11 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                             self.ViewPropertyVicew.isHidden = false
                             self.ProfileRightImage.isHidden = false
                             OfficeAip.GetOfficeById(Id: FireId) { office in
-                                if office.name == ""{print("[][][][][][======================][][][][][]-------------------------------------------11111")
+                                if office.name == ""{
                                     self.Image.image = UIImage(named: "4811117-small")
                                     self.Name.text = UserDefaults.standard.string(forKey: "PhoneNumber")
                                     self.Phone.isHidden = true
-                                }else{print("[][][][][][======================][][][][][]-------------------------------------------222222")
+                                }else{
                                     self.Phone.isHidden = false
                                     let url = URL(string: office.ImageURL ?? "")
                                     self.Image.sd_setImage(with: url, completed: nil)
@@ -425,7 +548,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                     self.Phone.text = office.phone1
                                 }
                             }
-                        }else{print("[][][][][][======================][][][][][]-------------------------------------------333333")
+                        }else{
                             if XLanguage.get() == .Kurdish{
                                 self.Name.text = "ناوەکەت لێرە پیشان دەدرێت"
                             }else if XLanguage.get() == .English{
@@ -433,6 +556,13 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                             }else{
                                 self.Name.text = "سيتم عرض اسمك هنا"
                             }
+                            
+                            
+                            self.SubscriptionView.isHidden             = true
+                            self.SubscriptionViewHeightLyout.constant  = 0
+                            self.SubscriptionViewTopLyout.constant     = 0
+                            self.SubscriptionViewBottomLyout.constant  = 0
+                            
                             
                             self.EditProfile.isEnabled = false
                             self.GetYATop.constant = 16
@@ -471,86 +601,86 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     self.FavoriteItemsEstate.removeAll()
                     ///ViewdItemsCount
                     ///
-
+                    
                     ProductAip.GetAllProducts { estate in
                         self.AllEstate = estate
-
-                    ViewdItemsObjectAip.GeViewdItemsById(fire_id: FireId) { [self] Item in
-                        print("]]]]]]]]]]]]]]]]]]]]]]\(self.AllEstate.count)")
-                        for i in self.AllEstate{print("=====")
-                            if i.id == Item.estate_id{
-                                ViewdItemCount = ViewdItemCount + 1
-                                self.ViewdItemsEstate.append(i)
+                        
+                        ViewdItemsObjectAip.GeViewdItemsById(fire_id: FireId) { [self] Item in
+                            print("]]]]]]]]]]]]]]]]]]]]]]\(self.AllEstate.count)")
+                            for i in self.AllEstate{print("=====")
+                                if i.id == Item.estate_id{
+                                    ViewdItemCount = ViewdItemCount + 1
+                                    self.ViewdItemsEstate.append(i)
+                                }
+                            }
+                            
+                            
+                            print("=====")
+                            print(ViewdItemCount)
+                            if ViewdItemCount == 1{
+                                if XLanguage.get() == .Kurdish{
+                                    self.ViewdItems.text = "\(ViewdItemCount) بینراو"
+                                    self.ViewdItems.font = UIFont(name: "PeshangDes2", size: 11)!
+                                }else if XLanguage.get() == .English{
+                                    self.ViewdItems.text = "\(ViewdItemCount) ITEM"
+                                    self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                                }else{
+                                    self.ViewdItems.text = "\(ViewdItemCount) عنصر"
+                                    self.ViewdItems.font = UIFont(name: "PeshangDes2", size: 11)!
+                                }
+                                
+                            }else{
+                                if XLanguage.get() == .Kurdish{
+                                    self.ViewdItems.text = "\(ViewdItemCount) بینراو"
+                                    self.ViewdItems.font = UIFont(name: "PeshangDes2", size: 11)!
+                                }else if XLanguage.get() == .English{
+                                    self.ViewdItems.text = "\(ViewdItemCount) ITEMS"
+                                    self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                                }else{
+                                    self.ViewdItems.text = "\(ViewdItemCount) عناصر"
+                                    self.ViewdItems.font = UIFont(name: "PeshangDes2", size: 11)!
+                                }
                             }
                         }
                         
                         
-                        print("=====")
-                        print(ViewdItemCount)
-                        if ViewdItemCount == 1{
-                            if XLanguage.get() == .Kurdish{
-                                self.ViewdItems.text = "\(ViewdItemCount) بینراو"
-                                self.ViewdItems.font = UIFont(name: "PeshangDes2", size: 11)!
-                            }else if XLanguage.get() == .English{
-                                self.ViewdItems.text = "\(ViewdItemCount) ITEM"
-                                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
-                            }else{
-                                self.ViewdItems.text = "\(ViewdItemCount) عنصر"
-                                self.ViewdItems.font = UIFont(name: "PeshangDes2", size: 11)!
+                        ///FavoriteItemsCount
+                        FavoriteItemsObjectAip.GetFavoriteItemsById(fire_id: FireId) { [self] Item in
+                            for i in self.AllEstate{
+                                if i.id == Item.estate_id{
+                                    FavoriteItemCount = FavoriteItemCount + 1
+                                    self.FavoriteItemsEstate.append(i)
+                                }
                             }
-                            
-                        }else{
-                            if XLanguage.get() == .Kurdish{
-                                self.ViewdItems.text = "\(ViewdItemCount) بینراو"
-                                self.ViewdItems.font = UIFont(name: "PeshangDes2", size: 11)!
-                            }else if XLanguage.get() == .English{
-                                self.ViewdItems.text = "\(ViewdItemCount) ITEMS"
-                                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                            //                        if Item.estate_id != ""{
+                            //                            FavoriteItemCount = FavoriteItemCount + 1
+                            //                        }
+                            if FavoriteItemCount == 1{
+                                if XLanguage.get() == .Kurdish{
+                                    self.FavoriteItems.text = "\(FavoriteItemCount) خوازراو"
+                                    self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 11)!
+                                }else if XLanguage.get() == .English{
+                                    self.FavoriteItems.text = "\(FavoriteItemCount) ITEM"
+                                    self.FavoriteItems.font =  UIFont(name: "ArialRoundedMTBold", size: 10)!
+                                }else{
+                                    self.FavoriteItems.text = "\(FavoriteItemCount) عنصر"
+                                    self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 11)!
+                                }
                             }else{
-                                self.ViewdItems.text = "\(ViewdItemCount) عناصر"
-                                self.ViewdItems.font = UIFont(name: "PeshangDes2", size: 11)!
+                                if XLanguage.get() == .Kurdish{
+                                    self.FavoriteItems.text = "\(FavoriteItemCount) خوازراو"
+                                    self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 11)!
+                                }else if XLanguage.get() == .English{
+                                    self.FavoriteItems.text = "\(FavoriteItemCount) ITEMS"
+                                    self.FavoriteItems.font =  UIFont(name: "ArialRoundedMTBold", size: 10)!
+                                }else{
+                                    self.FavoriteItems.text = "\(FavoriteItemCount) عناصر"
+                                    self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 11)!
+                                }
+                                
                             }
                         }
-                    }
-                    
-                    
-                    ///FavoriteItemsCount
-                    FavoriteItemsObjectAip.GetFavoriteItemsById(fire_id: FireId) { [self] Item in
-                        for i in self.AllEstate{
-                            if i.id == Item.estate_id{
-                                FavoriteItemCount = FavoriteItemCount + 1
-                                self.FavoriteItemsEstate.append(i)
-                            }
-                        }
-//                        if Item.estate_id != ""{
-//                            FavoriteItemCount = FavoriteItemCount + 1
-//                        }
-                        if FavoriteItemCount == 1{
-                            if XLanguage.get() == .Kurdish{
-                                self.FavoriteItems.text = "\(FavoriteItemCount) خوازراو"
-                                self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 11)!
-                            }else if XLanguage.get() == .English{
-                                self.FavoriteItems.text = "\(FavoriteItemCount) ITEM"
-                                self.FavoriteItems.font =  UIFont(name: "ArialRoundedMTBold", size: 10)!
-                            }else{
-                                self.FavoriteItems.text = "\(FavoriteItemCount) عنصر"
-                                self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 11)!
-                            }
-                        }else{
-                            if XLanguage.get() == .Kurdish{
-                                self.FavoriteItems.text = "\(FavoriteItemCount) خوازراو"
-                                self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 11)!
-                            }else if XLanguage.get() == .English{
-                                self.FavoriteItems.text = "\(FavoriteItemCount) ITEMS"
-                                self.FavoriteItems.font =  UIFont(name: "ArialRoundedMTBold", size: 10)!
-                            }else{
-                                self.FavoriteItems.text = "\(FavoriteItemCount) عناصر"
-                                self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 11)!
-                            }
-                            
-                        }
-                    }
-                       
+                        
                     }
                     
                 }
@@ -578,9 +708,9 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     }
     func isUpdateAvailable() throws -> Bool {
         guard let info = Bundle.main.infoDictionary,
-            let currentVersion = info["CFBundleShortVersionString"] as? String,
-            let identifier = info["CFBundleIdentifier"] as? String,
-            let url = URL(string: "https://itunes.apple.com/lookup?bundleId=\(identifier)") else {
+              let currentVersion = info["CFBundleShortVersionString"] as? String,
+              let identifier = info["CFBundleIdentifier"] as? String,
+              let url = URL(string: "https://itunes.apple.com/lookup?bundleId=\(identifier)") else {
             throw VersionError.invalidBundleInfo
         }
         let data = try Data(contentsOf: url)
@@ -596,7 +726,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     enum VersionError: Error {
         case invalidResponse, invalidBundleInfo
     }
-
+    
     
     
     
@@ -623,6 +753,47 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                 self.Action = "نعم"
                 self.cancel = "لا"
             }
+            
+            if let FireId = UserDefaults.standard.string(forKey: "UserId"){
+                if let officeId = UserDefaults.standard.string(forKey: "OfficeId"){
+                    OfficeAip.GetOffice(ID: officeId) { [self] office in
+                        if office.type_id == "h9nFfUrHgSwIg17uRwTD"{
+                            SubscriptionAip.GetAllSubscriptionsType { subscription in
+                                for sub in subscription{
+                                    if sub.user_id == officeId{
+                                        self.MyEstates.removeAll()
+                                        OfficeAip.GetOfficeById(Id: FireId) { office in
+                                            ProductAip.GetMyEstates(office_id: office.id ?? "") { estates in
+                                                self.MyEstates.append(estates)
+                                                SubscriptionsTypeAip.GetSubscriptionsTypeByOfficeId(id: sub.subscription_type_id ?? "") { posts in
+                                                    if XLanguage.get() == .Kurdish{
+                                                        self.SubscriptionPosts.text = "\(self.MyEstates.count)/ پۆست \(posts.number_of_post ?? "")"
+                                                        self.SubscriptionPosts.font = UIFont(name: "PeshangDes2", size: 11)!
+                                                    }else if XLanguage.get() == .English{
+                                                        self.SubscriptionPosts.text = "\(self.MyEstates.count) Post /\(posts.number_of_post ?? "")"
+                                                        self.SubscriptionPosts.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+                                                    }else{
+                                                        self.SubscriptionPosts.text = "\(self.MyEstates.count)/ منشور \(posts.number_of_post ?? "")"
+                                                        self.SubscriptionPosts.font = UIFont(name: "PeshangDes2", size: 11)!
+                                                    }
+                                                    
+                                                }
+                                                
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            
+            
+            
+            
+            
             let myAlert = UIAlertController(title: logoutT, message: logoutM, preferredStyle: UIAlertController.Style.alert)
             myAlert.addAction(UIAlertAction(title: Action, style: .default, handler: { (UIAlertAction) in
                 let firebaseAuth = Auth.auth()
@@ -688,19 +859,19 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         
     }
     
-   
+    
     
     
     var alert = UIAlertController()
     var loadingLableMessage = ""
     func LoadingView(){
         alert = UIAlertController(title: nil, message: self.loadingLableMessage, preferredStyle: .alert)
-
+        
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.style = UIActivityIndicatorView.Style.medium
         loadingIndicator.startAnimating();
-
+        
         alert.view.addSubview(loadingIndicator)
         present(alert, animated: true, completion: nil)
     }
@@ -865,11 +1036,11 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                 self.ViewdItemsEstate.append(i)
                             }
                         }
-//                        print("=====")
-//                        print(ViewdItemCount)
-//                        if Item.estate_id != ""{
-//                            ViewdItemCount = ViewdItemCount + 1
-//                        }
+                        //                        print("=====")
+                        //                        print(ViewdItemCount)
+                        //                        if Item.estate_id != ""{
+                        //                            ViewdItemCount = ViewdItemCount + 1
+                        //                        }
                         if ViewdItemCount == 1{
                             if XLanguage.get() == .Kurdish{
                                 self.ViewdItems.text = "\(ViewdItemCount) بینراو"
@@ -905,9 +1076,9 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                 self.FavoriteItemsEstate.append(i)
                             }
                         }
-//                        if Item.estate_id != ""{
-//                            FavoriteItemCount = FavoriteItemCount + 1
-//                        }
+                        //                        if Item.estate_id != ""{
+                        //                            FavoriteItemCount = FavoriteItemCount + 1
+                        //                        }
                         if FavoriteItemCount == 1{
                             if XLanguage.get() == .Kurdish{
                                 self.FavoriteItems.text = "\(FavoriteItemCount) خوازراو"
@@ -936,8 +1107,8 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                 }
             }
         }
-}
-
+    }
+    
     
     
     
@@ -1012,13 +1183,18 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
 
 
 extension Bundle {
-
+    
     var releaseVersionNumber: String? {
         return self.infoDictionary?["CFBundleShortVersionString"] as? String
     }
-
+    
     var buildVersionNumber: String? {
         return self.infoDictionary?["CFBundleVersion"] as? String
     }
-
+    
+}
+extension Date {
+    func days(sinceDate: Date) -> Int? {
+        return Calendar.current.dateComponents([.day], from: sinceDate, to: self).day
+    }
 }

@@ -853,7 +853,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TGx-LO-TUs" customClass="CosmosView" customModule="Cosmos">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TGx-LO-TUs" customClass="CosmosView" customModule="Cosmos">
                                                 <rect key="frame" x="144" y="319" width="120" height="40"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -3317,7 +3317,7 @@
                                 <rect key="frame" x="0.0" y="88" width="428" height="755"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="BSg-6P-lGj">
-                                        <rect key="frame" x="12" y="138" width="404" height="530"/>
+                                        <rect key="frame" x="12" y="231" width="404" height="530"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Vv5-lC-wsg">
                                                 <rect key="frame" x="0.0" y="0.0" width="196" height="530"/>
@@ -3454,7 +3454,7 @@
                                                                         </constraints>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHANGE LOCATION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rtT-WD-vQT" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="33" width="109" height="20"/>
+                                                                        <rect key="frame" x="0.0" y="32.999999999999943" width="109" height="20"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="20" id="6aQ-Cj-2wI"/>
                                                                         </constraints>
@@ -3474,7 +3474,7 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BST-W7-WMl">
-                                                                        <rect key="frame" x="0.0" y="56" width="50" height="10"/>
+                                                                        <rect key="frame" x="0.0" y="55.999999999999943" width="50" height="10"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="10" id="sNx-XX-VQN"/>
                                                                         </constraints>
@@ -3681,7 +3681,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Vwh-zN-NyT">
-                                                <rect key="frame" x="208" y="0.0" width="196" height="476"/>
+                                                <rect key="frame" x="208" y="0.0" width="196" height="528"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wqg-QM-RfO">
                                                         <rect key="frame" x="0.0" y="0.0" width="196" height="95"/>
@@ -4008,6 +4008,49 @@
                                                             <outletCollection property="gestureRecognizers" destination="FLn-6q-H69" appends="YES" id="mGa-4d-AZS"/>
                                                         </connections>
                                                     </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="U7u-gS-bfi">
+                                                        <rect key="frame" x="0.0" y="488" width="196" height="40"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logog" translatesAutoresizingMaskIntoConstraints="NO" id="eXN-xC-kWe">
+                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="40"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="50" id="8ru-HG-MyU"/>
+                                                                    <constraint firstAttribute="height" constant="40" id="As8-8G-Goa"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="g5L-bX-N55">
+                                                                <rect key="frame" x="50" y="4" width="146" height="36"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered by" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Za-k4-zc4">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="68" height="15"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="15" id="ER4-HI-MAV"/>
+                                                                        </constraints>
+                                                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
+                                                                        <color key="textColor" red="0.33824764800000001" green="0.36810522530000001" blue="0.41368950739999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D3b-rz-GXk">
+                                                                        <rect key="frame" x="0.0" y="15" width="81" height="21"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="21" id="H3x-2f-C6o"/>
+                                                                        </constraints>
+                                                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="14"/>
+                                                                        <state key="normal" title="Shark Team">
+                                                                            <color key="titleColor" red="0.061733548739999998" green="0.1172092813" blue="0.18496056759999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                        </state>
+                                                                        <connections>
+                                                                            <action selector="SharkTeam:" destination="Xvq-uj-CHQ" eventType="touchUpInside" id="kTz-MY-mWp"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <gestureRecognizers/>
+                                                        <connections>
+                                                            <outletCollection property="gestureRecognizers" destination="jKu-Gk-Yy9" appends="YES" id="dNg-cQ-IjB"/>
+                                                        </connections>
+                                                    </stackView>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -4061,49 +4104,6 @@
                                             <outletCollection property="gestureRecognizers" destination="oH0-j8-AGe" appends="YES" id="qJb-DJ-Uuf"/>
                                         </connections>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="U7u-gS-bfi">
-                                        <rect key="frame" x="148.66666666666666" y="748" width="130.99999999999997" height="40"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logog" translatesAutoresizingMaskIntoConstraints="NO" id="eXN-xC-kWe">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="40"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="50" id="8ru-HG-MyU"/>
-                                                    <constraint firstAttribute="height" constant="40" id="As8-8G-Goa"/>
-                                                </constraints>
-                                            </imageView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="g5L-bX-N55">
-                                                <rect key="frame" x="50" y="4" width="81" height="36"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered by" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Za-k4-zc4">
-                                                        <rect key="frame" x="0.0" y="0.0" width="81" height="15"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="15" id="ER4-HI-MAV"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
-                                                        <color key="textColor" red="0.33824764800000001" green="0.36810522530000001" blue="0.41368950739999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D3b-rz-GXk">
-                                                        <rect key="frame" x="0.0" y="15" width="81" height="21"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="21" id="H3x-2f-C6o"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="14"/>
-                                                        <state key="normal" title="Shark Team">
-                                                            <color key="titleColor" red="0.061733548739999998" green="0.1172092813" blue="0.18496056759999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="SharkTeam:" destination="Xvq-uj-CHQ" eventType="touchUpInside" id="kTz-MY-mWp"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                        <gestureRecognizers/>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="jKu-Gk-Yy9" appends="YES" id="dNg-cQ-IjB"/>
-                                        </connections>
-                                    </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xSX-bx-sLl">
                                         <rect key="frame" x="12" y="82" width="404" height="40"/>
                                         <subviews>
@@ -4142,16 +4142,146 @@
                                             <outletCollection property="gestureRecognizers" destination="rqT-Nw-EFt" appends="YES" id="7TE-oM-Cad"/>
                                         </connections>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s32-dm-WSw">
+                                        <rect key="frame" x="12" y="134" width="404" height="85"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="BtW-15-WG0">
+                                                <rect key="frame" x="16" y="12" width="144" height="24"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kFW-EG-zGd">
+                                                        <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="24" id="vp8-fg-C9T"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
+                                                        <color key="textColor" red="0.33561533919999997" green="0.65076793320000004" blue="0.34485708440000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Days remaining" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bXv-UL-oxt" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
+                                                        <rect key="frame" x="34" y="3" width="110" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="110" id="84d-24-9q6"/>
+                                                            <constraint firstAttribute="height" constant="21" id="EKI-XW-iNn"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="13"/>
+                                                        <color key="textColor" red="0.26946499759999998" green="0.3191690962" blue="0.36137576269999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Days remaining"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="يوما متبقية"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="ڕۆژی ماوە"/>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
+                                                                <real key="value" value="13"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
+                                                                <real key="value" value="14"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="K1u-PC-R0X">
+                                                <rect key="frame" x="16" y="48" width="216" height="25"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="PBZ-oS-yPx">
+                                                        <rect key="frame" x="0.0" y="0.0" width="101" height="25"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="startdate" translatesAutoresizingMaskIntoConstraints="NO" id="b1f-vK-hXB">
+                                                                <rect key="frame" x="0.0" y="2.6666666666666856" width="20" height="20"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="20" id="Ysi-M6-4Rf"/>
+                                                                    <constraint firstAttribute="height" constant="20" id="gdx-L0-gQ4"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00-00-000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aQf-V7-zRT">
+                                                                <rect key="frame" x="26" y="0.0" width="75" height="25"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="25" id="OhL-u5-Acn"/>
+                                                                    <constraint firstAttribute="width" constant="75" id="w5L-WW-OF5"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="11"/>
+                                                                <color key="textColor" red="0.41109187899609484" green="0.48691972850706405" blue="0.55130960483743685" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Days remaining"/>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="يوما متبقية"/>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="ڕۆژی ماوە"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="01O-xB-Z3y">
+                                                        <rect key="frame" x="116" y="0.0" width="100" height="25"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right-1" translatesAutoresizingMaskIntoConstraints="NO" id="N4F-Rc-VCp">
+                                                                <rect key="frame" x="0.0" y="2.6666666666666856" width="19" height="20"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="19" id="bnb-vm-JPy"/>
+                                                                    <constraint firstAttribute="height" constant="20" id="krx-pH-nsr"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00-00-000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VdU-e3-TIq">
+                                                                <rect key="frame" x="25" y="0.0" width="75" height="25"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="25" id="jnf-0s-lQH"/>
+                                                                    <constraint firstAttribute="width" constant="75" id="sGB-HO-023"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="11"/>
+                                                                <color key="textColor" red="0.41109187899999999" green="0.48691972849999998" blue="0.55130960480000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Days remaining"/>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="يوما متبقية"/>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="ڕۆژی ماوە"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 Posts /0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evq-nU-fmH">
+                                                <rect key="frame" x="332" y="12" width="56" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="pfL-mW-QmE"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
+                                                <color key="textColor" red="0.4029953871725106" green="0.47732980031333111" blue="0.54045151219223486" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Days remaining"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="يوما متبقية"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="ڕۆژی ماوە"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="K1u-PC-R0X" firstAttribute="top" secondItem="BtW-15-WG0" secondAttribute="bottom" constant="12" id="C49-0c-wjh"/>
+                                            <constraint firstItem="evq-nU-fmH" firstAttribute="top" secondItem="s32-dm-WSw" secondAttribute="top" constant="12" id="Zdh-Fj-nlE"/>
+                                            <constraint firstAttribute="trailing" secondItem="evq-nU-fmH" secondAttribute="trailing" constant="16" id="aUo-tL-dRz"/>
+                                            <constraint firstItem="BtW-15-WG0" firstAttribute="leading" secondItem="s32-dm-WSw" secondAttribute="leading" constant="16" id="eru-bo-jgt"/>
+                                            <constraint firstAttribute="height" constant="85" id="hhl-RS-scR"/>
+                                            <constraint firstItem="K1u-PC-R0X" firstAttribute="leading" secondItem="s32-dm-WSw" secondAttribute="leading" constant="16" id="jpd-KH-Ehc"/>
+                                            <constraint firstAttribute="bottom" secondItem="K1u-PC-R0X" secondAttribute="bottom" constant="12" id="t7i-OI-Zpe"/>
+                                            <constraint firstItem="BtW-15-WG0" firstAttribute="top" secondItem="s32-dm-WSw" secondAttribute="top" constant="12" id="z0J-S0-UQn"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="CornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="b4A-on-b3y" firstAttribute="leading" secondItem="Pu6-c8-Xf3" secondAttribute="leading" constant="12" id="0i9-8o-riX"/>
                                     <constraint firstItem="BSg-6P-lGj" firstAttribute="leading" secondItem="Pu6-c8-Xf3" secondAttribute="leading" constant="12" id="4ba-D3-aiQ"/>
-                                    <constraint firstItem="BSg-6P-lGj" firstAttribute="top" secondItem="xSX-bx-sLl" secondAttribute="bottom" constant="16" id="APf-Be-GyX"/>
+                                    <constraint firstItem="s32-dm-WSw" firstAttribute="leading" secondItem="Pu6-c8-Xf3" secondAttribute="leading" constant="12" id="8KK-lr-rpM"/>
                                     <constraint firstItem="b4A-on-b3y" firstAttribute="top" secondItem="Pu6-c8-Xf3" secondAttribute="top" constant="12" id="Epg-59-7cG"/>
-                                    <constraint firstItem="U7u-gS-bfi" firstAttribute="top" secondItem="BSg-6P-lGj" secondAttribute="bottom" priority="750" constant="80" id="Fp1-zK-yv6"/>
+                                    <constraint firstItem="BSg-6P-lGj" firstAttribute="top" secondItem="s32-dm-WSw" secondAttribute="bottom" constant="12" id="F04-n3-y3G"/>
                                     <constraint firstAttribute="trailing" secondItem="xSX-bx-sLl" secondAttribute="trailing" constant="12" id="GIQ-Xi-lAi"/>
-                                    <constraint firstAttribute="bottom" secondItem="U7u-gS-bfi" secondAttribute="bottom" constant="20" id="KMA-Rn-vpO"/>
-                                    <constraint firstItem="U7u-gS-bfi" firstAttribute="centerX" secondItem="Pu6-c8-Xf3" secondAttribute="centerX" id="Pac-Ai-r9O"/>
+                                    <constraint firstAttribute="trailing" secondItem="s32-dm-WSw" secondAttribute="trailing" constant="12" id="Inn-Hu-AQu"/>
+                                    <constraint firstItem="s32-dm-WSw" firstAttribute="top" secondItem="xSX-bx-sLl" secondAttribute="bottom" constant="12" id="Qau-sQ-fZg"/>
+                                    <constraint firstAttribute="bottom" secondItem="BSg-6P-lGj" secondAttribute="bottom" constant="20" id="WGB-ff-0f2"/>
                                     <constraint firstAttribute="trailing" secondItem="b4A-on-b3y" secondAttribute="trailing" constant="12" id="aYa-jz-z4K"/>
                                     <constraint firstItem="xSX-bx-sLl" firstAttribute="top" secondItem="b4A-on-b3y" secondAttribute="bottom" constant="15" id="amD-e5-Nut"/>
                                     <constraint firstItem="xSX-bx-sLl" firstAttribute="leading" secondItem="Pu6-c8-Xf3" secondAttribute="leading" constant="12" id="ccs-Qu-xqZ"/>
@@ -4194,11 +4324,12 @@
                         <outlet property="AddPropertyView" destination="M4d-WU-cVh" id="di6-Uj-UzS"/>
                         <outlet property="AddPropetiesAction" destination="crn-3v-wgW" id="lKa-5l-Hsp"/>
                         <outlet property="EditProfile" destination="oH0-j8-AGe" id="YMh-zT-mwf"/>
+                        <outlet property="EndDate" destination="VdU-e3-TIq" id="cTn-d4-pyO"/>
                         <outlet property="FavoriteItemAction" destination="fnh-3Q-WFx" id="ZWD-sM-LpW"/>
                         <outlet property="FavoriteItems" destination="lEN-oa-eXq" id="Llc-T2-gQz"/>
                         <outlet property="FavoriteItemsView" destination="Oan-lU-bZX" id="InX-mw-KiR"/>
                         <outlet property="GetYA" destination="EW6-ID-taw" id="SbW-iF-Uu0"/>
-                        <outlet property="GetYABottom" destination="APf-Be-GyX" id="E47-7b-fbi"/>
+                        <outlet property="GetYABottom" destination="Qau-sQ-fZg" id="btU-er-2FH"/>
                         <outlet property="GetYAHeight" destination="y6u-vF-F9h" id="ctN-fr-139"/>
                         <outlet property="GetYATop" destination="amD-e5-Nut" id="x9n-5S-ulJ"/>
                         <outlet property="GetYAView" destination="xSX-bx-sLl" id="YqU-Bg-vFx"/>
@@ -4215,6 +4346,13 @@
                         <outlet property="ProfileInfoStackViewLayout" destination="kA2-yl-gc8" id="GJE-eD-Eg7"/>
                         <outlet property="ProfileRightImage" destination="kVB-hE-Yc1" id="w6i-4b-cjc"/>
                         <outlet property="Profileimageheight" destination="bQl-pe-3dr" id="lZ2-Xx-dGq"/>
+                        <outlet property="StartDate" destination="aQf-V7-zRT" id="Fcb-cQ-H4G"/>
+                        <outlet property="SubscriptionDays" destination="kFW-EG-zGd" id="J6w-Cj-vgL"/>
+                        <outlet property="SubscriptionPosts" destination="evq-nU-fmH" id="UWc-eb-jQq"/>
+                        <outlet property="SubscriptionView" destination="s32-dm-WSw" id="5XJ-96-Z22"/>
+                        <outlet property="SubscriptionViewBottomLyout" destination="F04-n3-y3G" id="Uyx-z4-D5M"/>
+                        <outlet property="SubscriptionViewHeightLyout" destination="hhl-RS-scR" id="lK5-WI-DZu"/>
+                        <outlet property="SubscriptionViewTopLyout" destination="Qau-sQ-fZg" id="0kw-vE-q6s"/>
                         <outlet property="VersionNumber" destination="9Lg-o3-d6O" id="4uA-bW-5M1"/>
                         <outlet property="ViewPropertyVicew" destination="Wqg-QM-RfO" id="MbD-mA-26C"/>
                         <outlet property="ViewdItemAction" destination="QFD-oR-2Ar" id="0Mk-Dd-udA"/>
@@ -6558,8 +6696,17 @@
         <designable name="LTD-5l-dat">
             <size key="intrinsicContentSize" width="48" height="32"/>
         </designable>
-        <designable name="TGx-LO-TUs">
-            <size key="intrinsicContentSize" width="120" height="20"/>
+        <designable name="cxj-cr-kPD">
+            <size key="intrinsicContentSize" width="34" height="26"/>
+        </designable>
+        <designable name="dbp-hE-3Ei">
+            <size key="intrinsicContentSize" width="31" height="26"/>
+        </designable>
+        <designable name="gvJ-8u-cm5">
+            <size key="intrinsicContentSize" width="31" height="26"/>
+        </designable>
+        <designable name="y62-vT-gyw">
+            <size key="intrinsicContentSize" width="34" height="26"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
@@ -6604,8 +6751,10 @@
         <image name="profileicon" width="52" height="52"/>
         <image name="rentAndSell" width="24" height="24"/>
         <image name="right" width="24" height="24"/>
+        <image name="right-1" width="170.66667175292969" height="170.66667175292969"/>
         <image name="see2" width="170.66667175292969" height="170.66667175292969"/>
         <image name="share" width="61" height="61"/>
+        <image name="startdate" width="170.66667175292969" height="170.66667175292969"/>
         <image name="thumb1" width="24" height="24"/>
         <image name="version" width="170.66667175292969" height="170.66667175292969"/>
         <image name="vuesax-bold-call-calling" width="170.66667175292969" height="170.66667175292969"/>
