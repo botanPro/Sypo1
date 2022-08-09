@@ -99,6 +99,7 @@ extension FavoritesVC : UITableViewDelegate , UITableViewDataSource{
         let cell  = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! FavoriteTableViewCell
         if ProductArray.count != 0{
             cell.Edit.isHidden = true
+            cell.Sold.isHidden = true
             if let FireId = UserDefaults.standard.string(forKey: "UserId"){
                 FavoriteItemsObjectAip.GetFavoriteItemsById(fire_id: FireId) { item in
                     if item.fire_id == FireId && item.estate_id == self.ProductArray[indexPath.row].id ?? ""{

@@ -40,7 +40,9 @@ class EstatesVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        GetOffices()
+            if !CheckInternet.Connection(){
+                MessageBox.ShowMessage()
+            }
     }
     
    func GetOffices(){

@@ -18,7 +18,7 @@ import SKPhotoBrowser
 import YoutubePlayer_in_WKWebView
 import FirebaseDynamicLinks
 import FCAlertView
-class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDelegate , FCAlertViewDelegate, MKMapViewDelegate, CLLocationManagerDelegate{
+class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDelegate , FCAlertViewDelegate, MKMapViewDelegate, CLLocationManagerDelegate,UIPickerViewDelegate , UIPickerViewDataSource{
 
     
     func playerViewDidBecomeReady(_ playerView: WKYTPlayerView) {
@@ -40,10 +40,11 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
         if UserDefaults.standard.bool(forKey: "Login") == true {
             if let FireId = UserDefaults.standard.string(forKey: "UserId"){
                 FavoriteItemsObjectAip.GetFavoriteItemsById(fire_id: FireId) { item in
-                    if item.fire_id == FireId && item.estate_id == self.CommingEstate?.id ?? ""{
+                    if item.fire_id == FireId && item.estate_id == self.CommingEstate?.id ?? ""{print("oooooo")
                         FavoriteItemsObject.init(fire_id: "", estate_id: "", id:item.id ?? "").Remov()
                         self.AddToFav.setImage(UIImage(named: "Heart"), for: .normal)
-                    }else{
+                    }else{print("iiiiii")
+                        print("\(FireId)\n \(self.CommingEstate?.id ?? "")")
                         FavoriteItemsObject.init(fire_id: FireId, estate_id: self.CommingEstate?.id ?? "", id:UUID().uuidString).Upload()
                         self.AddToFav.setImage(UIImage(named: "fill_heart"), for: .normal)
                     }
@@ -190,7 +191,6 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     @IBOutlet weak var RelatedCollectionView: UICollectionView!
     @IBOutlet weak var DataCollectionView: UICollectionView!
     @IBOutlet weak var ImageCollectionView: UICollectionView!
-    @IBOutlet weak var NighboresCollectionView: UICollectionView!
     
     
     @IBOutlet weak var PagerControl: ScrollingPageControl!{
@@ -201,15 +201,99 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
         }
     }
     
+  
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return NighborArray.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        var pickerLabel: UILabel? = (view as? UILabel)
+        if pickerLabel == nil {
+            pickerLabel = UILabel()
+            if XLanguage.get() == .English{
+                pickerLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            }else if XLanguage.get() == .Kurdish || XLanguage.get() == .Arabic{
+                pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
+            }
+            pickerLabel?.textAlignment = .center
+        }
+        pickerLabel?.text = self.NighborArray[row].name
+
+        return pickerLabel!
+    }
+    
+    
+    
+    @IBAction func ChooseEstateType(_ sender: Any) {
+        setupEstateTypesAlert()
+    }
+    var ProjectsTitle = ""
+    var ProjectsAction = ""
+    var ProjectsCancel = ""
+    
+    var EstateTypepickerView = UIPickerView(frame: CGRect(x: 10, y: 50, width: 250, height: 150))
+    private func setupEstateTypesAlert() {
+        EstateTypepickerView.delegate = self
+        EstateTypepickerView.dataSource = self
+        if XLanguage.get() == .Kurdish{
+            self.ProjectsTitle = "جۆری خانوبەر هەلبژێرە"
+            self.ProjectsAction = "هەڵبژێرە"
+            self.ProjectsCancel = "هەڵوەشاندنەوە"
+        }else if XLanguage.get() == .English{
+            self.ProjectsTitle = "Choose Estate Type"
+            self.ProjectsAction = "Select"
+            self.ProjectsCancel = "Cancel"
+        }else{
+            self.ProjectsTitle = "اختر نوع العقار"
+            self.ProjectsAction  = "تحديد"
+            self.ProjectsCancel  = "إلغاء"
+        }
+        let ac = UIAlertController(title:  self.ProjectsTitle, message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
+        ac.view.addSubview(EstateTypepickerView)
+        ac.addAction(UIAlertAction(title:  self.ProjectsAction, style: .default, handler: { _ in
+            let pickerValue = self.NighborArray[self.EstateTypepickerView.selectedRow(inComponent: 0)]
+            self.EstateTypeLable.text = pickerValue.name
+            ProductAip.GetAllSectionProducts(TypeId: pickerValue.id ?? "") { Product in
+                self.EstateForMap.append(Product)
+            }
+
+            if self.EstateForMap.count != 0{
+                for loc in self.EstateForMap{
+                    let lat = Double(loc.lat ?? "")
+                    let long = Double(loc.long ?? "")
+                    if let latt = lat, let longg = long{
+                        let profileInfo = profile()
+                        profileInfo.profileId = loc.id ?? ""
+                        profileInfo.coordinate = CLLocationCoordinate2D(latitude: latt, longitude: longg)
+                        self.MapView.addAnnotation(profileInfo)
+                    }
+                }
+            }
+        }))
+        ac.addAction(UIAlertAction(title: self.ProjectsCancel, style: .cancel, handler: nil))
+        present(ac, animated: true)
+        
+    }
     
     
     
     
-    
+    @IBOutlet weak var EstateTypeLable: UILabel!
+    @IBOutlet weak var EstateTypeView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NighboresCollectionView.register(UINib(nibName: "EstateTypeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "NCell")
+        
+        EstateTypeView.layer.backgroundColor = UIColor.clear.cgColor
+        EstateTypeView.layer.borderWidth = 1
+        EstateTypeView.layer.borderColor = #colorLiteral(red: 0.776776731, green: 0.8295580745, blue: 0.8200985789, alpha: 1)
+        
+        
         RelatedCollectionView.register(UINib(nibName: "AllEstatessCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "RelatedCell")
         DataCollectionView.register(UINib(nibName: "DataCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "DataCell")
         ImageCollectionView.register(UINib(nibName: "ImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
@@ -248,7 +332,7 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     func GetEstateType(){
         EstateTypeAip.GetEstateType { types in
             self.NighborArray = types
-            self.NighboresCollectionView.reloadData()
+            self.EstateTypepickerView.reloadAllComponents()
         }
     }
     
@@ -274,6 +358,9 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     var RealDirection  = ""
     var lang : Int = UserDefaults.standard.integer(forKey: "language")
     var m2 = ""
+    @IBOutlet weak var DescLable: LanguageLable!
+    
+    @IBOutlet weak var VideoHeightLayout: NSLayoutConstraint!
     func GetData(){
         if let data = CommingEstate{
             
@@ -304,29 +391,37 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
             
             self.Location.text = data.address
             
-            self.Description.text = data.desc
-            self.DescHight.constant = self.Description.contentSize.height
-            self.view.layoutIfNeeded()
+            if data.desc == ""{
+                self.DescLable.isHidden = true
+                UIView.animate(withDuration: 1) {
+                    self.DescHight.constant = 0
+                }
+                self.view.layoutIfNeeded()
+            }else{
+                self.Description.text = data.desc
+                self.DescHight.constant = self.Description.contentSize.height
+                UIView.animate(withDuration: 0.2) {
+                    self.DescHight.constant = self.Description.contentSize.height
+                }
+                self.view.layoutIfNeeded()
+            }
 
             
             if XLanguage.get() == .Kurdish{
                 self.keys.append("مۆبیلیات کراوە")
                 self.keys.append("جۆری بەند")
-                self.keys.append("ژمارەی خانووبەر.")
                 self.keys.append("ساڵی دروست کردن")
                 self.keys.append("ئاڕاستە")
                 self.keys.append("ئەم خانووبەرە")
             }else if XLanguage.get() == .English{
                 self.keys.append("Furnished")
                 self.keys.append("Bond Type")
-                self.keys.append("Property No.")
                 self.keys.append("Constraction year")
                 self.keys.append("Direction")
                 self.keys.append("This estate is")
             }else{
                 self.keys.append("مفروشة")
                 self.keys.append("نوع السند")
-                self.keys.append("رقم العقار")
                 self.keys.append("سنة البناء")
                 self.keys.append("الاتجاه")
                 self.keys.append("هذا العقار")
@@ -467,7 +562,7 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
 
                     let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 24)!])
 
-                    attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "PeshangDes2", size: 18)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
+                    attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "PeshangDes2", size: 16)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
                     
                     self.Price.attributedText = attributedString
                 }else if XLanguage.get() == .English{
@@ -477,7 +572,7 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
 
                     let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 24)!])
 
-                    attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 10)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
+                    attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 15)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
                     
                     self.Price.attributedText = attributedString
                 }else{
@@ -487,7 +582,7 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
 
                     let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 24)!])
 
-                    attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "PeshangDes2", size: 18)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
+                    attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "PeshangDes2", size: 16)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
                     
                     self.Price.attributedText = attributedString
                 }
@@ -513,13 +608,15 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
             
             
             
-            
+            if data.video_link == ""{
+                self.VideoHeightLayout.constant = 0
+            }else{
             self.youtubeUrl = data.video_link ?? ""
             self.youtubeId = youtubeUrl.youtubeID ?? ""
             player.load(withVideoId: self.youtubeId, playerVars: ["playsinline":"1"])
             player.delegate = self
             player.layer.masksToBounds = true
-            
+            }
             
             
             if data.estate_type_id == "UTY25FYJHkliygt4nvPP"{
@@ -528,14 +625,17 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
                     self.keys.append("کرێی خزمەتگوزارییەکانی مانگانە")
                     self.keys.append("باڵەخانە")
                     self.keys.append("نهۆم")
+                    self.keys.append("ژمارەی خانووبەر")
                 }else if XLanguage.get() == .English{
                     self.keys.append("Monthly Services Fee")
                     self.keys.append("Building")
                     self.keys.append("Floor")
+                    self.keys.append("Property No.")
                 }else{
                     self.keys.append("رسوم الخدمات الشهرية")
                     self.keys.append("عمارة")
                     self.keys.append("الطابق")
+                    self.keys.append("رقم العقار")
                 }
                 
                 self.value.append(data.MonthlyService?.description.currencyFormattingIQD() ?? "")
@@ -721,15 +821,6 @@ extension EstateProfileVc : UICollectionViewDataSource, UICollectionViewDelegate
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == NighboresCollectionView{
-            print("[][][][][][]-------------[")
-            print(NighborArray.count)
-            if NighborArray.count == 0 {
-                return 0
-            }else{
-                return NighborArray.count
-            }
-        }
         if collectionView == ImageCollectionView{
             if sliderImages.count == 0 {
                 return 0
@@ -772,6 +863,10 @@ extension EstateProfileVc : UICollectionViewDataSource, UICollectionViewDelegate
             cell.updateKey(cell: self.keys[indexPath.row])
             cell.updateValue(cell: self.value[indexPath.row])
             
+            if self.keys.count == indexPath.row + 1{
+                cell.rightimage.isHidden = true
+            }
+            
             if XLanguage.get() == .Kurdish{
                 cell.Typee.font = UIFont(name: "PeshangDes2", size: 10)!
             }else if XLanguage.get() == .Kurdish{
@@ -781,23 +876,7 @@ extension EstateProfileVc : UICollectionViewDataSource, UICollectionViewDelegate
             }
             return cell
         }
-        
-        if collectionView == NighboresCollectionView{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NCell", for: indexPath) as! EstateTypeCollectionViewCell
-            if self.NighborArray.count != 0{
-                if self.selecteCell?.id == NighborArray[indexPath.row].id{
-                    UIView.animate(withDuration: 0.3) {
-                        cell.Vieww.backgroundColor = #colorLiteral(red: 0, green: 0.6025940776, blue: 0.9986988902, alpha: 1)
-                        cell.Name.textColor = .white
-                    }
-                }else{
-                    cell.Vieww.backgroundColor = .white
-                    cell.Name.textColor = #colorLiteral(red: 0.4430069923, green: 0.4869378209, blue: 0.5339931846, alpha: 1)
-                }
-                cell.Name.text = NighborArray[indexPath.row].name
-            }
-            return cell
-        }
+
         if collectionView == RelatedCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RelatedCell", for: indexPath) as! AllEstatessCollectionViewCell
             cell.update(self.SimilarArray[indexPath.row])
@@ -810,9 +889,7 @@ extension EstateProfileVc : UICollectionViewDataSource, UICollectionViewDelegate
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == NighboresCollectionView{
-            return CGSize(width: collectionView.frame.size.width / 4, height: 40)
-        }
+
         if collectionView == ImageCollectionView{
             return CGSize(width: collectionView.frame.size.width, height: 480)
         }
@@ -839,9 +916,7 @@ extension EstateProfileVc : UICollectionViewDataSource, UICollectionViewDelegate
     
     
      func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-         if collectionView == NighboresCollectionView{
-         return 5
-         }
+
          if collectionView == ImageCollectionView{
          return 0
          }
@@ -855,7 +930,7 @@ extension EstateProfileVc : UICollectionViewDataSource, UICollectionViewDelegate
      }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        if collectionView == RelatedCollectionView ||  collectionView == DataCollectionView || collectionView == NighboresCollectionView{
+        if collectionView == RelatedCollectionView ||  collectionView == DataCollectionView{
             return UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
         }
         return UIEdgeInsets()
@@ -863,31 +938,7 @@ extension EstateProfileVc : UICollectionViewDataSource, UICollectionViewDelegate
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == self.NighboresCollectionView{
-            if self.NighborArray.count != 0  && indexPath.row <= self.NighborArray.count{
-                self.SCell = NighborArray[indexPath.row].id ?? ""
-                self.selecteCell = self.NighborArray[indexPath.row]
-                
-                ProductAip.GetAllSectionProducts(TypeId: self.NighborArray[indexPath.row].id ?? "") { Product in
-                    self.EstateForMap.append(Product)
-                }
-                
-                if self.EstateForMap.count != 0{
-                    for loc in self.EstateForMap{
-                        let lat = Double(loc.lat ?? "")
-                        let long = Double(loc.long ?? "")
-                        if let latt = lat, let longg = long{
-                            let profileInfo = profile()
-                            profileInfo.profileId = loc.id ?? ""
-                            profileInfo.coordinate = CLLocationCoordinate2D(latitude: latt, longitude: longg)
-                            self.MapView.addAnnotation(profileInfo)
-                        }
-                    }
-                }
-                
-                self.NighboresCollectionView.reloadData()
-            }
-        }
+
         
         if collectionView == RelatedCollectionView{
             if self.SimilarArray.count != 0 && indexPath.row <= self.SimilarArray.count{

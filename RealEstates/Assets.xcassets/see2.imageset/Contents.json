@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "vuesax-bold-eye.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "vuesax-bold-eye@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "vuesax-bold-eye@3x.png",
+      "filename" : "eye (1).png",
       "idiom" : "universal",
       "scale" : "3x"
     }

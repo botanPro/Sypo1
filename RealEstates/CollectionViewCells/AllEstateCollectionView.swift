@@ -13,6 +13,7 @@ class AllEstateCollectionView: UICollectionViewCell {
     @IBOutlet weak var Location: UILabel!
     @IBOutlet weak var Name: UILabel!
     @IBOutlet weak var Imagee: UIImageView!
+    @IBOutlet weak var Sold: LanguageLable!
     @IBOutlet weak var BackView: UIView!
     @IBOutlet weak var Date: UILabel!
     @IBOutlet weak var Direction: UILabel!
@@ -24,10 +25,19 @@ class AllEstateCollectionView: UICollectionViewCell {
         // Initialization code
         self.Imagee.layer.cornerRadius = 10
         self.BackView.layer.cornerRadius = 10
+        self.Sold.isHidden = true
     }
-var rooms = ""
+    var rooms = ""
     var lang : Int = UserDefaults.standard.integer(forKey: "language")
     func update(_ cell: EstateObject){
+        
+        if cell.state == "1"{
+            self.Sold.isHidden = false
+            UIView.animate(withDuration: 2, delay: 0.3, options: [.repeat, .autoreverse]) { self.Sold.alpha = 0.3 } completion: { finish in }
+        }else{
+            self.Sold.isHidden = true
+        }
+        
         guard let imagrUrl = cell.ImageURL, let url = URL(string: imagrUrl[0]) else {return}
         self.Imagee.sd_setImage(with: url, completed: nil)
         self.Name.text = cell.name

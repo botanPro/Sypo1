@@ -25,10 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }else{
             UserDefaults.standard.set("false", forKey: "IsFirst")
         }
+        
         FirebaseApp.configure()
         
+        
         sleep(1)
-
+        
              self.window = UIWindow(frame: UIScreen.main.bounds)
              let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
              let newViewController = storyBoard.instantiateViewController(withIdentifier: "DetectVC")
@@ -41,16 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     
-    
-    
-    
-    
-    
     // DynamicLinks
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
         DynamicLinks.dynamicLinks().handleUniversalLink(url) { (dynamiclink, error) in
             if let dynamiclink = dynamiclink {
-                print(dynamiclink.url)
                 UserDefaults.standard.set(dynamiclink, forKey: "dynamiclink")
             }
         }
@@ -60,16 +56,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 
     private func application(_ application: UIApplication, continue userActivity: NSUserActivity,restorationHandler: @escaping ([Any]?) -> Void) -> Bool{
-        print("anything??")
         if let incomingurl = userActivity.webpageURL{
             print("incomingurl is \(incomingurl)")
             let handled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingurl) { (dynamiclink, error) in
-                
                 guard error == nil else{
                     print("found an error! \(error!.localizedDescription)")
                     return
                 }
-                print(dynamiclink?.url)
                 UserDefaults.standard.set(dynamiclink, forKey: "dynamiclink")
                 
             }

@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "vuesax-bold-archive-tick.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "vuesax-bold-archive-tick@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "vuesax-bold-archive-tick@3x.png",
+      "filename" : "bookmarks.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

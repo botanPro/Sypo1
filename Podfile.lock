@@ -379,6 +379,9 @@ PODS:
   - Firebase/Firestore (8.12.1):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 8.12.1)
+  - Firebase/Messaging (8.12.1):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 8.12.0)
   - Firebase/Storage (8.12.1):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 8.12.0)
@@ -437,6 +440,15 @@ PODS:
     - GoogleUtilities/Environment (~> 7.7)
     - GoogleUtilities/UserDefaults (~> 7.7)
     - PromisesObjC (< 3.0, >= 1.2)
+  - FirebaseMessaging (8.12.0):
+    - FirebaseCore (~> 8.0)
+    - FirebaseInstallations (~> 8.0)
+    - GoogleDataTransport (~> 9.1)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
+    - GoogleUtilities/Environment (~> 7.7)
+    - GoogleUtilities/Reachability (~> 7.7)
+    - GoogleUtilities/UserDefaults (~> 7.7)
+    - nanopb (~> 2.30908.0)
   - FirebaseStorage (8.12.0):
     - FirebaseCore (~> 8.0)
     - GTMSessionFetcher/Core (~> 1.5)
@@ -566,6 +578,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/DynamicLinks
   - Firebase/Firestore
+  - Firebase/Messaging
   - Firebase/Storage
   - FSPagerView
   - HMSegmentedControl
@@ -612,6 +625,7 @@ SPEC REPOS:
     - FirebaseDynamicLinks
     - FirebaseFirestore
     - FirebaseInstallations
+    - FirebaseMessaging
     - FirebaseStorage
     - FSPagerView
     - GoogleAppMeasurement
@@ -669,6 +683,7 @@ SPEC CHECKSUMS:
   FirebaseDynamicLinks: 98a5f0fe542245a89ec55f646d2581298c29219d
   FirebaseFirestore: dfeb58916ee3ae0ef2453d4849a683672705920c
   FirebaseInstallations: 25764cf322e77f99449395870a65b2bef88e1545
+  FirebaseMessaging: 23db8bf05585e929ada8af0f0968933c25252808
   FirebaseStorage: 4b75458c35d8b728e4c1fc1371942997456ab299
   FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
   GoogleAppMeasurement: ae033c3aad67e68294369373056b4d74cc8ae0d6
@@ -702,6 +717,6 @@ SPEC CHECKSUMS:
   ValidationTextField: 91bc04170ba4b4358912c372e12d7af4c9143ad5
   YoutubePlayer-in-WKWebView: 4dad12b3ece938a6456fa4374df78942f88b485a
 
-PODFILE CHECKSUM: ba3ffbb798d1f034a859ce38669b8be6c662d6d9
+PODFILE CHECKSUM: b28639a24b33118d1396d233ff6e1b253821e791
 
 COCOAPODS: 1.11.3

@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "vuesax-bold-call-calling.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "vuesax-bold-call-calling@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "vuesax-bold-call-calling@3x.png",
+      "filename" : "phone (1).png",
       "idiom" : "universal",
       "scale" : "3x"
     }

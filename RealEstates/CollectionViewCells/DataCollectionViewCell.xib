@@ -63,6 +63,7 @@
             <connections>
                 <outlet property="Typee" destination="Qtj-Id-67Y" id="1IW-3m-ZEY"/>
                 <outlet property="Value" destination="d6K-X8-O0s" id="ofG-Ka-U6N"/>
+                <outlet property="rightimage" destination="jTF-Hl-WVM" id="I9X-uY-LwU"/>
             </connections>
             <point key="canvasLocation" x="173.18840579710147" y="134.26339285714286"/>
         </collectionViewCell>

@@ -74,7 +74,12 @@ class ProjetsVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.LanguageChanged), name: NSNotification.Name(rawValue: "LanguageChanged"), object: nil)
         
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !CheckInternet.Connection(){
+            MessageBox.ShowMessage()
+        }
+    }
     
     @objc func LanguageChanged(){
         self.ProjectsCollectionView.reloadData()

@@ -64,6 +64,7 @@ extension ViewdVC : UITableViewDelegate , UITableViewDataSource{
         if ProductArray.count != 0{
             cell.Delete.isHidden = true
             cell.Edit.isHidden = true
+            cell.Sold.isHidden = true
             cell.update(self.ProductArray[indexPath.row])
         }
         return cell

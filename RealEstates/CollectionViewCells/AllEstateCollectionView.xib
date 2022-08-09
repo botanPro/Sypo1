@@ -23,8 +23,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo-1558472306-75b150ac26eb" translatesAutoresizingMaskIntoConstraints="NO" id="HMB-PF-FaC">
                                 <rect key="frame" x="10" y="10" width="112" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="112" id="6ta-sJ-oAG"/>
-                                    <constraint firstAttribute="height" constant="100" id="MVs-c7-vAg"/>
+                                    <constraint firstAttribute="width" secondItem="HMB-PF-FaC" secondAttribute="height" multiplier="28:25" id="FLg-L6-aCt"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="qXv-3I-OKl">
@@ -148,17 +147,40 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sold" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pid-Zk-Sqr" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
+                                <rect key="frame" x="36" y="46" width="54.5" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="xD7-BP-krz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Sold"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="فرۆشرا"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="تم البيع"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
+                                        <real key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
+                                        <real key="value" value="27"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="qXv-3I-OKl" firstAttribute="top" secondItem="z3p-16-oTD" secondAttribute="top" constant="16.5" id="7lZ-vG-UjF"/>
+                            <constraint firstItem="pid-Zk-Sqr" firstAttribute="leading" secondItem="z3p-16-oTD" secondAttribute="leading" constant="36" id="BMz-FJ-xei"/>
                             <constraint firstItem="HMB-PF-FaC" firstAttribute="leading" secondItem="z3p-16-oTD" secondAttribute="leading" constant="10" id="MDg-i4-VEv"/>
                             <constraint firstAttribute="trailing" secondItem="qXv-3I-OKl" secondAttribute="trailing" constant="5" id="O4h-K1-xAa"/>
                             <constraint firstAttribute="height" constant="120" id="T6k-Jr-Gbq"/>
                             <constraint firstAttribute="bottom" secondItem="HMB-PF-FaC" secondAttribute="bottom" constant="10" id="UeS-I6-Gxl"/>
                             <constraint firstItem="HMB-PF-FaC" firstAttribute="top" secondItem="z3p-16-oTD" secondAttribute="top" constant="10" id="XrU-IQ-FQq"/>
                             <constraint firstAttribute="bottom" secondItem="qXv-3I-OKl" secondAttribute="bottom" constant="16.5" id="aev-pA-NId"/>
+                            <constraint firstItem="pid-Zk-Sqr" firstAttribute="top" secondItem="z3p-16-oTD" secondAttribute="top" constant="46" id="hhU-9h-BYv"/>
                             <constraint firstItem="qXv-3I-OKl" firstAttribute="leading" secondItem="HMB-PF-FaC" secondAttribute="trailing" constant="8" symbolic="YES" id="lVo-M9-Lh8"/>
+                            <constraint firstAttribute="bottom" secondItem="pid-Zk-Sqr" secondAttribute="bottom" constant="45" id="yhP-kK-FAA"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -182,6 +204,7 @@
                 <outlet property="Name" destination="c4k-ap-yF0" id="2bU-Gj-FOv"/>
                 <outlet property="Price" destination="gjr-t2-Gl5" id="Uqw-fh-SAO"/>
                 <outlet property="RoomNumber" destination="erK-iE-Dxo" id="jSG-BV-Qnm"/>
+                <outlet property="Sold" destination="pid-Zk-Sqr" id="PXE-nJ-70O"/>
             </connections>
             <point key="canvasLocation" x="371.01449275362324" y="154.01785714285714"/>
         </collectionViewCell>

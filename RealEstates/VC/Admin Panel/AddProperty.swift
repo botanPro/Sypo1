@@ -15,44 +15,26 @@ import Firebase
 import FirebaseStorage
 import FirebaseFirestore
 class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,UIPickerViewDelegate , UIPickerViewDataSource ,UITextViewDelegate{
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return ProjectArray.count
+        if pickerView == ProjectpickerView{
+           return ProjectArray.count
+        }
+        
+        if pickerView == EstateTypepickerView{
+            return EstatesType.count
+        }
+        
+        if pickerView == TypepickerView{
+            return typees.count
+        }
+        return 0
     }
     
-    
-    
-    
-    
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        do {
-            let regex = try NSRegularExpression(pattern: ".*[^A-Za-z0-9 ].*", options: [])
-            if regex.firstMatch(in: text, options: [], range: NSMakeRange(0, text.count)) != nil {
-                return false
-            }
-        }
-        catch {
-            print("ERROR")
-        }
-        return true
-    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        do {
-            let regex = try NSRegularExpression(pattern: ".*[^A-Za-z0-9 ].*", options: [])
-            if regex.firstMatch(in: string, options: [], range: NSMakeRange(0, string.count)) != nil {
-                return false
-            }
-        }
-        catch {
-            print("ERROR")
-        }
-        return true
-    }
     
     
     
@@ -61,24 +43,43 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
         var pickerLabel: UILabel? = (view as? UILabel)
         if pickerLabel == nil {
             pickerLabel = UILabel()
-            pickerLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 13)
+            if XLanguage.get() == .English{
+                pickerLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            }else if XLanguage.get() == .Kurdish || XLanguage.get() == .Arabic{
+                pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
+            }
             pickerLabel?.textAlignment = .center
         }
+        if pickerView == ProjectpickerView{
         pickerLabel?.text = self.ProjectArray[row].project_name
-
+        }
+        
+        if pickerView == EstateTypepickerView{
+            pickerLabel?.text = self.EstatesType[row].name
+        }
+        
+        if pickerView == TypepickerView{
+            pickerLabel?.text = self.typees[row].name
+        }
+        
         return pickerLabel!
     }
-    
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return self.ProjectArray[row].project_name
-//    }
-    
+
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.ProjectName.text = self.ProjectArray[row].project_name
-        self.ProjectId = self.ProjectArray[row].id ?? ""
+//        if pickerView == ProjectpickerView{
+//        self.ProjectName.text = self.ProjectArray[row].project_name
+//        self.ProjectId = self.ProjectArray[row].id ?? ""
+//        }
+//        if pickerView == EstateTypepickerView{
+//        self.EstateTypeLable.text = self.EstatesType[row].name
+//        self.selecteEstatedcell = self.EstatesType[row]
+//        }
+//        if pickerView == TypepickerView{
+//        self.Typelable.text = self.typees[row].name
+//       // self.ProjectId = self.typees[row].id ?? ""
+//        }
     }
-    
-    
+
     
     
     
@@ -130,9 +131,9 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
     func radioButtonDidSelect(_ button: RadioButton) {
         print("select  : \(button.tag)")
         if button.tag == 1{
-            self.RentOrSell = 0
-        }else{
             self.RentOrSell = 1
+        }else{
+            self.RentOrSell = 0
         }
     }
     
@@ -147,14 +148,12 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
     var selecteTypecell : TypesObject?
     var NumberOfRoom = 0
     var NumberOfWashRoom = 0
-    var SelectedEstateTypy = "Apartment"
+    var SelectedEstateTypy = ""
     var Selectedtypee =  ""
     var EstatesType : [EstateTypeObject] = []
     var typees : [TypesObject] = []
     var NumberOfWashRooms = [1,2,3,4,5,6,7,8,9,10]
     var NumberOfRooms = [1,2,3,4,5,6,7,8,9,10]
-    @IBOutlet weak var TypeCollectionView: UICollectionView!
-    @IBOutlet weak var EstateTypeCollectionView: UICollectionView!{didSet{self.GetEstateTypes()}}
     @IBOutlet weak var NumberOfRoomsCollectionView: UICollectionView!
     @IBOutlet weak var NumberOfWashRoomsCollectionView: UICollectionView!
     
@@ -208,14 +207,34 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
     
     @IBOutlet weak var UploadItemBar: UIBarButtonItem!
     
+    
+    
+    @IBOutlet weak var TypeView: UIView!
+    @IBOutlet weak var EstateTypeView: UIView!
+    
+    @IBOutlet weak var Typelable: UILabel!
+    @IBOutlet weak var EstateTypeLable: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupGroup2()
-//        UploadItemBar.setTitleTextAttributes(
-//            [
-//                NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 15)!,
-//                NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.07560480386, green: 0.2257080078, blue: 0.3554315865, alpha: 1)
-//            ], for: .normal)
+        
+        
+        
+        TypeView.layer.backgroundColor = UIColor.clear.cgColor
+        TypeView.layer.borderWidth = 1
+        TypeView.layer.borderColor = #colorLiteral(red: 0.776776731, green: 0.8295580745, blue: 0.8200985789, alpha: 1)
+        
+        EstateTypeView.layer.backgroundColor = UIColor.clear.cgColor
+        EstateTypeView.layer.borderWidth = 1
+        EstateTypeView.layer.borderColor = #colorLiteral(red: 0.776776731, green: 0.8295580745, blue: 0.8200985789, alpha: 1)
+        
+        ProjectView.layer.backgroundColor = UIColor.clear.cgColor
+        ProjectView.layer.borderWidth = 1
+        ProjectView.layer.borderColor = #colorLiteral(red: 0.776776731, green: 0.8295580745, blue: 0.8200985789, alpha: 1)
+        
+        
+        
         if XLanguage.get() == .English{
             self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "ArialRoundedMTBold", size: 16)!]
             self.RentRadioButton.setTitle("RENT", for: .normal)
@@ -237,8 +256,6 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
         }
         NumberOfRoomsCollectionView.register(UINib(nibName: "EstateTypeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "NCell")
         NumberOfWashRoomsCollectionView.register(UINib(nibName: "EstateTypeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "NWCell")
-        EstateTypeCollectionView.register(UINib(nibName: "EstateTypeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "EstateCell")
-        TypeCollectionView.register(UINib(nibName: "EstateTypeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TypeCell")
         ImagesCollectionView.register(UINib(nibName: "ExpImagesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ImageCell")
         
   
@@ -404,15 +421,24 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             
             
             if data.RentOrSell == "1" {
-                self.RentRadioButton.isOn = true
-                self.SellRadioButton.isOn = false
-            }else{
                 self.RentRadioButton.isOn = false
                 self.SellRadioButton.isOn = true
+                group3Container.selectedButton = SellRadioButton
+            }else{
+                self.RentRadioButton.isOn = true
+                self.SellRadioButton.isOn = false
+                group3Container.selectedButton = RentRadioButton
             }
+            
             self.AddressLable.text = data.city_name
             self.city = data.city_name ?? ""
+            
             self.selecteEstatedcell = EstateTypeObject(name: "", id:data.estate_type_id ??  "")
+            
+            EstateTypeAip.GeEstateTypeNameById(id: data.estate_type_id ?? "") { type in
+                self.EstateTypeLable.text = type.name
+            }
+           
 
             print("===================================")
             if data.estate_type_id == "UTY25FYJHkliygt4nvPP"{
@@ -454,7 +480,6 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                     self.view.layoutIfNeeded()
                 }
             }
-            self.EstateTypeCollectionView.reloadData()
             self.IsUpdateEstateType = true
             
             self.Direction = data.Direction ?? ""
@@ -492,20 +517,103 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
         //self.Address.becomeFirstResponder()
     }
     
+    
+    @IBAction func ChooseType(_ sender: Any) {
+        setupTypesAlert()
+    }
+    
+    var IsPickerSelected = ""
+    var TypepickerView = UIPickerView(frame: CGRect(x: 10, y: 50, width: 250, height: 150))
+    
+    private func setupTypesAlert() {
+        GetType()
+        TypepickerView.delegate = self
+        TypepickerView.dataSource = self
+        IsPickerSelected = "1"
+        if XLanguage.get() == .Kurdish{
+            self.ProjectsTitle   = "جۆرەکە هەلبژێرە"
+            self.ProjectsAction  = "هەڵبژێرە"
+            self.ProjectsCancel  = "هەڵوەشاندنەوە"
+        }else if XLanguage.get() == .English{
+            self.ProjectsTitle   = "Choose a Type"
+            self.ProjectsAction  = "Select"
+            self.ProjectsCancel  = "Cancel"
+        }else{
+            self.ProjectsTitle   = "اختر نوع"
+            self.ProjectsAction  = "تحديد"
+            self.ProjectsCancel  = "إلغاء"
+        }
+        let ac = UIAlertController(title:  self.ProjectsTitle, message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
+        ac.view.addSubview(TypepickerView)
+        ac.addAction(UIAlertAction(title:  self.ProjectsAction, style: .default, handler: { _ in
+            let pickerValue = self.typees[self.TypepickerView.selectedRow(inComponent: 0)]
+            self.Typelable.text = pickerValue.name
+            print("Picker value: \(pickerValue) was selected")
+        }))
+        ac.addAction(UIAlertAction(title: self.ProjectsCancel, style: .cancel, handler: nil))
+        present(ac, animated: true)
+    }
+    
+    
+    
     func GetType(){
         self.typees.removeAll()
         TypesObjectAip.GetTypes { types in
             self.typees = types
-            self.TypeCollectionView.reloadData()
+            self.TypepickerView.reloadAllComponents()
         }
     }
+    
+    
+    
+    
+    
+    @IBAction func ChooseEstateType(_ sender: Any) {
+        setupEstateTypesAlert()
+    }
+    
+    
+    var EstateTypepickerView = UIPickerView(frame: CGRect(x: 10, y: 50, width: 250, height: 150))
+    private func setupEstateTypesAlert() {
+        GetEstateTypes()
+        EstateTypepickerView.delegate = self
+        EstateTypepickerView.dataSource = self
+        IsPickerSelected = "2"
+        if XLanguage.get() == .Kurdish{
+            self.ProjectsTitle = "جۆری خانوبەر هەلبژێرە"
+            self.ProjectsAction = "هەڵبژێرە"
+            self.ProjectsCancel = "هەڵوەشاندنەوە"
+        }else if XLanguage.get() == .English{
+            self.ProjectsTitle = "Choose Estate Type"
+            self.ProjectsAction = "Select"
+            self.ProjectsCancel = "Cancel"
+        }else{
+            self.ProjectsTitle = "اختر نوع العقار"
+            self.ProjectsAction  = "تحديد"
+            self.ProjectsCancel  = "إلغاء"
+        }
+        let ac = UIAlertController(title:  self.ProjectsTitle, message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
+        ac.view.addSubview(EstateTypepickerView)
+        ac.addAction(UIAlertAction(title:  self.ProjectsAction, style: .default, handler: { _ in
+            let pickerValue = self.EstatesType[self.EstateTypepickerView.selectedRow(inComponent: 0)]
+            self.EstateTypeLable.text = pickerValue.name
+            self.selecteEstatedcell = pickerValue
+            print("Picker value: \(pickerValue) was selected")
+        }))
+        ac.addAction(UIAlertAction(title: self.ProjectsCancel, style: .cancel, handler: nil))
+        present(ac, animated: true)
+        
+    }
+    
+    
+    
     
     
     func GetEstateTypes(){
         self.EstatesType.removeAll()
         EstateTypeAip.GetEstateType{ (estates) in
             self.EstatesType = estates
-            self.EstateTypeCollectionView.reloadData()
+            self.EstateTypepickerView.reloadAllComponents()
         }
     }
     
@@ -564,7 +672,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
     @IBOutlet weak var ProjectView : UIView!
     private var alertController = UIAlertController()
     private var tblView = UITableView()
-    var pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 150))
+    var ProjectpickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 150))
     @IBOutlet weak var ProjectName : UILabel!
     var ProjectId = ""
     
@@ -576,35 +684,35 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
     var ProjectArray : [ProjectObject] = []
     var ProjectsTitle = ""
     var ProjectsAction = ""
+    var ProjectsCancel = ""
     private func setupCitySelectionAlert() {
-        let vc = UIViewController()
-        vc.preferredContentSize = CGSize(width: 250,height: 150)
-        pickerView.delegate = self
-        pickerView.dataSource = self
-        
+        ProjectpickerView.delegate = self
+        ProjectpickerView.dataSource = self
+        IsPickerSelected = "3"
         if XLanguage.get() == .Kurdish{
             self.ProjectsTitle = "پرۆژە هەڵبژێرە"
-            self.ProjectsAction = "بەڵێ"
+            self.ProjectsAction  = "هەڵبژێرە"
+            self.ProjectsCancel  = "هەڵوەشاندنەوە"
         }else if XLanguage.get() == .English{
             self.ProjectsTitle = "Choose project"
-            self.ProjectsAction = "Ok"
+            self.ProjectsAction = "Select"
+            self.ProjectsCancel = "Cancel"
         }else{
             self.ProjectsTitle = "اختر المشروع"
-            self.ProjectsAction = "نعم"
+            self.ProjectsAction = "تحديد"
+            self.ProjectsCancel = "إلغاء"
         }
         
-        
-        vc.view.addSubview(pickerView)
-        let editRadiusAlert = UIAlertController(title: nil, message: "", preferredStyle: UIAlertController.Style.alert)
-        editRadiusAlert.setValue(vc, forKey: "contentViewController")
-        self.alertController = UIAlertController(title: ProjectsTitle, message: nil, preferredStyle: .alert)
-        alertController.setValue(editRadiusAlert, forKey: "contentViewController")
-        let cancelAction = UIAlertAction(title: self.ProjectsAction, style: .default, handler: { (UIAlertAction) in
-            
-        })
-        
-        alertController.addAction(cancelAction)
-        self.present(alertController, animated: true, completion: nil)
+        let ac = UIAlertController(title: self.ProjectsTitle, message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
+        ac.view.addSubview(ProjectpickerView)
+        ac.addAction(UIAlertAction(title: self.ProjectsAction, style: .default, handler: { _ in
+            let pickerValue = self.ProjectArray[self.ProjectpickerView.selectedRow(inComponent: 0)]
+            self.ProjectName.text = pickerValue.project_name
+            self.ProjectId = pickerValue.id ?? ""
+            print("Picker value: \(pickerValue) was selected")
+        }))
+        ac.addAction(UIAlertAction(title: self.ProjectsCancel, style: .cancel, handler: nil))
+        present(ac, animated: true)
     }
     
     
@@ -612,7 +720,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
         self.ProjectArray.removeAll()
         GetAllProjectsAip.GetAllProducts { pro in
             self.ProjectArray = pro
-            self.pickerView.reloadAllComponents()
+            self.ProjectpickerView.reloadAllComponents()
         }
         
     }
@@ -1092,7 +1200,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
         self.IsSClicked = false
         
         self.IsNWClicked = false
-        self.Direction = "EN"
+        self.Direction = "NE"
         self.IsENClicked = true
         self.IsSEClicked = false
         self.IsWSClicked = false
@@ -1609,7 +1717,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                 OfficeAip.GetOfficeById(Id: FireId) { office in
                     if office.name != ""{
                         let alertController = UIAlertController(title: self.titlee, message: self.messagee, preferredStyle: .alert)
-                        let okAction = UIAlertAction(title:  self.Actionn, style: UIAlertAction.Style.default) {
+                        let okAction = UIAlertAction(title:  self.Action, style: UIAlertAction.Style.default) {
                             UIAlertAction in
                             self.uploadManyImage { URLs in
                                 self.ImageUrl = URLs
@@ -1664,7 +1772,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                     if office.name != ""{
                         
                         let alertController = UIAlertController(title: self.updatetitlee, message: self.updatemessagee, preferredStyle: .alert)
-                        let okAction = UIAlertAction(title: self.Actionn, style: UIAlertAction.Style.default) {
+                        let okAction = UIAlertAction(title: self.Action, style: UIAlertAction.Style.default) {
                             UIAlertAction in
                             if self.removdImages.count != 0{
                                 for image in self.removdImages{
@@ -1736,20 +1844,7 @@ extension AddProperty : UICollectionViewDataSource, UICollectionViewDelegate , U
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == self.EstateTypeCollectionView{
-            if EstatesType.count == 0 {
-                return 0
-            }else{
-                return EstatesType.count
-            }
-        }
-        if collectionView == self.TypeCollectionView{
-            if typees.count == 0 {
-                return 0
-            }else{
-                return typees.count
-            }
-        }
+
         if collectionView == self.NumberOfRoomsCollectionView{
             if NumberOfRooms.count == 0 {
                 return 0
@@ -1838,137 +1933,6 @@ extension AddProperty : UICollectionViewDataSource, UICollectionViewDelegate , U
         }
         
         
-        if collectionView == self.EstateTypeCollectionView{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EstateCell", for: indexPath) as! EstateTypeCollectionViewCell
-            if self.EstatesType.count != 0{
-                cell.Name.text = EstatesType[indexPath.row].name
-                
-                if IsUpdateEstateType == false{
-                    if self.selecteEstatedcell?.id == nil && indexPath.row == 2{
-                        cell.Vieww.backgroundColor = #colorLiteral(red: 0, green: 0.6025940776, blue: 0.9986988902, alpha: 1)
-                        cell.Name.textColor = .white
-                        self.selecteEstatedcell?.id = EstatesType[indexPath.row].id
-                    }else{
-                        if self.selecteEstatedcell?.id == EstatesType[indexPath.row].id{
-                            UIView.animate(withDuration: 0.3) {
-                                cell.Vieww.backgroundColor = #colorLiteral(red: 0, green: 0.6025940776, blue: 0.9986988902, alpha: 1)
-                                cell.Name.textColor = .white
-                            }
-                        }else{
-                            cell.Vieww.backgroundColor = .white
-                            cell.Name.textColor = #colorLiteral(red: 0.4430069923, green: 0.4869378209, blue: 0.5339931846, alpha: 1)
-                        }
-                        if self.selecteEstatedcell?.id != "UTY25FYJHkliygt4nvPP"{
-                            self.IsApartment = false
-                            self.Floor.isUserInteractionEnabled = false
-                            self.Floor.alpha = 0.5
-                            self.Building.isUserInteractionEnabled = false
-                            self.Building.alpha = 0.5
-                            self.MonthlyFee.isUserInteractionEnabled = false
-                            self.MonthlyFee.alpha = 0.5
-                            
-                            UIView.animate(withDuration: 0.2, delay: 0.0) {
-                                self.ProjectHeight.constant = 0
-                                self.ProjectTopConstans.constant = 0
-                                self.ProjectView.isHidden = true
-                                self.view.layoutIfNeeded()
-                            }
-                            
-                        }else{
-                            self.IsApartment = true
-                            self.Floor.isUserInteractionEnabled = true
-                            self.Floor.alpha = 1
-                            self.Building.isUserInteractionEnabled = true
-                            self.Building.alpha = 1
-                            self.MonthlyFee.isUserInteractionEnabled = true
-                            self.MonthlyFee.alpha = 1
-                            
-                            UIView.animate(withDuration: 0.2, delay: 0.0) {
-                                self.ProjectHeight.constant = 45
-                                self.ProjectTopConstans.constant = 20
-                                self.ProjectView.isHidden = false
-                                self.view.layoutIfNeeded()
-                            }
-                        }
-                    }
-                }else{
-                    if self.selecteEstatedcell?.name == self.EstatesType[indexPath.row].name{
-                        IsUpdateEstateType = false
-                        UIView.animate(withDuration: 0.3) {
-                            cell.Vieww.backgroundColor = #colorLiteral(red: 0, green: 0.6025940776, blue: 0.9986988902, alpha: 1)
-                            cell.Name.textColor = .white
-                        }
-                    }else{
-                        cell.Vieww.backgroundColor = .white
-                        cell.Name.textColor = #colorLiteral(red: 0.4430069923, green: 0.4869378209, blue: 0.5339931846, alpha: 1)
-                    }
-                    
-                    if self.selecteEstatedcell?.id != "UTY25FYJHkliygt4nvPP"{
-                        self.IsApartment = false
-                        self.Floor.isUserInteractionEnabled = false
-                        self.Floor.alpha = 0.5
-                        self.Building.isUserInteractionEnabled = false
-                        self.Building.alpha = 0.5
-                        self.MonthlyFee.isUserInteractionEnabled = false
-                        self.MonthlyFee.alpha = 0.5
-                        
-                        UIView.animate(withDuration: 0.2, delay: 0.0) {
-                            self.ProjectHeight.constant = 0
-                            self.ProjectTopConstans.constant = 0
-                            self.ProjectView.isHidden = true
-                            self.view.layoutIfNeeded()
-                        }
-                    }else{
-                        self.IsApartment = true
-                        self.Floor.isUserInteractionEnabled = true
-                        self.Floor.alpha = 1
-                        self.Building.isUserInteractionEnabled = true
-                        self.Building.alpha = 1
-                        self.MonthlyFee.isUserInteractionEnabled = true
-                        self.MonthlyFee.alpha = 1
-                        
-                        UIView.animate(withDuration: 0.2, delay: 0.0) {
-                            self.ProjectHeight.constant = 45
-                            self.ProjectTopConstans.constant = 20
-                            self.ProjectView.isHidden = false
-                            self.view.layoutIfNeeded()
-                        }
-                    }
-                }
-                //self.selecteEstatedcell = self.EstatesType[indexPath.row]
-            }
-            
-            return cell
-        }
-        
-        
-        
-        if collectionView == self.TypeCollectionView{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TypeCell", for: indexPath) as! EstateTypeCollectionViewCell
-            if self.typees.count != 0{
-                cell.Name.text = typees[indexPath.row].name
-                if self.selecteTypecell?.id == nil && indexPath.row == 0{
-                    cell.Vieww.backgroundColor = #colorLiteral(red: 0, green: 0.6025940776, blue: 0.9986988902, alpha: 1)
-                    cell.Name.textColor = .white
-                    self.selecteTypecell?.id = typees[indexPath.row].id
-                }else{
-                if self.selecteTypecell?.id == typees[indexPath.row].id{
-                    UIView.animate(withDuration: 0.3) {
-                        cell.Vieww.backgroundColor = #colorLiteral(red: 0, green: 0.6025940776, blue: 0.9986988902, alpha: 1)
-                        cell.Name.textColor = .white
-                    }
-                }else{
-                    cell.Vieww.backgroundColor = .white
-                    cell.Name.textColor = #colorLiteral(red: 0.4430069923, green: 0.4869378209, blue: 0.5339931846, alpha: 1)
-                }
-                }
-                
-            }
-            return cell
-        }
-        
-        
-        
         
         if collectionView == ImagesCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ExpImagesCollectionViewCell
@@ -2000,10 +1964,7 @@ extension AddProperty : UICollectionViewDataSource, UICollectionViewDelegate , U
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if collectionView == self.EstateTypeCollectionView || collectionView == self.TypeCollectionView {
-            return CGSize(width: collectionView.frame.size.width / 4, height: 45)
-        }
-        
+
         if collectionView == ImagesCollectionView{
         return CGSize(width: collectionView.frame.size.width / 4, height: 150)
         }
@@ -2027,21 +1988,6 @@ extension AddProperty : UICollectionViewDataSource, UICollectionViewDelegate , U
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == self.EstateTypeCollectionView{
-            if self.EstatesType.count != 0  && indexPath.row <= self.EstatesType.count{
-                self.IsUpdateEstateType = false
-                self.SelectedEstateTypy = EstatesType[indexPath.row].id ?? ""
-                self.selecteEstatedcell = self.EstatesType[indexPath.row]
-                self.EstateTypeCollectionView.reloadData()
-            }
-        }
-        if collectionView == self.TypeCollectionView{
-            if self.typees.count != 0  && indexPath.row <= self.typees.count{
-                self.Selectedtypee = typees[indexPath.row].id ?? ""
-                self.selecteTypecell = self.typees[indexPath.row]
-                self.TypeCollectionView.reloadData()
-            }
-        }
 
         
         if collectionView == self.NumberOfRoomsCollectionView{
@@ -2062,5 +2008,4 @@ extension AddProperty : UICollectionViewDataSource, UICollectionViewDelegate , U
     }
     
 }
-
 

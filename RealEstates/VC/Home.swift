@@ -281,6 +281,40 @@ class Home: UIViewController ,UITextFieldDelegate{
         }
     }
     
+    
+    @IBAction func SeeAllNearEstatets(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let myVC = storyboard.instantiateViewController(withIdentifier: "AllEstateVC") as! AllEstateVC
+        myVC.AllEstate = self.NearArray
+        if XLanguage.get() == .English{
+            myVC.title = "Near you"
+        }else if XLanguage.get() == .Kurdish{
+            myVC.title = "بالقرب منك"
+        }else{
+            myVC.title = "نزیک لە تۆ"
+        }
+        self.navigationController?.pushViewController(myVC, animated: true)
+    }
+    
+    
+    @IBAction func SeeAllApartments(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let myVC = storyboard.instantiateViewController(withIdentifier: "AllEstateVC") as! AllEstateVC
+        myVC.AllEstate = self.ApartmentArray
+        if XLanguage.get() == .English{
+            myVC.title = "Apartments"
+        }else if XLanguage.get() == .Kurdish{
+            myVC.title = "شوقەکان"
+        }else{
+            myVC.title = "شقق"
+        }
+        self.navigationController?.pushViewController(myVC, animated: true)
+    }
+    
+    
+    
+    
+    
     var LocationdsArray : [CLLocationCoordinate2D] = []
     var ClosestArray : [CLLocationCoordinate2D] = []
 
@@ -312,6 +346,9 @@ class Home: UIViewController ,UITextFieldDelegate{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         TitleSubTile()
+        if !CheckInternet.Connection(){
+            MessageBox.ShowMessage()
+        }
     }
     
    
@@ -369,7 +406,15 @@ class Home: UIViewController ,UITextFieldDelegate{
     
     
     
-    
+    func InsertViewdItem(id : String){
+        if let FireId = UserDefaults.standard.string(forKey: "UserId"){
+            ViewdItemsObjectAip.GeViewdItemsById(fire_id: FireId) { item in
+                if item.estate_id != id || FireId != item.fire_id{
+                    ViewdItemsObject.init(fire_id: FireId, estate_id: id, id: UUID().uuidString).Upload()
+                }
+            }
+        }
+    }
 
     
 }
@@ -392,15 +437,21 @@ extension Home : UICollectionViewDataSource, UICollectionViewDelegate , UICollec
         if collectionView == ApartmentEstatesCollectionView{
             if ApartmentArray.count == 0{
                 return 0
+            }else if ApartmentArray.count >= 10{
+                return 10
+            }else{
+                return ApartmentArray.count
             }
-            return ApartmentArray.count
         }
         
         if collectionView == NearYouCollectionView{
             if NearArray.count == 0{
                 return 0
+            }else if NearArray.count >= 10{
+                return 10
+            }else{
+                return NearArray.count
             }
-            return NearArray.count
         }
         
         if collectionView == AllEstatesCollectionView{
@@ -432,7 +483,7 @@ extension Home : UICollectionViewDataSource, UICollectionViewDelegate , UICollec
         }
         
         if collectionView == NearYouCollectionView{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NearCell", for: indexPath) as! NearCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NearCell", for: indexPath) as! NearCollectionViewCell    
             cell.update(self.NearArray[indexPath.row])
             return cell
         }
@@ -530,16 +581,6 @@ extension Home : UICollectionViewDataSource, UICollectionViewDelegate , UICollec
     }
     
     
-    func InsertViewdItem(id : String){
-        if let FireId = UserDefaults.standard.string(forKey: "UserId"){
-            ViewdItemsObjectAip.GeViewdItemsById(fire_id: FireId) { item in
-                if item.estate_id != id || FireId != item.fire_id{
-                    ViewdItemsObject.init(fire_id: FireId, estate_id: id, id: UUID().uuidString).Upload()
-                }
-            }
-        }
-    }
-
 
     
 }

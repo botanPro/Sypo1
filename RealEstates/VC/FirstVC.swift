@@ -20,7 +20,11 @@ class FirstVC: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         var pickerLabel: UILabel? = (view as? UILabel)
         if pickerLabel == nil {
             pickerLabel = UILabel()
-            pickerLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            if XLanguage.get() == .English{
+                pickerLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            }else if XLanguage.get() == .Kurdish || XLanguage.get() == .Arabic{
+                pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
+            }
             pickerLabel?.textAlignment = .center
         }
         pickerLabel?.text = self.CityArray[row].name
@@ -37,28 +41,21 @@ class FirstVC: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
 
     @IBOutlet weak var Next: UIButton!
     
-    private var alertController = UIAlertController()
-    private var tblView = UITableView()
-    var pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 150))
+    var pickerView = UIPickerView(frame: CGRect(x: 10, y: 50, width: 250, height: 150))
     var CityArray : [CityObject] = []
     
     private func setupCitySelectionAlert() {
-        let vc = UIViewController()
-        vc.preferredContentSize = CGSize(width: 250,height: 150)
-        pickerView.delegate = self
-        pickerView.dataSource = self
-        vc.view.addSubview(pickerView)
-        let editRadiusAlert = UIAlertController(title: "Cities", message: "", preferredStyle: UIAlertController.Style.alert)
-        editRadiusAlert.setValue(vc, forKey: "contentViewController")
-        self.alertController = UIAlertController(title: "Choose your city", message: nil, preferredStyle: .alert)
-        alertController.setValue(editRadiusAlert, forKey: "contentViewController")
-        let cancelAction = UIAlertAction(title: "Ok", style: .default, handler: { (UIAlertAction) in
+        GetCity()
+        let ac = UIAlertController(title: "Cities", message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
+        ac.view.addSubview(pickerView)
+        ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            let pickerValue = self.CityArray[self.pickerView.selectedRow(inComponent: 0)]
+            print("Picker value: \(pickerValue) was selected")
             UserDefaults.standard.set("false", forKey: "IsFirst")
             self.performSegue(withIdentifier: "GoToApp", sender: nil)
-        })
-        
-        alertController.addAction(cancelAction)
-        self.present(alertController, animated: true, completion: nil)
+        }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(ac, animated: true)
     }
     
     func GetCity(){
@@ -77,6 +74,8 @@ class FirstVC: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         self.Next.layer.borderWidth = 2
         self.Next.layer.borderColor = UIColor.white.cgColor
         self.Next.layer.cornerRadius = 19
+        pickerView.delegate = self
+        pickerView.dataSource = self
     }
     
     

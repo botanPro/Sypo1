@@ -22,9 +22,9 @@ class FilterVC: UIViewController ,UITextFieldDelegate, RadioButtonDelegate{
     func radioButtonDidSelect(_ button: RadioButton) {
         print("select  : \(button.tag)")
         if button.tag == 1{
-            self.RentOrSell = "0"
-        }else{
             self.RentOrSell = "1"
+        }else{
+            self.RentOrSell = "0"
         }
     }
     
@@ -161,7 +161,6 @@ class FilterVC: UIViewController ,UITextFieldDelegate, RadioButtonDelegate{
     
     
     
-    
     @IBOutlet weak var AddressLable: LanguageLable!
     
     var cuntry = ""
@@ -185,7 +184,7 @@ class FilterVC: UIViewController ,UITextFieldDelegate, RadioButtonDelegate{
             if let CityId = data["CityId"] as? String{
                 self.CityId = (CityId as NSString).integerValue
             }
-            self.AddressLable.text = "\(self.cuntry) - \(self.city)"
+            self.AddressLable.text = self.city
         }
     }
 
@@ -193,7 +192,7 @@ class FilterVC: UIViewController ,UITextFieldDelegate, RadioButtonDelegate{
 
     
     @IBAction func FullAddress(_ sender: Any) {
-        self.performSegue(withIdentifier: "GoToCuntrys", sender: nil)
+        //self.performSegue(withIdentifier: "GoToCuntrys", sender: nil)
     }
 
     

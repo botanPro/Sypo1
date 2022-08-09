@@ -247,6 +247,9 @@ extension ProjectDetailsVC : UICollectionViewDataSource, UICollectionViewDelegat
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DataCell", for: indexPath) as! DataCollectionViewCell
             cell.updateKey(cell: self.keys[indexPath.row])
             cell.updateValue(cell: self.value[indexPath.row])
+            if self.keys.count == indexPath.row + 1{
+                cell.rightimage.isHidden = true
+            }
             if XLanguage.get() == .Kurdish{
                 cell.Typee.font = UIFont(name: "PeshangDes2", size: 10)!
             }else if XLanguage.get() == .Kurdish{
@@ -318,11 +321,7 @@ extension ProjectDetailsVC : UICollectionViewDataSource, UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == RelatedCollectionView{
             if self.SimilarArray.count != 0 && indexPath.row <= self.SimilarArray.count{
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let myVC = storyboard.instantiateViewController(withIdentifier: "GoToProductVC") as! EstateProfileVc
-                myVC.CommingEstate = self.SimilarArray[indexPath.row]
-                myVC.modalPresentationStyle = .fullScreen
-                self.present(myVC, animated: true, completion: nil)
+                self.performSegue(withIdentifier: "Next", sender: SimilarArray[indexPath.row])
             }
         }
         
@@ -340,6 +339,13 @@ extension ProjectDetailsVC : UICollectionViewDataSource, UICollectionViewDelegat
         }
     }
  
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let estate = sender as? EstateObject{
+            if let next = segue.destination as? EstateProfileVc{
+                next.CommingEstate = estate
+            }
+        }
+    }
     
 }
 

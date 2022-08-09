@@ -20,8 +20,6 @@ class AllEstateVC: UIViewController {
         
         
         
-        
-        
         if AllEstate.count != 0{
             
             self.AllEstateCollectionView.reloadData()

@@ -173,6 +173,8 @@ class EstateObject{
         Firestore.firestore().collection("EstateProducts").document(id).updateData( MakeDictionary() )
     }
     
+
+    
     
     // breka ve func de data delete kayn d database da
     func Remov() {
@@ -194,6 +196,12 @@ class ProductAip{
             }
         }
     }
+    
+    static func updateState(_ EstateId : String , state : String, completion : @escaping (_ product : EstateObject)->()){
+        Firestore.firestore().collection("EstateProducts").document(EstateId).setData( ["state": state], merge: true)
+        completion(EstateObject(Dictionary: [:]))
+    }
+    
     
     static func Remov(id : String, completion : @escaping (_ product : EstateObject)->()){
         Firestore.firestore().collection("EstateProducts").document(id).delete()
@@ -827,13 +835,13 @@ class ViewdItemsObject{
     
     func Upload() {
         guard let id = self.id else{ return }
-        //Firestore.firestore().collection("ViewdItems").document(id).setData( MakeDictionary() )
+        Firestore.firestore().collection("ViewdItems").document(id).setData( MakeDictionary() )
     }
     
     
     func Remov() {
         guard let id = self.id else{ return }
-        //Firestore.firestore().collection("ViewdItems").document(id).delete()
+        Firestore.firestore().collection("ViewdItems").document(id).delete()
     }
     
 }
@@ -922,6 +930,7 @@ class FavoriteItemsObject{
     
     func Upload() {
         guard let id = self.id else{ return }
+        print("-----")
         Firestore.firestore().collection("FavoriteItems").document(id).setData( MakeDictionary() )
     }
     

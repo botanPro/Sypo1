@@ -232,6 +232,25 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     @IBOutlet weak var NavTitle: LanguageBarItem!
     override func viewDidLoad() {
         super.viewDidLoad()
+        if XLanguage.get() == .Kurdish{
+            self.Etitle = "ئینگلیزی"
+            self.Atitle = "عەرەبی"
+            self.Ktitle = "کوردی"
+            self.titlee = "گۆڕینی زمان"
+            self.message = "زمان"
+        }else if XLanguage.get() == .English{
+            self.Etitle = "English"
+            self.Atitle = "Arabic"
+            self.Ktitle = "Kurdish"
+            self.titlee = "Change Language"
+            self.message = "Language"
+        }else{
+            self.Etitle = "إنجليزي"
+            self.Atitle = "العربة"
+            self.Ktitle = "الکردیة"
+            self.titlee = "تغيير اللغة"
+            self.message = "لغة"
+        }
         self.EditProfile.isEnabled = true
         self.GetYATop.constant = 0
         self.GetYABottom.constant = 16
@@ -242,6 +261,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         self.ProfileRightImage.isHidden = false
         ProductAip.GetAllProducts { estate in
             self.AllEstate = estate
+            print("--=-=-=-=-=-=-=-=-=-=- \(self.AllEstate.count)")
         }
         self.Image.layer.cornerRadius = self.Image.bounds.width / 2
 //        NavTitle.setTitleTextAttributes(
@@ -252,7 +272,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         
         
         navigationController?.navigationBar.shadowImage = UIImage.imageWithColor(color: .darkGray)
-        LangChanged()
+        //LangChanged()
     }
     
     
@@ -295,7 +315,9 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     var AllEstate : [EstateObject] = []
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        if !CheckInternet.Connection(){
+            MessageBox.ShowMessage()
+        }
         let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"]!
         self.VersionNumber.text = "V \(version)"
         self.VersionNumber.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
@@ -441,17 +463,30 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                         }
                     }
                     
+                    
+                    
+                    self.ViewdItemCount = 0
+                    self.ViewdItemsEstate.removeAll()
+                    self.FavoriteItemCount = 0
+                    self.FavoriteItemsEstate.removeAll()
                     ///ViewdItemsCount
+                    ///
+
+                    ProductAip.GetAllProducts { estate in
+                        self.AllEstate = estate
+
                     ViewdItemsObjectAip.GeViewdItemsById(fire_id: FireId) { [self] Item in
-                        for i in self.AllEstate{
+                        print("]]]]]]]]]]]]]]]]]]]]]]\(self.AllEstate.count)")
+                        for i in self.AllEstate{print("=====")
                             if i.id == Item.estate_id{
+                                ViewdItemCount = ViewdItemCount + 1
                                 self.ViewdItemsEstate.append(i)
                             }
                         }
                         
-                        if Item.estate_id != ""{
-                            ViewdItemCount = ViewdItemCount + 1
-                        }
+                        
+                        print("=====")
+                        print(ViewdItemCount)
                         if ViewdItemCount == 1{
                             if XLanguage.get() == .Kurdish{
                                 self.ViewdItems.text = "\(ViewdItemCount) بینراو"
@@ -483,12 +518,13 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     FavoriteItemsObjectAip.GetFavoriteItemsById(fire_id: FireId) { [self] Item in
                         for i in self.AllEstate{
                             if i.id == Item.estate_id{
+                                FavoriteItemCount = FavoriteItemCount + 1
                                 self.FavoriteItemsEstate.append(i)
                             }
                         }
-                        if Item.estate_id != ""{
-                            FavoriteItemCount = FavoriteItemCount + 1
-                        }
+//                        if Item.estate_id != ""{
+//                            FavoriteItemCount = FavoriteItemCount + 1
+//                        }
                         if FavoriteItemCount == 1{
                             if XLanguage.get() == .Kurdish{
                                 self.FavoriteItems.text = "\(FavoriteItemCount) خوازراو"
@@ -513,6 +549,8 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                             }
                             
                         }
+                    }
+                       
                     }
                     
                 }
@@ -672,6 +710,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     
     @objc func LangChanged(){
         print(self.lang)
+        
         if XLanguage.get() == .Kurdish{
             self.Etitle = "ئینگلیزی"
             self.Atitle = "عەرەبی"
@@ -722,7 +761,6 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             
             self.titlee = "تغيير اللغة"
             self.message = "لغة"
-            
             self.loadingLableMessage = "يرجى الانتظار..."
             
             self.cityTitle = "اختر مدينتك"
@@ -823,13 +861,15 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     ViewdItemsObjectAip.GeViewdItemsById(fire_id: FireId) { [self] Item in
                         for i in self.AllEstate{
                             if i.id == Item.estate_id{
+                                ViewdItemCount = ViewdItemCount + 1
                                 self.ViewdItemsEstate.append(i)
                             }
                         }
-                        
-                        if Item.estate_id != ""{
-                            ViewdItemCount = ViewdItemCount + 1
-                        }
+//                        print("=====")
+//                        print(ViewdItemCount)
+//                        if Item.estate_id != ""{
+//                            ViewdItemCount = ViewdItemCount + 1
+//                        }
                         if ViewdItemCount == 1{
                             if XLanguage.get() == .Kurdish{
                                 self.ViewdItems.text = "\(ViewdItemCount) بینراو"
@@ -861,12 +901,13 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     FavoriteItemsObjectAip.GetFavoriteItemsById(fire_id: FireId) { [self] Item in
                         for i in self.AllEstate{
                             if i.id == Item.estate_id{
+                                FavoriteItemCount = FavoriteItemCount + 1
                                 self.FavoriteItemsEstate.append(i)
                             }
                         }
-                        if Item.estate_id != ""{
-                            FavoriteItemCount = FavoriteItemCount + 1
-                        }
+//                        if Item.estate_id != ""{
+//                            FavoriteItemCount = FavoriteItemCount + 1
+//                        }
                         if FavoriteItemCount == 1{
                             if XLanguage.get() == .Kurdish{
                                 self.FavoriteItems.text = "\(FavoriteItemCount) خوازراو"
@@ -913,28 +954,36 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     
     @IBOutlet weak var Location : UILabel!
     
-    private var alertController = UIAlertController()
-    private var tblView = UITableView()
-    var pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 150))
+    var pickerView = UIPickerView(frame: CGRect(x: 10, y: 50, width: 250, height: 150))
     var CityArray : [CityObject] = []
     
     var cityTitle = ""
     var cityAction = ""
+    var cityCancel = ""
     private func setupCitySelectionAlert() {
-        let vc = UIViewController()
-        vc.preferredContentSize = CGSize(width: 250,height: 150)
+        if XLanguage.get() == .Kurdish{
+            cityTitle = "Cities"
+            cityAction = "Select"
+            cityCancel = "Cancel"
+        }else if XLanguage.get() == .English{
+            cityTitle = "شارەکان"
+            cityAction = "هەڵبژێرە"
+            cityCancel = "هەڵوەشاندنەوە"
+        }else{
+            cityTitle = "مدن"
+            cityAction = "تحديد"
+            cityCancel = "إلغاء"
+        }
         pickerView.delegate = self
         pickerView.dataSource = self
-        vc.view.addSubview(pickerView)
-        let editRadiusAlert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.alert)
-        editRadiusAlert.setValue(vc, forKey: "contentViewController")
-        self.alertController = UIAlertController(title: self.cityTitle, message: nil, preferredStyle: .alert)
-        alertController.setValue(editRadiusAlert, forKey: "contentViewController")
-        let cancelAction = UIAlertAction(title: cityAction, style: .default, handler: { (UIAlertAction) in
-        })
-        
-        alertController.addAction(cancelAction)
-        self.present(alertController, animated: true, completion: nil)
+        let ac = UIAlertController(title: cityTitle, message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
+        ac.view.addSubview(pickerView)
+        ac.addAction(UIAlertAction(title: cityAction , style: .default, handler: { _ in
+            let pickerValue = self.CityArray[self.pickerView.selectedRow(inComponent: 0)]
+            print("Picker value: \(pickerValue) was selected")
+        }))
+        ac.addAction(UIAlertAction(title: cityCancel, style: .cancel, handler: nil))
+        present(ac, animated: true)
     }
     
     func GetCity(){

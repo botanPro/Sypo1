@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "vuesax-bold-slider-vertical.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "vuesax-bold-slider-vertical@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "vuesax-bold-slider-vertical@3x.png",
+      "filename" : "slider.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

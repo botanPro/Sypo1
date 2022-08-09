@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "vuesax-bold-login.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "vuesax-bold-login@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "vuesax-bold-login@3x.png",
+      "filename" : "logout (1).png",
       "idiom" : "universal",
       "scale" : "3x"
     }

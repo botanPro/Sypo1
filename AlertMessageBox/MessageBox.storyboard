@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Message BoxVC-->
+        <scene sceneID="aMR-dz-vZ3">
+            <objects>
+                <viewController storyboardIdentifier="MessageBox" id="fao-1l-gIH" customClass="MessageBoxVC" customModule="RealEstates" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zqc-9m-TSv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6MW-mg-f4X">
+                                <rect key="frame" x="25" y="922" width="364" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No internet connection." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2At-yi-KzV" customClass="LanguageLable" customModule="RealEstates">
+                                        <rect key="frame" x="19" y="10" width="326" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="No internet connection."/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
+                                                <real key="value" value="13"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
+                                                <real key="value" value="14"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="ئینتەرنێت نییە."/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="لا يوجد اتصال بالإنترنت."/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="nonewhite"/>
+                                <constraints>
+                                    <constraint firstItem="2At-yi-KzV" firstAttribute="leading" secondItem="6MW-mg-f4X" secondAttribute="leading" constant="19" id="CUZ-m5-WcR"/>
+                                    <constraint firstAttribute="height" constant="40" id="VL5-IF-b9g"/>
+                                    <constraint firstAttribute="trailing" secondItem="2At-yi-KzV" secondAttribute="trailing" constant="19" id="cHl-AV-ZeF"/>
+                                    <constraint firstItem="2At-yi-KzV" firstAttribute="top" secondItem="6MW-mg-f4X" secondAttribute="top" constant="10" id="h5c-Yc-eDQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="2At-yi-KzV" secondAttribute="bottom" constant="10" id="nDv-SU-zUX"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="3zf-8X-WoA"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.31385075651257244" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6MW-mg-f4X" firstAttribute="leading" secondItem="3zf-8X-WoA" secondAttribute="leading" constant="25" id="EG3-so-I7a"/>
+                            <constraint firstItem="6MW-mg-f4X" firstAttribute="centerX" secondItem="Zqc-9m-TSv" secondAttribute="centerX" id="R5O-lm-ngV"/>
+                            <constraint firstItem="3zf-8X-WoA" firstAttribute="trailing" secondItem="6MW-mg-f4X" secondAttribute="trailing" constant="25" id="avn-WS-Fvs"/>
+                            <constraint firstItem="3zf-8X-WoA" firstAttribute="bottom" secondItem="6MW-mg-f4X" secondAttribute="bottom" constant="-100" id="hdH-Ra-uYi"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="Message" destination="2At-yi-KzV" id="ymK-Sj-MX1"/>
+                        <outlet property="viewlayout" destination="hdH-Ra-uYi" id="EVn-Le-Qs1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HcV-ac-D2U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="124.6376811594203" y="101.78571428571428"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="nonewhite">
+            <color red="0.95999997854232788" green="0.95499998331069946" blue="0.96399998664855957" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+    </resources>
+</document>

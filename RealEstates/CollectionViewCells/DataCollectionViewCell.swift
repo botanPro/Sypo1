@@ -9,6 +9,7 @@ import UIKit
 
 class DataCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var rightimage: UIView!
     @IBOutlet weak var Value: UILabel!
     @IBOutlet weak var Typee: UILabel!
     override func awakeFromNib() {

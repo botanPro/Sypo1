@@ -122,6 +122,8 @@ class MyEstatesVc: UIViewController {
     
     
     @objc func edit(sender : UIButton){
+
+        
         for i in ProductArray{
             if i.id == sender.accessibilityValue{
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -131,6 +133,40 @@ class MyEstatesVc: UIViewController {
             }
         }
     }
+    
+    
+    
+    
+    @objc func Sold(sender : UIButton){
+        for i in ProductArray{
+            if i.id == sender.accessibilityIdentifier{
+                if XLanguage.get() == .Kurdish{
+                    self.Title = ""
+                    self.message = "ئایا دڵنیای کە ئەم خانوبەرە فرۆشراوە؟"
+                    self.action = "دڵنیام"
+                    self.cancel = "نەخێر"
+                }else if XLanguage.get() == .Arabic{
+                    self.Title = ""
+                    self.message = "هل أنت متأكد من أنه تم بيع هذه العقار؟"
+                    self.action = "متأكد"
+                    self.cancel = "لا"
+                }else{
+                    self.Title = ""
+                    self.message = "Are you sure that this estate has been sold?"
+                    self.action = "I'm sure"
+                    self.cancel = "Cancel"
+                }
+                let myAlert = UIAlertController(title: self.Title, message: self.message, preferredStyle: UIAlertController.Style.alert)
+                myAlert.addAction(UIAlertAction(title: self.action, style: .default, handler: { (UIAlertAction) in
+                    ProductAip.updateState(i.id ?? "", state: "1") { _ in }
+                }))
+                myAlert.addAction(UIAlertAction(title: self.cancel, style: .cancel, handler: nil))
+                self.present(myAlert, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    
 }
 
 extension MyEstatesVc : UITableViewDelegate , UITableViewDataSource{
@@ -153,6 +189,8 @@ extension MyEstatesVc : UITableViewDelegate , UITableViewDataSource{
             cell.Delete.accessibilityHint = "\(indexPath.row)"
             cell.Delete.addTarget(self, action: #selector(self.remov(sender:)), for: .touchUpInside)
             cell.Edit.addTarget(self, action: #selector(self.edit(sender:)), for: .touchUpInside)
+            cell.Sold.accessibilityIdentifier = self.ProductArray[indexPath.row].id
+            cell.Sold.addTarget(self, action: #selector(self.Sold(sender:)), for: .touchUpInside)
             cell.update(self.ProductArray[indexPath.row])
         }
         return cell

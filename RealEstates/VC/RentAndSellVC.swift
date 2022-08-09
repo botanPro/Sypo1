@@ -60,7 +60,12 @@ class RentAndSellVC: MXSegmentedPagerController {
         segmentedPager.reloadData()
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !CheckInternet.Connection(){
+            MessageBox.ShowMessage()
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

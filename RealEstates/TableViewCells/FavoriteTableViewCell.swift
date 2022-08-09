@@ -9,6 +9,7 @@ import UIKit
 
 class FavoriteTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var Sold: Languagebutton!
     @IBOutlet weak var Edit: UIButton!
     @IBOutlet weak var Delete: UIButton!
     @IBOutlet weak var HomeSize: UILabel!
