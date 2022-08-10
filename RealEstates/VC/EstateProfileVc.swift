@@ -338,7 +338,9 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     func GetRelated(type:String){
             self.SimilarArray.removeAll()
             ProductAip.GetAllSectionProducts(TypeId: type) { Product in
-                self.SimilarArray.append(Product)
+                if Product.archived != "1"{
+                   self.SimilarArray.append(Product)
+                }
                 self.RelatedCollectionView.reloadData()
             }
     }
@@ -357,6 +359,7 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     var lang : Int = UserDefaults.standard.integer(forKey: "language")
     var m2 = ""
     @IBOutlet weak var DescLable: LanguageLable!
+    @IBOutlet weak var DescBottomLayout: NSLayoutConstraint!
     
     @IBOutlet weak var VideoHeightLayout: NSLayoutConstraint!
     func GetData(){
@@ -393,6 +396,7 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
                 self.DescLable.isHidden = true
                 UIView.animate(withDuration: 1) {
                     self.DescHight.constant = 0
+                    self.DescBottomLayout.constant = 0
                 }
                 self.view.layoutIfNeeded()
             }else{
@@ -400,6 +404,7 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
                 self.DescHight.constant = self.Description.contentSize.height
                 UIView.animate(withDuration: 0.2) {
                     self.DescHight.constant = self.Description.contentSize.height
+                    self.DescBottomLayout.constant = 25
                 }
                 self.view.layoutIfNeeded()
             }
@@ -664,7 +669,6 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
                         print("RateValue : \(self.RateValue)")
                         self.OfficeRate.text = "\(self.RateValue)"
                     }
-                    
                 }
                 self.lat = data.lat ?? ""
                 self.long = data.long ?? ""

@@ -58,6 +58,13 @@ target 'RealEstates' do
 
   pod 'ShimmerLabel', '~> 1.0'
   
+  pod 'FlipLabel'
+  
+  pod 'Drops', :git => 'https://github.com/omaralbeik/Drops.git', :tag => '1.5.0'
+  
+  pod 'NVActivityIndicatorView'
+  
+  pod 'EmptyDataSet-Swift', '~> 5.0.0'
   
   target 'RealEstatesTests' do
     inherit! :search_paths

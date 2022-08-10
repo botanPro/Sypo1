@@ -432,6 +432,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             
             self.AddressLable.text = data.city_name
             self.city = data.city_name ?? ""
+            self.CityId = data.city_id ?? ""
             
             self.selecteEstatedcell = EstateTypeObject(name: "", id:data.estate_type_id ??  "")
             
@@ -1217,7 +1218,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
     
     @IBOutlet weak var AddressLable: LanguageLable!
     var city = ""
-    var CityId = 0
+    var CityId = ""
     
 
     @objc func notificationRecevied1(_ notification: NSNotification) {
@@ -1226,7 +1227,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                 self.city = City
             }
             if let CityId = data["CityId"] as? String{
-                self.CityId = (CityId as NSString).integerValue
+                self.CityId = CityId
             }
             self.AddressLable.text = self.city
         }
@@ -1735,7 +1736,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                                                   , office_id: office.id ?? ""
                                                   , fire_id: FireId
                                                   , ImageURL: self.ImageUrl
-                                                  , city_id: "\(self.CityId)"
+                                                  , city_id: self.CityId
                                                   , estate_type_id: self.selecteEstatedcell?.id ?? ""
                                                   , Direction: self.Direction
                                                   , floor: self.Floor.text!
@@ -1750,7 +1751,8 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                                                   , propertyNo: self.PropertyNo.text!
                                                   , state: "0"
                                                   , project_id: self.ProjectId
-                                                  , video_link: "").Upload()
+                                                  , video_link: ""
+                                                  , archived: "0").Upload()
                             }
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "EstateInserted"), object: nil)
                             self.navigationController?.popViewController(animated: true)
@@ -1797,7 +1799,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                                               , office_id: office.id ?? ""
                                               , fire_id: FireId
                                               , ImageURL: self.CommignImages
-                                              , city_id: "\(self.CityId)"
+                                              , city_id: self.CityId
                                               , estate_type_id: self.selecteEstatedcell?.id ?? ""
                                               , Direction: self.Direction
                                               , floor: self.Floor.text!
@@ -1812,7 +1814,8 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                                               , propertyNo: self.PropertyNo.text!
                                               , state: "0"
                                               , project_id: self.ProjectId
-                                              , video_link: "").Update()
+                                              , video_link: ""
+                                              , archived: "0").Update()
                             
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "EstateInserted"), object: nil)
                             self.navigationController?.popViewController(animated: true)

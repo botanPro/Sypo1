@@ -356,6 +356,7 @@ PODS:
   - Cosmos (23.0.0)
   - CRRefresh (1.1.3)
   - DropDown (2.3.13)
+  - Drops (1.5.0)
   - EmptyDataSet-Swift (5.0.0)
   - FCAlertView (1.4.0)
   - Firebase (8.12.1):
@@ -452,6 +453,7 @@ PODS:
   - FirebaseStorage (8.12.0):
     - FirebaseCore (~> 8.0)
     - GTMSessionFetcher/Core (~> 1.5)
+  - FlipLabel (1.0.1)
   - FSPagerView (0.8.3)
   - GoogleAppMeasurement (8.12.0):
     - GoogleAppMeasurement/AdIdSupport (= 8.12.0)
@@ -538,6 +540,9 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - NSFWDetector (1.1.0)
+  - NVActivityIndicatorView (5.1.1):
+    - NVActivityIndicatorView/Base (= 5.1.1)
+  - NVActivityIndicatorView/Base (5.1.1)
   - OTPTextField (1.1.5)
   - PhoneNumberKit (3.3.4):
     - PhoneNumberKit/PhoneNumberKitCore (= 3.3.4)
@@ -569,6 +574,7 @@ DEPENDENCIES:
   - Cosmos
   - CRRefresh
   - DropDown
+  - Drops (from `https://github.com/omaralbeik/Drops.git`, tag `1.5.0`)
   - EmptyDataSet-Swift (~> 5.0.0)
   - FCAlertView
   - Firebase
@@ -580,12 +586,14 @@ DEPENDENCIES:
   - Firebase/Firestore
   - Firebase/Messaging
   - Firebase/Storage
+  - FlipLabel
   - FSPagerView
   - HMSegmentedControl
   - MBRadioCheckboxButton
   - MHLoadingButton
   - MXSegmentedPager
   - NSFWDetector
+  - NVActivityIndicatorView
   - OTPTextField
   - PhoneNumberKit (~> 3.3)
   - PureLayout
@@ -627,6 +635,7 @@ SPEC REPOS:
     - FirebaseInstallations
     - FirebaseMessaging
     - FirebaseStorage
+    - FlipLabel
     - FSPagerView
     - GoogleAppMeasurement
     - GoogleDataTransport
@@ -644,6 +653,7 @@ SPEC REPOS:
     - MXSegmentedPager
     - nanopb
     - NSFWDetector
+    - NVActivityIndicatorView
     - OTPTextField
     - PhoneNumberKit
     - PromisesObjC
@@ -659,6 +669,16 @@ SPEC REPOS:
     - ValidationTextField
     - YoutubePlayer-in-WKWebView
 
+EXTERNAL SOURCES:
+  Drops:
+    :git: https://github.com/omaralbeik/Drops.git
+    :tag: 1.5.0
+
+CHECKOUT OPTIONS:
+  Drops:
+    :git: https://github.com/omaralbeik/Drops.git
+    :tag: 1.5.0
+
 SPEC CHECKSUMS:
   AAShimmerView: 9d584fc5d8f9e7b082d2ed65c5b9e1d946e6c0fa
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -672,6 +692,7 @@ SPEC CHECKSUMS:
   Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
   CRRefresh: 1415d4ae06837fa7bb064c44f2e102f3ef517044
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
+  Drops: fe8765e3f42c2bb1b37a15489b2b9574c50e5411
   EmptyDataSet-Swift: eb382c0c87a2d9c678077385a595cec52da38171
   FCAlertView: fdddd63381898c1d1a5a20c9f084fbd2c6d12f8b
   Firebase: 580d09e8edafc3073ebf09c03fd42e4d80d35fe9
@@ -685,6 +706,7 @@ SPEC CHECKSUMS:
   FirebaseInstallations: 25764cf322e77f99449395870a65b2bef88e1545
   FirebaseMessaging: 23db8bf05585e929ada8af0f0968933c25252808
   FirebaseStorage: 4b75458c35d8b728e4c1fc1371942997456ab299
+  FlipLabel: c2ca8fbbed924bc5e125478dd058d39325d79ae6
   FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
   GoogleAppMeasurement: ae033c3aad67e68294369373056b4d74cc8ae0d6
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
@@ -702,6 +724,7 @@ SPEC CHECKSUMS:
   MXSegmentedPager: 527ee76513c96e6607eebe473fe49b7ab4971616
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   NSFWDetector: aefec2254932bdc933cccc9385abfe07ae36a7a1
+  NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   OTPTextField: 9d35010a6356972471298aea37bf8d6d5f9974f7
   PhoneNumberKit: 441e8b26ec88d598e3591de9061eff18f5dd12e8
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
@@ -717,6 +740,6 @@ SPEC CHECKSUMS:
   ValidationTextField: 91bc04170ba4b4358912c372e12d7af4c9143ad5
   YoutubePlayer-in-WKWebView: 4dad12b3ece938a6456fa4374df78942f88b485a
 
-PODFILE CHECKSUM: b28639a24b33118d1396d233ff6e1b253821e791
+PODFILE CHECKSUM: c224d6d339135d76e1e03b12d66536226bf664ec
 
 COCOAPODS: 1.11.3

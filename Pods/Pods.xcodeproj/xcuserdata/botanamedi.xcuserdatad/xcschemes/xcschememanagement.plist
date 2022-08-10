@@ -64,6 +64,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Drops.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>EmptyDataSet-Swift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -139,6 +144,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FlipLabel.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>GTMSessionFetcher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -195,6 +205,11 @@
 			<false/>
 		</dict>
 		<key>NSFWDetector.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>NVActivityIndicatorView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

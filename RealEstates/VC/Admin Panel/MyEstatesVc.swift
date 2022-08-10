@@ -44,7 +44,9 @@ class MyEstatesVc: UIViewController {
         if let FireId = UserDefaults.standard.string(forKey: "UserId"){
             OfficeAip.GetOfficeById(Id: FireId) { office in
                 ProductAip.GetMyEstates(office_id: office.id ?? "") { estates in
+                    if estates.archived != "1"{
                     self.ProductArray.append(estates)
+                    }
                     UIView.animate(withDuration: 0.2, delay: 0.0) {
                         self.IndecatorView.isHidden = true
                     }
@@ -114,7 +116,7 @@ class MyEstatesVc: UIViewController {
                     }
                 }
             }
-            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "EstateInserted"), object: nil)
         }))
         myAlert.addAction(UIAlertAction(title: self.cancel, style: .cancel, handler: nil))
         self.present(myAlert, animated: true, completion: nil)
@@ -122,8 +124,6 @@ class MyEstatesVc: UIViewController {
     
     
     @objc func edit(sender : UIButton){
-
-        
         for i in ProductArray{
             if i.id == sender.accessibilityValue{
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -159,6 +159,7 @@ class MyEstatesVc: UIViewController {
                 let myAlert = UIAlertController(title: self.Title, message: self.message, preferredStyle: UIAlertController.Style.alert)
                 myAlert.addAction(UIAlertAction(title: self.action, style: .default, handler: { (UIAlertAction) in
                     ProductAip.updateState(i.id ?? "", state: "1") { _ in }
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "EstateInserted"), object: nil)
                 }))
                 myAlert.addAction(UIAlertAction(title: self.cancel, style: .cancel, handler: nil))
                 self.present(myAlert, animated: true, completion: nil)

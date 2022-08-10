@@ -68,12 +68,22 @@ class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDel
     @IBOutlet weak var State: UILabel!
     var value  : [String] = []
     var ProjectEstate : ProjectObject?
+    
+    
+    
+    @IBOutlet weak var DescLable: LanguageLable!
+    @IBOutlet weak var DescBottomLayout: NSLayoutConstraint!
+    @IBOutlet weak var VideoHeightLayout: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        
+        
         RelatedCollectionView.register(UINib(nibName: "AllEstatessCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "RelatedCell")
         DataCollectionView.register(UINib(nibName: "DataCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "DataCell")
         ImageCollectionView.register(UINib(nibName: "ImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
+        
         
    
         if sliderImages.count <= 5 {
@@ -86,8 +96,6 @@ class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDel
         self.Description.delegate = self
         
         
-        
-        
         if let data = ProjectEstate{
             self.sliderImages = data.images ?? []
             self.PagerControl.pages = data.images?.count ?? 0
@@ -97,7 +105,26 @@ class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDel
             self.Location.text = data.address ?? ""
             self.lat = data.latitude ?? ""
             self.long = data.longitude ?? ""
-            self.Description.text = data.desc ?? ""
+            
+            
+            if data.desc == ""{
+                self.DescLable.isHidden = true
+                UIView.animate(withDuration: 1) {
+                    self.DescHight.constant = 0
+                    self.DescBottomLayout.constant = 0
+                }
+                self.view.layoutIfNeeded()
+            }else{
+                self.Description.text = data.desc
+                self.DescHight.constant = self.Description.contentSize.height
+                UIView.animate(withDuration: 0.2) {
+                    self.DescHight.constant = self.Description.contentSize.height
+                    self.DescBottomLayout.constant = 25
+                }
+                self.view.layoutIfNeeded()
+            }
+            
+            
             self.State.text = data.state ?? ""
             
             let date = NSDate(timeIntervalSince1970: data.uploaded_date_stamp ?? 0.0)
@@ -137,16 +164,23 @@ class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDel
             self.value.append(data.project_office_phone ?? "")
             
             
-            self.youtubeUrl = data.video_link ?? ""
-            self.youtubeId = youtubeUrl.youtubeID ?? ""
-            player.load(withVideoId: self.youtubeId, playerVars: ["playsinline":"1"])
-            player.delegate = self
-            player.layer.masksToBounds = true
-            self.player.layer.cornerRadius = 10
+            if data.video_link == ""{
+                self.VideoHeightLayout.constant = 0
+            }else{
+                self.youtubeUrl = data.video_link ?? ""
+                self.youtubeId = youtubeUrl.youtubeID ?? ""
+                player.load(withVideoId: self.youtubeId, playerVars: ["playsinline":"1"])
+                player.delegate = self
+                player.layer.masksToBounds = true
+                self.player.layer.cornerRadius = 10
+            }
+           
             
             
             ProductAip.GetProjectsById(project_id: data.id ?? "") { estates in
-                self.SimilarArray.append(estates)
+                if estates.archived != "1"{
+                   self.SimilarArray.append(estates)
+                }
                 self.RelatedCollectionView.reloadData()
             }
         }

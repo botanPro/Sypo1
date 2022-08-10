@@ -52,10 +52,11 @@ class EstateObject{
     
     var project_id :String?
     
+    var archived : String?
     
     init(name : String,id : String , stamp : TimeInterval ,RentOrSell: String, city_name : String , address : String ,lat : String , long : String , price: Double, desc:String , office_id : String ,fire_id : String, ImageURL : [String] , city_id : String
          
-         , estate_type_id : String ,Direction : String , floor : String ,Building : String, Year: String, Furnished : String , BondType:String , MonthlyService : String, RoomNo : String ,WashNo:String, space : String , propertyNo : String, state : String, project_id : String, video_link : String) {
+         , estate_type_id : String ,Direction : String , floor : String ,Building : String, Year: String, Furnished : String , BondType:String , MonthlyService : String, RoomNo : String ,WashNo:String, space : String , propertyNo : String, state : String, project_id : String, video_link : String,archived : String) {
         
         self.name               = name
         self.id                 = id
@@ -86,6 +87,7 @@ class EstateObject{
         self.state              = state
         self.video_link         = video_link
         self.project_id         = project_id
+        self.archived           = archived
         
     }
     
@@ -120,7 +122,8 @@ class EstateObject{
         self.space          = Dictionary[ "space"           ] as? String
         self.propertyNo     = Dictionary[ "property_number" ] as? String
         self.video_link     = Dictionary[ "video_link"      ] as? String
-        self.project_id     = Dictionary[ "project_id" ] as? String
+        self.project_id     = Dictionary[ "project_id"      ] as? String
+        self.archived       = Dictionary[ "archived"        ] as? String
     }
     
     
@@ -156,7 +159,8 @@ class EstateObject{
         New["space"            ] = self.space          as AnyObject
         New["property_number"  ] = self.propertyNo     as AnyObject
         New["video_link"       ] = self.video_link     as AnyObject
-        New["project_id"       ] = self.project_id as AnyObject
+        New["project_id"       ] = self.project_id     as AnyObject
+        New["archived"         ] = self.archived     as AnyObject
         return New
     }
     
@@ -204,7 +208,7 @@ class ProductAip{
     
     
     static func Remov(id : String, completion : @escaping (_ product : EstateObject)->()){
-        Firestore.firestore().collection("EstateProducts").document(id).delete()
+        Firestore.firestore().collection("EstateProducts").document(id).setData( ["archived": "1"], merge: true)
         completion(EstateObject(Dictionary: [:]))
     }
                    
@@ -1020,7 +1024,8 @@ class ProjectObject{
     var state : String?
     var year : String?
     var video_link : String?
-    init(project_name : String,id : String , uploaded_date_stamp : TimeInterval ,Buildings_count: String, from_price : Double , monthly_fee : String , address : String ,latitude : String , longitude : String , to_price: Double, desc:String , project_office_phone : String , images : [String] , state : String, year:String,video_link : String) {
+    var city_id : String?
+    init(project_name : String,id : String , uploaded_date_stamp : TimeInterval ,Buildings_count: String, from_price : Double , monthly_fee : String , address : String ,latitude : String , longitude : String , to_price: Double, desc:String , project_office_phone : String , images : [String] , state : String, year:String,video_link : String , city_id: String) {
         
         self.project_name        = project_name
         self.id                  = id
@@ -1038,6 +1043,7 @@ class ProjectObject{
         self.desc                = desc
         self.project_office_phone = project_office_phone
         self.video_link          = video_link
+        self.city_id             = city_id
         
     }
     
@@ -1059,6 +1065,7 @@ class ProjectObject{
         self.uploaded_date_stamp = Dictionary[ "uploaded_date_stamp"  ] as? TimeInterval
         self.state               = Dictionary[ "state"                ] as? String
         self.Buildings_count     = Dictionary[ "Buildings_count"      ] as? String
+        self.city_id             = Dictionary[ "city_id"      ] as? String
         self.project_office_phone     = Dictionary[ "project_office_phone"      ] as? String
         
     }

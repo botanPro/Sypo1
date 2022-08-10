@@ -33,7 +33,7 @@ class ViewdVC: UIViewController {
                 ViewdItemsObjectAip.GeViewdItemsById(fire_id: FireId) { [self] Item in
                     ProductAip.GetAllProducts { estate in
                         for i in estate{
-                            if i.id == Item.estate_id{
+                            if i.id == Item.estate_id && i.archived != "1"{
                                 self.ProductArray.append(i)
                             }
                         }

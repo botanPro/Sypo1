@@ -102,7 +102,11 @@ extension EstatesVC : UICollectionViewDataSource, UICollectionViewDelegate , UIC
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if self.Offices.count != 0  && indexPath.row <= self.Offices.count{
-            //callSegueFromProductCell(myData:self.EstateArray[indexPath.row])
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let myVC = storyboard.instantiateViewController(withIdentifier: "OfficeVC") as! OfficeVC
+            myVC.modalPresentationStyle = .fullScreen
+            myVC.OfficeData = self.Offices[indexPath.row]
+            self.present(myVC, animated: true, completion: nil)
         }
     }
     

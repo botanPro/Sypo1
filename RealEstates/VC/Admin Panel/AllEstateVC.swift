@@ -10,10 +10,12 @@ import CRRefresh
 class AllEstateVC: UIViewController {
     @IBOutlet weak var AllEstateCollectionView: UICollectionView!
     var AllEstate : [EstateObject] = []
+    var UnArchivedAllEstate : [EstateObject] = []
     let sectionInsets = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
     var numberOfItemsPerRow: CGFloat = 2
     let spacingBetweenCells: CGFloat = 10
     var EstateType = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         AllEstateCollectionView.register(UINib(nibName: "AllEstatessCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AllCell")
@@ -21,9 +23,12 @@ class AllEstateVC: UIViewController {
         
         
         if AllEstate.count != 0{
-            
+            for UnArchived in AllEstate{
+                if UnArchived.archived != "1"{
+                    self.UnArchivedAllEstate.append(UnArchived)
+                }
+            }
             self.AllEstateCollectionView.reloadData()
-            
         }else if EstateType != ""{
             
             self.GetEstates(type: self.EstateType)
@@ -48,7 +53,9 @@ class AllEstateVC: UIViewController {
     
     func GetEstates(type : String){
         ProductAip.GetAllSectionProducts(TypeId: type) { Product in
-            self.AllEstate.append(Product)
+                if Product.archived != "1"{
+                    self.UnArchivedAllEstate.append(Product)
+                }
             self.AllEstateCollectionView.cr.endHeaderRefresh()
             self.AllEstateCollectionView.reloadData()
         }
@@ -60,19 +67,19 @@ extension AllEstateVC : UICollectionViewDataSource, UICollectionViewDelegate , U
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            if AllEstate.count == 0{
+            if UnArchivedAllEstate.count == 0{
                 self.AllEstateCollectionView.alpha = 0
                 return 0
             }
              self.AllEstateCollectionView.alpha = 1
-            return AllEstate.count
+            return UnArchivedAllEstate.count
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AllCell", for: indexPath) as! AllEstatessCollectionViewCell
-        cell.update(self.AllEstate[indexPath.row])
+        cell.update(self.UnArchivedAllEstate[indexPath.row])
         return cell
     }
     
@@ -96,9 +103,9 @@ extension AllEstateVC : UICollectionViewDataSource, UICollectionViewDelegate , U
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if self.AllEstate.count != 0 && indexPath.row <= self.AllEstate.count{
-            InsertViewdItem(id : self.AllEstate[indexPath.row].id ?? "")
-        self.performSegue(withIdentifier: "Next", sender: AllEstate[indexPath.row])
+        if self.UnArchivedAllEstate.count != 0 && indexPath.row <= self.UnArchivedAllEstate.count{
+            InsertViewdItem(id : self.UnArchivedAllEstate[indexPath.row].id ?? "")
+        self.performSegue(withIdentifier: "Next", sender: UnArchivedAllEstate[indexPath.row])
         }
     }
     

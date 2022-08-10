@@ -19,14 +19,16 @@ class MXWebViewController: UIViewController {
         super.viewDidLoad()
         RentAndSellCollectionView.register(UINib(nibName: "AllEstatessCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         
-        self.GetEstatesByType()
         self.RentAndSellCollectionView.cr.addHeadRefresh(animator: FastAnimator()) {
             self.GetEstatesByType()
         }
         NotificationCenter.default.addObserver(self, selector: #selector(self.LanguageChanged), name: NSNotification.Name(rawValue: "LanguageChanged"), object: nil)
-        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        GetEstatesByType()
+    }
     
     @objc func LanguageChanged(){
         self.RentAndSellCollectionView.reloadData()
@@ -38,7 +40,9 @@ class MXWebViewController: UIViewController {
             guard let documents = Snapshot?.documents else { return }
             for P in documents {
                 if let data = P.data() as [String : AnyObject]? {
-                    self.RentAndSellArray.append(EstateObject(Dictionary: data))
+                    if EstateObject(Dictionary: data).archived != "1"{
+                         self.RentAndSellArray.append(EstateObject(Dictionary: data))
+                    }
                 }
             }
             self.RentAndSellCollectionView.cr.endHeaderRefresh()

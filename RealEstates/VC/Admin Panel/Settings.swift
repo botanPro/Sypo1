@@ -13,7 +13,7 @@ import SDWebImage
 import SwiftyJSON
 import AAShimmerView
 import ShimmerLabel
-
+import FlipLabel
 class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -272,7 +272,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         
         self.EditProfile.isEnabled = true
         self.GetYATop.constant = 0
-        self.GetYABottom.constant = 16
+        self.GetYABottom.constant = 12
         self.GetYAHeight.constant = 0
         self.GetYAView.isHidden = true
         self.AddPropertyView.isHidden = false
@@ -327,6 +327,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     var ViewdItemsEstate : [EstateObject] = []
     var FavoriteItemsEstate : [EstateObject] = []
     var label = ShimmerLabel()
+    
     @IBOutlet weak var Profileimageheight: NSLayoutConstraint!
     var lang : Int = UserDefaults.standard.integer(forKey: "language")
     @IBOutlet weak var ProfileRightImage: UIImageView!
@@ -481,8 +482,6 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                             print((Date().days(sinceDate: date1 as Date) ?? 0) * -1)
                                             
                                             
-                                            
-                                            
                                             self.MyEstates.removeAll()
                                             if let FireId = UserDefaults.standard.string(forKey: "UserId"){
                                                 OfficeAip.GetOfficeById(Id: FireId) { office in
@@ -529,7 +528,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                             
                             self.EditProfile.isEnabled = true
                             self.GetYATop.constant = 0
-                            self.GetYABottom.constant = 16
+                            self.GetYABottom.constant = 12
                             self.GetYAHeight.constant = 0
                             self.GetYAView.isHidden = true
                             self.AddPropertyView.isHidden = false
@@ -565,8 +564,8 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                             
                             
                             self.EditProfile.isEnabled = false
-                            self.GetYATop.constant = 16
-                            self.GetYABottom.constant = 16
+                            self.GetYATop.constant = 15
+                            self.GetYABottom.constant = 12
                             self.GetYAHeight.constant = 40
                             self.GetYAView.isHidden = false
                             self.GetYA.text = ""
@@ -811,7 +810,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     self.ViewditemView.alpha = 0.5
                     self.FavoriteItemsView.alpha = 0.5
                     self.GetYATop.constant = 0
-                    self.GetYABottom.constant = 16
+                    self.GetYABottom.constant = 12
                     self.GetYAHeight.constant = 0
                     self.GetYAView.isHidden = true
                     if XLanguage.get() == .Kurdish{

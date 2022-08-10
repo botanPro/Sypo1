@@ -83,7 +83,8 @@ class Home: UIViewController ,UITextFieldDelegate{
     
     
     
-
+    @IBOutlet weak var LoadingIndecator: UIActivityIndicatorView!
+    
     var currentLocation: CLLocation?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,6 +107,12 @@ class Home: UIViewController ,UITextFieldDelegate{
         self.GetApartmentEstates()
         GetEstateType()
 
+        if self.AllEstateArray.count == 0 && self.ApartmentArray.count == 0{
+            self.ScrollView.isHidden = true
+            self.LoadingIndecator.startAnimating()
+        }
+        
+        
         let locManager = CLLocationManager()
         locManager.requestWhenInUseAuthorization()
         
@@ -127,8 +134,12 @@ class Home: UIViewController ,UITextFieldDelegate{
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.LanguageChanged), name: NSNotification.Name(rawValue: "LanguageChanged"), object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.ReloadData), name: NSNotification.Name(rawValue: "EstateInserted"), object: nil)
     }
-    
+    @objc func ReloadData(){
+        self.GetAllEstates()
+        self.GetApartmentEstates()
+    }
     
     @objc func LanguageChanged(){
         self.AllEstatesCollectionView.reloadData()
@@ -261,9 +272,15 @@ class Home: UIViewController ,UITextFieldDelegate{
     func GetAllEstates(){
         self.LocationdsArray.removeAll()
         self.NearArray.removeAll()
+        self.AllEstateArray.removeAll()
         ProductAip.GetAllProducts { Product in
-            self.AllEstateArray = Product
-            for product in Product{
+            for UnArchived in Product{
+                if UnArchived.archived != "1"{
+                   self.AllEstateArray.append(UnArchived)
+                }
+            }
+            
+            for product in self.AllEstateArray{
                 let dbLat = Double(product.lat ?? "")
                 let dbLong = Double(product.long ?? "")
                 self.LocationdsArray.append(CLLocationCoordinate2D(latitude: dbLat!, longitude:dbLong!))
@@ -276,6 +293,8 @@ class Home: UIViewController ,UITextFieldDelegate{
                     }
                 }
             }
+            self.ScrollView.isHidden = false
+            self.LoadingIndecator.stopAnimating()
             self.NearYouCollectionView.reloadData()
             self.AllEstatesCollectionView.reloadData()
         }
@@ -324,7 +343,11 @@ class Home: UIViewController ,UITextFieldDelegate{
     func GetApartmentEstates(){
         self.ApartmentArray.removeAll()
         ProductAip.GetAllSectionProducts(TypeId: "UTY25FYJHkliygt4nvPP") { Product in
-            self.ApartmentArray.append(Product)
+                if Product.archived != "1"{
+                   self.ApartmentArray.append(Product)
+                }
+            self.ScrollView.isHidden = false
+            self.LoadingIndecator.stopAnimating()
             self.ApartmentEstatesCollectionView.reloadData()
         }
         

@@ -9,12 +9,11 @@ import UIKit
 import FSPagerView
 import CRRefresh
 import SDWebImage
-
-
-
+import NVActivityIndicatorView
+import Drops
+import EmptyDataSet_Swift
 class ProjetsVC: UIViewController {
 
-    
     
     
     @IBOutlet weak var CityCollectionView: UICollectionView!
@@ -28,6 +27,7 @@ class ProjetsVC: UIViewController {
     var ProjectArray : [ProjectObject] = []
     
     
+    @IBOutlet weak var NVLoaderView: NVActivityIndicatorView!
     @IBOutlet weak var SliderView: FSPagerView!{
         didSet{
             self.SliderView.layer.masksToBounds = true
@@ -48,15 +48,14 @@ class ProjetsVC: UIViewController {
     let spacingBetweenCells: CGFloat = 10
     
     
+    @IBOutlet weak var LoadingIndecator: UIActivityIndicatorView!
     
     @IBOutlet weak var AllEstatesCollectionLayout: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
-//        NavTitle.setTitleTextAttributes(
-//            [
-//                NSAttributedString.Key.font: UIFont(name: "ArialRoundedMTBold", size: 20)!,
-//                NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.07560480386, green: 0.2257080078, blue: 0.3554315865, alpha: 1)
-//            ], for: .normal)
+
+        
+        
         self.SliderView.layer.cornerRadius = 10
         CityCollectionView.register(UINib(nibName: "EstateTypeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CityCell")
         ProjectsCollectionView.register(UINib(nibName: "ProjectsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProjectCell")
@@ -64,7 +63,10 @@ class ProjetsVC: UIViewController {
         GetSliderImages()
         GetCity()
         GetAllProjects()
-        
+        if self.ProjectArray.count == 0{
+            self.ScrollView.isHidden = true
+            self.LoadingIndecator.startAnimating()
+        }
         self.ScrollView.cr.addHeadRefresh(animator: FastAnimator()) {
             self.GetSliderImages()
             self.GetAllProjects()
@@ -72,14 +74,24 @@ class ProjetsVC: UIViewController {
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.LanguageChanged), name: NSNotification.Name(rawValue: "LanguageChanged"), object: nil)
+
         
     }
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if !CheckInternet.Connection(){
             MessageBox.ShowMessage()
         }
     }
+    
+    
+    
+    
+  
+    
+    
     
     @objc func LanguageChanged(){
         self.ProjectsCollectionView.reloadData()
@@ -99,6 +111,8 @@ class ProjetsVC: UIViewController {
         self.ProjectArray.removeAll()
         GetAllProjectsAip.GetAllProducts { pro in
             self.ProjectArray = pro
+            self.ScrollView.isHidden = false
+            self.LoadingIndecator.stopAnimating()
             self.ProjectsCollectionView.reloadData()
         }
         
@@ -114,6 +128,7 @@ class ProjetsVC: UIViewController {
         
     }
     
+    @IBOutlet weak var EmptyStackView: UIStackView!
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -218,9 +233,47 @@ extension ProjetsVC : UICollectionViewDataSource, UICollectionViewDelegate , UIC
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.CityCollectionView{
             if self.CityArray.count != 0  && indexPath.row <= self.CityArray.count{
+                Drops.hideAll()
+                self.EmptyStackView.isHidden = true
                 self.selecteCitycell = CityArray[indexPath.row].id ?? ""
                 self.selecteCity = self.CityArray[indexPath.row]
                 self.CityCollectionView.reloadData()
+                self.ProjectArray.removeAll()
+                self.ProjectsCollectionView.reloadData()
+                self.NVLoaderView.startAnimating()
+                self.AllEstatesCollectionLayout.constant = 0
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    GetAllProjectsAip.GetAllProducts { proj in
+                        for pro in proj {
+                            if pro.city_id == self.CityArray[indexPath.row].id ?? ""{
+                                self.ProjectArray.append(pro)
+                            }
+                        }
+                        self.NVLoaderView.stopAnimating()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            let height = self.ProjectsCollectionView.collectionViewLayout.collectionViewContentSize.height
+                            self.AllEstatesCollectionLayout.constant = height
+                        }
+                        if self.ProjectArray.count == 0{
+                            self.EmptyStackView.isHidden = false
+                            let drop = Drop(
+                                title: "Empty",
+                                subtitle: "No projects are found",
+                                icon: UIImage(named: "attention"),
+                                action: .init {
+                                    print("Drop tapped")
+                                    Drops.hideCurrent()
+                                },
+                                position: .bottom,
+                                duration: 3.0,
+                                accessibility: "Alert: Title, Subtitle"
+                            )
+                            Drops.show(drop)
+                        }
+                        self.ProjectsCollectionView.reloadData()
+                    }
+                }
+               
             }
         }
         

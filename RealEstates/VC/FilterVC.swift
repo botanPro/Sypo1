@@ -95,7 +95,11 @@ class FilterVC: UIViewController ,UITextFieldDelegate, RadioButtonDelegate{
     var AllEstateArray : [EstateObject] = []
     func GetAllEstates(){
         ProductAip.GetAllProducts { Product in
-            self.AllEstateArray = Product
+            for UnArchived in Product{
+                if UnArchived.archived != "1"{
+                    self.AllEstateArray.append(UnArchived)
+                }
+            }
         }
     }
     
