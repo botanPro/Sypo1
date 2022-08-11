@@ -162,7 +162,7 @@ class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDel
             self.value.append(data.year ?? "")
             
             self.value.append(data.project_office_phone ?? "")
-            
+            self.DataCollectionView.reloadData()
             
             if data.video_link == ""{
                 self.VideoHeightLayout.constant = 0
@@ -232,6 +232,32 @@ class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDel
         self.view.layoutIfNeeded()
     }
     
+    
+    
+    
+    var IsViewd = false
+    func InsertViewdItem(id : String){
+        if let FireId = UserDefaults.standard.string(forKey: "UserId"){
+            self.IsViewd = false
+            ViewdItemsObjectAip.GeViewdItemsById(fire_id: FireId) { item in
+                
+                for i in item{
+                    print("CurrentEstateId : \(id)")
+                    print("ViewdEstateId : \(i.estate_id ?? "")")
+                    
+                    print("CurrentFireId : \(FireId)")
+                    print("ViewdFireId : \(i.fire_id ?? "")")
+                    if i.estate_id == id && FireId == i.fire_id{
+                        print("Item is Viewd")
+                        self.IsViewd = true
+                    }
+                }
+                if self.IsViewd == false{print("Item is Not Viewd")
+                  ViewdItemsObject.init(fire_id: FireId, estate_id: id, id: UUID().uuidString).Upload()
+                }
+            }
+        }
+    }
     
 }
 
@@ -355,6 +381,7 @@ extension ProjectDetailsVC : UICollectionViewDataSource, UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == RelatedCollectionView{
             if self.SimilarArray.count != 0 && indexPath.row <= self.SimilarArray.count{
+                InsertViewdItem(id : self.SimilarArray[indexPath.row].id ?? "")
                 self.performSegue(withIdentifier: "Next", sender: SimilarArray[indexPath.row])
             }
         }

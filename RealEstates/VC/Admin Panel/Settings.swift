@@ -14,6 +14,7 @@ import SwiftyJSON
 import AAShimmerView
 import ShimmerLabel
 import FlipLabel
+import Drops
 class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -283,15 +284,9 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             print("--=-=-=-=-=-=-=-=-=-=- \(self.AllEstate.count)")
         }
         self.Image.layer.cornerRadius = self.Image.bounds.width / 2
-        //        NavTitle.setTitleTextAttributes(
-        //                [
-        //                    NSAttributedString.Key.font: UIFont(name: "ArialRoundedMTBold", size: 20)!,
-        //                    NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.07560480386, green: 0.2257080078, blue: 0.3554315865, alpha: 1)
-        //                ], for: .normal)
-        
-        
+     
         navigationController?.navigationBar.shadowImage = UIImage.imageWithColor(color: .darkGray)
-        //LangChanged()
+
     }
     
     
@@ -462,7 +457,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                             
                                             let date = NSDate(timeIntervalSince1970: sub.start_date ?? 0.0)
                                             let dayTimePeriodFormatter = DateFormatter()
-                                            dayTimePeriodFormatter.dateFormat = "dd-MM-YYYY"
+                                            dayTimePeriodFormatter.dateFormat = "dd-MM-YYYY  h:mm"
                                             let dateTimeString = dayTimePeriodFormatter.string(from: date as Date)
                                             let dateTime = dateTimeString.split(separator: ".")
                                             self.StartDate.text = "\(dateTime[0])"
@@ -470,7 +465,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                             
                                             let date1 = NSDate(timeIntervalSince1970: sub.end_date ?? 0.0)
                                             let dayTimePeriodFormatter1 = DateFormatter()
-                                            dayTimePeriodFormatter1.dateFormat = "dd-MM-YYYY"
+                                            dayTimePeriodFormatter1.dateFormat = "dd-MM-YYYY  h:mm"
                                             let dateTimeString1 = dayTimePeriodFormatter1.string(from: date1 as Date)
                                             let dateTime1 = dateTimeString1.split(separator: ".")
                                             self.EndDate.text = "\(dateTime1[0])"
@@ -489,13 +484,13 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                                         self.MyEstates.append(estates)
                                                         SubscriptionsTypeAip.GetSubscriptionsTypeByOfficeId(id: sub.subscription_type_id ?? "") { posts in
                                                             if XLanguage.get() == .Kurdish{
-                                                                self.SubscriptionPosts.text = "\(self.MyEstates.count)/ پۆست \(posts.number_of_post ?? "")"
+                                                                self.SubscriptionPosts.text = "\(posts.number_of_post ?? "") /پۆست \(self.MyEstates.count)"
                                                                 self.SubscriptionPosts.font = UIFont(name: "PeshangDes2", size: 11)!
                                                             }else if XLanguage.get() == .English{
                                                                 self.SubscriptionPosts.text = "\(self.MyEstates.count) Post /\(posts.number_of_post ?? "")"
                                                                 self.SubscriptionPosts.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
                                                             }else{
-                                                                self.SubscriptionPosts.text = "\(self.MyEstates.count)/ منشور \(posts.number_of_post ?? "")"
+                                                                self.SubscriptionPosts.text = "\(posts.number_of_post ?? "")/ منشور \(self.MyEstates.count)"
                                                                 self.SubscriptionPosts.font = UIFont(name: "PeshangDes2", size: 11)!
                                                             }
                                                             
@@ -604,7 +599,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     ProductAip.GetAllProducts { estate in
                         self.AllEstate = estate
                         
-                        ViewdItemsObjectAip.GeViewdItemsById(fire_id: FireId) { [self] Item in
+                        ViewdItemsObjectAip.GeViewdItemById(fire_id: FireId) { [self] Item in
                             print("]]]]]]]]]]]]]]]]]]]]]]\(self.AllEstate.count)")
                             for i in self.AllEstate{print("=====")
                                 if i.id == Item.estate_id{
@@ -694,13 +689,32 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     
     
     @IBAction func CheckVersion(_ sender: Any) {
+        Drops.hideAll()
         DispatchQueue.global().async {
             do {
                 let update = try self.isUpdateAvailable()
                 DispatchQueue.main.async {
                     print(update)
+                    if update == true{
+                        if let url = URL(string: "itms-apps://apple.com/app/1602905831") {
+                            UIApplication.shared.open(url)
+                        }
+                    }
                 }
             } catch {
+                let drop = Drop(
+                    title: "Update",
+                    subtitle: "The app is not uploaded to appstore yet.",
+                    icon: UIImage(named: "attention"),
+                    action: .init {
+                        print("Drop tapped")
+                        Drops.hideCurrent()
+                    },
+                    position: .bottom,
+                    duration: 3.0,
+                    accessibility: "Alert: Title, Subtitle"
+                )
+                Drops.show(drop)
                 print(error)
             }
         }
@@ -753,45 +767,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                 self.cancel = "لا"
             }
             
-            if let FireId = UserDefaults.standard.string(forKey: "UserId"){
-                if let officeId = UserDefaults.standard.string(forKey: "OfficeId"){
-                    OfficeAip.GetOffice(ID: officeId) { [self] office in
-                        if office.type_id == "h9nFfUrHgSwIg17uRwTD"{
-                            SubscriptionAip.GetAllSubscriptionsType { subscription in
-                                for sub in subscription{
-                                    if sub.user_id == officeId{
-                                        self.MyEstates.removeAll()
-                                        OfficeAip.GetOfficeById(Id: FireId) { office in
-                                            ProductAip.GetMyEstates(office_id: office.id ?? "") { estates in
-                                                self.MyEstates.append(estates)
-                                                SubscriptionsTypeAip.GetSubscriptionsTypeByOfficeId(id: sub.subscription_type_id ?? "") { posts in
-                                                    if XLanguage.get() == .Kurdish{
-                                                        self.SubscriptionPosts.text = "\(self.MyEstates.count)/ پۆست \(posts.number_of_post ?? "")"
-                                                        self.SubscriptionPosts.font = UIFont(name: "PeshangDes2", size: 11)!
-                                                    }else if XLanguage.get() == .English{
-                                                        self.SubscriptionPosts.text = "\(self.MyEstates.count) Post /\(posts.number_of_post ?? "")"
-                                                        self.SubscriptionPosts.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
-                                                    }else{
-                                                        self.SubscriptionPosts.text = "\(self.MyEstates.count)/ منشور \(posts.number_of_post ?? "")"
-                                                        self.SubscriptionPosts.font = UIFont(name: "PeshangDes2", size: 11)!
-                                                    }
-                                                    
-                                                }
-                                                
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            
-            
-            
-            
-            
+   
             
             let myAlert = UIAlertController(title: logoutT, message: logoutM, preferredStyle: UIAlertController.Style.alert)
             myAlert.addAction(UIAlertAction(title: Action, style: .default, handler: { (UIAlertAction) in
@@ -813,6 +789,12 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     self.GetYABottom.constant = 12
                     self.GetYAHeight.constant = 0
                     self.GetYAView.isHidden = true
+                    
+                    self.SubscriptionView.isHidden             = true
+                    self.SubscriptionViewHeightLyout.constant  = 0
+                    self.SubscriptionViewTopLyout.constant     = 0
+                    self.SubscriptionViewBottomLyout.constant  = 0
+                    
                     if XLanguage.get() == .Kurdish{
                         self.ViewdItems.text = "0 بینراو"
                         self.FavoriteItems.text = "0 خوازراو"
@@ -841,6 +823,11 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true)
         }
+        
+        
+    
+        
+        
     }
     
     
@@ -939,6 +926,44 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         }
         
         
+        
+        if let FireId = UserDefaults.standard.string(forKey: "UserId"){
+            if let officeId = UserDefaults.standard.string(forKey: "OfficeId"){
+                OfficeAip.GetOffice(ID: officeId) { [self] office in
+                    if office.type_id == "h9nFfUrHgSwIg17uRwTD"{
+                        SubscriptionAip.GetAllSubscriptionsType { subscription in
+                            for sub in subscription{
+                                if sub.user_id == officeId{
+                                    self.MyEstates.removeAll()
+                                    OfficeAip.GetOfficeById(Id: FireId) { office in
+                                        ProductAip.GetMyEstates(office_id: office.id ?? "") { estates in
+                                            self.MyEstates.append(estates)
+                                            SubscriptionsTypeAip.GetSubscriptionsTypeByOfficeId(id: sub.subscription_type_id ?? "") { posts in
+                                                if XLanguage.get() == .Kurdish{
+                                                    self.SubscriptionPosts.text = "\(posts.number_of_post ?? "") /پۆست \(self.MyEstates.count)"
+                                                    self.SubscriptionPosts.font = UIFont(name: "PeshangDes2", size: 11)!
+                                                }else if XLanguage.get() == .English{
+                                                    self.SubscriptionPosts.text = "\(self.MyEstates.count) Post /\(posts.number_of_post ?? "")"
+                                                    self.SubscriptionPosts.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+                                                }else{
+                                                    self.SubscriptionPosts.text = "\(posts.number_of_post ?? "")/ منشور \(self.MyEstates.count)"
+                                                    self.SubscriptionPosts.font = UIFont(name: "PeshangDes2", size: 11)!
+                                                }
+                                                
+                                            }
+                                            
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+        
         if UserDefaults.standard.bool(forKey: "Login") == false {
             if XLanguage.get() == .Kurdish{
                 self.LoginOrLogoutLable.text = "چونه‌ ژووره‌وه‌"
@@ -1028,18 +1053,14 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     self.FavoriteItemsEstate.removeAll()
                     
                     ///ViewdItemsCount
-                    ViewdItemsObjectAip.GeViewdItemsById(fire_id: FireId) { [self] Item in
+                    ViewdItemsObjectAip.GeViewdItemById(fire_id: FireId) { [self] Item in
                         for i in self.AllEstate{
                             if i.id == Item.estate_id{
                                 ViewdItemCount = ViewdItemCount + 1
                                 self.ViewdItemsEstate.append(i)
                             }
                         }
-                        //                        print("=====")
-                        //                        print(ViewdItemCount)
-                        //                        if Item.estate_id != ""{
-                        //                            ViewdItemCount = ViewdItemCount + 1
-                        //                        }
+
                         if ViewdItemCount == 1{
                             if XLanguage.get() == .Kurdish{
                                 self.ViewdItems.text = "\(ViewdItemCount) بینراو"

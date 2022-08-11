@@ -85,12 +85,13 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
     
     
     
-    
+    var BoudTypes : [BoundTypeObject] = []
     var SelectedFurnished = "0"
-    var SelectedBoundType = "0"
+    var SelectedBoundTypeId = "0"
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == self.Furnished {
             self.view.endEditing(true)
+            
             if XLanguage.get() == .Kurdish{
                 dropDown.dataSource = ["مۆبیلیات کراوە", "مۆبیلیات نییە"]
             }else if XLanguage.get() == .English{
@@ -109,20 +110,20 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
         
         if textField == self.BondType {
             self.view.endEditing(true)
-            if XLanguage.get() == .Kurdish{
-                 dropDown1.dataSource = ["خاوەندارێتی بکە", "فرۆشتنی."]
-            }else if XLanguage.get() == .English{
-                dropDown1.dataSource = ["Own It", "Sell"]
-            }else{
-                dropDown1.dataSource = ["تملكها"," بيع"]
+            self.dropDown1.dataSource.removeAll()
+            BoundTypeAip.GetAllBoundType { bounds in
+                self.BoudTypes = bounds
+                for bound in bounds{
+                    self.dropDown1.dataSource.append(bound.en_title ?? "")
+                }
+                self.dropDown1.show()
+                self.dropDown1.selectionAction = { [unowned self] (index: Int, item: String) in
+                    self.BondType.text = item
+                    self.SelectedBoundTypeId = self.BoudTypes[index].id ?? ""
+                    dropDown1.hide()
+                }
             }
-           
-            dropDown1.show()
-            dropDown1.selectionAction = { [unowned self] (index: Int, item: String) in
-                self.BondType.text = item
-                self.SelectedBoundType = "\(index)"
-                dropDown1.hide()
-            }
+            
         }
     }
     
@@ -218,7 +219,9 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
     override func viewDidLoad() {
         super.viewDidLoad()
         setupGroup2()
-        
+        self.ProjectHeight.constant = 0
+        self.ProjectTopConstans.constant = 0
+        self.ProjectView.isHidden = true
         
         
         TypeView.layer.backgroundColor = UIColor.clear.cgColor
@@ -394,32 +397,13 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             
             
             
-            if data.BondType == "0" && XLanguage.get() == .English{
-                self.BondType.text = "Own It"
-                self.SelectedBoundType = "0"
-            }else if data.BondType == "1" && XLanguage.get() == .English{
-                self.BondType.text = "Sell"
-                self.SelectedBoundType = "1"
-            }
-            if data.BondType == "0" && XLanguage.get() == .Kurdish{
-                self.BondType.text = "فرۆشتنی"
-                self.SelectedBoundType = "0"
-            }else if data.BondType == "1" && XLanguage.get() == .Kurdish{
-                self.BondType.text = "خاوەندارێتی بکە"
-                self.SelectedBoundType = "1"
-            }
-            if data.BondType == "0" && XLanguage.get() == .Arabic{
-                self.BondType.text = "تملكها"
-                self.SelectedBoundType = "0"
-            }else if data.BondType == "1" && XLanguage.get() == .Arabic{
-                self.BondType.text = "بيع"
-                self.SelectedBoundType = "1"
+            BoundTypeAip.GetBoundTypeByOfficeId(id: data.bound_id ?? "") { bound in
+                self.SelectedBoundTypeId = bound.id ?? ""
+                self.BondType.text = bound.en_title ?? ""
             }
             
 
-            
-            
-            
+        
             if data.RentOrSell == "1" {
                 self.RentRadioButton.isOn = false
                 self.SellRadioButton.isOn = true
@@ -599,7 +583,37 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             let pickerValue = self.EstatesType[self.EstateTypepickerView.selectedRow(inComponent: 0)]
             self.EstateTypeLable.text = pickerValue.name
             self.selecteEstatedcell = pickerValue
-            print("Picker value: \(pickerValue) was selected")
+            print(pickerValue.id ?? "")
+            if pickerValue.id == "UTY25FYJHkliygt4nvPP"{
+                self.IsApartment = true
+                self.Floor.isUserInteractionEnabled = true
+                self.Floor.alpha = 1
+                self.Building.isUserInteractionEnabled = true
+                self.Building.alpha = 1
+                self.MonthlyFee.isUserInteractionEnabled = true
+                self.MonthlyFee.alpha = 1
+                UIView.animate(withDuration: 0.2, delay: 0.0) {
+                    self.ProjectHeight.constant = 45
+                    self.ProjectTopConstans.constant = 20
+                    self.ProjectView.isHidden = false
+                    self.view.layoutIfNeeded()
+                }
+            }else{
+                self.IsApartment = false
+                self.Floor.isUserInteractionEnabled = false
+                self.Floor.alpha = 0.5
+                self.Building.isUserInteractionEnabled = false
+                self.Building.alpha = 0.5
+                self.MonthlyFee.isUserInteractionEnabled = false
+                self.MonthlyFee.alpha = 0.5
+                UIView.animate(withDuration: 0.2, delay: 0.0) {
+                    self.ProjectHeight.constant = 0
+                    self.ProjectTopConstans.constant = 0
+                    self.ProjectView.isHidden = true
+                    self.view.layoutIfNeeded()
+                }
+            }
+            print("Picker value: \(pickerValue.name ?? "") was selected")
         }))
         ac.addAction(UIAlertAction(title: self.ProjectsCancel, style: .cancel, handler: nil))
         present(ac, animated: true)
@@ -1672,17 +1686,15 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
         
         guard self.Furnished.text!.isEmpty == false else{EmptyTextField(self.Furnished); return}
         
-        if self.IsApartment == false{
+        if self.IsApartment == true{
             guard self.Floor.text!.isEmpty == false else{EmptyTextField(self.Floor); return}
             
             guard self.Building.text!.isEmpty == false else{EmptyTextField(self.Building); return}
             
             guard self.MonthlyFee.text!.isEmpty == false else{EmptyTextField(self.MonthlyFee); return}
-        }
-        if self.IsApartment == true{
+            
             guard self.ProjectName.text!.isEmpty == false else{EmptyLable(self.ProjectName); return}
         }
-        
         
         guard self.BondType.text!.isEmpty == false else{EmptyTextField(self.BondType); return}
         
@@ -1743,7 +1755,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                                                   , Building: self.Building.text!
                                                   , Year: self.Year.text!
                                                   , Furnished: self.SelectedFurnished
-                                                  , BondType: self.SelectedBoundType
+                                                  , bound_id: self.SelectedBoundTypeId
                                                   , MonthlyService: self.MonthlyFee.text!
                                                   , RoomNo:"\(self.selecteNumbercell)"
                                                   , WashNo: "\(self.selecteWashcell)"
@@ -1806,7 +1818,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                                               , Building: self.Building.text!
                                               , Year: self.Year.text!
                                               , Furnished: self.SelectedFurnished
-                                              , BondType: self.SelectedBoundType
+                                              , bound_id: self.SelectedBoundTypeId
                                               , MonthlyService: self.MonthlyFee.text!
                                               , RoomNo:"\(self.selecteNumbercell)"
                                               , WashNo: "\(self.selecteWashcell)"

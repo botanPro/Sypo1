@@ -13,8 +13,6 @@ import NVActivityIndicatorView
 import Drops
 import EmptyDataSet_Swift
 class ProjetsVC: UIViewController {
-
-    
     
     @IBOutlet weak var CityCollectionView: UICollectionView!
     @IBOutlet weak var ProjectsCollectionView: UICollectionView!
@@ -84,6 +82,21 @@ class ProjetsVC: UIViewController {
         if !CheckInternet.Connection(){
             MessageBox.ShowMessage()
         }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    @IBAction func ShowProjectOnMap(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let myVC = storyboard.instantiateViewController(withIdentifier: "ProjectMapVc") as! ProjectMapVC
+        myVC.AllProjects = self.self.ProjectArray
+        myVC.modalPresentationStyle = .fullScreen
+        self.present(myVC, animated: true, completion: nil)
     }
     
     
@@ -256,9 +269,23 @@ extension ProjetsVC : UICollectionViewDataSource, UICollectionViewDelegate , UIC
                         }
                         if self.ProjectArray.count == 0{
                             self.EmptyStackView.isHidden = false
+                            var title = "Empty"
+                            var message = "No projects are found"
+                            
+                            if XLanguage.get() == .English{
+                                title = "Empty"
+                                message = "No projects are found"
+                            }else if XLanguage.get() == .Kurdish{
+                                title = "بەتاڵ"
+                                message = "هیچ پرۆژەیەک نەدۆزراوەتەوە"
+                            }else{
+                                title = "فارغة"
+                                message = "لم يتم العثور على مشاريع"
+                            }
+                            
                             let drop = Drop(
-                                title: "Empty",
-                                subtitle: "No projects are found",
+                                title: title,
+                                subtitle: message,
                                 icon: UIImage(named: "attention"),
                                 action: .init {
                                     print("Drop tapped")

@@ -238,6 +238,7 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     private func setupEstateTypesAlert() {
         EstateTypepickerView.delegate = self
         EstateTypepickerView.dataSource = self
+        
         if XLanguage.get() == .Kurdish{
             self.ProjectsTitle = "جۆری خانوبەر هەلبژێرە"
             self.ProjectsAction = "هەڵبژێرە"
@@ -254,21 +255,21 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
         let ac = UIAlertController(title:  self.ProjectsTitle, message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         ac.view.addSubview(EstateTypepickerView)
         ac.addAction(UIAlertAction(title:  self.ProjectsAction, style: .default, handler: { _ in
+            self.self.EstateForMap.removeAll()
             let pickerValue = self.NighborArray[self.EstateTypepickerView.selectedRow(inComponent: 0)]
             self.EstateTypeLable.text = pickerValue.name
-            ProductAip.GetAllSectionProducts(TypeId: pickerValue.id ?? "") { Product in
-                self.EstateForMap.append(Product)
-            }
-
-            if self.EstateForMap.count != 0{
-                for loc in self.EstateForMap{
-                    let lat = Double(loc.lat ?? "")
-                    let long = Double(loc.long ?? "")
-                    if let latt = lat, let longg = long{
-                        let profileInfo = profile()
-                        profileInfo.profileId = loc.id ?? ""
-                        profileInfo.coordinate = CLLocationCoordinate2D(latitude: latt, longitude: longg)
-                        self.MapView.addAnnotation(profileInfo)
+            ProductAip.GetAllEstateForNeighburs(TypeId: pickerValue.id ?? "") { Product in
+                self.EstateForMap = Product
+                if self.EstateForMap.count != 0{
+                    for loc in self.EstateForMap{
+                        let lat = Double(loc.lat ?? "")
+                        let long = Double(loc.long ?? "")
+                        if let latt = lat, let longg = long{
+                            let profileInfo = profile()
+                            profileInfo.profileId = loc.id ?? ""
+                            profileInfo.coordinate = CLLocationCoordinate2D(latitude: latt, longitude: longg)
+                            self.MapView.addAnnotation(profileInfo)
+                        }
                     }
                 }
             }
@@ -286,7 +287,12 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        GetAllEstates()
+        print(self.CommingEstate?.bound_id ?? "")
+        BoundTypeAip.GetBoundTypeByOfficeId(id: self.CommingEstate?.bound_id ?? "") { bound in
+            self.BoundType = bound.en_title ?? ""
+            self.GetData()
+        }
         EstateTypeView.layer.backgroundColor = UIColor.clear.cgColor
         EstateTypeView.layer.borderWidth = 1
         EstateTypeView.layer.borderColor = #colorLiteral(red: 0.776776731, green: 0.8295580745, blue: 0.8200985789, alpha: 1)
@@ -308,7 +314,7 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
         self.Description.delegate = self
         self.PagerControl.pages = 10
         
-        GetData()
+        
         GetEstateType()
         
         
@@ -360,15 +366,13 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     var m2 = ""
     @IBOutlet weak var DescLable: LanguageLable!
     @IBOutlet weak var DescBottomLayout: NSLayoutConstraint!
-    
+    var BoundType = ""
     @IBOutlet weak var VideoHeightLayout: NSLayoutConstraint!
     func GetData(){
         if let data = CommingEstate{
             
             self.profileID = data.id ?? ""
             self.sliderImages = data.ImageURL ?? []
-           
-            
             
             self.PagerControl.pages = data.ImageURL?.count ?? 0
             self.ImageCollectionView.reloadData()
@@ -450,25 +454,7 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
             
             
             
-            if data.BondType == "0" && XLanguage.get() == .English{
-                self.value.append("Own It")
-            }else if data.BondType == "1" && XLanguage.get() == .English{
-                self.value.append("Sell")
-            }
-            if data.BondType == "0" && XLanguage.get() == .Kurdish{
-                self.value.append("فرۆشتنی")
-            }else if data.BondType == "1" && XLanguage.get() == .Kurdish{
-                self.value.append("خاوەندارێتی بکە")
-            }
-            if data.BondType == "0" && XLanguage.get() == .Arabic{
-                self.value.append("تملكها")
-            }else if data.BondType == "1" && XLanguage.get() == .Arabic{
-                self.value.append("بيع")
-            }
-            
-            
-
-            self.value.append(data.propertyNo ?? "")
+            self.value.append(self.BoundType)
             
             self.value.append(data.Year ?? "")
             
@@ -647,6 +633,8 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
                 
                 self.value.append(data.floor ?? "")
                 
+                self.value.append(data.propertyNo ?? "")
+                
 
             }
             
@@ -688,6 +676,22 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
         
         
     }
+    
+    
+    var AllEstateArray : [EstateObject] = []
+    func GetAllEstates(){
+        self.AllEstateArray.removeAll()
+        ProductAip.GetAllProducts { Product in
+            for UnArchived in Product{
+                if UnArchived.archived != "1"{
+                   self.AllEstateArray.append(UnArchived)
+                }
+            }
+        }
+    }
+    
+    
+    
     
     func zoomToLocation(with coordinate: CLLocationCoordinate2D) {
         let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 10000, longitudinalMeters: 10000)
@@ -803,6 +807,34 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     @IBOutlet weak var RelatedEstatesCollectionLayout: NSLayoutConstraint!
     
  
+    
+    
+    
+    var IsViewd = false
+    func InsertViewdItem(id : String){
+        if let FireId = UserDefaults.standard.string(forKey: "UserId"){
+            self.IsViewd = false
+            ViewdItemsObjectAip.GeViewdItemsById(fire_id: FireId) { item in
+                
+                for i in item{
+                    print("CurrentEstateId : \(id)")
+                    print("ViewdEstateId : \(i.estate_id ?? "")")
+                    
+                    print("CurrentFireId : \(FireId)")
+                    print("ViewdFireId : \(i.fire_id ?? "")")
+                    if i.estate_id == id && FireId == i.fire_id{
+                        print("Item is Viewd")
+                        self.IsViewd = true
+                    }
+                }
+                if self.IsViewd == false{print("Item is Not Viewd")
+                  ViewdItemsObject.init(fire_id: FireId, estate_id: id, id: UUID().uuidString).Upload()
+                }
+            }
+        }
+    }
+    
+    
     
 }
 
@@ -943,6 +975,7 @@ extension EstateProfileVc : UICollectionViewDataSource, UICollectionViewDelegate
                 let myVC = storyboard.instantiateViewController(withIdentifier: "GoToEstateProfileVc") as! EstateProfileVc
                 myVC.CommingEstate = self.SimilarArray[indexPath.row]
                 myVC.modalPresentationStyle = .fullScreen
+                InsertViewdItem(id : self.SimilarArray[indexPath.row].id ?? "")
                 self.present(myVC, animated: true, completion: nil)
             }
         }

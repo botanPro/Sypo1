@@ -186,6 +186,31 @@ class OfficeVC: UIViewController {
             self.CollectionHeight.constant = height
         }
     }
+    
+    
+    var IsViewd = false
+    func InsertViewdItem(id : String){
+        if let FireId = UserDefaults.standard.string(forKey: "UserId"){
+            self.IsViewd = false
+            ViewdItemsObjectAip.GeViewdItemsById(fire_id: FireId) { item in
+                
+                for i in item{
+                    print("CurrentEstateId : \(id)")
+                    print("ViewdEstateId : \(i.estate_id ?? "")")
+                    
+                    print("CurrentFireId : \(FireId)")
+                    print("ViewdFireId : \(i.fire_id ?? "")")
+                    if i.estate_id == id && FireId == i.fire_id{
+                        print("Item is Viewd")
+                        self.IsViewd = true
+                    }
+                }
+                if self.IsViewd == false{print("Item is Not Viewd")
+                  ViewdItemsObject.init(fire_id: FireId, estate_id: id, id: UUID().uuidString).Upload()
+                }
+            }
+        }
+    }
 }
 
 
@@ -229,7 +254,11 @@ extension OfficeVC : UICollectionViewDataSource, UICollectionViewDelegate , UICo
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        if self.SimilarArray.count != 0 && indexPath.row <= self.SimilarArray.count{
+           InsertViewdItem(id : self.SimilarArray[indexPath.row].id ?? "")
+        }
     }
+    
+    
     
 }

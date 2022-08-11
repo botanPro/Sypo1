@@ -16,7 +16,7 @@ class ViewdVC: UIViewController {
         super.viewDidLoad()
         TableView.register(UINib(nibName: "FavoriteTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         if let FireId = UserDefaults.standard.string(forKey: "UserId"){print(FireId)
-            ViewdItemsObjectAip.GeViewdItemsById(fire_id: FireId) { [self] Item in
+            ViewdItemsObjectAip.GeViewdItemById(fire_id: FireId) { [self] Item in
                 ProductAip.GetAllProducts { estate in
                     for i in estate{
                         if i.id == Item.estate_id{
@@ -30,7 +30,7 @@ class ViewdVC: UIViewController {
         self.TableView.cr.addHeadRefresh(animator: FastAnimator()) {
             self.ProductArray.removeAll()
             if let FireId = UserDefaults.standard.string(forKey: "UserId"){print(FireId)
-                ViewdItemsObjectAip.GeViewdItemsById(fire_id: FireId) { [self] Item in
+                ViewdItemsObjectAip.GeViewdItemById(fire_id: FireId) { [self] Item in
                     ProductAip.GetAllProducts { estate in
                         for i in estate{
                             if i.id == Item.estate_id && i.archived != "1"{

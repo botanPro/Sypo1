@@ -41,7 +41,7 @@ class EstateObject{
     var Building : String?
     var Year :String?
     var Furnished : String?
-    var BondType : String?
+    var bound_id : String?
     var MonthlyService : String?
     var video_link : String?
     var RoomNo : String?
@@ -56,7 +56,7 @@ class EstateObject{
     
     init(name : String,id : String , stamp : TimeInterval ,RentOrSell: String, city_name : String , address : String ,lat : String , long : String , price: Double, desc:String , office_id : String ,fire_id : String, ImageURL : [String] , city_id : String
          
-         , estate_type_id : String ,Direction : String , floor : String ,Building : String, Year: String, Furnished : String , BondType:String , MonthlyService : String, RoomNo : String ,WashNo:String, space : String , propertyNo : String, state : String, project_id : String, video_link : String,archived : String) {
+         , estate_type_id : String ,Direction : String , floor : String ,Building : String, Year: String, Furnished : String , bound_id:String , MonthlyService : String, RoomNo : String ,WashNo:String, space : String , propertyNo : String, state : String, project_id : String, video_link : String,archived : String) {
         
         self.name               = name
         self.id                 = id
@@ -77,7 +77,7 @@ class EstateObject{
         self.Building           = Building
         self.Year               = Year
         self.Furnished          = Furnished
-        self.BondType           = BondType
+        self.bound_id           = bound_id
         self.MonthlyService     = MonthlyService
         self.RoomNo             = RoomNo
         self.WashNo             = WashNo
@@ -115,7 +115,7 @@ class EstateObject{
         self.floor          = Dictionary[ "floor"           ] as? String
         self.Year           = Dictionary[ "year"            ] as? String
         self.Furnished      = Dictionary[ "furnished"       ] as? String
-        self.BondType       = Dictionary[ "bond_type"       ] as? String
+        self.bound_id       = Dictionary[ "bound_id"       ] as? String
         self.MonthlyService = Dictionary[ "monthly_service" ] as? String
         self.RoomNo         = Dictionary[ "room_number"     ] as? String
         self.WashNo         = Dictionary[ "wash_number"     ] as? String
@@ -152,7 +152,7 @@ class EstateObject{
         New["floor"            ] = self.floor          as AnyObject
         New["year"             ] = self.Year           as AnyObject
         New["furnished"        ] = self.Furnished      as AnyObject
-        New["bond_type"        ] = self.BondType       as AnyObject
+        New["bound_id"         ] = self.bound_id       as AnyObject
         New["monthly_service"  ] = self.MonthlyService as AnyObject
         New["room_number"      ] = self.RoomNo         as AnyObject
         New["wash_number"      ] = self.WashNo         as AnyObject
@@ -238,6 +238,21 @@ class ProductAip{
                     completion(New)
                 }
             }
+        }
+    }
+    
+    
+    static func GetAllEstateForNeighburs(TypeId : String , completion : @escaping (_ Product : [EstateObject])->()){
+        var New : [EstateObject] = []
+        Firestore.firestore().collection("EstateProducts").whereField("estate_type_id", isEqualTo: TypeId).getDocuments { (Snapshot, error) in
+            if error != nil { print(error.debugDescription) ; return }
+            guard let documents = Snapshot?.documents else { return }
+            for P in documents {
+                if let data = P.data() as [String : AnyObject]? {
+                    New.append(EstateObject(Dictionary: data))
+                }
+            }
+            completion(New)
         }
     }
     
@@ -880,14 +895,33 @@ class ViewdItemsObjectAip{
     
     
     
-    static func GeViewdItemsById(fire_id : String , completion : @escaping (_ Product : ViewdItemsObject)->()){
+    static func GeViewdItemsById(fire_id : String , completion : @escaping (_ Product : [ViewdItemsObject])->()){
+        var New : [ViewdItemsObject] = []
         Firestore.firestore().collection("ViewdItems").whereField("fire_id", isEqualTo: fire_id).getDocuments { (Snapshot, error) in
             if error != nil { print(error.debugDescription) ; return }
             guard let documents = Snapshot?.documents else { return }
             if documents != []{
             for P in documents {
                 if let data = P.data() as [String : AnyObject]? {
-                    let New = ViewdItemsObject(Dictionary: data)
+                    New.append(ViewdItemsObject(Dictionary: data))
+                    print(JSON(data))
+                }
+            }
+                completion(New)
+            }else{
+                completion([ViewdItemsObject.init(fire_id: "", estate_id: "", id: "")])
+            }
+        }
+    }
+    
+    static func GeViewdItemById(fire_id : String , completion : @escaping (_ Product : ViewdItemsObject)->()){
+        Firestore.firestore().collection("ViewdItems").whereField("fire_id", isEqualTo: fire_id).getDocuments { (Snapshot, error) in
+            if error != nil { print(error.debugDescription) ; return }
+            guard let documents = Snapshot?.documents else { return }
+            if documents != []{
+            for P in documents {
+                if let data = P.data() as [String : AnyObject]? {
+                   let New = ViewdItemsObject(Dictionary: data)
                     print(JSON(data))
                     completion(New)
                 }
@@ -1286,6 +1320,76 @@ class SubscriptionsTypeAip{
             }
             }else{
                 completion(SubscriptionsTypeObject.init(title: "", id: "", number_of_post: ""))
+            }
+        }
+    }
+    
+}
+
+
+
+
+
+
+
+
+class BoundTypeObject{
+    
+    var en_title : String?
+    var id : String?
+    
+    init(en_title : String,id : String ) {
+        self.en_title           = en_title
+        self.id                 = id
+    }
+    
+    
+    
+    init(Dictionary : [String : AnyObject]) {
+        self.id   = Dictionary[ "id" ]   as? String
+        self.en_title = Dictionary[ "en_title" ] as? String
+    }
+    
+
+    func MakeDictionary() -> [String : AnyObject] {
+        var New  : [String : AnyObject]  = [:]
+        New["id"]   = self.id       as AnyObject
+        New["en_title"] = self.en_title     as AnyObject
+        return New
+    }
+    
+    
+}
+
+class BoundTypeAip{
+    static func GetAllBoundType(completion : @escaping (_ Product : [BoundTypeObject])->()){
+        var New : [BoundTypeObject] = []
+        Firestore.firestore().collection("BoundTypes").getDocuments { (Snapshot, error) in
+            if error != nil { print("Error") ; return }
+            guard let documents = Snapshot?.documents else { return }
+            for P in documents {
+                if let data = P.data() as [String : AnyObject]? {
+                    New.append(BoundTypeObject(Dictionary: data))
+                }
+            }
+            completion(New)
+        }
+    }
+    
+    
+    static func GetBoundTypeByOfficeId(id : String , completion : @escaping (_ Product : BoundTypeObject)->()){
+        Firestore.firestore().collection("BoundTypes").whereField("id", isEqualTo: id).getDocuments { (Snapshot, error) in
+            if error != nil { print(error.debugDescription) ; return }
+            guard let documents = Snapshot?.documents else { return }
+            if documents != []{
+            for P in documents {
+                if let data = P.data() as [String : AnyObject]? {
+                    let New = BoundTypeObject(Dictionary: data)
+                    completion(New)
+                }
+            }
+            }else{
+                completion(BoundTypeObject.init(en_title: "", id: ""))
             }
         }
     }

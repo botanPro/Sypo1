@@ -83,6 +83,7 @@
 		7D0288432894063900A175A8 /* CheckVersionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0288422894063900A175A8 /* CheckVersionClass.swift */; };
 		7D0288482894766700A175A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D0288472894766700A175A8 /* GoogleService-Info.plist */; };
 		7D0EA1842895AACA001E9D9B /* ProjectDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EA1832895AACA001E9D9B /* ProjectDetailsVC.swift */; };
+		7D305EFC28A43E9000006554 /* ProjectMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D305EFB28A43E9000006554 /* ProjectMapVC.swift */; };
 		7D9455AC2872273A00CF6A53 /* popup_load_balls.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7D9455AB2872273A00CF6A53 /* popup_load_balls.gif */; };
 		7D9BDBEB28A146340029CEF8 /* CheckInternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9BDBEA28A146340029CEF8 /* CheckInternetConnection.swift */; };
 		7D9BDBF228A14A300029CEF8 /* MessageBox.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D9BDBF028A14A300029CEF8 /* MessageBox.storyboard */; };
@@ -197,6 +198,7 @@
 		7D0288462894634B00A175A8 /* RealEstates.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RealEstates.entitlements; sourceTree = "<group>"; };
 		7D0288472894766700A175A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7D0EA1832895AACA001E9D9B /* ProjectDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailsVC.swift; sourceTree = "<group>"; };
+		7D305EFB28A43E9000006554 /* ProjectMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectMapVC.swift; sourceTree = "<group>"; };
 		7D9455AB2872273A00CF6A53 /* popup_load_balls.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = popup_load_balls.gif; sourceTree = "<group>"; };
 		7D9BDBEA28A146340029CEF8 /* CheckInternetConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInternetConnection.swift; sourceTree = "<group>"; };
 		7D9BDBF028A14A300029CEF8 /* MessageBox.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MessageBox.storyboard; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				7683AAB827C152270068E02F /* ProjetsVC.swift */,
 				7D0EA1832895AACA001E9D9B /* ProjectDetailsVC.swift */,
 				76CE4592285505BE005E1C0B /* RentAndSellVC.swift */,
+				7D305EFB28A43E9000006554 /* ProjectMapVC.swift */,
 				76CE4594285505E6005E1C0B /* OfficesVc.swift */,
 				76324E43278B4E4300281936 /* EstateProfileVc.swift */,
 				76E55BFD27A2F3BA003E05C0 /* MapVC.swift */,
@@ -837,6 +840,7 @@
 				76E55BFE27A2F3BA003E05C0 /* MapVC.swift in Sources */,
 				761208282629A29E00C0CE94 /* Settings.swift in Sources */,
 				7655162F266EC39B00D8C833 /* CommentTableViewCell.swift in Sources */,
+				7D305EFC28A43E9000006554 /* ProjectMapVC.swift in Sources */,
 				76B7B64327B416120033BAC0 /* AddProperty.swift in Sources */,
 				761207CC26299EDD00C0CE94 /* ViewController.swift in Sources */,
 				76CE459828551CF6005E1C0B /* AllEstateVC.swift in Sources */,
@@ -1065,7 +1069,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.maskani.sharkteam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1093,7 +1097,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.maskani.sharkteam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
