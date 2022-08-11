@@ -273,6 +273,22 @@ class ProductAip{
     }
     
     
+    static func GetAllMyEstates(office_id : String , completion : @escaping (_ Product : [EstateObject])->()){
+        var New : [EstateObject] = []
+        Firestore.firestore().collection("EstateProducts").whereField("office_id", isEqualTo: office_id).getDocuments { (Snapshot, error) in
+            if error != nil { print(error.debugDescription) ; return }
+            guard let documents = Snapshot?.documents else { return }
+            for P in documents {
+                if let data = P.data() as [String : AnyObject]? {
+                    New.append(EstateObject(Dictionary: data))
+                    print("[]][[][][]][][][][]")
+                }
+            }
+            completion(New)
+        }
+    }
+    
+    
     static func GetProjectsById(project_id : String , completion : @escaping (_ Product : EstateObject)->()){
         Firestore.firestore().collection("EstateProducts").whereField("project_id", isEqualTo: project_id).getDocuments { (Snapshot, error) in
             if error != nil { print(error.debugDescription) ; return }

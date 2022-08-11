@@ -1001,7 +1001,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dmc-bt-UJj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1203" y="2688"/>
+            <point key="canvasLocation" x="-1204.2056074766354" y="2687.6889848812098"/>
         </scene>
         <!--Estate Profile Vc-->
         <scene sceneID="bxM-tx-HuF">
@@ -1546,16 +1546,35 @@
                                             <outletCollection property="gestureRecognizers" destination="hgT-3X-gjw" appends="YES" id="IRQ-AP-VcZ"/>
                                         </connections>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RnV-VR-k2b" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                        <rect key="frame" x="179" y="1026" width="70" height="70"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="qqc-v8-NDk"/>
+                                            <constraint firstAttribute="height" constant="70" id="vlH-zT-ZJg"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                <color key="value" red="0.52618827050000005" green="0.63085979299999995" blue="0.71402439929999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballScaleMultiple"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                                <real key="value" value="22"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="6pP-wi-zjX" firstAttribute="centerX" secondItem="Yfe-ef-ILG" secondAttribute="centerX" id="1l9-G0-eBr"/>
                                     <constraint firstItem="u3F-AB-btz" firstAttribute="top" secondItem="V20-lJ-hsq" secondAttribute="bottom" constant="30" id="1wo-hJ-epX"/>
+                                    <constraint firstItem="Rm9-Je-Vaf" firstAttribute="top" secondItem="RnV-VR-k2b" secondAttribute="bottom" constant="65.329999999999998" id="2qL-Kt-fgE"/>
                                     <constraint firstItem="V20-lJ-hsq" firstAttribute="leading" secondItem="Yfe-ef-ILG" secondAttribute="leading" constant="10" id="3fa-VE-Xqx"/>
                                     <constraint firstAttribute="trailing" secondItem="1OD-EZ-zQj" secondAttribute="trailing" constant="10" id="5Hh-7j-OKm"/>
                                     <constraint firstItem="tet-zn-EZE" firstAttribute="top" secondItem="dQS-h5-PyC" secondAttribute="bottom" constant="21" id="5Pc-o5-02k"/>
                                     <constraint firstItem="Xhu-jW-iWB" firstAttribute="top" secondItem="tet-zn-EZE" secondAttribute="bottom" constant="10" id="6MO-vp-NcP"/>
                                     <constraint firstItem="EXN-c5-LaM" firstAttribute="leading" secondItem="Yfe-ef-ILG" secondAttribute="leading" constant="30" id="75Q-N4-coM"/>
                                     <constraint firstAttribute="trailing" secondItem="ZaT-7R-mPp" secondAttribute="trailing" constant="10" id="7EN-Ad-dbn"/>
+                                    <constraint firstItem="RnV-VR-k2b" firstAttribute="top" secondItem="Pzs-4I-OIi" secondAttribute="bottom" constant="64.670000000000002" id="7F6-Vb-oAZ"/>
                                     <constraint firstItem="qcf-uv-S2o" firstAttribute="top" secondItem="Yfe-ef-ILG" secondAttribute="top" constant="40" id="8Dm-m4-5Eu"/>
                                     <constraint firstItem="Sce-cT-NDY" firstAttribute="leading" secondItem="Yfe-ef-ILG" secondAttribute="leading" constant="30" id="8Yr-by-SHF"/>
                                     <constraint firstItem="EXN-c5-LaM" firstAttribute="top" secondItem="1OD-EZ-zQj" secondAttribute="bottom" constant="10" id="8zB-r4-DsM"/>
@@ -1585,6 +1604,7 @@
                                     <constraint firstItem="M1J-l3-Bry" firstAttribute="centerX" secondItem="Yfe-ef-ILG" secondAttribute="centerX" id="YCz-nS-6VA"/>
                                     <constraint firstItem="gOv-XN-w40" firstAttribute="top" secondItem="no7-1z-0M8" secondAttribute="bottom" constant="5" id="Z4Q-VS-Z52"/>
                                     <constraint firstItem="dQS-h5-PyC" firstAttribute="leading" secondItem="Yfe-ef-ILG" secondAttribute="leading" constant="25" id="Zc0-AB-jO4"/>
+                                    <constraint firstItem="RnV-VR-k2b" firstAttribute="centerX" secondItem="Yfe-ef-ILG" secondAttribute="centerX" id="aOi-mV-Xhv"/>
                                     <constraint firstAttribute="trailing" secondItem="dQS-h5-PyC" secondAttribute="trailing" constant="25" id="ah9-pG-fkU"/>
                                     <constraint firstItem="V20-lJ-hsq" firstAttribute="top" secondItem="BnA-80-82g" secondAttribute="bottom" constant="20" id="cOh-py-ctb"/>
                                     <constraint firstAttribute="trailing" secondItem="qcf-uv-S2o" secondAttribute="trailing" constant="18" id="dZU-lX-rrf"/>
@@ -1645,6 +1665,7 @@
                         <outlet property="Location" destination="VMR-3E-gGq" id="N0z-EC-vGi"/>
                         <outlet property="MapView" destination="p0L-Wv-tLX" id="lwx-cU-7E7"/>
                         <outlet property="Meters" destination="Zg3-IE-Q1F" id="Yso-KK-2t7"/>
+                        <outlet property="NVLoaderView" destination="RnV-VR-k2b" id="8pS-X0-bIw"/>
                         <outlet property="OfficeImage" destination="TMu-Wb-PT6" id="hFZ-fB-g7s"/>
                         <outlet property="OfficeLocation" destination="qGc-bs-j9B" id="vef-qA-6FS"/>
                         <outlet property="OfficeName" destination="YpL-TM-aIt" id="rMk-wZ-xvA"/>
@@ -1763,7 +1784,7 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="color">
                                         <color key="value" red="0.52618827050000005" green="0.63085979299999995" blue="0.71402439929999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballScale"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballScaleMultiple"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="padding">
                                         <real key="value" value="22"/>
                                     </userDefinedRuntimeAttribute>
@@ -2471,7 +2492,7 @@
                                             <userDefinedRuntimeAttribute type="color" keyPath="color">
                                                 <color key="value" red="0.52618827051875183" green="0.63085979304814055" blue="0.71402439926609851" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballScale"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballScaleMultiple"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="padding">
                                                 <real key="value" value="22"/>
                                             </userDefinedRuntimeAttribute>
@@ -6879,10 +6900,10 @@
             <size key="intrinsicContentSize" width="53" height="14"/>
         </designable>
         <designable name="gvJ-8u-cm5">
-            <size key="intrinsicContentSize" width="31" height="26"/>
+            <size key="intrinsicContentSize" width="53" height="14"/>
         </designable>
         <designable name="y62-vT-gyw">
-            <size key="intrinsicContentSize" width="34" height="26"/>
+            <size key="intrinsicContentSize" width="56" height="14"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>

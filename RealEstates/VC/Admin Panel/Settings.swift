@@ -204,7 +204,21 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     
     
     @IBAction func CntactUs(_ sender: Any) {
-        
+        self.dialNumber(phoneNumber: "+9647514505411")
+    }
+    
+    func dialNumber(phoneNumber : String) {
+
+     if let url = URL(string: "tel://\(phoneNumber)"),
+       UIApplication.shared.canOpenURL(url) {
+          if #available(iOS 10, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler:nil)
+           } else {print("ppp[p[][p][p][p][p][p00000")
+               UIApplication.shared.openURL(url)
+           }
+       } else {print("ppp[p[][p][p][p][p][p")
+                // add error message here
+       }
     }
     
     @IBOutlet var FavoriteItemAction: UITapGestureRecognizer!
@@ -297,14 +311,9 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     
     
     @IBAction func GetYAAction(_ sender: Any) {
-        self.makePhoneCall(phoneNumber: "+964 750 894 7942")
+        self.dialNumber(phoneNumber: "+9647514505411")
     }
     
-    func makePhoneCall(phoneNumber: String) {
-        if let phoneURL = NSURL(string: ("tel://" + phoneNumber)) {
-            UIApplication.shared.open(phoneURL as URL)
-        }
-    }
     
     
     
@@ -480,8 +489,9 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                             self.MyEstates.removeAll()
                                             if let FireId = UserDefaults.standard.string(forKey: "UserId"){
                                                 OfficeAip.GetOfficeById(Id: FireId) { office in
-                                                    ProductAip.GetMyEstates(office_id: office.id ?? "") { estates in
-                                                        self.MyEstates.append(estates)
+                                                    ProductAip.GetAllMyEstates(office_id: office.id ?? "") { estates in
+                                                        print("sub id -------: \(sub.subscription_type_id ?? "")")
+                                                        self.MyEstates = estates
                                                         SubscriptionsTypeAip.GetSubscriptionsTypeByOfficeId(id: sub.subscription_type_id ?? "") { posts in
                                                             if XLanguage.get() == .Kurdish{
                                                                 self.SubscriptionPosts.text = "\(posts.number_of_post ?? "") /پۆست \(self.MyEstates.count)"
@@ -936,8 +946,8 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                 if sub.user_id == officeId{
                                     self.MyEstates.removeAll()
                                     OfficeAip.GetOfficeById(Id: FireId) { office in
-                                        ProductAip.GetMyEstates(office_id: office.id ?? "") { estates in
-                                            self.MyEstates.append(estates)
+                                        ProductAip.GetAllMyEstates(office_id: office.id ?? "") { estates in
+                                            self.MyEstates = estates
                                             SubscriptionsTypeAip.GetSubscriptionsTypeByOfficeId(id: sub.subscription_type_id ?? "") { posts in
                                                 if XLanguage.get() == .Kurdish{
                                                     self.SubscriptionPosts.text = "\(posts.number_of_post ?? "") /پۆست \(self.MyEstates.count)"

@@ -100,10 +100,6 @@ class AllEstatessCollectionViewCell: UICollectionViewCell {
         }
         
          EstateTypeAip.GeEstateTypeNameById(id:  cell.estate_type_id ?? "") { type in
-             print("----------_________________----------")
-             print(cell.estate_type_id ?? "")
-             print(type.id)
-             print(type.name)
              self.Typee.text = type.name
          }
         let date = NSDate(timeIntervalSince1970: cell.Stamp ?? 0.0)

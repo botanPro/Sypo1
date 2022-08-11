@@ -188,28 +188,28 @@ class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDel
     
     
     @IBAction func GoToLocation(_ sender: Any) {
-        if let UrlNavigation = URL.init(string: "comgooglemaps://") {
-            if UIApplication.shared.canOpenURL(UrlNavigation){
-                if let urlDestination = URL.init(string: "comgooglemaps://?saddr=&daddr=\(self.lat.trimmingCharacters(in: .whitespaces)),\(self.long.trimmingCharacters(in: .whitespaces))&directionsmode=driving") {
-                    UIApplication.shared.open(urlDestination)
+            if let UrlNavigation = URL.init(string: "comgooglemaps://") {
+                if UIApplication.shared.canOpenURL(UrlNavigation){
+                    if let urlDestination = URL.init(string: "comgooglemaps://?saddr=&daddr=\(self.lat.trimmingCharacters(in: .whitespaces)),\(self.long.trimmingCharacters(in: .whitespaces))&directionsmode=driving") {
+                        UIApplication.shared.open(urlDestination)
+                    }
+                }else {print("opopopopop")
+                    NSLog("Can't use comgooglemaps://");
+                    self.openTrackerInBrowser()
                 }
-            }else {print("opopopopop")
+            }else{print("lkklklklkl")
                 NSLog("Can't use comgooglemaps://");
                 self.openTrackerInBrowser()
             }
-        }else{print("lkklklklkl")
-            NSLog("Can't use comgooglemaps://");
-            self.openTrackerInBrowser()
         }
-    }
-    
-    
-    
-    func openTrackerInBrowser(){
-       if let urlDestination = URL.init(string: "http://maps.google.com/maps?q=loc:\(self.lat.trimmingCharacters(in: .whitespaces)),\(self.long.trimmingCharacters(in: .whitespaces))&directionsmode=driving") {
-              UIApplication.shared.open(urlDestination)
+        
+        
+        
+        func openTrackerInBrowser(){
+           if let urlDestination = URL.init(string: "http://maps.google.com/maps?q=loc:\(self.lat.trimmingCharacters(in: .whitespaces)),\(self.long.trimmingCharacters(in: .whitespaces))&directionsmode=driving") {
+                  UIApplication.shared.open(urlDestination)
+              }
           }
-      }
     
     
     

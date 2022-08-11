@@ -53,7 +53,7 @@ class ProjetsVC: UIViewController {
         super.viewDidLoad()
 
         
-        
+        self.AllEstatesCollectionLayout.constant = 0
         self.SliderView.layer.cornerRadius = 10
         CityCollectionView.register(UINib(nibName: "EstateTypeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CityCell")
         ProjectsCollectionView.register(UINib(nibName: "ProjectsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProjectCell")
@@ -198,6 +198,8 @@ extension ProjetsVC : UICollectionViewDataSource, UICollectionViewDelegate , UIC
         if collectionView == ProjectsCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProjectCell", for: indexPath) as! ProjectsCollectionViewCell
             cell.update(self.ProjectArray[indexPath.row])
+            print(self.ProjectArray[indexPath.row].latitude)
+            print(self.ProjectArray[indexPath.row].longitude)
             return cell
         }
         return UICollectionViewCell()

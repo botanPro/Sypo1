@@ -98,6 +98,9 @@ class OfficeVC: UIViewController {
     let device = UIDevice.current
     var count = 0.0
     var RateValue = 0.0
+    
+    var phone1 = ""
+    var phone2 = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -124,6 +127,10 @@ class OfficeVC: UIViewController {
                 self.AboutHeight.constant = self.About.contentSize.height
                 self.view.layoutIfNeeded()
             }
+            
+            
+            self.phone1 = data.phone1 ?? ""
+            self.phone2 = data.phone2 ?? ""
             
             let url = URL(string: data.ImageURL ?? "")
             self.Imagee.sd_setImage(with: url, completed: nil)
@@ -164,14 +171,27 @@ class OfficeVC: UIViewController {
     
     
     @IBAction func Number(_ sender: Any) {
-        
+        self.dialNumber(phoneNumber: self.phone1.removeWhitespace())
     }
     
     
     @IBAction func Number2(_ sender: Any) {
-        
+        self.dialNumber(phoneNumber: self.phone2.removeWhitespace())
     }
     
+    func dialNumber(phoneNumber : String) {
+
+     if let url = URL(string: "tel://\(phoneNumber)"),
+       UIApplication.shared.canOpenURL(url) {
+          if #available(iOS 10, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler:nil)
+           } else {print("ppp[p[][p][p][p][p][p00000")
+               UIApplication.shared.openURL(url)
+           }
+       } else {print("ppp[p[][p][p][p][p][p")
+                // add error message here
+       }
+    }
     
     
     override func viewDidLayoutSubviews() {
@@ -262,3 +282,12 @@ extension OfficeVC : UICollectionViewDataSource, UICollectionViewDelegate , UICo
     
     
 }
+extension String {
+   func replace(string:String, replacement:String) -> String {
+       return self.replacingOccurrences(of: string, with: replacement, options: NSString.CompareOptions.literal, range: nil)
+   }
+
+   func removeWhitespace() -> String {
+       return self.replace(string: " ", replacement: "")
+   }
+ }

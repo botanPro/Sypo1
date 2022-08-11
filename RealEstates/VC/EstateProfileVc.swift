@@ -18,6 +18,8 @@ import SKPhotoBrowser
 import YoutubePlayer_in_WKWebView
 import FirebaseDynamicLinks
 import FCAlertView
+import Drops
+import NVActivityIndicatorView
 class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDelegate , FCAlertViewDelegate, MKMapViewDelegate, CLLocationManagerDelegate,UIPickerViewDelegate , UIPickerViewDataSource{
 
     
@@ -227,12 +229,19 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     
     
     
+    
+    
+    
+    var Locations : [Place] = []
+ 
+    
     @IBAction func ChooseEstateType(_ sender: Any) {
         setupEstateTypesAlert()
     }
     var ProjectsTitle = ""
     var ProjectsAction = ""
     var ProjectsCancel = ""
+    @IBOutlet weak var NVLoaderView: NVActivityIndicatorView!
     
     var EstateTypepickerView = UIPickerView(frame: CGRect(x: 10, y: 50, width: 250, height: 150))
     private func setupEstateTypesAlert() {
@@ -255,29 +264,116 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
         let ac = UIAlertController(title:  self.ProjectsTitle, message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         ac.view.addSubview(EstateTypepickerView)
         ac.addAction(UIAlertAction(title:  self.ProjectsAction, style: .default, handler: { _ in
-            self.self.EstateForMap.removeAll()
+            self.EstateForMap.removeAll()
+            self.Locations.removeAll()
+            self.NVLoaderView.startAnimating()
+            self.MapView.annotations.forEach {
+              if !($0 is MKUserLocation) {
+                self.MapView.removeAnnotation($0)
+              }
+            }
             let pickerValue = self.NighborArray[self.EstateTypepickerView.selectedRow(inComponent: 0)]
             self.EstateTypeLable.text = pickerValue.name
             ProductAip.GetAllEstateForNeighburs(TypeId: pickerValue.id ?? "") { Product in
                 self.EstateForMap = Product
-                if self.EstateForMap.count != 0{
-                    for loc in self.EstateForMap{
+                if Product.count != 0{
+                    for loc in Product{
                         let lat = Double(loc.lat ?? "")
                         let long = Double(loc.long ?? "")
-                        if let latt = lat, let longg = long{
-                            let profileInfo = profile()
-                            profileInfo.profileId = loc.id ?? ""
-                            profileInfo.coordinate = CLLocationCoordinate2D(latitude: latt, longitude: longg)
-                            self.MapView.addAnnotation(profileInfo)
-                        }
+                            self.Locations.append(Place(coordinate: CLLocationCoordinate2D(latitude: lat ?? 0.0, longitude: long ?? 0.0), profileId: loc.id ?? "", title: loc.name ?? "", subtitle: loc.address ?? ""))
                     }
+                }else{
+                        var title = "Empty"
+                        var message = "No Estates are found"
+                        
+                        if XLanguage.get() == .English{
+                            title = "Empty"
+                            message = "No Estates are found"
+                        }else if XLanguage.get() == .Kurdish{
+                            title = "بەتاڵ"
+                            message = "هیچ خانوبەرێک نەدۆزراوەتەوە"
+                        }else{
+                            title = "فارغة"
+                            message = "لم يتم العثور على عقار"
+                        }
+                        let drop = Drop(
+                            title: title,
+                            subtitle: message,
+                            icon: UIImage(named: "attention"),
+                            action: .init {
+                                print("Drop tapped")
+                                Drops.hideCurrent()
+                            },
+                            position: .bottom,
+                            duration: 3.0,
+                            accessibility: "Alert: Title, Subtitle"
+                        )
+                        Drops.show(drop)
                 }
+                self.NVLoaderView.stopAnimating()
+                self.MapView.addAnnotations(self.Locations)
             }
+            
         }))
         ac.addAction(UIAlertAction(title: self.ProjectsCancel, style: .cancel, handler: nil))
         present(ac, animated: true)
         
     }
+    
+    var Count = 0
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard annotation is Place else {return nil }
+
+           let identifier = "Capital"
+           var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+
+           if annotationView == nil {
+               annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+               annotationView?.canShowCallout = true
+               annotationView?.image = UIImage(named: "pin")
+               let btn = UIButton(type: .detailDisclosure)
+               btn.addTarget(self, action: #selector(callSegueFromCell(_:)), for: .touchUpInside)
+               annotationView?.rightCalloutAccessoryView = btn
+           } else {
+               annotationView?.annotation = annotation
+           }
+           return annotationView
+    }
+    
+    
+    
+    
+    var SelectedEstateId = ""
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if view.annotation is MKUserLocation{
+            return
+        }
+        
+        if let profileID = view.annotation as? Place {
+            self.SelectedEstateId = profileID.profileId
+        }
+    }
+    
+    
+    
+    
+    @objc  func callSegueFromCell(_ sender:UIButton) {
+        ProductAip.GetProduct(ID: self.SelectedEstateId) { product in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let myVC = storyboard.instantiateViewController(withIdentifier: "GoToEstateProfileVc") as! EstateProfileVc
+            myVC.CommingEstate = product
+            myVC.modalPresentationStyle = .fullScreen
+            self.present(myVC, animated: true, completion: nil)
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -732,25 +828,7 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     
     
     
-    
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        if view.annotation is MKUserLocation{
-            return
-        }
-        
-        if let profileID = view.annotation as? profile {
-            ProductAip.GetProduct(ID: profileID.profileId) { product in
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let myVC = storyboard.instantiateViewController(withIdentifier: "GoToEstateProfileVc") as! EstateProfileVc
-                myVC.CommingEstate = product
-                myVC.modalPresentationStyle = .fullScreen
-                self.present(myVC, animated: true, completion: nil)
-            }
-        }
-    }
-    
-    
-    
+
     
     
     

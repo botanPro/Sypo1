@@ -78,7 +78,7 @@ var count = 0
                 
                 if ((authResult?.user) != nil){
                     guard let UserId = authResult?.user.uid else { return }
-                    
+                    print("fire id is \(UserId)")
                     OfficeAip.GetAllOffice{ office in
                         
                         for GetOffice in office{
