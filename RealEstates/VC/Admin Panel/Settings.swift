@@ -25,8 +25,8 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        UserDefaults.standard.set(self.CityArray[row].name, forKey: "CityName")
-        self.Location.text = "\("IRAQ-\(self.CityArray[row].name ?? "")")".uppercased()
+//        UserDefaults.standard.set(self.CityArray[row].name, forKey: "CityName")
+//        self.Location.text = "\("IRAQ-\(self.CityArray[row].name ?? "")")".uppercased()
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
@@ -1162,11 +1162,11 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     var cityAction = ""
     var cityCancel = ""
     private func setupCitySelectionAlert() {
-        if XLanguage.get() == .Kurdish{
+        if XLanguage.get() == .English{
             cityTitle = "Cities"
             cityAction = "Select"
             cityCancel = "Cancel"
-        }else if XLanguage.get() == .English{
+        }else if XLanguage.get() == .Kurdish{
             cityTitle = "شارەکان"
             cityAction = "هەڵبژێرە"
             cityCancel = "هەڵوەشاندنەوە"
@@ -1181,7 +1181,8 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         ac.view.addSubview(pickerView)
         ac.addAction(UIAlertAction(title: cityAction , style: .default, handler: { _ in
             let pickerValue = self.CityArray[self.pickerView.selectedRow(inComponent: 0)]
-            print("Picker value: \(pickerValue) was selected")
+            UserDefaults.standard.set(pickerValue.name, forKey: "CityName")
+            self.Location.text = "\("IRAQ-\(pickerValue.name ?? "")")".uppercased()
         }))
         ac.addAction(UIAlertAction(title: cityCancel, style: .cancel, handler: nil))
         present(ac, animated: true)

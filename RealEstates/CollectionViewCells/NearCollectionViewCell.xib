@@ -23,7 +23,8 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo-1511857963324-9aab834f68f0" translatesAutoresizingMaskIntoConstraints="NO" id="vmS-4W-Qe2">
                                 <rect key="frame" x="8" y="8" width="232" height="200"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="vmS-4W-Qe2" secondAttribute="height" multiplier="29:25" id="W4p-W8-g1P"/>
+                                    <constraint firstAttribute="width" constant="232" id="Ap4-m9-YVJ"/>
+                                    <constraint firstAttribute="height" constant="200" id="ZEF-6F-nBm"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="KEi-hO-gNl">

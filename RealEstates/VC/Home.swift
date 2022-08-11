@@ -11,7 +11,7 @@ import CRRefresh
 import SDWebImage
 import MapKit
 import SwiftyJSON
-//import FirebaseDynamicLinks
+import FirebaseDynamicLinks
 class Home: UIViewController ,UITextFieldDelegate{
     @IBOutlet weak var SliderView: FSPagerView!{
         didSet{
@@ -127,9 +127,9 @@ class Home: UIViewController ,UITextFieldDelegate{
             self.GetEstateType()
         }
         
-//        if let dynamiclink = UserDefaults.standard.value(forKey: "dynamiclink"){
-//           // handleIncomeDynamicLink(dynamiclink as! DynamicLink)
-//        }
+        if let dynamiclink = UserDefaults.standard.value(forKey: "dynamiclink"){
+           handleIncomeDynamicLink(dynamiclink as! DynamicLink)
+        }
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.LanguageChanged), name: NSNotification.Name(rawValue: "LanguageChanged"), object: nil)
@@ -149,34 +149,34 @@ class Home: UIViewController ,UITextFieldDelegate{
     
     
     
-//
-//    var window: UIWindow?
-//    func handleIncomeDynamicLink(_ dynamicLink: DynamicLink){
-//        guard let url = dynamicLink.url else{
-//            print("no object")
-//            return
-//        }
-//        guard (dynamicLink.matchType == .unique || dynamicLink.matchType == .default) else{
-//            print("not a strong enough match type to conitunie)")
-//            return
-//        }
-//        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-//              let queryItems = components.queryItems  else{
-//            return
-//        }
-//        if components.path == "/maskani"{
-//            if let productIdQueryItem = queryItems.first(where: {$0.name == "estate_id"}){
-//                guard let productId = productIdQueryItem.value else{return}
-//                ProductAip.GetProduct(ID: productId) { estate in
-//                    self.InsertViewdItem(id : productId)
-//                    self.performSegue(withIdentifier: "Next", sender: estate)
-//                }
-//            }
-//        }
-//        UserDefaults.standard.set(nil, forKey: "dynamiclink")
-//    }
-//
-//
+
+    var window: UIWindow?
+    func handleIncomeDynamicLink(_ dynamicLink: DynamicLink){
+        guard let url = dynamicLink.url else{
+            print("no object")
+            return
+        }
+        guard (dynamicLink.matchType == .unique || dynamicLink.matchType == .default) else{
+            print("not a strong enough match type to conitunie)")
+            return
+        }
+        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+              let queryItems = components.queryItems  else{
+            return
+        }
+        if components.path == "/maskani"{
+            if let productIdQueryItem = queryItems.first(where: {$0.name == "estate_id"}){
+                guard let productId = productIdQueryItem.value else{return}
+                ProductAip.GetProduct(ID: productId) { estate in
+                    self.InsertViewdItem(id : productId)
+                    self.performSegue(withIdentifier: "Next", sender: estate)
+                }
+            }
+        }
+        UserDefaults.standard.set(nil, forKey: "dynamiclink")
+    }
+
+
     
     
     
