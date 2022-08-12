@@ -1071,11 +1071,11 @@ class ProjectObject{
     var to_price : Double?
     var desc : String?
     var images : [String]?
-    var state : String?
+    var project_state_id : String?
     var year : String?
     var video_link : String?
     var city_id : String?
-    init(project_name : String,id : String , uploaded_date_stamp : TimeInterval ,Buildings_count: String, from_price : Double , monthly_fee : String , address : String ,latitude : String , longitude : String , to_price: Double, desc:String , project_office_phone : String , images : [String] , state : String, year:String,video_link : String , city_id: String) {
+    init(project_name : String,id : String , uploaded_date_stamp : TimeInterval ,Buildings_count: String, from_price : Double , monthly_fee : String , address : String ,latitude : String , longitude : String , to_price: Double, desc:String , project_office_phone : String , images : [String] , project_state_id : String, year:String,video_link : String , city_id: String) {
         
         self.project_name        = project_name
         self.id                  = id
@@ -1089,7 +1089,7 @@ class ProjectObject{
         self.year                = year
         self.uploaded_date_stamp = uploaded_date_stamp
         self.Buildings_count     = Buildings_count
-        self.state               = state
+        self.project_state_id    = project_state_id
         self.desc                = desc
         self.project_office_phone = project_office_phone
         self.video_link          = video_link
@@ -1113,10 +1113,10 @@ class ProjectObject{
         self.year                = Dictionary[ "year"                 ] as? String
         self.video_link          = Dictionary[ "youtube_link_id"      ] as? String
         self.uploaded_date_stamp = Dictionary[ "uploaded_date_stamp"  ] as? TimeInterval
-        self.state               = Dictionary[ "state"                ] as? String
+        self.project_state_id    = Dictionary[ "project_state_id"     ] as? String
         self.Buildings_count     = Dictionary[ "Buildings_count"      ] as? String
         self.city_id             = Dictionary[ "city_id"      ] as? String
-        self.project_office_phone     = Dictionary[ "project_office_phone"      ] as? String
+        self.project_office_phone     = Dictionary[ "project_office_phone" ] as? String
         
     }
     
@@ -1406,6 +1406,72 @@ class BoundTypeAip{
             }
             }else{
                 completion(BoundTypeObject.init(en_title: "", id: ""))
+            }
+        }
+    }
+    
+}
+
+
+
+
+
+class ProjectStatesObject{
+    
+    var title : String?
+    var id : String?
+    
+    init(title : String,id : String ) {
+        self.title           = title
+        self.id              = id
+    }
+    
+    
+    init(Dictionary : [String : AnyObject]) {
+        self.id    = Dictionary[ "id" ]   as? String
+        self.title = Dictionary[ "title" ] as? String
+    }
+    
+
+    func MakeDictionary() -> [String : AnyObject] {
+        var New  : [String : AnyObject]  = [:]
+        New["id"]    = self.id       as AnyObject
+        New["title"] = self.title     as AnyObject
+        return New
+    }
+    
+    
+}
+
+class ProjectStatesAip{
+    static func GetAllProjectStates(completion : @escaping (_ Product : [ProjectStatesObject])->()){
+        var New : [ProjectStatesObject] = []
+        Firestore.firestore().collection("ProjectStates").getDocuments { (Snapshot, error) in
+            if error != nil { print("Error") ; return }
+            guard let documents = Snapshot?.documents else { return }
+            for P in documents {
+                if let data = P.data() as [String : AnyObject]? {
+                    New.append(ProjectStatesObject(Dictionary: data))
+                }
+            }
+            completion(New)
+        }
+    }
+    
+    
+    static func GetProjectStatesId(id : String , completion : @escaping (_ Product : ProjectStatesObject)->()){
+        Firestore.firestore().collection("ProjectStates").whereField("id", isEqualTo: id).getDocuments { (Snapshot, error) in
+            if error != nil { print(error.debugDescription) ; return }
+            guard let documents = Snapshot?.documents else { return }
+            if documents != []{
+            for P in documents {
+                if let data = P.data() as [String : AnyObject]? {
+                    let New = ProjectStatesObject(Dictionary: data)
+                    completion(New)
+                }
+            }
+            }else{
+                completion(ProjectStatesObject.init(title: "", id: ""))
             }
         }
     }

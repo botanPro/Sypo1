@@ -17,6 +17,7 @@ class ProjectsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var Name: UILabel!
     @IBOutlet weak var Image: UIImageView!
     
+    @IBOutlet weak var State: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,6 +28,11 @@ class ProjectsCollectionViewCell: UICollectionViewCell {
     var to = ""
     var lang : Int = UserDefaults.standard.integer(forKey: "language")
     func update(_ cell: ProjectObject){
+        print(cell.project_state_id ?? "")
+        ProjectStatesAip.GetProjectStatesId(id: cell.project_state_id ?? "") { state in
+            self.State.text = state.title
+        }
+        
         guard let imagrUrl = cell.images, let url = URL(string: imagrUrl[0]) else {return}
         self.Image.sd_setImage(with: url, completed: nil)
         self.Name.text = cell.project_name

@@ -137,6 +137,9 @@ class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDel
         
         
         if let data = ProjectEstate{
+            ProjectStatesAip.GetProjectStatesId(id: data.project_state_id ?? "") { state in
+                self.State.text = state.title
+            }
             self.sliderImages = data.images ?? []
             self.PagerControl.pages = data.images?.count ?? 0
             
@@ -165,7 +168,6 @@ class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDel
             }
             
             
-            self.State.text = data.state ?? ""
             
             let date = NSDate(timeIntervalSince1970: data.uploaded_date_stamp ?? 0.0)
             let dayTimePeriodFormatter = DateFormatter()
