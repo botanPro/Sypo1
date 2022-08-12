@@ -712,9 +712,22 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     }
                 }
             } catch {
+                var title = "Update"
+                var message = "The app is not uploaded to appstore yet."
+                
+                if XLanguage.get() == .English{
+                    title = "Update"
+                    message = "The app is not uploaded to appstore yet."
+                }else if XLanguage.get() == .Kurdish{
+                    title = "نوێکردنەوە"
+                    message = "تا ئێستا ئەپەکە لە ئەپ ستۆر بار نەکراوە."
+                }else{
+                    title = "تحديث"
+                    message = "لم يتم تحميل التطبيق إلى متجر التطبيقات حتى الآن."
+                }
                 let drop = Drop(
-                    title: "Update",
-                    subtitle: "The app is not uploaded to appstore yet.",
+                    title: title,
+                    subtitle: message,
                     icon: UIImage(named: "attention"),
                     action: .init {
                         print("Drop tapped")

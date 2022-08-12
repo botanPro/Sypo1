@@ -47,7 +47,7 @@ class AllEstateVC: UIViewController {
         }
         
         
-        
+        self.AllEstate.shuffle()
       
     }
     
@@ -56,6 +56,7 @@ class AllEstateVC: UIViewController {
                 if Product.archived != "1"{
                     self.UnArchivedAllEstate.append(Product)
                 }
+            self.UnArchivedAllEstate.shuffle()
             self.AllEstateCollectionView.cr.endHeaderRefresh()
             self.AllEstateCollectionView.reloadData()
         }

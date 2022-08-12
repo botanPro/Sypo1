@@ -12,6 +12,7 @@ import SDWebImage
 import MapKit
 import SwiftyJSON
 import FirebaseDynamicLinks
+import GameplayKit
 class Home: UIViewController ,UITextFieldDelegate{
     @IBOutlet weak var SliderView: FSPagerView!{
         didSet{
@@ -27,8 +28,17 @@ class Home: UIViewController ,UITextFieldDelegate{
     
     var SearchArray : [EstateObject] = []
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        SearchArray = AllEstateArray.filter{$0.name?.description.lowercased().prefix(textField.text?.count ?? 0).description == textField.text?.lowercased()}
-        self.SearchTableView.reloadData()
+        
+        
+        
+        SearchArray = AllEstateArray.filter({ estate -> Bool in
+            
+                      let titleMatch = estate.name?.range(of: textField.text!, options: NSString.CompareOptions.caseInsensitive)
+            
+            return titleMatch != nil})
+        
+        
+            self.SearchTableView.reloadData()
         return true
     }
     
@@ -73,6 +83,8 @@ class Home: UIViewController ,UITextFieldDelegate{
     
     @objc func tapDone(sender: Any) {
         self.view.endEditing(true)
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
+       self.navigationItem.leftBarButtonItem?.isEnabled = true
         UIView.animate(withDuration: 0.2) {
             self.SearchTableView.alpha = 0
             self.SearchText.text = ""
@@ -179,16 +191,7 @@ class Home: UIViewController ,UITextFieldDelegate{
 
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+ 
     
     
     
@@ -280,6 +283,7 @@ class Home: UIViewController ,UITextFieldDelegate{
                 }
             }
             
+            
             for product in self.AllEstateArray{
                 let dbLat = Double(product.lat ?? "")
                 let dbLong = Double(product.long ?? "")
@@ -293,6 +297,12 @@ class Home: UIViewController ,UITextFieldDelegate{
                     }
                 }
             }
+            
+ 
+            self.AllEstateArray.shuffle()
+
+
+
             self.ScrollView.isHidden = false
             self.LoadingIndecator.stopAnimating()
             self.NearYouCollectionView.reloadData()
@@ -346,6 +356,7 @@ class Home: UIViewController ,UITextFieldDelegate{
                 if Product.archived != "1"{
                    self.ApartmentArray.append(Product)
                 }
+            self.ApartmentArray.shuffle()
             self.ScrollView.isHidden = false
             self.LoadingIndecator.stopAnimating()
             self.ApartmentEstatesCollectionView.reloadData()
@@ -357,6 +368,7 @@ class Home: UIViewController ,UITextFieldDelegate{
     var IsFirst = true
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
             self.navigationItem.rightBarButtonItem?.isEnabled = false
+           self.navigationItem.leftBarButtonItem?.isEnabled = false
             self.IsFirst = !self.IsFirst
             UIView.animate(withDuration: 0.2) {
                 self.SearchTableView.alpha = 1
@@ -372,8 +384,16 @@ class Home: UIViewController ,UITextFieldDelegate{
         if !CheckInternet.Connection(){
             MessageBox.ShowMessage()
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(EstateVCDismissed), name:  NSNotification.Name(rawValue: "EstateVCDismissed"), object: nil)
     }
     
+    @objc func EstateVCDismissed(){
+        print(self.SearchTableView.alpha)
+        print("dshjdjshkhkjhksjhdkjhskdj")
+        if self.SearchTableView.alpha == 1.0{print("[][][][][")
+        self.SearchText.becomeFirstResponder()
+        }
+    }
    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -686,3 +706,37 @@ extension Home : UITableViewDelegate , UITableViewDataSource{
     }
 }
 
+
+
+extension Array {
+
+// Non-mutating shuffle
+    var shuffled : Array {
+        let totalCount : Int = self.count
+        var shuffledArray : Array = []
+        var count : Int = totalCount
+        var tempArray : Array = self
+        for _ in 0..<totalCount {
+            let randomIndex : Int = Int(arc4random_uniform(UInt32(count)))
+            let randomElement : Element = tempArray.remove(at: randomIndex)
+            shuffledArray.append(randomElement)
+            count -= 1
+        }
+        return shuffledArray
+    }
+
+// Mutating shuffle
+    mutating func shuffle() {
+        let totalCount : Int = self.count
+        var shuffledArray : Array = []
+        var count : Int = totalCount
+        var tempArray : Array = self
+        for _ in 0..<totalCount {
+            let randomIndex : Int = Int(arc4random_uniform(UInt32(count)))
+            let randomElement : Element = tempArray.remove(at: randomIndex)
+            shuffledArray.append(randomElement)
+            count -= 1
+        }
+        self = shuffledArray
+    }
+}

@@ -20,7 +20,7 @@ import FirebaseDynamicLinks
 import FCAlertView
 import Drops
 import NVActivityIndicatorView
-class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDelegate , FCAlertViewDelegate, MKMapViewDelegate, CLLocationManagerDelegate,UIPickerViewDelegate , UIPickerViewDataSource{
+class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDelegate , FCAlertViewDelegate, MKMapViewDelegate, CLLocationManagerDelegate,UIPickerViewDelegate , UIPickerViewDataSource, UIScrollViewDelegate{
 
     
     func playerViewDidBecomeReady(_ playerView: WKYTPlayerView) {
@@ -33,8 +33,42 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     
     
     @IBAction func Dismiss(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "EstateVCDismissed"), object: nil)
         self.dismiss(animated: true, completion: nil)
     }
+    
+    
+    
+    @IBOutlet weak var Scrollview: UIScrollView!{didSet{
+        self.Scrollview.delegate = self
+    }}
+    
+    
+    @IBOutlet weak var DismissAfterScroll: UIButton!
+    
+    @IBOutlet weak var DismissAfterScrollTopLayout: NSLayoutConstraint!
+    
+    @IBAction func DismissAfterScroll(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print(scrollView.contentOffset.y)
+        if scrollView.contentOffset.y >= 80{
+            UIView.animate(withDuration: 0.5) {
+                self.DismissAfterScrollTopLayout.constant = 60
+                self.view.layoutIfNeeded()
+            }
+        }
+        
+        if scrollView.contentOffset.y < 78{
+            UIView.animate(withDuration: 0.3) {
+                self.DismissAfterScrollTopLayout.constant = -100
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    
     
     
     @IBOutlet weak var AddToFav: UIButton!
@@ -374,9 +408,10 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     
     
     
+    @IBOutlet weak var ImagesHeightLayout: NSLayoutConstraint!
     
     
-    
+    let device = UIDevice.current
     
     @IBOutlet weak var EstateTypeLable: UILabel!
     @IBOutlet weak var EstateTypeView: UIView!
@@ -384,6 +419,14 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         GetAllEstates()
+        
+        let deviceName = device.modelNamee
+        print(UIDevice.current.modelNamee)
+        if deviceName == "iPhone 8" ||  deviceName == "iPhone 7" ||  deviceName == "iPhone 6"{
+            self.ImagesHeightLayout.constant = 360
+        }
+        
+        
         print(self.CommingEstate?.bound_id ?? "")
         BoundTypeAip.GetBoundTypeByOfficeId(id: self.CommingEstate?.bound_id ?? "") { bound in
             self.BoundType = bound.en_title ?? ""

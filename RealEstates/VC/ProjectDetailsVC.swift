@@ -17,7 +17,7 @@ import SKPhotoBrowser
 import YoutubePlayer_in_WKWebView
 import FirebaseDynamicLinks
 import FCAlertView
-class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDelegate{
+class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDelegate,UIScrollViewDelegate{
     
     
     func playerViewDidBecomeReady(_ playerView: WKYTPlayerView) {
@@ -28,6 +28,46 @@ class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDel
     }
     
 
+
+    
+    
+    @IBOutlet weak var Scrollview: UIScrollView!{didSet{
+        self.Scrollview.delegate = self
+    }}
+    
+    
+    @IBOutlet weak var DismissAfterScroll: UIButton!
+    
+    @IBOutlet weak var DismissAfterScrollTopLayout: NSLayoutConstraint!
+    
+    @IBAction func DismissAfterScroll(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print(scrollView.contentOffset.y)
+        if scrollView.contentOffset.y >= 80{
+            UIView.animate(withDuration: 0.5) {
+                self.DismissAfterScrollTopLayout.constant = 60
+                self.view.layoutIfNeeded()
+            }
+        }
+        
+        if scrollView.contentOffset.y < 78{
+            UIView.animate(withDuration: 0.3) {
+                self.DismissAfterScrollTopLayout.constant = -100
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     @IBOutlet weak var Name: UILabel!
     
     

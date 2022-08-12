@@ -114,6 +114,7 @@ class ProjetsVC: UIViewController {
         self.sliderImages.removeAll()
         SlidesAip.GetProjectSlides { SlidesObject in
             self.sliderImages = SlidesObject
+            self.sliderImages.shuffle()
             self.SliderView.reloadData()
             self.ScrollView.cr.endHeaderRefresh()
         }
@@ -124,6 +125,7 @@ class ProjetsVC: UIViewController {
         self.ProjectArray.removeAll()
         GetAllProjectsAip.GetAllProducts { pro in
             self.ProjectArray = pro
+            self.ProjectArray.shuffle()
             self.ScrollView.isHidden = false
             self.LoadingIndecator.stopAnimating()
             self.ProjectsCollectionView.reloadData()

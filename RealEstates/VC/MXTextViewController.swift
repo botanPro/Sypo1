@@ -47,6 +47,7 @@ class MXTextViewController: UIViewController {
                     }
                 }
             }
+            self.RentAndSellArray.shuffle()
             self.RentAndSellCollectionView.cr.endHeaderRefresh()
             self.RentAndSellCollectionView.reloadData()
         }

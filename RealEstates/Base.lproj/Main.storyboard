@@ -473,7 +473,7 @@
                                 </constraints>
                             </scrollView>
                             <tableView clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="LXq-nf-kP5">
-                                <rect key="frame" x="0.0" y="152" width="460" height="165"/>
+                                <rect key="frame" x="0.0" y="152" width="460" height="1165"/>
                                 <color key="backgroundColor" red="0.95029202859999995" green="0.95029202859999995" blue="0.95029202859999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
                                     <outlet property="dataSource" destination="ly3-8u-cAX" id="UQa-hO-O1S"/>
@@ -491,7 +491,7 @@
                             <constraint firstItem="Bmr-Kb-f1e" firstAttribute="bottom" secondItem="byp-e0-auu" secondAttribute="bottom" id="Qj1-gO-T4R"/>
                             <constraint firstItem="iK8-gf-7Sy" firstAttribute="centerY" secondItem="uHX-ys-xqu" secondAttribute="centerY" id="Wms-ue-Dsx"/>
                             <constraint firstItem="Bmr-Kb-f1e" firstAttribute="leading" secondItem="byp-e0-auu" secondAttribute="leading" id="Xik-T6-9oi"/>
-                            <constraint firstItem="byp-e0-auu" firstAttribute="bottom" secondItem="LXq-nf-kP5" secondAttribute="bottom" constant="1000" id="avm-yr-fkl"/>
+                            <constraint firstItem="byp-e0-auu" firstAttribute="bottom" secondItem="LXq-nf-kP5" secondAttribute="bottom" id="avm-yr-fkl"/>
                             <constraint firstItem="LXq-nf-kP5" firstAttribute="top" secondItem="byp-e0-auu" secondAttribute="top" constant="64" id="mpa-bh-rrT"/>
                             <constraint firstItem="Bmr-Kb-f1e" firstAttribute="top" secondItem="byp-e0-auu" secondAttribute="top" id="nd0-94-h4z"/>
                         </constraints>
@@ -865,7 +865,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TGx-LO-TUs" customClass="CosmosView" customModule="Cosmos">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TGx-LO-TUs" customClass="CosmosView" customModule="Cosmos">
                                                 <rect key="frame" x="144" y="319" width="120" height="40"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -1638,12 +1638,26 @@
                                     <constraint firstItem="1OD-EZ-zQj" firstAttribute="centerX" secondItem="Yfe-ef-ILG" secondAttribute="centerX" id="zwA-35-wHO"/>
                                 </constraints>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eS5-wQ-EkV">
+                                <rect key="frame" x="18" y="-100" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="hWW-it-3LW"/>
+                                    <constraint firstAttribute="width" constant="50" id="sx9-WW-BbZ"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="Closee"/>
+                                <connections>
+                                    <action selector="DismissAfterScroll:" destination="nx9-J7-yrf" eventType="touchUpInside" id="tlN-6d-GPL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WZ6-MD-9l0"/>
                         <color key="backgroundColor" red="0.95029202859999995" green="0.95029202859999995" blue="0.95029202859999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="eS5-wQ-EkV" firstAttribute="top" secondItem="YGv-GI-lDb" secondAttribute="top" constant="-100" id="7u3-Op-KzV"/>
                             <constraint firstItem="Yfe-ef-ILG" firstAttribute="leading" secondItem="WZ6-MD-9l0" secondAttribute="leading" id="Bd7-5y-wz3"/>
                             <constraint firstAttribute="bottom" secondItem="Yfe-ef-ILG" secondAttribute="bottom" id="JC5-kc-OwW"/>
+                            <constraint firstItem="eS5-wQ-EkV" firstAttribute="leading" secondItem="WZ6-MD-9l0" secondAttribute="leading" constant="18" id="WKs-t4-j7Q"/>
                             <constraint firstItem="Yfe-ef-ILG" firstAttribute="top" secondItem="YGv-GI-lDb" secondAttribute="top" id="pSf-iR-GUT"/>
                             <constraint firstItem="Yfe-ef-ILG" firstAttribute="trailing" secondItem="WZ6-MD-9l0" secondAttribute="trailing" id="zpw-UA-uGs"/>
                         </constraints>
@@ -1658,10 +1672,13 @@
                         <outlet property="DescLable" destination="x0M-YU-eYI" id="QjJ-my-JYY"/>
                         <outlet property="Description" destination="ZaT-7R-mPp" id="3Ik-A9-SXT"/>
                         <outlet property="Dismiss" destination="Iqv-Qx-EZC" id="nqC-p4-Hqt"/>
+                        <outlet property="DismissAfterScroll" destination="eS5-wQ-EkV" id="Igr-wk-KPO"/>
+                        <outlet property="DismissAfterScrollTopLayout" destination="7u3-Op-KzV" id="cCd-7r-z2D"/>
                         <outlet property="EstateName" destination="Sce-cT-NDY" id="u1T-Sk-Pf4"/>
                         <outlet property="EstateTypeLable" destination="ZO5-OU-3CF" id="Xc0-Vy-bUT"/>
                         <outlet property="EstateTypeView" destination="Rm9-Je-Vaf" id="AEe-Ys-qgO"/>
                         <outlet property="ImageCollectionView" destination="M1J-l3-Bry" id="jIR-kC-plu"/>
+                        <outlet property="ImagesHeightLayout" destination="FjP-K0-gdl" id="H0k-F4-MAN"/>
                         <outlet property="Location" destination="VMR-3E-gGq" id="N0z-EC-vGi"/>
                         <outlet property="MapView" destination="p0L-Wv-tLX" id="lwx-cU-7E7"/>
                         <outlet property="Meters" destination="Zg3-IE-Q1F" id="Yso-KK-2t7"/>
@@ -1675,6 +1692,7 @@
                         <outlet property="RelatedCollectionView" destination="XVp-yU-tLm" id="abo-E5-ESF"/>
                         <outlet property="RelatedEstatesCollectionLayout" destination="GaK-bg-Ckd" id="RjH-Eg-c6d"/>
                         <outlet property="RoomNo" destination="6hZ-12-ajl" id="9sz-82-mHV"/>
+                        <outlet property="Scrollview" destination="Yfe-ef-ILG" id="Fhj-6A-s7d"/>
                         <outlet property="VideoHeightLayout" destination="BUV-dS-teE" id="Dc8-ig-byY"/>
                         <outlet property="player" destination="V20-lJ-hsq" id="zAJ-we-nND"/>
                         <outlet property="propertyNo" destination="dRZ-Fq-8Pw" id="mDZ-b0-9C0"/>
@@ -1859,7 +1877,7 @@
                                                         </constraints>
                                                         <color key="textColor" red="0.55587820389999998" green="0.59931577069999997" blue="0.6685562183" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                                 <color key="value" red="0.78899876859999996" green="0.78783638140000001" blue="0.80814039090000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1883,7 +1901,7 @@
                                                         </constraints>
                                                         <color key="textColor" red="0.55587820389999998" green="0.59931577069999997" blue="0.6685562183" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                                 <color key="value" red="0.78899876859999996" green="0.78783638140000001" blue="0.80814039090000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -2288,6 +2306,7 @@
                         <outlet property="PriceMax" destination="p83-9H-Yx0" id="MKp-oY-fBN"/>
                         <outlet property="PriceMin" destination="BwI-lT-Iuc" id="tep-PU-GFV"/>
                         <outlet property="RentRadioButton" destination="y62-vT-gyw" id="cHQ-nE-hH8"/>
+                        <outlet property="ScrollViewLayout" destination="n2K-SW-vzV" id="VGa-4K-AyK"/>
                         <outlet property="SellRadioButton" destination="gvJ-8u-cm5" id="ie9-Og-eYU"/>
                         <outlet property="viewGroup" destination="F1W-of-Kz4" id="l7r-Wf-Cw9"/>
                     </connections>
@@ -3350,11 +3369,26 @@
                                     <constraint firstItem="doH-Hw-oYM" firstAttribute="top" secondItem="Bj7-Uc-cvM" secondAttribute="bottom" constant="15" id="yLe-82-3lz"/>
                                 </constraints>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0j-sN-W3N">
+                                <rect key="frame" x="19" y="-100" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="C6v-Ym-fTP"/>
+                                    <constraint firstAttribute="width" constant="50" id="Nwr-gg-dWe"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="Closee"/>
+                                <connections>
+                                    <action selector="DismissAfterScroll:" destination="Lkh-W4-rcA" eventType="touchUpInside" id="crp-um-wW7"/>
+                                    <action selector="DismissAfterScroll:" destination="nx9-J7-yrf" eventType="touchUpInside" id="czg-LJ-Dn2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aDn-qL-chd"/>
                         <color key="backgroundColor" red="0.94901961089999998" green="0.94901961089999998" blue="0.94901961089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="gcG-Ad-2SB" firstAttribute="leading" secondItem="aDn-qL-chd" secondAttribute="leading" id="Iha-8m-Kw9"/>
+                            <constraint firstItem="V0j-sN-W3N" firstAttribute="leading" secondItem="aDn-qL-chd" secondAttribute="leading" constant="19" id="UM3-8j-edc"/>
+                            <constraint firstItem="V0j-sN-W3N" firstAttribute="top" secondItem="bvS-fZ-qno" secondAttribute="top" constant="-100" id="YnI-w0-Txb"/>
                             <constraint firstAttribute="bottom" secondItem="gcG-Ad-2SB" secondAttribute="bottom" id="ja4-vF-3N7"/>
                             <constraint firstItem="gcG-Ad-2SB" firstAttribute="trailing" secondItem="aDn-qL-chd" secondAttribute="trailing" id="u7w-1y-4w7"/>
                             <constraint firstItem="gcG-Ad-2SB" firstAttribute="top" secondItem="bvS-fZ-qno" secondAttribute="top" id="yWq-sY-Y6h"/>
@@ -3368,6 +3402,8 @@
                         <outlet property="DescHight" destination="Fvi-pn-esg" id="Wbn-um-S6B"/>
                         <outlet property="DescLable" destination="doH-Hw-oYM" id="Qnf-ej-dvZ"/>
                         <outlet property="Description" destination="xhH-W3-FdM" id="Yr6-oc-UhA"/>
+                        <outlet property="DismissAfterScroll" destination="V0j-sN-W3N" id="8UI-et-QZk"/>
+                        <outlet property="DismissAfterScrollTopLayout" destination="YnI-w0-Txb" id="mZv-1J-raL"/>
                         <outlet property="ImageCollectionView" destination="hQr-1g-JK5" id="mzO-Do-ay8"/>
                         <outlet property="Location" destination="lRU-RX-lVz" id="4mg-X7-qgQ"/>
                         <outlet property="Name" destination="Dxd-E8-njM" id="TVM-Vk-obV"/>
@@ -3375,6 +3411,7 @@
                         <outlet property="Price" destination="7GI-C4-a8h" id="4kM-xh-pht"/>
                         <outlet property="RelatedCollectionView" destination="lf4-hi-Y8G" id="VUk-te-vBq"/>
                         <outlet property="RelatedEstatesCollectionLayout" destination="Gqx-FX-HRp" id="ycg-Xl-53a"/>
+                        <outlet property="Scrollview" destination="gcG-Ad-2SB" id="OZh-gn-yad"/>
                         <outlet property="State" destination="HGl-8E-mRo" id="DES-HN-VvC"/>
                         <outlet property="VideoHeightLayout" destination="ye3-Pn-yvw" id="OZH-Qr-6hg"/>
                         <outlet property="player" destination="xgt-9i-ne2" id="qhH-Ie-tPt"/>
@@ -4788,7 +4825,7 @@
                                                                         </constraints>
                                                                         <color key="textColor" white="0.0" alpha="0.98999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
-                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                                                 <color key="value" red="0.68418005739999999" green="0.68418005739999999" blue="0.68418005739999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -4829,7 +4866,7 @@
                                                                         </constraints>
                                                                         <color key="textColor" white="0.0" alpha="0.98999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
-                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                                                 <color key="value" red="0.68418005739999999" green="0.68418005739999999" blue="0.68418005739999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -5320,7 +5357,7 @@
                                                 </constraints>
                                                 <color key="textColor" white="0.0" alpha="0.98999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                         <color key="value" red="0.68418005739999999" green="0.68418005739999999" blue="0.68418005739999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -5508,7 +5545,7 @@
                                                                 </constraints>
                                                                 <color key="textColor" red="0.55587820389999998" green="0.59931577069999997" blue="0.6685562183" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
-                                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                                         <color key="value" red="0.78899876859999996" green="0.78783638140000001" blue="0.80814039090000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -5557,7 +5594,7 @@
                                                                 </constraints>
                                                                 <color key="textColor" red="0.55587820389999998" green="0.59931577069999997" blue="0.6685562183" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
-                                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                                         <color key="value" red="0.78899876859999996" green="0.78783638140000001" blue="0.80814039090000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -5655,7 +5692,7 @@
                                                                 </constraints>
                                                                 <color key="textColor" red="0.55587820389999998" green="0.59931577069999997" blue="0.6685562183" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
-                                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                                         <color key="value" red="0.78899876859999996" green="0.78783638140000001" blue="0.80814039090000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -5709,7 +5746,7 @@
                                                                 </constraints>
                                                                 <color key="textColor" red="0.55587820389999998" green="0.59931577069999997" blue="0.6685562183" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
-                                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
+                                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                                         <color key="value" red="0.78899876859999996" green="0.78783638140000001" blue="0.80814039090000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -5758,7 +5795,7 @@
                                                                 </constraints>
                                                                 <color key="textColor" red="0.55587820389999998" green="0.59931577069999997" blue="0.6685562183" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
-                                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                                         <color key="value" red="0.78899876859999996" green="0.78783638140000001" blue="0.80814039090000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -5807,7 +5844,7 @@
                                                                 </constraints>
                                                                 <color key="textColor" red="0.55587820389999998" green="0.59931577069999997" blue="0.6685562183" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
-                                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                                         <color key="value" red="0.78899876859999996" green="0.78783638140000001" blue="0.80814039090000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -5856,7 +5893,7 @@
                                                                 </constraints>
                                                                 <color key="textColor" red="0.55587820389999998" green="0.59931577069999997" blue="0.6685562183" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
-                                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                                         <color key="value" red="0.78899876859999996" green="0.78783638140000001" blue="0.80814039090000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -6890,20 +6927,17 @@
         <designable name="LTD-5l-dat">
             <size key="intrinsicContentSize" width="48" height="32"/>
         </designable>
-        <designable name="TGx-LO-TUs">
-            <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
         <designable name="cxj-cr-kPD">
-            <size key="intrinsicContentSize" width="56" height="14"/>
+            <size key="intrinsicContentSize" width="34" height="26"/>
         </designable>
         <designable name="dbp-hE-3Ei">
-            <size key="intrinsicContentSize" width="53" height="14"/>
+            <size key="intrinsicContentSize" width="31" height="26"/>
         </designable>
         <designable name="gvJ-8u-cm5">
-            <size key="intrinsicContentSize" width="53" height="14"/>
+            <size key="intrinsicContentSize" width="31" height="26"/>
         </designable>
         <designable name="y62-vT-gyw">
-            <size key="intrinsicContentSize" width="56" height="14"/>
+            <size key="intrinsicContentSize" width="34" height="26"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>

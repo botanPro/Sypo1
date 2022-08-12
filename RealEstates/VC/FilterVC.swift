@@ -8,7 +8,8 @@
 import UIKit
 import MBRadioCheckboxButton
 import Slider2
-
+import Drops
+import Photos
 protocol FilterDataDelegate {
     func AllData(dis_type:Int , price_min : Int , price_max:Int , rooms : Int , space_max : Int, space_min : Int, CityId : Int , estatetype_id : Int)
 }
@@ -36,7 +37,7 @@ class FilterVC: UIViewController ,UITextFieldDelegate, RadioButtonDelegate{
     var selecteEstatedcell : EstateTypeObject?
     var selecteNumbercell = 0
     var NumberOfRoom = 0
-    var EstateTypy = "Apartment"
+    var EstateTypy = "UTY25FYJHkliygt4nvPP"
     var EstatesType : [EstateTypeObject] = []
     var NumberOfRooms = [1,2,3,4,5,6,7,8,9,10]
     @IBOutlet weak var EstateTypeCollectionView: UICollectionView!
@@ -50,7 +51,7 @@ class FilterVC: UIViewController ,UITextFieldDelegate, RadioButtonDelegate{
     var Delegate : FilterDataDelegate!
     
 
-    
+    @IBOutlet weak var ScrollViewLayout: NSLayoutConstraint!
     @IBOutlet weak var PriceMin: LanguagePlaceHolder!
     @IBOutlet weak var PriceMax: LanguagePlaceHolder!
 
@@ -90,7 +91,31 @@ class FilterVC: UIViewController ,UITextFieldDelegate, RadioButtonDelegate{
         EstateTypeCollectionView.register(UINib(nibName: "EstateTypeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "EstateCell")
         GetEstateType()
         GetAllEstates()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    var count = 1
+    @objc func keyboardWasShown(notification: NSNotification) {
+        if count == 1{
+           count += 1
+        let info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        self.ScrollViewLayout.constant += keyboardFrame.height - 100
+        }
+    }
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     var AllEstateArray : [EstateObject] = []
     func GetAllEstates(){
@@ -169,7 +194,7 @@ class FilterVC: UIViewController ,UITextFieldDelegate, RadioButtonDelegate{
     
     var cuntry = ""
     var city = ""
-    var CityId = 0
+    var CityId = ""
     
     @objc func showSpinningWheel(_ notification: NSNotification) {
         if let data = notification.userInfo as NSDictionary? {print("22222")
@@ -186,7 +211,8 @@ class FilterVC: UIViewController ,UITextFieldDelegate, RadioButtonDelegate{
                 self.city = City
             }
             if let CityId = data["CityId"] as? String{
-                self.CityId = (CityId as NSString).integerValue
+                print(CityId)
+                self.CityId = CityId
             }
             self.AddressLable.text = self.city
         }
@@ -210,10 +236,10 @@ class FilterVC: UIViewController ,UITextFieldDelegate, RadioButtonDelegate{
     
     var M2MAX = 0.0
     var M2MIN = 0.0
-    
+    var filter6 : [EstateObject] = []
     var filter1 : [EstateObject] = []
     @IBAction func Apply(_ sender: Any) {
-        
+        Drops.hideAll()
         let Price_Min = Double(self.PriceMin.text!) ?? 0.0
         let Price_Max = Double(self.PriceMax.text!) ?? 0.0
         
@@ -230,23 +256,56 @@ class FilterVC: UIViewController ,UITextFieldDelegate, RadioButtonDelegate{
             }
             filter1 = self.AllEstateArray.filter{ $0.price ?? 0 <= self.PriceMAX && $0.price ?? 0 >= self.PriceMIN}
         }
-        
-        let filter2 = filter1.filter{ $0.space ?? "" <= self.MaxSpaceLable.text! && $0.space ?? "" <= self.MinSpaceLable.text!}
-        
-        let filter3 = filter2.filter{ $0.RoomNo == "\(self.NumberOfRoom)"}
-        
-        let filter4 = filter3.filter{ $0.estate_type_id == self.EstateTypy }
-        
-        let filter5 = filter4.filter{ $0.RentOrSell == self.RentOrSell}
-        
-        let filter6 = filter5.filter{ $0.address == self.AddressLable.text!}
-        
 
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let myVC = storyboard.instantiateViewController(withIdentifier: "AllEstateVC") as! AllEstateVC
-        myVC.title = "Result"
-        myVC.AllEstate = filter6
-        self.navigationController?.pushViewController(myVC, animated: true)
+        let filter2 = filter1.filter{ $0.space ?? "" <= self.MaxSpaceLable.text! && $0.space ?? "" >= self.MinSpaceLable.text!}
+
+        let filter3 = filter2.filter{ $0.RoomNo == "\(self.NumberOfRoom)"}
+
+        let filter4 = filter3.filter{ $0.estate_type_id == self.EstateTypy }
+
+        let filter5 = filter4.filter{ $0.RentOrSell == self.RentOrSell}
+
+        if self.CityId == ""{
+            self.filter6 = filter5
+        }else{
+            self.filter6 = filter5.filter{ $0.city_id == self.CityId}
+        }
+
+        if self.filter6.count != 0{
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let myVC = storyboard.instantiateViewController(withIdentifier: "AllEstateVC") as! AllEstateVC
+            myVC.title = "Result"
+            myVC.AllEstate = self.filter6
+            self.navigationController?.pushViewController(myVC, animated: true)
+        }else{
+            AudioServicesPlaySystemSound(1519);
+            var title = "Empty"
+            var message = "No estates are found"
+            
+            if XLanguage.get() == .English{
+                title = "Empty"
+                message = "No estates are found"
+            }else if XLanguage.get() == .Kurdish{
+                title = "بەتاڵ"
+                message = "هیچ خانوبەرێک نەدۆزراوەتەوە"
+            }else{
+                title = "فارغة"
+                message = "لم يتم العثور على عقار"
+            }
+            let drop = Drop(
+                title: title,
+                subtitle: message,
+                icon: UIImage(named: "attention"),
+                action: .init {
+                    print("Drop tapped")
+                    Drops.hideCurrent()
+                },
+                position: .bottom,
+                duration: 3.0,
+                accessibility: "Alert: Title, Subtitle"
+            )
+            Drops.show(drop)
+        }
 
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -319,7 +378,7 @@ extension FilterVC : UICollectionViewDataSource, UICollectionViewDelegate , UICo
             if self.EstatesType.count != 0{
                 
                 if self.IsFirstType == false && indexPath.row == 2{
-                    self.EstateTypy = self.EstatesType[indexPath.row].name ?? ""
+                    self.EstateTypy = self.EstatesType[indexPath.row].id ?? ""
                     self.selecteEstatedcell = self.EstatesType[indexPath.row]
                     self.IsFirstType = true
                 }
@@ -366,7 +425,7 @@ extension FilterVC : UICollectionViewDataSource, UICollectionViewDelegate , UICo
         
         if collectionView == self.NumberOfRoomsCollectionView{
             if self.NumberOfRooms.count != 0  && indexPath.row <= self.NumberOfRooms.count{
-                self.NumberOfRoom = NumberOfRooms[indexPath.row + 1]
+                self.NumberOfRoom = NumberOfRooms[indexPath.row]
                 self.selecteNumbercell = self.NumberOfRooms[indexPath.row]
                 self.NumberOfRoomsCollectionView.reloadData()
             }

@@ -52,6 +52,7 @@ extension CityVC : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if City.count != 0{
+            print(self.City[indexPath.row].id ?? "")
         let CityName : [String : String] = ["City" : self.City[indexPath.row].name ?? "" ,"CityId":self.City[indexPath.row].id ?? ""]
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CityName"), object: nil ,userInfo:CityName)
             self.popBack(2)

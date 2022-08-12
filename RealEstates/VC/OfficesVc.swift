@@ -49,6 +49,7 @@ class EstatesVC: UIViewController {
         self.Offices.removeAll()
         OfficeAip.GetAllOffice{ office in
             self.Offices = office
+            self.Offices.shuffle()
             print("office count is : \(office.count)")
             self.EstateCollectionView.reloadData()
             self.EstateCollectionView.cr.endHeaderRefresh()
