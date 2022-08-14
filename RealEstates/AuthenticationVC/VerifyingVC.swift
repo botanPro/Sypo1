@@ -96,7 +96,7 @@ var count = 0
                         if self.count == office.count{print("111111111")
                             let office = OfficesObject.init(name: "", id:UUID().uuidString , fire_id: UserId, address: "",about: "", phone1: UserDefaults.standard.string(forKey: "PhoneNumber") ?? "", phone2: "", ImageURL:"", type_id: "1kMcAwX8d1WMUhBanY4F")
                             UserDefaults.standard.set(office.id, forKey: "OfficeId")
-                            office.Update()
+                            office.Upload()
                             UserDefaults.standard.set("1kMcAwX8d1WMUhBanY4F", forKey: "UserType")
                             UserDefaults.standard.set(true, forKey: "Login")
                             UserDefaults.standard.set(UserId, forKey: "UserId")

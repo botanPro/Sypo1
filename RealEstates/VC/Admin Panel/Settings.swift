@@ -334,7 +334,6 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     
     @IBOutlet weak var Profileimageheight: NSLayoutConstraint!
     var lang : Int = UserDefaults.standard.integer(forKey: "language")
-    @IBOutlet weak var ProfileRightImage: UIImageView!
     var AllEstate : [EstateObject] = []
     
     
@@ -349,6 +348,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             }
         }
     }
+    @IBOutlet weak var ProfileRightImage: UIImageView!
     
     
     
@@ -367,7 +367,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         self.Location.text = "\("IRAQ-\(UserDefaults.standard.string(forKey: "CityName")?.uppercased() ?? "")")"
         
         GetCity()
-        if UserDefaults.standard.bool(forKey: "Login") == false {
+        if UserDefaults.standard.bool(forKey: "Login") == false {print("is not-----------------")
             if XLanguage.get() == .Kurdish{
                 self.LoginOrLogoutLable.text = "چونه‌ ژووره‌وه‌"
                 self.LoginOrLogoutLable.font = UIFont(name: "PeshangDes2", size: 14)!
@@ -418,7 +418,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             
             
             
-        }else{
+        }else{print("is -----------------")
             if lang == 1{
                 self.LoginOrLogoutLable.text = "چوونە دەرەوە"
                 self.LoginOrLogoutLable.font = UIFont(name: "PeshangDes2", size: 14)!
@@ -430,26 +430,29 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                 self.LoginOrLogoutLable.font = UIFont(name: "PeshangDes2", size: 14)!
             }
             
-            self.LoginImage.image = UIImage(named: "logout5")
-            self.ProfileInfoStackView.isHidden = false
-            self.ProfileInfoStackViewLayout.constant = 55
-            self.Profileimageheight.constant = 55
-            self.AddPropertyView.alpha = 1
-            self.ViewPropertyVicew.alpha = 1
-            self.ViewditemView.alpha = 1
-            self.FavoriteItemsView.alpha = 1
-            self.ViewdItemAction.isEnabled = true
-            self.MyPropertiesAction.isEnabled = true
-            self.AddPropetiesAction.isEnabled = true
-            self.FavoriteItemAction.isEnabled = true
+            
             self.Name.layer.cornerRadius = 5
             self.Phone.layer.cornerRadius = 3
-            
             
             if let FireId = UserDefaults.standard.string(forKey: "UserId"){
                 if let officeId = UserDefaults.standard.string(forKey: "OfficeId"){
                     OfficeAip.GetOffice(ID: officeId) { [self] office in
-                        if office.type_id == "h9nFfUrHgSwIg17uRwTD"{
+                        if office.type_id == "h9nFfUrHgSwIg17uRwTD"{print("is office-----------------")
+                            self.ProfileRightImage.isHidden = false
+                            self.Phone.isHidden = false
+                            self.LoginImage.image = UIImage(named: "logout5")
+                            self.ProfileInfoStackView.isHidden = false
+                            self.ProfileInfoStackViewLayout.constant = 55
+                            self.Profileimageheight.constant = 55
+                            self.AddPropertyView.alpha = 1
+                            self.ViewPropertyVicew.alpha = 1
+                            self.ViewditemView.alpha = 1
+                            self.FavoriteItemsView.alpha = 1
+                            self.ViewdItemAction.isEnabled = true
+                            self.MyPropertiesAction.isEnabled = true
+                            self.AddPropetiesAction.isEnabled = true
+                            self.FavoriteItemAction.isEnabled = true
+                            
                             
                             SubscriptionAip.GetAllSubscriptionsType { subscription in
                                 for sub in subscription{
@@ -462,8 +465,6 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                                 self.SubscriptionViewBottomLyout.constant  = 12
                                                 self.view.layoutIfNeeded()
                                             }
-                                            
-                                            
                                             let date = NSDate(timeIntervalSince1970: sub.start_date ?? 0.0)
                                             let dayTimePeriodFormatter = DateFormatter()
                                             dayTimePeriodFormatter.dateFormat = "dd-MM-YYYY  h:mm"
@@ -540,32 +541,32 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                             self.ViewPropertyVicew.isHidden = false
                             self.ProfileRightImage.isHidden = false
                             OfficeAip.GetOfficeById(Id: FireId) { office in
-                                if office.name == ""{
-                                    self.Image.image = UIImage(named: "4811117-small")
-                                    self.Name.text = UserDefaults.standard.string(forKey: "PhoneNumber")
-                                    self.Phone.isHidden = true
-                                }else{
                                     self.Phone.isHidden = false
                                     let url = URL(string: office.ImageURL ?? "")
                                     self.Image.sd_setImage(with: url, completed: nil)
                                     self.Name.text = office.name?.description.uppercased()
                                     self.Phone.text = office.phone1
-                                }
                             }
-                        }else{
-                            if XLanguage.get() == .Kurdish{
-                                self.Name.text = "ناوەکەت لێرە پیشان دەدرێت"
-                            }else if XLanguage.get() == .English{
-                                self.Name.text = "YOUR NAME WILL BE DISPLAY HERE"
-                            }else{
-                                self.Name.text = "سيتم عرض اسمك هنا"
-                            }
+                        }else{print("is not office-----------------")
+                            
+                            
+                            self.ProfileInfoStackView.isHidden = false
+                            self.ProfileInfoStackViewLayout.constant = 55
+                            self.Profileimageheight.constant = 55
+                            
+                            
+                                self.Image.image = UIImage(named: "4811117-small")
+                                self.Name.text = UserDefaults.standard.string(forKey: "PhoneNumber")
+                                self.Phone.isHidden = true
+                            
                             
                             
                             self.SubscriptionView.isHidden             = true
                             self.SubscriptionViewHeightLyout.constant  = 0
                             self.SubscriptionViewTopLyout.constant     = 0
                             self.SubscriptionViewBottomLyout.constant  = 0
+                            self.ProfileRightImage.isHidden = true
+                            
                             
                             
                             self.EditProfile.isEnabled = false
@@ -573,6 +574,9 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                             self.GetYABottom.constant = 12
                             self.GetYAHeight.constant = 40
                             self.GetYAView.isHidden = false
+                            
+                            
+                            
                             self.GetYA.text = ""
                             if self.lang == 1{
                                 label.text = "بۆ دروستکردنی ئەکاونتی ئۆفیسی خانووبەرە پەیوەندیمان پێوە بکەن."
@@ -591,8 +595,10 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                             self.label.startShimmering()
                             self.Image.image = UIImage(named: "4811117-small")
                             self.Phone.text = UserDefaults.standard.string(forKey: "PhoneNumber")
-                            self.AddPropertyView.isHidden = true
-                            self.ViewPropertyVicew.isHidden = true
+                            self.AddPropertyView.alpha = 0.5
+                            self.ViewPropertyVicew.alpha = 0.5
+                            self.MyPropertiesAction.isEnabled = false
+                            self.AddPropetiesAction.isEnabled = false
                             self.ProfileRightImage.isHidden = true
                         }
                     }
@@ -1028,47 +1034,20 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                 self.LoginOrLogoutLable.font =  UIFont(name: "PeshangDes2", size: 14)!
             }
             
-            if let FireId = UserDefaults.standard.string(forKey: "UserId"){print("[][][][][][======================][][][][][]------------55555---")
-                
-                if let officeId = UserDefaults.standard.string(forKey: "OfficeId"){print("[][][][][][======================][][][][][]-------------------666666----")
-                    OfficeAip.GetOffice(ID: officeId) { [self] office in
-                        if office.type_id == "h9nFfUrHgSwIg17uRwTD"{
-                            OfficeAip.GetOfficeById(Id: FireId) { office in
-                                if office.name == ""{
-                                    if XLanguage.get() == .Kurdish{
-                                        self.Name.text = "لێرە خوت تۆمار بکە"
-                                    }else if XLanguage.get() == .English{
-                                        self.Name.text = "REGISTER HERE"
-                                    }else{
-                                        self.Name.text = "سجل هنا"
-                                    }
-                                }else{
-                                    let url = URL(string: office.ImageURL ?? "")
-                                    self.Image.sd_setImage(with: url, completed: nil)
-                                    self.Name.text = office.name?.description.uppercased()
-                                    self.Phone.text = office.phone1
-                                }
-                            }
-                            
-                        }else{
-                            if XLanguage.get() == .Kurdish{
-                                self.Name.text = "ناوەکەت لێرە پیشان دەدرێت"
-                                self.label.text = "بۆ دروستکردنی ئەکاونتی ئۆفیسی خانووبەرە پەیوەندیمان پێوە بکەن."
-                                self.label.font =  UIFont(name: "PeshangDes2", size: 11)!
-                            }else if XLanguage.get() == .English{
-                                self.Name.text = "YOUR NAME WILL BE DISPLAY HERE"
-                                self.label.text = "Contact us for creating a real estate office account."
-                                self.label.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
-                            }else{
-                                self.Name.text = "سيتم عرض اسمك هنا"
-                                self.label.text = "اتصل بنا لإنشاء حساب مكتب عقارات."
-                                self.label.font =  UIFont(name: "PeshangDes2", size: 11)!
-                            }
-                        }
-                    }
-                    
-                    
-                    
+            if XLanguage.get() == .Kurdish{
+                self.label.text = "بۆ دروستکردنی ئەکاونتی ئۆفیسی خانووبەرە پەیوەندیمان پێوە بکەن."
+                self.label.font =  UIFont(name: "PeshangDes2", size: 11)!
+            }else if XLanguage.get() == .English{
+                self.label.text = "Contact us for creating a real estate office account."
+                self.label.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
+            }else{
+                self.label.text = "اتصل بنا لإنشاء حساب مكتب عقارات."
+                self.label.font =  UIFont(name: "PeshangDes2", size: 11)!
+            }
+            
+            
+            
+            if let FireId = UserDefaults.standard.string(forKey: "UserId"){
                     
                     self.ViewdItemCount = 0
                     self.ViewdItemsEstate.removeAll()
@@ -1119,9 +1098,6 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                 self.FavoriteItemsEstate.append(i)
                             }
                         }
-                        //                        if Item.estate_id != ""{
-                        //                            FavoriteItemCount = FavoriteItemCount + 1
-                        //                        }
                         if FavoriteItemCount == 1{
                             if XLanguage.get() == .Kurdish{
                                 self.FavoriteItems.text = "\(FavoriteItemCount) خوازراو"
@@ -1148,7 +1124,6 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                         }
                     }
                 }
-            }
         }
     }
     
