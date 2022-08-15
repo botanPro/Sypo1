@@ -158,7 +158,7 @@ class MyEstatesVc: UIViewController {
                 }
                 let myAlert = UIAlertController(title: self.Title, message: self.message, preferredStyle: UIAlertController.Style.alert)
                 myAlert.addAction(UIAlertAction(title: self.action, style: .default, handler: { (UIAlertAction) in
-                    ProductAip.updateState(i.id ?? "", state: "1") { _ in }
+                    ProductAip.updateState(i.id ?? "", sold: "1") { _ in }
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "EstateInserted"), object: nil)
                 }))
                 myAlert.addAction(UIAlertAction(title: self.cancel, style: .cancel, handler: nil))

@@ -1764,7 +1764,8 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                                                   , state: "0"
                                                   , project_id: self.ProjectId
                                                   , video_link: ""
-                                                  , archived: "0").Upload()
+                                                  , archived: "0"
+                                                  , sold: "0").Upload()
                             }
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "EstateInserted"), object: nil)
                             self.navigationController?.popViewController(animated: true)
@@ -1827,7 +1828,8 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                                               , state: "0"
                                               , project_id: self.ProjectId
                                               , video_link: ""
-                                              , archived: "0").Update()
+                                              , archived: "0"
+                                              , sold: "0").Update()
                             
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "EstateInserted"), object: nil)
                             self.navigationController?.popViewController(animated: true)

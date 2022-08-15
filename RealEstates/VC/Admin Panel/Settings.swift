@@ -164,6 +164,50 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     @IBOutlet weak var Image: UIImageView!
     
     
+    
+  
+    
+    @IBOutlet weak var NotificationLable: UILabel!
+    
+    @IBAction func Notification(_ sender: Any) {
+        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+            if settings.authorizationStatus == .authorized {
+                if XLanguage.get() == .English{
+                    self.NotificationLable.text = "ON"
+                }else if XLanguage.get() == .Kurdish{
+                    self.NotificationLable.text = "چالاک کراوە"
+                }else{
+                    self.NotificationLable.text = "مفعّلة"
+                }
+            }
+            else {
+                if XLanguage.get() == .English{
+                    self.NotificationLable.text = "OFF"
+                }else if XLanguage.get() == .Kurdish{
+                    self.NotificationLable.text = "چالاک کراوە نیە"
+                }else{
+                    self.NotificationLable.text = "معطّل"
+                }
+            }
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     @IBAction func Fav(_ sender: Any) {
         if UserDefaults.standard.bool(forKey: "Login") == true {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -258,6 +302,8 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     @IBOutlet weak var NavTitle: LanguageBarItem!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         if XLanguage.get() == .Kurdish{
             self.Etitle = "ئینگلیزی"
             self.Atitle = "عەرەبی"
@@ -300,9 +346,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         self.Image.layer.cornerRadius = self.Image.bounds.width / 2
      
         navigationController?.navigationBar.shadowImage = UIImage.imageWithColor(color: .darkGray)
-
     }
-    
     
     
     
@@ -348,12 +392,51 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             }
         }
     }
+
     @IBOutlet weak var ProfileRightImage: UIImageView!
     
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        print(UserDefaults.standard.string(forKey: "UserId"))
+        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+            if settings.authorizationStatus == .authorized {
+                
+                if XLanguage.get() == .English{
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ON"
+                    }
+                }else if XLanguage.get() == .Kurdish{
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "چالاک کراوە"
+                    }
+                }else{
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "مفعّلة"
+                    }
+                }
+            }
+            else {
+                if XLanguage.get() == .English{
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "OFF"
+                    }
+                }else if XLanguage.get() == .Kurdish{
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "چالاک کراوە نیە"
+                    }
+                }else{
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "معطّل"
+                    }
+                }
+            }
+        }
+        
+        
+        
         if !CheckInternet.Connection(){
             MessageBox.ShowMessage()
         }
@@ -434,10 +517,10 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             self.Name.layer.cornerRadius = 5
             self.Phone.layer.cornerRadius = 3
             
-            if let FireId = UserDefaults.standard.string(forKey: "UserId"){
-                if let officeId = UserDefaults.standard.string(forKey: "OfficeId"){
+            if let FireId = UserDefaults.standard.string(forKey: "UserId"){print("=-=-=-=-=-=-=-1111111")
+                if let officeId = UserDefaults.standard.string(forKey: "OfficeId"){print("=-=-=-=-=-=-=-2222222")
                     OfficeAip.GetOffice(ID: officeId) { [self] office in
-                        if office.type_id == "h9nFfUrHgSwIg17uRwTD"{print("is office-----------------")
+                        if office.type_id == "h9nFfUrHgSwIg17uRwTD"{print("is office-----------------1111")
                             self.ProfileRightImage.isHidden = false
                             self.Phone.isHidden = false
                             self.LoginImage.image = UIImage(named: "logout5")
@@ -697,10 +780,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                 
             }
         }
-        
     }
-    
-    
     
     
     
@@ -849,8 +929,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             self.present(myAlert, animated: true, completion: nil)
         }else{
             let vc = storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVCViewController
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         
         
@@ -896,7 +975,26 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     
     @objc func LangChanged(){
         print(self.lang)
-        
+        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+            if settings.authorizationStatus == .authorized {
+                if XLanguage.get() == .English{
+                    self.NotificationLable.text = "ON"
+                }else if XLanguage.get() == .Kurdish{
+                    self.NotificationLable.text = "چالاک کراوە"
+                }else{
+                    self.NotificationLable.text = "مفعّلة"
+                }
+            }
+            else {
+                if XLanguage.get() == .English{
+                    self.NotificationLable.text = "OFF"
+                }else if XLanguage.get() == .Kurdish{
+                    self.NotificationLable.text = "چالاک کراوە نیە"
+                }else{
+                    self.NotificationLable.text = "معطّل"
+                }
+            }
+        }
         if XLanguage.get() == .Kurdish{
             self.Etitle = "ئینگلیزی"
             self.Atitle = "عەرەبی"

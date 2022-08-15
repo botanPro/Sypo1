@@ -90,6 +90,7 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
         }else{
             let vc = storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVCViewController
             vc.modalPresentationStyle = .fullScreen
+            vc.IsFromAnotherVc = true
             self.present(vc, animated: true)
         }
     }

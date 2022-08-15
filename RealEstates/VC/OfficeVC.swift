@@ -77,6 +77,7 @@ class OfficeVC: UIViewController {
                     self.RatingStars.rating = 2.0
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVCViewController
                     vc.modalPresentationStyle = .fullScreen
+                    vc.IsFromAnotherVc = true
                     self.present(vc, animated: true)
                 }
             }

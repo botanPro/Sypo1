@@ -53,10 +53,10 @@ class EstateObject{
     var project_id :String?
     
     var archived : String?
-    
+    var sold : String?
     init(name : String,id : String , stamp : TimeInterval ,RentOrSell: String, city_name : String , address : String ,lat : String , long : String , price: Double, desc:String , office_id : String ,fire_id : String, ImageURL : [String] , city_id : String
          
-         , estate_type_id : String ,Direction : String , floor : String ,Building : String, Year: String, Furnished : String , bound_id:String , MonthlyService : String, RoomNo : String ,WashNo:String, space : String , propertyNo : String, state : String, project_id : String, video_link : String,archived : String) {
+         , estate_type_id : String ,Direction : String , floor : String ,Building : String, Year: String, Furnished : String , bound_id:String , MonthlyService : String, RoomNo : String ,WashNo:String, space : String , propertyNo : String, state : String, project_id : String, video_link : String,archived : String , sold : String) {
         
         self.name               = name
         self.id                 = id
@@ -88,6 +88,7 @@ class EstateObject{
         self.video_link         = video_link
         self.project_id         = project_id
         self.archived           = archived
+        self.sold               = sold
         
     }
     
@@ -124,6 +125,7 @@ class EstateObject{
         self.video_link     = Dictionary[ "video_link"      ] as? String
         self.project_id     = Dictionary[ "project_id"      ] as? String
         self.archived       = Dictionary[ "archived"        ] as? String
+        self.sold           = Dictionary[ "sold"            ] as? String
     }
     
     
@@ -161,6 +163,7 @@ class EstateObject{
         New["video_link"       ] = self.video_link     as AnyObject
         New["project_id"       ] = self.project_id     as AnyObject
         New["archived"         ] = self.archived     as AnyObject
+        New["sold"             ] = self.sold           as AnyObject
         return New
     }
     
@@ -201,8 +204,8 @@ class ProductAip{
         }
     }
     
-    static func updateState(_ EstateId : String , state : String, completion : @escaping (_ product : EstateObject)->()){
-        Firestore.firestore().collection("EstateProducts").document(EstateId).setData( ["state": state], merge: true)
+    static func updateState(_ EstateId : String , sold : String, completion : @escaping (_ product : EstateObject)->()){
+        Firestore.firestore().collection("EstateProducts").document(EstateId).setData( ["sold": sold], merge: true)
         completion(EstateObject(Dictionary: [:]))
     }
     
@@ -322,8 +325,9 @@ class OfficesObject{
     var about : String?
     var ImageURL : String?
     var type_id : String?
+    var archived : String?
     
-    init(name : String,id : String ,fire_id : String , address : String , about : String,phone1:String , phone2 : String , ImageURL : String , type_id : String) {
+    init(name : String,id : String ,fire_id : String , address : String , about : String,phone1:String , phone2 : String , ImageURL : String , type_id : String, archived : String) {
         self.name               = name
         self.id                 = id
         self.fire_id            = fire_id
@@ -334,6 +338,7 @@ class OfficesObject{
         self.about              = about
         self.address            = address
         self.type_id            = type_id
+        self.archived           = archived
     }
     
     
@@ -348,6 +353,7 @@ class OfficesObject{
         self.ImageURL       = Dictionary[ "image"            ] as? String
         self.address        = Dictionary[ "address"          ] as? String
         self.type_id        = Dictionary[ "type_id"          ] as? String
+        self.archived       = Dictionary[ "archived"         ] as? String
     }
     
     
@@ -363,6 +369,7 @@ class OfficesObject{
         New["image"            ] = self.ImageURL  as AnyObject
         New["address"          ] = self.address   as AnyObject
         New["type_id"          ] = self.type_id    as AnyObject
+        New["archived"         ] = self.archived   as AnyObject
         return New
     }
     
@@ -394,6 +401,11 @@ class OfficeAip{
         }
     }
     
+    static func Remov(id : String, completion : @escaping (_ product : OfficesObject)->()){
+        Firestore.firestore().collection("OfficesProfile").document(id).setData( ["archived": "1"], merge: true)
+        completion(OfficesObject(Dictionary: [:]))
+    }
+    
     
     // ava hamy product d inyty
     static func GetAllOffice(completion : @escaping (_ Product : [OfficesObject])->()){
@@ -423,7 +435,7 @@ class OfficeAip{
                 }
             }
             }else{
-                completion(OfficesObject.init(name: "", id: "", fire_id: "", address: "", about: "", phone1: "", phone2: "", ImageURL: "", type_id: ""))
+                completion(OfficesObject.init(name: "", id: "", fire_id: "", address: "", about: "", phone1: "", phone2: "", ImageURL: "", type_id: "", archived: ""))
             }
         }
     }

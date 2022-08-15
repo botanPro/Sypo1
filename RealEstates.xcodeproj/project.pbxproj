@@ -88,6 +88,8 @@
 		7D9BDBEB28A146340029CEF8 /* CheckInternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9BDBEA28A146340029CEF8 /* CheckInternetConnection.swift */; };
 		7D9BDBF228A14A300029CEF8 /* MessageBox.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D9BDBF028A14A300029CEF8 /* MessageBox.storyboard */; };
 		7D9BDBF328A14A300029CEF8 /* MessageBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9BDBF128A14A300029CEF8 /* MessageBox.swift */; };
+		7DCCFDED28AA983B00BAA777 /* DeletionAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCCFDEC28AA983B00BAA777 /* DeletionAccountVC.swift */; };
+		7DCCFDEF28AADE9D00BAA777 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCCFDEE28AADE9D00BAA777 /* TabBarVC.swift */; };
 		7DD0FEE2289B2D9B00E0C971 /* Peshang_Des_2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7DD0FEE1289B2D4200E0C971 /* Peshang_Des_2.ttf */; };
 		AF422A371E42F6C4EFB40953 /* Pods_RealEstates_RealEstatesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 132314E230047AE1122CB446 /* Pods_RealEstates_RealEstatesUITests.framework */; };
 		E73DC058474A4B62C540ACFD /* Pods_RealEstates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81D8CED1F9B46E50D34F15A7 /* Pods_RealEstates.framework */; };
@@ -203,6 +205,8 @@
 		7D9BDBEA28A146340029CEF8 /* CheckInternetConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInternetConnection.swift; sourceTree = "<group>"; };
 		7D9BDBF028A14A300029CEF8 /* MessageBox.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MessageBox.storyboard; sourceTree = "<group>"; };
 		7D9BDBF128A14A300029CEF8 /* MessageBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageBox.swift; sourceTree = "<group>"; };
+		7DCCFDEC28AA983B00BAA777 /* DeletionAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletionAccountVC.swift; sourceTree = "<group>"; };
+		7DCCFDEE28AADE9D00BAA777 /* TabBarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		7DD0FEE1289B2D4200E0C971 /* Peshang_Des_2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Peshang_Des_2.ttf; sourceTree = "<group>"; };
 		81D8CED1F9B46E50D34F15A7 /* Pods_RealEstates.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RealEstates.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACDA44F87AAF39C6DB758C76 /* Pods-RealEstates.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealEstates.debug.xcconfig"; path = "Target Support Files/Pods-RealEstates/Pods-RealEstates.debug.xcconfig"; sourceTree = "<group>"; };
@@ -331,6 +335,7 @@
 				7649761127A15DA1005EAEB2 /* MXTextViewController.swift */,
 				7649761027A15DA1005EAEB2 /* MXWebViewController.swift */,
 				76CE459728551CF6005E1C0B /* AllEstateVC.swift */,
+				7DCCFDEE28AADE9D00BAA777 /* TabBarVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -529,6 +534,7 @@
 				768AF859263F139200E48A4A /* AboutrVC.swift */,
 				76B7B64227B416120033BAC0 /* AddProperty.swift */,
 				769A417B285A5A460085805F /* MyEstatesVc.swift */,
+				7DCCFDEC28AA983B00BAA777 /* DeletionAccountVC.swift */,
 			);
 			path = "Admin Panel";
 			sourceTree = "<group>";
@@ -839,6 +845,7 @@
 				76ABCC7226360E1500D8C4BD /* Objects.swift in Sources */,
 				76E55BFE27A2F3BA003E05C0 /* MapVC.swift in Sources */,
 				761208282629A29E00C0CE94 /* Settings.swift in Sources */,
+				7DCCFDEF28AADE9D00BAA777 /* TabBarVC.swift in Sources */,
 				7655162F266EC39B00D8C833 /* CommentTableViewCell.swift in Sources */,
 				7D305EFC28A43E9000006554 /* ProjectMapVC.swift in Sources */,
 				76B7B64327B416120033BAC0 /* AddProperty.swift in Sources */,
@@ -873,6 +880,7 @@
 				7D0EA1842895AACA001E9D9B /* ProjectDetailsVC.swift in Sources */,
 				7638009E27D7E6F90095BCEB /* VerifyingVC.swift in Sources */,
 				764A466C262B0F0800213B08 /* LanguagesVCViewController.swift in Sources */,
+				7DCCFDED28AA983B00BAA777 /* DeletionAccountVC.swift in Sources */,
 				768BD56B279304A40005FCC4 /* OfficeVC.swift in Sources */,
 				7668EDE5262C5C6000BF4C4D /* DataTableVeiwCell.swift in Sources */,
 				761B99D727D4F8AE009783B8 /* XUploadImage.swift in Sources */,
@@ -1057,7 +1065,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RealEstates/RealEstates.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = LSB7R4D9XA;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1069,7 +1077,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.3;
+				MARKETING_VERSION = 0.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.maskani.sharkteam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1085,7 +1093,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RealEstates/RealEstates.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = LSB7R4D9XA;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1097,7 +1105,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.3;
+				MARKETING_VERSION = 0.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.maskani.sharkteam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

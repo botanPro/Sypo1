@@ -85,14 +85,14 @@
 	<key>NSCameraUsageDescription</key>
 	<string>would you like to access to camera?</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>$(PRODUCT_NAME) need to access your location</string>
+	<string>$(PRODUCT_NAME) need to access your location, your location will use for showing nearest estates from your current location.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Used to save images into your galery</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>$(PRODUCT_NAME) Need to access your images</string>
+	<string>$(PRODUCT_NAME) Need to access your images, you will need images when  you trying upload the estates.</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Peshang_Des_2.ttf</string>
+		<string></string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
@@ -116,7 +116,10 @@
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
-	<array/>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

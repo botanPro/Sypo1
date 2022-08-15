@@ -14,22 +14,46 @@ class VerifyingVC: UIViewController {
 
     @IBOutlet weak var Verify: LoadingButton!
     @IBOutlet weak var OTPCode: OTPTextField!
+    @IBOutlet weak var Dismiss: UIButton!
     
     
+    var IsFromAnotherVc = false
     @IBAction func Dismis(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBOutlet weak var VerifingLable: LanguageLable!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.OTPCode.delegate = self
+        
+        self.Dismiss.isHidden = true
+        
+        
+        if self.IsFromAnotherVc == true{
+            self.Dismiss.isHidden = false
+        }
+        
+        
         self.OTPCode.becomeFirstResponder()
-        self.Verify.layer.cornerRadius = 8
+        self.Verify.layer.cornerRadius = 4
         Verify.layer.shadowColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         Verify.layer.shadowOpacity = 1
         Verify.layer.shadowOffset = CGSize(width: 0, height: 2.0)
         Verify.layer.shadowRadius = 2
+        
+        if XLanguage.get() == .Kurdish{
+            self.VerifingLable.text = "کورتەنامەیەک نێردراوە بۆ \(UserDefaults.standard.string(forKey: "PhoneNumber") ?? "")"
+            self.VerifingLable.font = UIFont(name: "PeshangDes2", size: 12)!
+        }else if XLanguage.get() == .English{
+            self.VerifingLable.text = "An SMS was sent to \(UserDefaults.standard.string(forKey: "PhoneNumber") ?? "")"
+            self.VerifingLable.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        }else{
+            self.VerifingLable.text = "تم إرسال SMS إلى \(UserDefaults.standard.string(forKey: "PhoneNumber") ?? "")"
+            self.VerifingLable.font = UIFont(name: "PeshangDes2", size: 12)!
+        }
+        
+        
         Verify.indicator = MaterialLoadingIndicator(color: .gray)
         guard let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") else {
             let myMessage = "no virification code"
@@ -42,17 +66,29 @@ class VerifyingVC: UIViewController {
         
         if XLanguage.get() == .Kurdish{
             self.Verify.setTitle("پشتڕاستکردنەوە" , for: .normal)
-            self.Verify.titleLabel?.font = UIFont(name: "PeshangDes2", size: 16)!
+            self.Verify.titleLabel?.font = UIFont(name: "PeshangDes2", size: 11)!
         }else if XLanguage.get() == .English{
             self.Verify.setTitle("Verify" , for: .normal)
-            self.Verify.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 15)!
+            self.Verify.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
         }else{
             self.Verify.setTitle("تحقق" , for: .normal)
-            self.Verify.titleLabel?.font = UIFont(name: "PeshangDes2", size: 16)!
+            self.Verify.titleLabel?.font = UIFont(name: "PeshangDes2", size: 11)!
         }
     }
     var ver : String = ""
     var credential : PhoneAuthCredential!
+    
+    
+    
+    func popBack(_ nb: Int) {
+        if let viewControllers: [UIViewController] = self.navigationController?.viewControllers {
+            guard viewControllers.count < nb else {
+                self.navigationController?.popToViewController(viewControllers[viewControllers.count - nb], animated: true)
+                return
+            }
+        }
+    }
+    
     
 var count = 0
     var UserTypeFound = false
@@ -83,24 +119,62 @@ var count = 0
                         
                         for GetOffice in office{
                             self.count += 1
-                            if GetOffice.fire_id == UserId{print("22222222")
-                                UserDefaults.standard.set(GetOffice.type_id, forKey: "UserType")
-                                UserDefaults.standard.set(true, forKey: "Login")
-                                UserDefaults.standard.set(UserId, forKey: "UserId")
-                                UserDefaults.standard.set(GetOffice.id, forKey: "OfficeId")
-                                self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+                            if GetOffice.fire_id == UserId{
+                                if GetOffice.archived != "1"{
+                                    UserDefaults.standard.set(GetOffice.type_id, forKey: "UserType")
+                                    UserDefaults.standard.set(true, forKey: "Login")
+                                    UserDefaults.standard.set(UserId, forKey: "UserId")
+                                    UserDefaults.standard.set(GetOffice.id, forKey: "OfficeId")
+                                    if self.IsFromAnotherVc == false{
+                                        self.navigationController?.popToViewController(ofClass: Settings.self, animated: true)
+                                    }else{
+                                        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+                                    }
+                                }else{
+                                    var mss = ""
+                                    var action = ""
+                                    if XLanguage.get() == .English{
+                                        mss = "The account associated with this number has been deleted before, contact us to reactive your account."
+                                        action = "Ok"
+                                    }else if XLanguage.get() == .Kurdish{
+                                        mss = "پێشتر ئەو ئەکاونتەی پەیوەندی بەم ژمارەیەوە هەیە سڕاوەتەوە، پەیوەندیمان پێوە بکە بۆ کاردانەوەی ئەکاونتەکەت."
+                                        action = "باشە"
+                                    }else{
+                                        mss = "تم حذف الحساب المرتبط بهذا الرقم من قبل ، اتصل بنا لإعادة تنشيط حسابك."
+                                        action = "حسنا"
+                                    }
+                                    let myAlertin = UIAlertController(title: "", message: mss, preferredStyle: UIAlertController.Style.alert)
+                                    myAlertin.addAction(UIAlertAction(title: action, style: .default, handler: { (UIAlertActiokn) in
+                                        UserDefaults.standard.set("", forKey: "UserType")
+                                        UserDefaults.standard.set(false, forKey: "Login")
+                                        UserDefaults.standard.set("", forKey: "UserId")
+                                        UserDefaults.standard.set("", forKey: "OfficeId")
+                                        if self.IsFromAnotherVc == false{
+                                            self.popBack(3)
+                                        }else{
+                                            self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+                                        }
+                                    }))
+                                    self.present(myAlertin, animated: true, completion: nil)
+                                    
+                                }
                                 return
+                                    
                             }
                         }
                         
-                        if self.count == office.count{print("111111111")
-                            let office = OfficesObject.init(name: "", id:UUID().uuidString , fire_id: UserId, address: "",about: "", phone1: UserDefaults.standard.string(forKey: "PhoneNumber") ?? "", phone2: "", ImageURL:"", type_id: "1kMcAwX8d1WMUhBanY4F")
+                        if self.count == office.count{
+                            let office = OfficesObject.init(name: "", id:UUID().uuidString , fire_id: UserId, address: "",about: "", phone1: UserDefaults.standard.string(forKey: "PhoneNumber") ?? "", phone2: "", ImageURL:"", type_id: "1kMcAwX8d1WMUhBanY4F", archived: "0")
                             UserDefaults.standard.set(office.id, forKey: "OfficeId")
                             office.Upload()
                             UserDefaults.standard.set("1kMcAwX8d1WMUhBanY4F", forKey: "UserType")
                             UserDefaults.standard.set(true, forKey: "Login")
                             UserDefaults.standard.set(UserId, forKey: "UserId")
-                            self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+                            if self.IsFromAnotherVc == false{
+                                self.popBack(3)
+                            }else{
+                                self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+                            }
                         }
                     }
                     
@@ -111,20 +185,4 @@ var count = 0
     
 }
 
-
-extension VerifyingVC: UITextFieldDelegate{
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        print("fdl,lvk,dflv,ldkf,vlkd,")
-//        do {
-//            let regex = try NSRegularExpression(pattern: ".*[^A-Za-z0-9 ].*", options: [])
-//            if regex.firstMatch(in: string, options: [], range: NSMakeRange(0, string.count)) != nil {
-//                return false
-//            }
-//        }
-//        catch {
-//            print("ERROR")
-//        }
-//        return true
-//    }
-}
 

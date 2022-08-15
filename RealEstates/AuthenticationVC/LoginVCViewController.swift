@@ -23,7 +23,7 @@ class LoginVCViewController: UIViewController ,UITextFieldDelegate{
     
     
     
-    
+    var IsFromAnotherVc = false
     
     var TextLength = 0
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -38,22 +38,15 @@ class LoginVCViewController: UIViewController ,UITextFieldDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.Dismiss.isHidden = true
+        
+        
+        if self.IsFromAnotherVc == true{
+            self.Dismiss.isHidden = false
+        }
         self.PhoneNumber.becomeFirstResponder()
-        self.Login.layer.cornerRadius = 8
-        self.View1.layer.cornerRadius = 8
-        self.View1.layer.borderWidth = 1.5
-        self.View1.layer.borderColor = #colorLiteral(red: 0.002777122427, green: 0.4764660597, blue: 0.9986379743, alpha: 1)
-        
-        View1.clipsToBounds = false
-        View1.layer.shadowColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        View1.layer.shadowOpacity = 1
-        View1.layer.shadowOffset = .zero
-        View1.layer.shadowRadius = 3
-        
-        Login.layer.shadowColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        Login.layer.shadowOpacity = 1
-        Login.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-        Login.layer.shadowRadius = 2
+        self.Login.layer.cornerRadius = 4
+        self.View1.layer.cornerRadius = 4
         
         self.PhoneNumber.keyboardType = .asciiCapable
         self.PhoneNumber.withPrefix = true
@@ -64,14 +57,14 @@ class LoginVCViewController: UIViewController ,UITextFieldDelegate{
 
         
         if XLanguage.get() == .Kurdish{
-            self.Login.setTitle("چونه‌ ژووره‌وه‌" , for: .normal)
-            self.Login.titleLabel?.font = UIFont(name: "PeshangDes2", size: 16)!
+            self.Login.setTitle("بەردەوام بوون" , for: .normal)
+            self.Login.titleLabel?.font = UIFont(name: "PeshangDes2", size: 11)!
         }else if XLanguage.get() == .English{
-            self.Login.setTitle("LOGIN" , for: .normal)
-            self.Login.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 15)!
+            self.Login.setTitle("Next" , for: .normal)
+            self.Login.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
         }else{
-            self.Login.setTitle("تسجيل الدخول" , for: .normal)
-            self.Login.titleLabel?.font = UIFont(name: "PeshangDes2", size: 16)!
+            self.Login.setTitle("استمرار" , for: .normal)
+            self.Login.titleLabel?.font = UIFont(name: "PeshangDes2", size: 11)!
         }
         
         
@@ -81,17 +74,18 @@ class LoginVCViewController: UIViewController ,UITextFieldDelegate{
     var phone = ""
     @IBAction func Login(_ sender: Any) {
         print(self.PhoneNumber.text!)
-        if self.PhoneNumber.text != "+964"{
-            print(self.PhoneNumber.text![5])
-            
-            if self.PhoneNumber.text![5] == "0"{
-                self.phone = self.PhoneNumber.text!
-                let i = self.phone.index(self.phone.startIndex, offsetBy: 5)
-                print(i)
-                self.phone.remove(at: i)
-            }else{
-                self.phone = self.PhoneNumber.text!
+        if self.PhoneNumber.text != ""{
+            let str = self.PhoneNumber.text!
+            if str.count > 5{
+                let index = str.index(str.startIndex, offsetBy: 5)
+                if str[index] == "0" && self.PhoneNumber.currentRegion == "IRQ"{
+                    self.phone = self.PhoneNumber.text!
+                    self.phone.remove(at: index)
+                }else{
+                    self.phone = self.PhoneNumber.text!
+                }
             }
+            
             print(self.phone)
             Login.showLoader(userInteraction: true)
             PhoneAuthProvider.provider().verifyPhoneNumber(self.phone, uiDelegate: nil) { (verificationID, error) in
@@ -108,15 +102,32 @@ class LoginVCViewController: UIViewController ,UITextFieldDelegate{
                 UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let myVC = storyboard.instantiateViewController(withIdentifier: "VeryingVC") as! VerifyingVC
-                myVC.modalPresentationStyle = .fullScreen
                 self.Login.hideLoader()
-                self.present(myVC, animated: true, completion: nil)
+                if self.IsFromAnotherVc == false{
+                   self.navigationController?.pushViewController(myVC, animated: true)
+                }else{
+                    myVC.modalPresentationStyle = .fullScreen
+                    myVC.IsFromAnotherVc = true
+                    self.present(myVC, animated: true)
+                }
             }
         }else{
             self.Login.hideLoader()
-            if self.PhoneNumber.text == "+964"{
-                let myAlert = UIAlertController(title: "Please enter your number", message: nil, preferredStyle: UIAlertController.Style.alert)
-                myAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+            if self.PhoneNumber.text == ""{
+                var mss = ""
+                var action = ""
+                if XLanguage.get() == .English{
+                    mss = "Please enter phone number"
+                    action = "Ok"
+                }else if XLanguage.get() == .Kurdish{
+                    mss = "تکایە ژمارەی تەلەفۆن بنووسە"
+                    action = "باشە"
+                }else{
+                    mss = "الرجاء إدخال رقم الهاتف"
+                    action = "حسنا"
+                }
+                let myAlert = UIAlertController(title: nil, message: mss, preferredStyle: UIAlertController.Style.alert)
+                myAlert.addAction(UIAlertAction(title: action, style: UIAlertAction.Style.default, handler: nil))
                 self.present(myAlert, animated: true, completion: nil)
             }
         }
@@ -135,8 +146,8 @@ class MyGBTextField: PhoneNumberTextField {
         set {} // exists for backward compatibility
     }
 }
-extension String {
-    subscript(idx: Int) -> String {
-        String(self[index(startIndex, offsetBy: idx)])
-    }
-}
+//extension String {
+//    subscript(idx: Int) -> String {
+//        String(self[index(startIndex, offsetBy: idx)])
+//    }
+//}

@@ -865,7 +865,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TGx-LO-TUs" customClass="CosmosView" customModule="Cosmos">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TGx-LO-TUs" customClass="CosmosView" customModule="Cosmos">
                                                 <rect key="frame" x="144" y="319" width="120" height="40"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -2330,7 +2330,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="CvY-Pm-ZuS">
-                                <rect key="frame" x="204" y="438" width="20" height="20"/>
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="E8c-9G-AlY"/>
                                     <constraint firstAttribute="width" constant="20" id="hey-8F-7ly"/>
@@ -2338,10 +2338,10 @@
                                 <color key="color" red="0.4029953872" green="0.4773298003" blue="0.54045151219999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </activityIndicatorView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qmh-NH-wDp">
-                                <rect key="frame" x="0.0" y="88" width="428" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="D5y-Cv-3Nx">
-                                        <rect key="frame" x="144" y="380" width="140.5" height="45"/>
+                                        <rect key="frame" x="137" y="380" width="140.5" height="45"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Empty List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M3F-y4-SOK" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
                                                 <rect key="frame" x="32" y="0.0" width="76.5" height="25"/>
@@ -2652,10 +2652,10 @@
             </objects>
             <point key="canvasLocation" x="2188" y="2568"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar Vc-->
         <scene sceneID="03P-A8-SBn">
             <objects>
-                <tabBarController storyboardIdentifier="GoToApp" id="oK9-3G-Fqi" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="GoToApp" id="oK9-3G-Fqi" customClass="TabBarVc" customModule="RealEstates" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="M0u-EH-gEC"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="y9t-0A-wvH" customClass="UIXTabBarStyle" customModule="RealEstates" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -2684,75 +2684,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MkG-iW-yZs" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
-                                <rect key="frame" x="20" y="77" width="328" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="TFQ-eS-m8B"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="24"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="تسجيل الدخول"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Sign In"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="چوونە ژوورەوە"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
-                                        <real key="value" value="24"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
-                                        <real key="value" value="27"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZDm-iv-mFS">
-                                <rect key="frame" x="358" y="68" width="36" height="37"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="37" id="UPo-rR-xfx"/>
-                                    <constraint firstAttribute="width" constant="36" id="b48-Of-O2H"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" backgroundImage="close"/>
-                                <connections>
-                                    <action selector="Dismiss:" destination="y25-8C-HdS" eventType="touchUpInside" id="Jre-gU-GQ6"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NyS-6F-cPV">
-                                <rect key="frame" x="20" y="121" width="374" height="1"/>
-                                <color key="backgroundColor" red="0.90212796914457072" green="0.90212796914457072" blue="0.90212796914457072" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="HZh-4j-L5C"/>
-                                </constraints>
-                            </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="c6P-s2-DrV">
-                                <rect key="frame" x="20" y="142" width="374" height="81"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="c6P-s2-DrV">
+                                <rect key="frame" x="12" y="148" width="390" height="58"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Your Phone Number." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fH-32-FDc" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="Jtw-pm-FGw"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
-                                        <color key="textColor" red="0.42180117955941338" green="0.49409188484360456" blue="0.57308281792534721" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PHONE NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7u9-Sl-5e5" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="12"/>
+                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="10"/>
+                                        <color key="textColor" red="0.26946499759999998" green="0.3191690962" blue="0.36137576269999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Enter Your Phone Number."/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="أدخل رقم هاتفك."/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="ژمارەی مۆبایلت داخل بکە."/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="PHONE NUMBER"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="ژمارەی مۆبایل"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="رقم الهاتف"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
-                                                <real key="value" value="17"/>
+                                                <real key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
-                                                <real key="value" value="19"/>
+                                                <real key="value" value="11"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VmG-mo-g9V">
-                                        <rect key="frame" x="0.0" y="34" width="374" height="47"/>
+                                        <rect key="frame" x="0.0" y="18" width="390" height="40"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="+964 000 000 00 00" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CSa-xa-zso" customClass="PhoneNumberTextField" customModule="PhoneNumberKit">
-                                                <rect key="frame" x="16" y="0.0" width="342" height="47"/>
+                                                <rect key="frame" x="16" y="0.0" width="358" height="40"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="13"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
@@ -2767,61 +2725,99 @@
                                             <constraint firstAttribute="trailing" secondItem="CSa-xa-zso" secondAttribute="trailing" constant="16" id="EaM-lf-Xo3"/>
                                             <constraint firstItem="CSa-xa-zso" firstAttribute="top" secondItem="VmG-mo-g9V" secondAttribute="top" id="ZHx-sE-4Oq"/>
                                             <constraint firstItem="CSa-xa-zso" firstAttribute="leading" secondItem="VmG-mo-g9V" secondAttribute="leading" constant="16" id="j3o-U4-bsW"/>
-                                            <constraint firstAttribute="height" constant="47" id="zzk-P9-9Hq"/>
+                                            <constraint firstAttribute="height" constant="40" id="zzk-P9-9Hq"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1YR-K0-u2b" customClass="LoadingButton" customModule="MHLoadingButton">
-                                <rect key="frame" x="20" y="253" width="374" height="45"/>
-                                <color key="backgroundColor" systemColor="linkColor"/>
+                            <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1YR-K0-u2b" customClass="LoadingButton" customModule="MHLoadingButton">
+                                <rect key="frame" x="12" y="236" width="390" height="37"/>
+                                <color key="backgroundColor" red="0.27762734720522736" green="0.45648036045695495" blue="0.71672659209280298" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="Olc-jh-axx"/>
+                                    <constraint firstAttribute="height" constant="37" id="Olc-jh-axx"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="11"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Log in ">
+                                <state key="normal" title="Next ">
                                     <color key="titleColor" red="0.92238023550000003" green="0.92238023550000003" blue="0.92238023550000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="8"/>
+                                        <real key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="Login:" destination="y25-8C-HdS" eventType="touchUpInside" id="0k4-Bl-beT"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter phone number" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dy3-Rz-ZhK" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
+                                <rect key="frame" x="37" y="93" width="340" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="fle-wb-fKO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Enter phone number"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="ژمارەی تەلەفۆن بنووسە"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="أدخل رقم الهاتف"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xtg-YS-hK3">
+                                <rect key="frame" x="12" y="100" width="24" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="0fE-XM-IYu"/>
+                                    <constraint firstAttribute="width" constant="24" id="Ni6-PG-gFi"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="down-arrow"/>
+                                <connections>
+                                    <action selector="Dismiss:" destination="y25-8C-HdS" eventType="touchUpInside" id="xf2-p8-nBD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dxz-nt-aEY"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.93508017183554293" green="0.93508017183554293" blue="0.93508017183554293" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="dxz-nt-aEY" firstAttribute="trailing" secondItem="c6P-s2-DrV" secondAttribute="trailing" constant="20" id="5Qz-fd-L9x"/>
+                            <constraint firstItem="dxz-nt-aEY" firstAttribute="trailing" secondItem="dy3-Rz-ZhK" secondAttribute="trailing" constant="37" id="1JL-Q1-ddJ"/>
+                            <constraint firstItem="dy3-Rz-ZhK" firstAttribute="leading" secondItem="dxz-nt-aEY" secondAttribute="leading" constant="37" id="3kB-qL-bso"/>
+                            <constraint firstItem="dxz-nt-aEY" firstAttribute="trailing" secondItem="c6P-s2-DrV" secondAttribute="trailing" constant="12" id="5Qz-fd-L9x"/>
                             <constraint firstItem="1YR-K0-u2b" firstAttribute="top" secondItem="c6P-s2-DrV" secondAttribute="bottom" constant="30" id="6Uj-wz-e00"/>
-                            <constraint firstItem="dxz-nt-aEY" firstAttribute="trailing" secondItem="ZDm-iv-mFS" secondAttribute="trailing" constant="20" id="Alx-H1-GDZ"/>
-                            <constraint firstItem="NyS-6F-cPV" firstAttribute="leading" secondItem="dxz-nt-aEY" secondAttribute="leading" constant="20" id="Esj-ZA-aay"/>
-                            <constraint firstItem="MkG-iW-yZs" firstAttribute="top" secondItem="dxz-nt-aEY" secondAttribute="top" constant="33" id="KKU-bn-mtU"/>
-                            <constraint firstItem="MkG-iW-yZs" firstAttribute="leading" secondItem="dxz-nt-aEY" secondAttribute="leading" constant="20" id="QGW-LT-uY2"/>
-                            <constraint firstItem="dxz-nt-aEY" firstAttribute="trailing" secondItem="NyS-6F-cPV" secondAttribute="trailing" constant="20" id="SJT-lh-dT9"/>
-                            <constraint firstItem="ZDm-iv-mFS" firstAttribute="leading" secondItem="MkG-iW-yZs" secondAttribute="trailing" constant="10" id="Un2-8R-oW8"/>
-                            <constraint firstItem="1YR-K0-u2b" firstAttribute="leading" secondItem="dxz-nt-aEY" secondAttribute="leading" constant="20" id="atP-GD-dFc"/>
-                            <constraint firstItem="ZDm-iv-mFS" firstAttribute="top" secondItem="dxz-nt-aEY" secondAttribute="top" constant="24" id="gAd-b5-xMR"/>
-                            <constraint firstItem="dxz-nt-aEY" firstAttribute="trailing" secondItem="1YR-K0-u2b" secondAttribute="trailing" constant="20" id="q0l-wN-Sd4"/>
-                            <constraint firstItem="c6P-s2-DrV" firstAttribute="top" secondItem="NyS-6F-cPV" secondAttribute="bottom" constant="20" id="x8o-Hc-pNu"/>
-                            <constraint firstItem="NyS-6F-cPV" firstAttribute="top" secondItem="MkG-iW-yZs" secondAttribute="bottom" constant="10" id="yKY-ml-wu7"/>
-                            <constraint firstItem="c6P-s2-DrV" firstAttribute="leading" secondItem="dxz-nt-aEY" secondAttribute="leading" constant="20" id="zH2-bI-IMP"/>
+                            <constraint firstItem="c6P-s2-DrV" firstAttribute="top" secondItem="dy3-Rz-ZhK" secondAttribute="bottom" constant="20" id="Pd3-Ae-ofI"/>
+                            <constraint firstItem="xtg-YS-hK3" firstAttribute="top" secondItem="dxz-nt-aEY" secondAttribute="top" constant="12" id="Uj2-62-9Br"/>
+                            <constraint firstItem="xtg-YS-hK3" firstAttribute="leading" secondItem="dxz-nt-aEY" secondAttribute="leading" constant="12" id="XWi-hI-Cxx"/>
+                            <constraint firstItem="1YR-K0-u2b" firstAttribute="leading" secondItem="dxz-nt-aEY" secondAttribute="leading" constant="12" id="atP-GD-dFc"/>
+                            <constraint firstItem="dy3-Rz-ZhK" firstAttribute="top" secondItem="dxz-nt-aEY" secondAttribute="top" constant="5" id="ojV-W5-A4m"/>
+                            <constraint firstItem="dxz-nt-aEY" firstAttribute="trailing" secondItem="1YR-K0-u2b" secondAttribute="trailing" constant="12" id="q0l-wN-Sd4"/>
+                            <constraint firstItem="c6P-s2-DrV" firstAttribute="leading" secondItem="dxz-nt-aEY" secondAttribute="leading" constant="12" id="zH2-bI-IMP"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="m1J-UJ-9Y6">
+                        <barButtonItem key="backBarButtonItem" title="  " id="aKR-ek-F4k"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Enter phone number"/>
+                            <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="أدخل رقم الهاتف"/>
+                            <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="ژمارەی تەلەفۆن بنووسە"/>
+                        </userDefinedRuntimeAttributes>
+                    </navigationItem>
                     <connections>
-                        <outlet property="Dismiss" destination="ZDm-iv-mFS" id="6oG-Em-1pY"/>
+                        <outlet property="Dismiss" destination="xtg-YS-hK3" id="qva-Mp-00Y"/>
                         <outlet property="Login" destination="1YR-K0-u2b" id="FWY-Gg-92n"/>
                         <outlet property="PhoneNumber" destination="CSa-xa-zso" id="vg6-aJ-Ilb"/>
                         <outlet property="View1" destination="VmG-mo-g9V" id="Vea-yX-fIt"/>
+                        <segue destination="tKh-ed-iLY" kind="show" id="nWr-id-APP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l9K-Tg-EGM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2871" y="1195"/>
+            <point key="canvasLocation" x="2869.5652173913045" y="1194.6428571428571"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="T6f-hZ-re7">
@@ -4175,6 +4171,9 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outletCollection property="gestureRecognizers" destination="wzm-sL-2Ts" appends="YES" id="9mE-KW-0zd"/>
+                                                        </connections>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zEj-bz-odH">
                                                         <rect key="frame" x="0.0" y="391" width="189" height="85"/>
@@ -4531,7 +4530,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dvA-0K-KhN">
-                        <barButtonItem key="backBarButtonItem" title=" " id="wbj-pd-hKA"/>
+                        <barButtonItem key="backBarButtonItem" title="  " id="wbj-pd-hKA"/>
                         <barButtonItem key="leftBarButtonItem" title="Settings" id="3OJ-wE-Hag" customClass="LanguageBarItem" customModule="RealEstates" customModuleProvider="target">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="ڕێکخستنەکان"/>
@@ -4572,6 +4571,7 @@
                         <outlet property="MyPropertiesAction" destination="74L-SL-xo7" id="6md-rQ-Nsw"/>
                         <outlet property="Name" destination="hOk-nQ-f8W" id="f4t-4Q-SLe"/>
                         <outlet property="NavTitle" destination="3OJ-wE-Hag" id="7qT-8g-gZu"/>
+                        <outlet property="NotificationLable" destination="TOx-SJ-7Ku" id="Hed-xU-cbb"/>
                         <outlet property="Phone" destination="2w7-22-l89" id="d9M-6A-MFg"/>
                         <outlet property="ProfileInfoStackView" destination="b4A-on-b3y" id="BaK-8y-6Nv"/>
                         <outlet property="ProfileInfoStackViewLayout" destination="kA2-yl-gc8" id="GJE-eD-Eg7"/>
@@ -4589,6 +4589,7 @@
                         <outlet property="ViewdItemAction" destination="QFD-oR-2Ar" id="0Mk-Dd-udA"/>
                         <outlet property="ViewdItems" destination="hfN-ra-XEo" id="i6a-IK-hPU"/>
                         <outlet property="ViewditemView" destination="Z5c-YJ-gRC" id="fAZ-ee-yUy"/>
+                        <segue destination="y25-8C-HdS" kind="show" id="Sxk-oC-BfR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jAg-dq-CvN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -4659,6 +4660,11 @@
                 <tapGestureRecognizer id="rqT-Nw-EFt" userLabel="GetYA">
                     <connections>
                         <action selector="GetYAAction:" destination="GDD-yN-csg" id="Dvt-En-0BJ"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="wzm-sL-2Ts" userLabel="notifications">
+                    <connections>
+                        <action selector="Notification:" destination="GDD-yN-csg" id="jag-WY-tfj"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -4992,22 +4998,31 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="PROFILE" id="pgW-ej-5Cv" customClass="LanguageNvigationItem" customModule="RealEstates" customModuleProvider="target">
-                        <barButtonItem key="rightBarButtonItem" title="SAVE" id="dca-7P-tZz" customClass="LanguageBarItem" customModule="RealEstates" customModuleProvider="target">
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="حفظ"/>
-                                <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="SAVE"/>
-                                <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="پاراستن"/>
-                                <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
-                                    <real key="value" value="15"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
-                                    <real key="value" value="17"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="Save:" destination="qfc-xC-urU" id="Ig5-av-UAy"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="backBarButtonItem" title=" " id="VGG-lH-VdN"/>
+                        <rightBarButtonItems>
+                            <barButtonItem image="setting" id="uTR-vt-Tz9">
+                                <color key="tintColor" red="0.26946499759999998" green="0.3191690962" blue="0.36137576269999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <connections>
+                                    <segue destination="nPP-Sb-rBJ" kind="show" id="sjs-rA-G5X"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="SAVE" id="dca-7P-tZz" customClass="LanguageBarItem" customModule="RealEstates" customModuleProvider="target">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="حفظ"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="SAVE"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="پاراستن"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
+                                        <real key="value" value="17"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="Save:" destination="qfc-xC-urU" id="Ig5-av-UAy"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="PROFILE"/>
                             <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="پرۆفایل"/>
@@ -5101,6 +5116,77 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lxk-MW-gbh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3543" y="1922"/>
+        </scene>
+        <!--Deletion AccountVC-->
+        <scene sceneID="OKs-TS-ERY">
+            <objects>
+                <viewController id="nPP-Sb-rBJ" customClass="DeletionAccountVC" customModule="RealEstates" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gWj-QS-GUO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SjL-1g-7qJ">
+                                <rect key="frame" x="10" y="108" width="394" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete Account" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2g7-Wm-rY4" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="10" width="362" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="eio-0C-9ZN"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="14"/>
+                                        <color key="textColor" red="0.1533161515" green="0.20187605710000001" blue="0.26883335310000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Delete Account"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="سڕینەوەی ئەکاونت"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="حذف الحساب"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
+                                                <real key="value" value="14"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
+                                                <real key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="42w-XX-jmp"/>
+                                    <constraint firstAttribute="bottom" secondItem="2g7-Wm-rY4" secondAttribute="bottom" constant="10" id="47b-Gh-l3G"/>
+                                    <constraint firstAttribute="trailing" secondItem="2g7-Wm-rY4" secondAttribute="trailing" constant="16" id="GLl-pk-bqF"/>
+                                    <constraint firstItem="2g7-Wm-rY4" firstAttribute="leading" secondItem="SjL-1g-7qJ" secondAttribute="leading" constant="16" id="cfh-wQ-IAm"/>
+                                    <constraint firstItem="2g7-Wm-rY4" firstAttribute="top" secondItem="SjL-1g-7qJ" secondAttribute="top" constant="10" id="dGs-JM-pfh"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="CornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="fYX-do-vct" appends="YES" id="Upg-nr-AM3"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="aLo-4W-bTi"/>
+                        <color key="backgroundColor" red="0.93333333730000001" green="0.93333333730000001" blue="0.93333333730000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="SjL-1g-7qJ" firstAttribute="centerX" secondItem="gWj-QS-GUO" secondAttribute="centerX" id="CJR-Ds-Ikl"/>
+                            <constraint firstItem="SjL-1g-7qJ" firstAttribute="leading" secondItem="aLo-4W-bTi" secondAttribute="leading" constant="10" id="Uqp-Fx-tAQ"/>
+                            <constraint firstItem="aLo-4W-bTi" firstAttribute="trailing" secondItem="SjL-1g-7qJ" secondAttribute="trailing" constant="10" id="iMj-CF-H6o"/>
+                            <constraint firstItem="SjL-1g-7qJ" firstAttribute="top" secondItem="aLo-4W-bTi" secondAttribute="top" constant="20" id="xwB-hj-bem"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="pvZ-6g-QyJ" customClass="LanguageNvigationItem" customModule="RealEstates" customModuleProvider="target"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RSq-jb-byB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="fYX-do-vct">
+                    <connections>
+                        <action selector="DeleteAccount:" destination="nPP-Sb-rBJ" id="Ugo-x6-97a"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="5579.7101449275369" y="2552.0089285714284"/>
         </scene>
         <!--VIEWD ITEMS-->
         <scene sceneID="0ir-H4-qLf">
@@ -6661,136 +6747,150 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verifying Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y1g-kf-gKj" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
-                                <rect key="frame" x="20" y="77" width="328" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="1B0-yA-5RD"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="24"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="پشتڕاستکردنەوەی ژمارە"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="التحقق من الرقم"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Verifying Number"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
-                                        <real key="value" value="24"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
-                                        <real key="value" value="27"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jla-Kh-rI7">
-                                <rect key="frame" x="358" y="68" width="36" height="37"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="37" id="cRG-rV-RZr"/>
-                                    <constraint firstAttribute="width" constant="36" id="pGz-jG-7P6"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" backgroundImage="close"/>
-                                <connections>
-                                    <action selector="Dismis:" destination="tKh-ed-iLY" eventType="touchUpInside" id="3ts-Af-UlF"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iaF-QI-KY8">
-                                <rect key="frame" x="20" y="121" width="374" height="1"/>
-                                <color key="backgroundColor" red="0.90212796910000004" green="0.90212796910000004" blue="0.90212796910000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="tMv-JE-HKg"/>
-                                </constraints>
-                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bNY-ac-4Sf">
-                                <rect key="frame" x="20" y="142" width="374" height="85"/>
+                                <rect key="frame" x="12" y="173" width="390" height="40"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter OTP Code." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wH5-Zf-6wA" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="20"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ipg-Yg-caR">
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="40"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Kg-pW-ZPQ">
+                                                <rect key="frame" x="10" y="3" width="370" height="34"/>
+                                                <color key="textColor" red="0.1325884162" green="0.17458321530000001" blue="0.23248815049999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholderSeparator" value="-"/>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                        <color key="value" red="0.80430834220000003" green="0.80430834220000003" blue="0.80430834220000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="count">
+                                                        <integer key="value" value="6"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="spacing">
+                                                        <real key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
+                                                        <color key="value" red="0.90212796910000004" green="0.90212796910000004" blue="0.90212796910000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="za2-N7-9uD"/>
+                                            <constraint firstAttribute="trailing" secondItem="9Kg-pW-ZPQ" secondAttribute="trailing" constant="10" id="0JR-Yn-qzG"/>
+                                            <constraint firstItem="9Kg-pW-ZPQ" firstAttribute="top" secondItem="Ipg-Yg-caR" secondAttribute="top" constant="3" id="WYZ-uw-BcF"/>
+                                            <constraint firstItem="9Kg-pW-ZPQ" firstAttribute="leading" secondItem="Ipg-Yg-caR" secondAttribute="leading" constant="10" id="iFa-Of-4Xp"/>
+                                            <constraint firstAttribute="bottom" secondItem="9Kg-pW-ZPQ" secondAttribute="bottom" constant="3" id="rkF-a0-fRG"/>
+                                            <constraint firstAttribute="height" constant="40" id="yP1-hg-EzS"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
-                                        <color key="textColor" red="0.42405471210000001" green="0.49670350549999998" blue="0.57256138320000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="أدخل رمز OTP."/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Enter OTP Code."/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="کۆدی OTP بنووسە."/>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
-                                                <real key="value" value="17"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
-                                                <real key="value" value="19"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="CornerRadius">
+                                                <integer key="value" value="4"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Kg-pW-ZPQ" customClass="OTPTextField">
-                                        <rect key="frame" x="0.0" y="40" width="374" height="45"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="45" id="qf6-wO-Mw5"/>
-                                        </constraints>
-                                        <color key="textColor" red="0.1325884162" green="0.17458321530000001" blue="0.23248815049999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="25"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderSeparator" value="-"/>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                <color key="value" red="0.80430834220000003" green="0.80430834220000003" blue="0.80430834220000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="count">
-                                                <integer key="value" value="6"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="spacing">
-                                                <real key="value" value="20"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
-                                                <color key="value" red="0.90212796910000004" green="0.90212796910000004" blue="0.90212796910000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </textField>
+                                    </view>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTD-5l-dat" customClass="LoadingButton" customModule="MHLoadingButton">
-                                <rect key="frame" x="20" y="253" width="374" height="45"/>
-                                <color key="backgroundColor" systemColor="linkColor"/>
+                                <rect key="frame" x="12" y="239" width="390" height="37"/>
+                                <color key="backgroundColor" red="0.27762734719999999" green="0.45648036050000002" blue="0.7167265921" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="4kj-jp-QNG"/>
+                                    <constraint firstAttribute="height" constant="37" id="4kj-jp-QNG"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="11"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Verify">
                                     <color key="titleColor" red="0.92238023550000003" green="0.92238023550000003" blue="0.92238023550000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="8"/>
+                                        <real key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="Verify:" destination="tKh-ed-iLY" eventType="touchUpInside" id="cP3-UY-Nu4"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Y50-jo-XGX">
+                                <rect key="frame" x="37" y="93" width="340" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your confirmation code" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnG-Vh-4nQ" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
+                                        <rect key="frame" x="57" y="0.0" width="226.5" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="u1k-F2-n52"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Enter your confirmation code"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="کۆدی پشتڕاستکردنەوەت بنووسە"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="أدخل رمز التأكيد الخاص بك"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
+                                                <real key="value" value="16"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
+                                                <real key="value" value="16"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="An SMS was sent to" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSG-fF-jyl">
+                                        <rect key="frame" x="113" y="30" width="114" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="RVK-tP-LFu"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
+                                        <color key="textColor" red="0.26946499759999998" green="0.3191690962" blue="0.36137576269999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="PHONE NUMBER"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="ژمارەی مۆبایل"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="رقم الهاتف"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
+                                                <real key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
+                                                <real key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="exg-Iq-qXE">
+                                <rect key="frame" x="12" y="100" width="24" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="8TG-k9-clk"/>
+                                    <constraint firstAttribute="height" constant="21" id="uoW-f1-5vt"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="down-arrow"/>
+                                <connections>
+                                    <action selector="Dismis:" destination="tKh-ed-iLY" eventType="touchUpInside" id="v3D-jI-Tjf"/>
+                                    <action selector="Dismiss:" destination="y25-8C-HdS" eventType="touchUpInside" id="pjB-an-oGo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YaR-aK-qM0"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.93333333730000001" green="0.93333333730000001" blue="0.93333333730000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="Y1g-kf-gKj" firstAttribute="top" secondItem="YaR-aK-qM0" secondAttribute="top" constant="33" id="ATH-Qm-gnm"/>
-                            <constraint firstItem="iaF-QI-KY8" firstAttribute="top" secondItem="Y1g-kf-gKj" secondAttribute="bottom" constant="10" id="EWo-Jc-Yrg"/>
                             <constraint firstItem="LTD-5l-dat" firstAttribute="top" secondItem="bNY-ac-4Sf" secondAttribute="bottom" constant="26" id="FG1-eR-4mA"/>
-                            <constraint firstItem="YaR-aK-qM0" firstAttribute="trailing" secondItem="jla-Kh-rI7" secondAttribute="trailing" constant="20" id="NKQ-KB-RAr"/>
-                            <constraint firstItem="bNY-ac-4Sf" firstAttribute="leading" secondItem="YaR-aK-qM0" secondAttribute="leading" constant="20" id="QKW-9b-0ei"/>
-                            <constraint firstItem="LTD-5l-dat" firstAttribute="leading" secondItem="YaR-aK-qM0" secondAttribute="leading" constant="20" id="TDO-ef-egu"/>
-                            <constraint firstItem="iaF-QI-KY8" firstAttribute="leading" secondItem="YaR-aK-qM0" secondAttribute="leading" constant="20" id="Ta2-MW-glN"/>
-                            <constraint firstItem="bNY-ac-4Sf" firstAttribute="top" secondItem="iaF-QI-KY8" secondAttribute="bottom" constant="20" id="bpy-hI-4bj"/>
-                            <constraint firstItem="YaR-aK-qM0" firstAttribute="trailing" secondItem="bNY-ac-4Sf" secondAttribute="trailing" constant="20" id="hd7-ob-WIz"/>
-                            <constraint firstItem="Y1g-kf-gKj" firstAttribute="leading" secondItem="YaR-aK-qM0" secondAttribute="leading" constant="20" id="lbq-6t-2rH"/>
-                            <constraint firstItem="jla-Kh-rI7" firstAttribute="leading" secondItem="Y1g-kf-gKj" secondAttribute="trailing" constant="10" id="liA-Q4-F33"/>
-                            <constraint firstItem="YaR-aK-qM0" firstAttribute="trailing" secondItem="LTD-5l-dat" secondAttribute="trailing" constant="20" id="pun-ym-kmP"/>
-                            <constraint firstItem="YaR-aK-qM0" firstAttribute="trailing" secondItem="iaF-QI-KY8" secondAttribute="trailing" constant="20" id="vSI-wi-lbN"/>
-                            <constraint firstItem="jla-Kh-rI7" firstAttribute="top" secondItem="YaR-aK-qM0" secondAttribute="top" constant="24" id="xdH-2X-wjK"/>
+                            <constraint firstItem="exg-Iq-qXE" firstAttribute="leading" secondItem="YaR-aK-qM0" secondAttribute="leading" constant="12" id="NVY-zS-urB"/>
+                            <constraint firstItem="bNY-ac-4Sf" firstAttribute="leading" secondItem="YaR-aK-qM0" secondAttribute="leading" constant="12" id="QKW-9b-0ei"/>
+                            <constraint firstItem="YaR-aK-qM0" firstAttribute="trailing" secondItem="Y50-jo-XGX" secondAttribute="trailing" constant="37" id="R0y-wM-Nzh"/>
+                            <constraint firstItem="LTD-5l-dat" firstAttribute="leading" secondItem="YaR-aK-qM0" secondAttribute="leading" constant="12" id="TDO-ef-egu"/>
+                            <constraint firstItem="Y50-jo-XGX" firstAttribute="leading" secondItem="YaR-aK-qM0" secondAttribute="leading" constant="37" id="cMb-sc-JQV"/>
+                            <constraint firstItem="YaR-aK-qM0" firstAttribute="trailing" secondItem="bNY-ac-4Sf" secondAttribute="trailing" constant="12" id="hd7-ob-WIz"/>
+                            <constraint firstItem="exg-Iq-qXE" firstAttribute="top" secondItem="YaR-aK-qM0" secondAttribute="top" constant="12" id="jGe-vX-9un"/>
+                            <constraint firstItem="YaR-aK-qM0" firstAttribute="trailing" secondItem="LTD-5l-dat" secondAttribute="trailing" constant="12" id="pun-ym-kmP"/>
+                            <constraint firstItem="Y50-jo-XGX" firstAttribute="top" secondItem="YaR-aK-qM0" secondAttribute="top" constant="5" id="z5t-1C-nAx"/>
+                            <constraint firstItem="bNY-ac-4Sf" firstAttribute="top" secondItem="Y50-jo-XGX" secondAttribute="bottom" constant="20" id="zgf-qY-G4L"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="g52-vP-lOK" customClass="LanguageNvigationItem" customModule="RealEstates" customModuleProvider="target"/>
                     <connections>
+                        <outlet property="Dismiss" destination="exg-Iq-qXE" id="5Wf-qx-V17"/>
                         <outlet property="OTPCode" destination="9Kg-pW-ZPQ" id="TBM-8s-dgM"/>
+                        <outlet property="VerifingLable" destination="aSG-fF-jyl" id="Ppk-03-tlg"/>
                         <outlet property="Verify" destination="LTD-5l-dat" id="8gf-0F-tkg"/>
                     </connections>
                 </viewController>
@@ -6919,22 +7019,16 @@
     </scenes>
     <designables>
         <designable name="1YR-K0-u2b">
-            <size key="intrinsicContentSize" width="55" height="32"/>
-        </designable>
-        <designable name="9Kg-pW-ZPQ">
-            <size key="intrinsicContentSize" width="7" height="30.5"/>
+            <size key="intrinsicContentSize" width="30" height="25"/>
         </designable>
         <designable name="LTD-5l-dat">
-            <size key="intrinsicContentSize" width="48" height="32"/>
-        </designable>
-        <designable name="TGx-LO-TUs">
-            <size key="intrinsicContentSize" width="120" height="20"/>
+            <size key="intrinsicContentSize" width="31" height="25"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="bVW-1x-iCi"/>
         <segue reference="x2K-O3-G9L"/>
-        <segue reference="t5N-62-9lD"/>
+        <segue reference="sQ1-xM-CxL"/>
         <segue reference="uAK-j6-hYl"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -6951,7 +7045,6 @@
         <image name="back" width="7801" height="4001"/>
         <image name="bell-ring" width="170.66667175292969" height="170.66667175292969"/>
         <image name="call" width="43" height="43"/>
-        <image name="close" width="24" height="25"/>
         <image name="down-arrow" width="170.66667175292969" height="170.66667175292969"/>
         <image name="empty-folder" width="512" height="512"/>
         <image name="empty-star" width="24" height="24"/>
@@ -6976,6 +7069,7 @@
         <image name="right" width="24" height="24"/>
         <image name="right-1" width="170.66667175292969" height="170.66667175292969"/>
         <image name="see2" width="170.66667175292969" height="170.66667175292969"/>
+        <image name="setting" width="21.333333969116211" height="21.333333969116211"/>
         <image name="share" width="61" height="61"/>
         <image name="startdate" width="170.66667175292969" height="170.66667175292969"/>
         <image name="thumb1" width="24" height="24"/>
@@ -6984,9 +7078,6 @@
         <image name="vuesax-bold-slider-vertical" width="170.66667175292969" height="170.66667175292969"/>
         <image name="vuesax-linear-buildings" width="24" height="24"/>
         <image name="vuesax-twotone-arrow-right" width="24" height="24"/>
-        <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

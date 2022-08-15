@@ -232,8 +232,7 @@ class Home: UIViewController ,UITextFieldDelegate{
             self.navigationController?.pushViewController(myVC, animated: true)
         }else{
             let vc = storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVCViewController
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
@@ -245,8 +244,7 @@ class Home: UIViewController ,UITextFieldDelegate{
             self.navigationController?.pushViewController(myVC, animated: true)
         }else{
             let vc = storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVCViewController
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     

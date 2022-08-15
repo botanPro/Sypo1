@@ -9,6 +9,7 @@ import UIKit
 import BSImagePicker
 import Photos
 import Firebase
+import FirebaseAuth
 import FirebaseStorage
 import FirebaseFirestore
 class EditProfileVC: UIViewController ,UITextFieldDelegate, UITextViewDelegate{
@@ -103,8 +104,7 @@ class EditProfileVC: UIViewController ,UITextFieldDelegate, UITextViewDelegate{
     }
     
     
-    
-    
+
     
     func EmptyTextField(_ textfield : UITextField){
         AudioServicesPlaySystemSound(1519);
@@ -159,7 +159,7 @@ class EditProfileVC: UIViewController ,UITextFieldDelegate, UITextViewDelegate{
                    
                     if let FireId = UserDefaults.standard.string(forKey: "UserId"){
                             if self.Images.count == 0{
-                                OfficesObject.init(name: self.Name.text!, id:self.Offiecid , fire_id: FireId, address: self.Location.text!,about: self.AboutMe.text!, phone1: self.Number1.text!, phone2: self.Number2.text!, ImageURL:self.OfficeImage, type_id: self.userTypeId).Update()
+                                OfficesObject.init(name: self.Name.text!, id:self.Offiecid , fire_id: FireId, address: self.Location.text!,about: self.AboutMe.text!, phone1: self.Number1.text!, phone2: self.Number2.text!, ImageURL:self.OfficeImage, type_id: self.userTypeId, archived: "0").Update()
                             }else{
                                 print(self.OfficeImage.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
                                 let imageUrl = self.OfficeImage.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
@@ -169,7 +169,7 @@ class EditProfileVC: UIViewController ,UITextFieldDelegate, UITextViewDelegate{
                                 }
                                 
                                 self.uploadManyImage { URLs in
-                                    OfficesObject.init(name: self.Name.text!, id:self.Offiecid , fire_id: FireId, address: self.Location.text!,about: self.AboutMe.text!, phone1: self.Number1.text!, phone2: self.Number2.text!, ImageURL:URLs[0], type_id: self.userTypeId).Update()
+                                    OfficesObject.init(name: self.Name.text!, id:self.Offiecid , fire_id: FireId, address: self.Location.text!,about: self.AboutMe.text!, phone1: self.Number1.text!, phone2: self.Number2.text!, ImageURL:URLs[0], type_id: self.userTypeId, archived: "0").Update()
                                 }
                         }
                         self.navigationController?.popViewController(animated: true)
