@@ -85,14 +85,14 @@
 	<key>NSCameraUsageDescription</key>
 	<string>would you like to access to camera?</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>$(PRODUCT_NAME) need to access your location, your location will use for showing nearest estates from your current location.</string>
+	<string>Allow $(PRODUCT_NAME) to use your location? Turning on location services allows app to show you when estates are nearby.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Used to save images into your galery</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>$(PRODUCT_NAME) Need to access your images, you will need images when  you trying upload the estates.</string>
+	<string>Allow $(PRODUCT_NAME) to access your images?  You will need images when  you trying upload the estates.</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string></string>
+		<string>Peshang_Des_2.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

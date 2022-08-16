@@ -353,11 +353,14 @@ extension ProjectDetailsVC : UICollectionViewDataSource, UICollectionViewDelegat
                 cell.rightimage.isHidden = true
             }
             if XLanguage.get() == .Kurdish{
-                cell.Typee.font = UIFont(name: "PeshangDes2", size: 10)!
-            }else if XLanguage.get() == .Kurdish{
+                cell.Typee.font = UIFont(name: "PeshangDes2", size: 11)!
+                cell.Value.font = UIFont(name: "PeshangDes2", size: 10)!
+            }else if XLanguage.get() == .English{
                 cell.Typee.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+                cell.Value.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
             }else{
-                cell.Typee.font = UIFont(name: "PeshangDes2", size: 10)!
+                cell.Typee.font = UIFont(name: "PeshangDes2", size: 11)!
+                cell.Value.font = UIFont(name: "PeshangDes2", size: 10)!
             }
             return cell
         }

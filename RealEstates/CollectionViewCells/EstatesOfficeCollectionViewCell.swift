@@ -30,15 +30,17 @@ class EstatesOfficeCollectionViewCell: UICollectionViewCell {
         
         
         OfficeRatingAip.GetRatingByOfficeId(office_id: cell.id ?? "") { arr in
-            if arr.office_id == cell.id{
-                self.count += 1
-                self.RateValue += arr.rate ?? 0.0
-            }
-            self.RateValue = self.RateValue / self.count
-            print("RateValue : \(self.RateValue)")
-            self.RateLable.text = "\(self.RateValue)"
+            self.count += 1
+            self.RateValue = self.RateValue + (arr.rate ?? 0.0)
+            self.RateLable.text = "\((self.RateValue / self.count).rounded(toPlaces: 1))"
         }
        
     }
     
+}
+extension Double {
+    func rounded(toPlaces places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
 }

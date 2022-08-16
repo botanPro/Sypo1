@@ -48,8 +48,11 @@ class EstatesVC: UIViewController {
    func GetOffices(){
         self.Offices.removeAll()
         OfficeAip.GetAllOffice{ office in
-            self.Offices = office
-            self.Offices.shuffle()
+            for off in office {
+                if off.archived != "1"{
+                    self.Offices.append(off)
+                }
+            }
             print("office count is : \(office.count)")
             self.EstateCollectionView.reloadData()
             self.EstateCollectionView.cr.endHeaderRefresh()

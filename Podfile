@@ -66,6 +66,8 @@ target 'RealEstates' do
   
   pod 'EmptyDataSet-Swift', '~> 5.0.0'
   
+  pod 'GIFImageView'
+  
   target 'RealEstatesTests' do
     inherit! :search_paths
     # Pods for testing

@@ -78,20 +78,35 @@ class Home: UIViewController ,UITextFieldDelegate{
     var HistoryArray : [String] = []
     
     
+    @IBOutlet weak var SearchViewRight: NSLayoutConstraint!
     
-    
-    
-    @objc func tapDone(sender: Any) {
+    @IBAction func Cancel(_ sender: Any) {
         self.view.endEditing(true)
         self.navigationItem.rightBarButtonItem?.isEnabled = true
        self.navigationItem.leftBarButtonItem?.isEnabled = true
         UIView.animate(withDuration: 0.2) {
             self.SearchTableView.alpha = 0
+            self.SearchViewRight.constant = 10
             self.SearchText.text = ""
             self.view.layoutIfNeeded()
         }
     }
     
+    
+    
+//
+//    @objc func tapDone(sender: Any) {
+//        self.view.endEditing(true)
+//        self.navigationItem.rightBarButtonItem?.isEnabled = true
+//       self.navigationItem.leftBarButtonItem?.isEnabled = true
+//        UIView.animate(withDuration: 0.2) {
+//            self.SearchTableView.alpha = 0
+//            self.SearchText.text = ""
+//            self.SearchViewRight.constant = 10
+//            self.view.layoutIfNeeded()
+//        }
+//    }
+//
     
     
     
@@ -103,7 +118,7 @@ class Home: UIViewController ,UITextFieldDelegate{
         TitleSubTile()
         
 
-        self.SearchText.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
+//        self.SearchText.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
         self.SearchText.delegate = self
         self.SearchView.layer.cornerRadius = 10
         self.SliderView.layer.cornerRadius = 10
@@ -370,6 +385,7 @@ class Home: UIViewController ,UITextFieldDelegate{
             self.IsFirst = !self.IsFirst
             UIView.animate(withDuration: 0.2) {
                 self.SearchTableView.alpha = 1
+                self.SearchViewRight.constant = 85
                 self.view.layoutIfNeeded()
             }
         return true

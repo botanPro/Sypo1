@@ -63,7 +63,7 @@
                                                     <constraint firstAttribute="width" constant="20" id="pZz-5v-fUI"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="rooms" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I9b-OA-lVl">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I9b-OA-lVl">
                                                 <rect key="frame" x="25" y="3.5" width="45" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="MDc-Q9-4Ho"/>
@@ -135,7 +135,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Cer-cb-9jC">
                                             <rect key="frame" x="7" y="21" width="164" height="31"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pjo-oJ-YT8">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pjo-oJ-YT8" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
                                                     <rect key="frame" x="68" y="0.0" width="28.5" height="11"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="11" id="w53-Gk-3qv"/>
@@ -143,6 +143,17 @@
                                                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="11"/>
                                                     <color key="textColor" red="0.84652185921717171" green="0.84652185921717171" blue="0.84652185921717171" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Price"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="نرخ"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="السعر"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
+                                                            <real key="value" value="11"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
+                                                            <real key="value" value="12"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbJ-7G-1FU">
                                                     <rect key="frame" x="37" y="16" width="90" height="15"/>

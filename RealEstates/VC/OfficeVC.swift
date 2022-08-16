@@ -152,9 +152,7 @@ class OfficeVC: UIViewController {
                     self.count += 1
                     self.RateValue += arr.rate ?? 0.0
                 }
-                self.RateValue = self.RateValue / self.count
-                print("RateValue : \(self.RateValue)")
-                self.RateLable.text = "\(self.RateValue)"
+                self.RateLable.text = "\((self.RateValue / self.count).rounded(toPlaces: 1))"
             }
             
             

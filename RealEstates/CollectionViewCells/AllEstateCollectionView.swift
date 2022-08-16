@@ -31,9 +31,8 @@ class AllEstateCollectionView: UICollectionViewCell {
     var lang : Int = UserDefaults.standard.integer(forKey: "language")
     func update(_ cell: EstateObject){
         
-        if cell.state == "1"{
+        if cell.sold == "1"{
             self.Sold.isHidden = false
-            UIView.animate(withDuration: 2, delay: 0.3, options: [.repeat, .autoreverse]) { self.Sold.alpha = 0.3 } completion: { finish in }
         }else{
             self.Sold.isHidden = true
         }

@@ -455,6 +455,7 @@ PODS:
     - GTMSessionFetcher/Core (~> 1.5)
   - FlipLabel (1.0.1)
   - FSPagerView (0.8.3)
+  - GIFImageView (0.1.0)
   - GoogleAppMeasurement (8.12.0):
     - GoogleAppMeasurement/AdIdSupport (= 8.12.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
@@ -588,6 +589,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - FlipLabel
   - FSPagerView
+  - GIFImageView
   - HMSegmentedControl
   - MBRadioCheckboxButton
   - MHLoadingButton
@@ -637,6 +639,7 @@ SPEC REPOS:
     - FirebaseStorage
     - FlipLabel
     - FSPagerView
+    - GIFImageView
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
@@ -708,6 +711,7 @@ SPEC CHECKSUMS:
   FirebaseStorage: 4b75458c35d8b728e4c1fc1371942997456ab299
   FlipLabel: c2ca8fbbed924bc5e125478dd058d39325d79ae6
   FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
+  GIFImageView: cd6a500b9bac1942cb66b73452b97baa6e75280d
   GoogleAppMeasurement: ae033c3aad67e68294369373056b4d74cc8ae0d6
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
@@ -740,6 +744,6 @@ SPEC CHECKSUMS:
   ValidationTextField: 91bc04170ba4b4358912c372e12d7af4c9143ad5
   YoutubePlayer-in-WKWebView: 4dad12b3ece938a6456fa4374df78942f88b485a
 
-PODFILE CHECKSUM: c224d6d339135d76e1e03b12d66536226bf664ec
+PODFILE CHECKSUM: 808519e80138611672fddee6984ab90a838b2f1d
 
 COCOAPODS: 1.11.3

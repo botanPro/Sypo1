@@ -310,18 +310,24 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             self.Ktitle = "کوردی"
             self.titlee = "گۆڕینی زمان"
             self.message = "زمان"
+            self.LanguageLable.text = self.Ktitle
+            self.LanguageLable.font =  UIFont(name: "PeshangDes2", size: 11)!
         }else if XLanguage.get() == .English{
             self.Etitle = "English"
             self.Atitle = "Arabic"
             self.Ktitle = "Kurdish"
             self.titlee = "Change Language"
             self.message = "Language"
+            self.LanguageLable.text = self.Etitle
+            self.LanguageLable.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
         }else{
             self.Etitle = "إنجليزي"
             self.Atitle = "العربة"
             self.Ktitle = "الکردیة"
             self.titlee = "تغيير اللغة"
             self.message = "لغة"
+            self.LanguageLable.text = self.Atitle
+            self.LanguageLable.font =  UIFont(name: "PeshangDes2", size: 11)!
         }
         
         self.SubscriptionView.isHidden             = true
@@ -400,21 +406,23 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        print(UserDefaults.standard.string(forKey: "UserId"))
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             if settings.authorizationStatus == .authorized {
                 
                 if XLanguage.get() == .English{
                     DispatchQueue.main.async {
                         self.NotificationLable.text = "ON"
+                        self.NotificationLable.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
                     }
                 }else if XLanguage.get() == .Kurdish{
                     DispatchQueue.main.async {
                         self.NotificationLable.text = "چالاک کراوە"
+                        self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
                     }
                 }else{
                     DispatchQueue.main.async {
                         self.NotificationLable.text = "مفعّلة"
+                        self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
                     }
                 }
             }
@@ -422,14 +430,17 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                 if XLanguage.get() == .English{
                     DispatchQueue.main.async {
                         self.NotificationLable.text = "OFF"
+                        self.NotificationLable.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
                     }
                 }else if XLanguage.get() == .Kurdish{
                     DispatchQueue.main.async {
                         self.NotificationLable.text = "چالاک کراوە نیە"
+                        self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
                     }
                 }else{
                     DispatchQueue.main.async {
                         self.NotificationLable.text = "معطّل"
+                        self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
                     }
                 }
             }
@@ -978,20 +989,38 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             if settings.authorizationStatus == .authorized {
                 if XLanguage.get() == .English{
+                    DispatchQueue.main.async {
                     self.NotificationLable.text = "ON"
+                        self.NotificationLable.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
+                    }
                 }else if XLanguage.get() == .Kurdish{
+                    DispatchQueue.main.async {
                     self.NotificationLable.text = "چالاک کراوە"
+                        self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
+                    }
                 }else{
+                    DispatchQueue.main.async {
                     self.NotificationLable.text = "مفعّلة"
+                        self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
+                    }
                 }
             }
             else {
                 if XLanguage.get() == .English{
-                    self.NotificationLable.text = "OFF"
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "OFF"
+                        self.NotificationLable.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
+                    }
                 }else if XLanguage.get() == .Kurdish{
+                    DispatchQueue.main.async {
                     self.NotificationLable.text = "چالاک کراوە نیە"
+                        self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
+                    }
                 }else{
+                    DispatchQueue.main.async {
                     self.NotificationLable.text = "معطّل"
+                        self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
+                    }
                 }
             }
         }
