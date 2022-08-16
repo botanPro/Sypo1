@@ -240,13 +240,23 @@ class FilterVC: UIViewController ,UITextFieldDelegate, RadioButtonDelegate{
     var filter1 : [EstateObject] = []
     @IBAction func Apply(_ sender: Any) {
         Drops.hideAll()
-        let Price_Min = Double(self.PriceMin.text!) ?? 0.0
-        let Price_Max = Double(self.PriceMax.text!) ?? 0.0
+        
+        
+        var Price_Min = Double(self.PriceMin.text!) ?? 0.0
+        var Price_Max = Double(self.PriceMax.text!) ?? 0.0
+        
+        if Price_Min < 0{
+            Price_Min = Price_Min * -1
+        }
+        
+        if Price_Max < 0{
+            Price_Max = Price_Max * -1
+        }
         
         
         if Price_Min == 0.0 && Price_Max == 0.0{
             filter1 = self.AllEstateArray
-        }else{
+        }else if Price_Min >= 0.0 && Price_Max >= 0.0{
             if Price_Min > Price_Max{
                 self.PriceMIN = Price_Max
                 self.PriceMAX = Price_Min
@@ -256,6 +266,15 @@ class FilterVC: UIViewController ,UITextFieldDelegate, RadioButtonDelegate{
             }
             filter1 = self.AllEstateArray.filter{ $0.price ?? 0 <= self.PriceMAX && $0.price ?? 0 >= self.PriceMIN}
         }
+        
+        if self.PriceMIN == 0.0 && self.PriceMAX != 0.0{
+            filter1 = self.AllEstateArray.filter{ $0.price ?? 0 <= self.PriceMAX}
+        }
+        if self.PriceMIN != 0.0 && self.PriceMAX == 0.0{
+            filter1 = self.AllEstateArray.filter{ $0.price ?? 0 >= self.PriceMIN}
+        }
+        
+        
 
         let filter2 = filter1.filter{ $0.space ?? "" <= self.MaxSpaceLable.text! && $0.space ?? "" >= self.MinSpaceLable.text!}
 

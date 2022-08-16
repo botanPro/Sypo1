@@ -88,6 +88,7 @@ class Home: UIViewController ,UITextFieldDelegate{
             self.SearchTableView.alpha = 0
             self.SearchViewRight.constant = 10
             self.SearchText.text = ""
+            self.ScrollView.isScrollEnabled = true
             self.view.layoutIfNeeded()
         }
     }
@@ -384,8 +385,10 @@ class Home: UIViewController ,UITextFieldDelegate{
            self.navigationItem.leftBarButtonItem?.isEnabled = false
             self.IsFirst = !self.IsFirst
             UIView.animate(withDuration: 0.2) {
+                self.ScrollView.scrollToTop()
                 self.SearchTableView.alpha = 1
                 self.SearchViewRight.constant = 85
+                self.ScrollView.isScrollEnabled = false
                 self.view.layoutIfNeeded()
             }
         return true
@@ -753,4 +756,10 @@ extension Array {
         }
         self = shuffledArray
     }
+}
+extension UIScrollView {
+    func scrollToTop() {
+        let desiredOffset = CGPoint(x: 0, y: -contentInset.top)
+        setContentOffset(desiredOffset, animated: true)
+   }
 }
