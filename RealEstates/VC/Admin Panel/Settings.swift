@@ -823,10 +823,10 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             title = "Version \(self.version)"
             message = "Is your current version."
         }else if XLanguage.get() == .Kurdish{
-            title = "\(self.version) وەشانی"
+            title = "وەشانی \(self.version)"
             message = "وەشانی ئێستای تۆیە."
         }else{
-            title = "\(self.version) الإصدار"
+            title = "الإصدار \(self.version)"
             message = "هو نسختك الحالية."
         }
         let drop = Drop(

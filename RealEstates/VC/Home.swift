@@ -113,13 +113,32 @@ class Home: UIViewController ,UITextFieldDelegate {
         }
     }
 
-    
+    var titlee = ""
+    var messagee = ""
+    var Action = ""
+    var cancel = ""
     func IsUpdateAvaible(){
         let IsUpdateAvaiable = self.remoteConfig.configValue(forKey: "maskani_version").boolValue
         if IsUpdateAvaiable == true{
             DispatchQueue.main.async {
-                let alertController = UIAlertController(title: "Warning", message: "A new update is avaiable ", preferredStyle: .alert)
-                let okAction = UIAlertAction(title:  "Update", style: UIAlertAction.Style.default) { _ in
+                if XLanguage.get() == .Kurdish{
+                    self.titlee = "ئاگاداری"
+                    self.messagee = "ئەپدەیتی نوێ بەردەستە"
+                    self.Action = "نوێکردنەوە"
+                    self.cancel = "ئێستا نا"
+                }else if XLanguage.get() == . English{
+                    self.titlee = "Warning"
+                    self.messagee = "A new update is available"
+                    self.Action = "Update"
+                    self.cancel = "Not now"
+                }else{
+                    self.titlee = "تنبيه"
+                    self.messagee = "يتوفر تحديث جديد"
+                    self.Action = "تحديث"
+                    self.cancel = "ليس الان"
+                }
+                let alertController = UIAlertController(title: self.titlee, message: self.messagee, preferredStyle: .alert)
+                let okAction = UIAlertAction(title:  self.Action, style: UIAlertAction.Style.default) { _ in
                     if let url = URL(string: "https://apps.apple.com/us/app/maskani/id1602905831"),
                       UIApplication.shared.canOpenURL(url) {
                          if #available(iOS 10, *) {
@@ -129,7 +148,7 @@ class Home: UIViewController ,UITextFieldDelegate {
                           }
                       } else { }
                 }
-                let cancelAction = UIAlertAction(title: "Not now", style: UIAlertAction.Style.default) { UIAlertAction in  alertController.dismiss(animated: true)}
+                let cancelAction = UIAlertAction(title: self.cancel, style: UIAlertAction.Style.default) { UIAlertAction in  alertController.dismiss(animated: true)}
                 alertController.addAction(okAction)
                 alertController.addAction(cancelAction)
                 self.present(alertController, animated: true, completion: nil)
