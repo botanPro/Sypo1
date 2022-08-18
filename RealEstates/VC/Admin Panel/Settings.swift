@@ -173,20 +173,38 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             if settings.authorizationStatus == .authorized {
                 if XLanguage.get() == .English{
-                    self.NotificationLable.text = "ON"
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ON"
+                        self.NotificationLable.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
+                    }
                 }else if XLanguage.get() == .Kurdish{
-                    self.NotificationLable.text = "چالاک کراوە"
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "چالاک کراوە"
+                        self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
+                    }
                 }else{
-                    self.NotificationLable.text = "مفعّلة"
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "مفعّلة"
+                        self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
+                    }
                 }
             }
             else {
                 if XLanguage.get() == .English{
-                    self.NotificationLable.text = "OFF"
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "OFF"
+                        self.NotificationLable.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
+                    }
                 }else if XLanguage.get() == .Kurdish{
-                    self.NotificationLable.text = "چالاک کراوە نیە"
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "چالاک کراوە نیە"
+                        self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
+                    }
                 }else{
-                    self.NotificationLable.text = "معطّل"
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "معطّل"
+                        self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
+                    }
                 }
             }
         }
@@ -302,7 +320,8 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     @IBOutlet weak var NavTitle: LanguageBarItem!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         
         if XLanguage.get() == .Kurdish{
             self.Etitle = "ئینگلیزی"
@@ -351,7 +370,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         }
         self.Image.layer.cornerRadius = self.Image.bounds.width / 2
      
-        navigationController?.navigationBar.shadowImage = UIImage.imageWithColor(color: .darkGray)
+        //navigationController?.navigationBar.shadowImage = UIImage.imageWithColor(color: .darkGray)
     }
     
     
@@ -402,7 +421,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     @IBOutlet weak var ProfileRightImage: UIImageView!
     
     
-    
+    let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"]!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -451,7 +470,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         if !CheckInternet.Connection(){
             MessageBox.ShowMessage()
         }
-        let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"]!
+       
         self.VersionNumber.text = "V \(version)"
         self.VersionNumber.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
         self.ViewdItemsEstate.removeAll()
@@ -797,48 +816,35 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     
     @IBAction func CheckVersion(_ sender: Any) {
         Drops.hideAll()
-        DispatchQueue.global().async {
-            do {
-                let update = try self.isUpdateAvailable()
-                DispatchQueue.main.async {
-                    print(update)
-                    if update == true{
-                        if let url = URL(string: "itms-apps://apple.com/app/1602905831") {
-                            UIApplication.shared.open(url)
-                        }
-                    }
-                }
-            } catch {
-                var title = "Update"
-                var message = "The app is not uploaded to appstore yet."
-                
-                if XLanguage.get() == .English{
-                    title = "Update"
-                    message = "The app is not uploaded to appstore yet."
-                }else if XLanguage.get() == .Kurdish{
-                    title = "نوێکردنەوە"
-                    message = "تا ئێستا ئەپەکە لە ئەپ ستۆر بار نەکراوە."
-                }else{
-                    title = "تحديث"
-                    message = "لم يتم تحميل التطبيق إلى متجر التطبيقات حتى الآن."
-                }
-                let drop = Drop(
-                    title: title,
-                    subtitle: message,
-                    icon: UIImage(named: "attention"),
-                    action: .init {
-                        print("Drop tapped")
-                        Drops.hideCurrent()
-                    },
-                    position: .bottom,
-                    duration: 3.0,
-                    accessibility: "Alert: Title, Subtitle"
-                )
-                Drops.show(drop)
-                print(error)
-            }
+        var title = "Version \(self.version)"
+        var message = "Is your current version."
+        
+        if XLanguage.get() == .English{
+            title = "Version \(self.version)"
+            message = "Is your current version."
+        }else if XLanguage.get() == .Kurdish{
+            title = "\(self.version) وەشانی"
+            message = "وەشانی ئێستای تۆیە."
+        }else{
+            title = "\(self.version) الإصدار"
+            message = "هو نسختك الحالية."
         }
+        let drop = Drop(
+            title: title,
+            subtitle: message,
+            icon: UIImage(named: "attention"),
+            action: .init {
+                print("Drop tapped")
+                Drops.hideCurrent()
+            },
+            position: .bottom,
+            duration: 3.0,
+            accessibility: "Alert: Title, Subtitle"
+        )
+        Drops.show(drop)
     }
+    
+    
     func isUpdateAvailable() throws -> Bool {
         guard let info = Bundle.main.infoDictionary,
               let currentVersion = info["CFBundleShortVersionString"] as? String,

@@ -789,13 +789,9 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
                     self.OfficeLocation.text = office.address
                     
                     OfficeRatingAip.GetRatingByOfficeId(office_id: office.id ?? "") { arr in
-                        if arr.office_id == office.id ?? ""{
-                            self.count += 1
-                            self.RateValue += arr.rate ?? 0.0
-                        }
-                        self.RateValue = self.RateValue / self.count
-                        print("RateValue : \(self.RateValue)")
-                        self.OfficeRate.text = "\(self.RateValue)"
+                        self.count += 1
+                        self.RateValue = self.RateValue + (arr.rate ?? 0.0)
+                        self.OfficeRate.text = "\((self.RateValue / self.count).rounded(toPlaces: 1))"
                     }
                 }
                 self.lat = data.lat ?? ""
@@ -803,8 +799,6 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
                 let dbLat = Double(data.lat ?? "")
                 let dbLong = Double(data.long ?? "")
                 self.zoomToLocation(with: CLLocationCoordinate2D(latitude: dbLat!, longitude: dbLong!))
-            
-            
             
             }
         
@@ -1014,7 +1008,7 @@ extension EstateProfileVc : UICollectionViewDataSource, UICollectionViewDelegate
             cell.updateKey(cell: self.keys[indexPath.row])
             cell.updateValue(cell: self.value[indexPath.row])
             
-            if self.keys.count == indexPath.row + 1{
+            if indexPath.row + 1 == self.value.count{
                 cell.rightimage.isHidden = true
             }
             

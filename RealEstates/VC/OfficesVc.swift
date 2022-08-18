@@ -16,15 +16,11 @@ class EstatesVC: UIViewController {
     var Offices : [OfficesObject] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        NavTitle.setTitleTextAttributes(
-//                [
-//                    NSAttributedString.Key.font: UIFont(name: "ArialRoundedMTBold", size: 20)!,
-//                    NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.07560480386, green: 0.2257080078, blue: 0.3554315865, alpha: 1)
-//                ], for: .normal)
-//        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+       
         EstateCollectionView.register(UINib(nibName: "EstatesOfficeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
-        navigationController?.navigationBar.shadowImage = UIImage.imageWithColor(color: .darkGray)
+
         self.EstateCollectionView.cr.addHeadRefresh(animator: FastAnimator()) {
             self.GetOffices()
         }

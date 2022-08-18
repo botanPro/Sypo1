@@ -51,7 +51,8 @@ class ProjetsVC: UIViewController {
     @IBOutlet weak var AllEstatesCollectionLayout: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         
         self.AllEstatesCollectionLayout.constant = 0
         self.SliderView.layer.cornerRadius = 10
@@ -347,7 +348,6 @@ extension ProjetsVC: FSPagerViewDataSource,FSPagerViewDelegate {
         if sliderImages.count != 0{
         let urlString = sliderImages[index].image ?? ""
         let url = URL(string: urlString)
-        cell.imageView?.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         cell.imageView?.sd_setImage(with: url, completed: nil)
         cell.imageView?.contentMode = .scaleToFill
         cell.imageView?.clipsToBounds = true

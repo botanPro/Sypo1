@@ -10,33 +10,31 @@ import Firebase
 import FirebaseDynamicLinks
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         if XLanguage.get() == .none{
-           XLanguage.set(Language: .English)
+            XLanguage.set(Language: .English)
             UserDefaults.standard.set(2, forKey: "language")
         }
         
         UserDefaults.standard.set(nil, forKey: "dynamiclink")
         if UserDefaults.standard.string(forKey: "IsFirst") == nil{
-           UserDefaults.standard.set("true", forKey: "IsFirst")
-        }else{
-            UserDefaults.standard.set("false", forKey: "IsFirst")
+            UserDefaults.standard.set("true", forKey: "IsFirst")
         }
         
         FirebaseApp.configure()
-        
+ 
         
         sleep(1)
         
-             self.window = UIWindow(frame: UIScreen.main.bounds)
-             let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-             let newViewController = storyBoard.instantiateViewController(withIdentifier: "DetectVC")
-             self.window!.rootViewController = newViewController
-             self.window!.makeKeyAndVisible()
-
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "DetectVC")
+        self.window!.rootViewController = newViewController
+        self.window!.makeKeyAndVisible()
+        
         return true
     }
 

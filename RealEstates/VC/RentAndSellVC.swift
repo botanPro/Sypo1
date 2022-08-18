@@ -26,8 +26,9 @@ class RentAndSellVC: MXSegmentedPagerController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationController?.navigationBar.shadowImage = UIImage.imageWithColor(color: .darkGray)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        //navigationController?.navigationBar.shadowImage = UIImage.imageWithColor(color: .darkGray)
         
         segmentedPager.backgroundColor = #colorLiteral(red: 0.95029217, green: 0.95029217, blue: 0.9502920508, alpha: 1)
         segmentedPager.segmentedControl.indicator.lineHeight = 3

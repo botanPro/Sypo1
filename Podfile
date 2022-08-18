@@ -27,6 +27,7 @@ target 'RealEstates' do
   pod 'Firebase/Storage'
   pod 'Firebase/Messaging'
   pod 'Firebase/DynamicLinks'
+  pod 'Firebase/RemoteConfig'
   
   pod 'NSFWDetector'
   
@@ -67,6 +68,8 @@ target 'RealEstates' do
   pod 'EmptyDataSet-Swift', '~> 5.0.0'
   
   pod 'GIFImageView'
+  
+  pod 'FirebaseCheckVersion'
   
   target 'RealEstatesTests' do
     inherit! :search_paths

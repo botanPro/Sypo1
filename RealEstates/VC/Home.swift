@@ -13,7 +13,8 @@ import MapKit
 import SwiftyJSON
 import FirebaseDynamicLinks
 import GameplayKit
-class Home: UIViewController ,UITextFieldDelegate{
+import FirebaseRemoteConfig
+class Home: UIViewController ,UITextFieldDelegate {
     @IBOutlet weak var SliderView: FSPagerView!{
         didSet{
             self.SliderView.layer.masksToBounds = true
@@ -94,20 +95,47 @@ class Home: UIViewController ,UITextFieldDelegate{
     }
     
     
+    var remoteConfig = RemoteConfig.remoteConfig()
+    let settings = RemoteConfigSettings()
+    func fetchRemoteConfig(){
+        settings.minimumFetchInterval = 0
+        remoteConfig.configSettings = settings
+        remoteConfig.fetch { (status, error) -> Void in
+          if error == nil {
+            print("Config fetched!")
+            self.remoteConfig.activate { changed, error in
+                self.IsUpdateAvaible()
+            }
+          } else {
+            print("Config not fetched")
+            print("Error: \(error?.localizedDescription ?? "No error available.")")
+          }
+        }
+    }
+
     
-//
-//    @objc func tapDone(sender: Any) {
-//        self.view.endEditing(true)
-//        self.navigationItem.rightBarButtonItem?.isEnabled = true
-//       self.navigationItem.leftBarButtonItem?.isEnabled = true
-//        UIView.animate(withDuration: 0.2) {
-//            self.SearchTableView.alpha = 0
-//            self.SearchText.text = ""
-//            self.SearchViewRight.constant = 10
-//            self.view.layoutIfNeeded()
-//        }
-//    }
-//
+    func IsUpdateAvaible(){
+        let IsUpdateAvaiable = self.remoteConfig.configValue(forKey: "maskani_version").boolValue
+        if IsUpdateAvaiable == true{
+            DispatchQueue.main.async {
+                let alertController = UIAlertController(title: "Warning", message: "A new update is avaiable ", preferredStyle: .alert)
+                let okAction = UIAlertAction(title:  "Update", style: UIAlertAction.Style.default) { _ in
+                    if let url = URL(string: "https://apps.apple.com/us/app/maskani/id1602905831"),
+                      UIApplication.shared.canOpenURL(url) {
+                         if #available(iOS 10, *) {
+                           UIApplication.shared.open(url, options: [:], completionHandler:nil)
+                          } else {
+                              UIApplication.shared.openURL(url)
+                          }
+                      } else { }
+                }
+                let cancelAction = UIAlertAction(title: "Not now", style: UIAlertAction.Style.default) { UIAlertAction in  alertController.dismiss(animated: true)}
+                alertController.addAction(okAction)
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
+    }
     
     
     
@@ -116,10 +144,15 @@ class Home: UIViewController ,UITextFieldDelegate{
     var currentLocation: CLLocation?
     override func viewDidLoad() {
         super.viewDidLoad()
-        TitleSubTile()
-        
+        fetchRemoteConfig()
 
-//        self.SearchText.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
+
+        
+        TitleSubTile()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+
+//      self.SearchText.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
         self.SearchText.delegate = self
         self.SearchView.layer.cornerRadius = 10
         self.SliderView.layer.cornerRadius = 10
@@ -679,7 +712,6 @@ extension Home: FSPagerViewDataSource,FSPagerViewDelegate {
         if sliderImages.count != 0{
         let urlString = sliderImages[index].image
         let url = URL(string: urlString ?? "")
-        cell.imageView?.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         cell.imageView?.sd_setImage(with: url, completed: nil)
         cell.imageView?.contentMode = .scaleToFill
         cell.imageView?.clipsToBounds = true

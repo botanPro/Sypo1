@@ -11,10 +11,10 @@ class DetectVC: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        print("[][][][]-------=============[][][][]]][]")
-        if UserDefaults.standard.string(forKey: "IsFirst") == "true"{
+        print(UserDefaults.standard.string(forKey: "IsFirst"))
+        if UserDefaults.standard.string(forKey: "IsFirst") == "true"{print("[][][][]-------=============[][][][]]][]")
             self.performSegue(withIdentifier: "FirstVC", sender: nil)
-        }else{
+        }else{print("[][][][]-------=============[][][][]]][]444444")
             self.performSegue(withIdentifier: "GoToApp", sender: nil)
         }
     }
