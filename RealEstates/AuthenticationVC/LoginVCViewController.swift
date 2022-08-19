@@ -38,11 +38,19 @@ class LoginVCViewController: UIViewController ,UITextFieldDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        
         self.Dismiss.isHidden = true
         
         
         if self.IsFromAnotherVc == true{
             self.Dismiss.isHidden = false
+        }else{
+            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+            self.navigationController?.navigationBar.shadowImage = UIImage()
         }
         self.PhoneNumber.becomeFirstResponder()
         self.Login.layer.cornerRadius = 4
@@ -88,7 +96,7 @@ class LoginVCViewController: UIViewController ,UITextFieldDelegate{
             
             print(self.phone)
             Login.showLoader(userInteraction: true)
-            PhoneAuthProvider.provider().verifyPhoneNumber(self.phone, uiDelegate: nil) { (verificationID, error) in
+            PhoneAuthProvider.provider().verifyPhoneNumber(self.phone.convertedDigitsToLocale(Locale(identifier: "EN")), uiDelegate: nil) { (verificationID, error) in
                 if let error = error {
                     print(error)
                     self.Login.hideLoader()

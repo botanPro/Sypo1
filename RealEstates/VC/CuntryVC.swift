@@ -13,7 +13,8 @@ class CuntryVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         TableView.register(UINib(nibName: "CuntryAndCityTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
-
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         self.TableView.cr.addHeadRefresh(animator: FastAnimator()) {
             self.GetCuntys()
         }

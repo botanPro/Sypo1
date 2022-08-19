@@ -37,6 +37,7 @@ class AllEstateCollectionView: UICollectionViewCell {
             self.Sold.isHidden = true
         }
         
+        
         guard let imagrUrl = cell.ImageURL, let url = URL(string: imagrUrl[0]) else {return}
         self.Imagee.sd_setImage(with: url, completed: nil)
         self.Name.text = cell.name
@@ -98,7 +99,7 @@ class AllEstateCollectionView: UICollectionViewCell {
         dayTimePeriodFormatter.dateFormat = "dd MM,YYYY"
         let dateTimeString = dayTimePeriodFormatter.string(from: date as Date)
         let dateTime = dateTimeString.split(separator: ".")
-        self.Date.text = "\(dateTime[0])"
+        self.Date.text = "\(dateTime[0])".convertedDigitsToLocale(Locale(identifier: "EN"))
         
         if XLanguage.get() == .English{
             self.Direction.font = UIFont(name: "ArialRoundedMTBold", size: 10)!

@@ -13,6 +13,8 @@ class DeletionAccountVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         GetMyEstates()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     var ProductArray : [EstateObject] = []

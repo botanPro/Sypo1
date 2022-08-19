@@ -121,19 +121,19 @@
                                 </subviews>
                             </stackView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QYO-gA-hix">
-                                <rect key="frame" x="35" y="138" width="178" height="60"/>
+                                <rect key="frame" x="35" y="133" width="178" height="65"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="GEe-ue-Nof">
-                                    <rect key="frame" x="0.0" y="0.0" width="178" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="178" height="65"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csO-cH-bqv">
-                                            <rect key="frame" x="89" y="7" width="0.0" height="7"/>
+                                            <rect key="frame" x="89" y="7" width="0.0" height="12"/>
                                             <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="10"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Cer-cb-9jC">
-                                            <rect key="frame" x="7" y="21" width="164" height="31"/>
+                                            <rect key="frame" x="7" y="26" width="164" height="31"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pjo-oJ-YT8" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
                                                     <rect key="frame" x="68" y="0.0" width="28.5" height="11"/>
@@ -178,7 +178,7 @@
                                 </view>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="bgc-we-NiR"/>
+                                    <constraint firstAttribute="height" constant="65" id="bgc-we-NiR"/>
                                 </constraints>
                                 <blurEffect style="light"/>
                                 <userDefinedRuntimeAttributes>
@@ -241,7 +241,7 @@
                             <constraint firstItem="KEi-hO-gNl" firstAttribute="top" secondItem="QYO-gA-hix" secondAttribute="bottom" constant="20" id="JFs-0U-aaA"/>
                             <constraint firstAttribute="trailing" secondItem="vmS-4W-Qe2" secondAttribute="trailing" constant="8" id="KLQ-2I-rHx"/>
                             <constraint firstItem="CrT-mg-B85" firstAttribute="centerX" secondItem="VaW-CI-SiI" secondAttribute="centerX" id="Kls-Qf-fIC"/>
-                            <constraint firstItem="QYO-gA-hix" firstAttribute="top" secondItem="CrT-mg-B85" secondAttribute="bottom" constant="27" id="SDT-7m-4no"/>
+                            <constraint firstItem="QYO-gA-hix" firstAttribute="top" secondItem="CrT-mg-B85" secondAttribute="bottom" constant="22" id="SDT-7m-4no"/>
                             <constraint firstItem="NOQ-re-GDA" firstAttribute="leading" secondItem="VaW-CI-SiI" secondAttribute="leading" constant="8" id="VMM-21-f2F"/>
                             <constraint firstAttribute="trailing" secondItem="NOQ-re-GDA" secondAttribute="trailing" constant="8" id="YZu-fc-0Rp"/>
                             <constraint firstItem="NOQ-re-GDA" firstAttribute="top" secondItem="KEi-hO-gNl" secondAttribute="bottom" constant="8" symbolic="YES" id="apu-bZ-Tov"/>

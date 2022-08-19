@@ -46,10 +46,10 @@ class AllEstatessCollectionViewCell: UICollectionViewCell {
         self.Imagee.sd_setImage(with: url, completed: nil)
         self.Name.text = cell.name
         self.Location.text = cell.address
-        if self.lang == 2{
+        if XLanguage.get() == .English{
             self.rooms = "rooms"
             self.RoomNumber.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
-        }else if lang == 3{
+        }else if XLanguage.get() == .Arabic{
             self.rooms = "غرف"
             self.RoomNumber.font = UIFont(name: "PeshangDes2", size: 11)!
         }else{
@@ -98,15 +98,24 @@ class AllEstatessCollectionViewCell: UICollectionViewCell {
             self.Price.text = cell.price?.description.currencyFormatting()
         }
         
-         EstateTypeAip.GeEstateTypeNameById(id:  cell.estate_type_id ?? "") { type in
-             self.Typee.text = type.name
-         }
+        EstateTypeAip.GeEstateTypeNameById(id:  cell.estate_type_id ?? "") { type in
+            if XLanguage.get() == .English{
+                self.Typee.text = type.name
+                self.Typee.font =  UIFont(name: "ArialRoundedMTBold", size: 12)!
+            }else if XLanguage.get() == .Arabic{
+                self.Typee.text = type.ar_name
+                self.Typee.font =  UIFont(name: "PeshangDes2", size: 13)!
+            }else{
+                self.Typee.text = type.ku_name
+                self.Typee.font =  UIFont(name: "PeshangDes2", size: 13)!
+            }
+        }
         let date = NSDate(timeIntervalSince1970: cell.Stamp ?? 0.0)
         let dayTimePeriodFormatter = DateFormatter()
         dayTimePeriodFormatter.dateFormat = "dd MM,YYYY"
         let dateTimeString = dayTimePeriodFormatter.string(from: date as Date)
         let dateTime = dateTimeString.split(separator: ".")
-        self.Date.text = "\(dateTime[0])"
+        self.Date.text = "\(dateTime[0])".convertedDigitsToLocale(Locale(identifier: "EN"))
     }
 
 }

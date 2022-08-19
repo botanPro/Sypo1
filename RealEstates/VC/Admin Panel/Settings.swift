@@ -35,13 +35,17 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             pickerLabel = UILabel()
             if XLanguage.get() == .English{
                 pickerLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-            }else if XLanguage.get() == .Kurdish || XLanguage.get() == .Arabic{
+                pickerLabel?.text = self.CityArray[row].name
+            }else if XLanguage.get() == .Arabic{
                 pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
+                pickerLabel?.text = self.CityArray[row].ar_name
+            }else{
+                pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
+                pickerLabel?.text = self.CityArray[row].ku_name
             }
-            
             pickerLabel?.textAlignment = .center
         }
-        pickerLabel?.text = self.CityArray[row].name
+        
         
         return pickerLabel!
     }
@@ -133,7 +137,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             dialog.dismiss()
         })
         
-        dialog.addAction(AZDialogAction(title: self.Etitle) { (dialog) -> (Void) in
+        dialog.addAction(AZDialogAction(title: self.Etitle) { (dialog) -> (Void) in 
             self.LoadingView()
             XLanguage.set(Language: .English)
             self.LanguageLable.text = self.Etitle
@@ -349,6 +353,54 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             self.LanguageLable.font =  UIFont(name: "PeshangDes2", size: 11)!
         }
         
+        
+        
+        
+        if XLanguage.get() == .English{
+            self.Location.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            CityObjectAip.GetCities { cities in
+                if let cityId = UserDefaults.standard.string(forKey: "CityId"){
+                    for city in cities {
+                        if city.id == cityId{
+                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
+                                self.Location.text = "\(country.name ?? "")-\(city.name ?? "")".uppercased()
+                            }
+                        }
+                    }
+                }
+            }
+        }else if XLanguage.get() == .Kurdish{
+            self.Location.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            CityObjectAip.GetCities { cities in
+                if let cityId = UserDefaults.standard.string(forKey: "CityId"){
+                    for city in cities {
+                        if city.id == cityId{
+                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
+                                self.Location.text = "\(country.ar_name ?? "")-\(city.ar_name ?? "")".uppercased()
+                            }
+                        }
+                    }
+                }
+            }
+        }else{
+            self.Location.font = UIFont(name: "PeshangDes2", size: 11)!
+            CityObjectAip.GetCities { cities in
+                if let cityId = UserDefaults.standard.string(forKey: "CityId"){
+                    for city in cities {
+                        if city.id == cityId{
+                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
+                                self.Location.text = "\(country.ku_name ?? "")-\(city.ku_name ?? "")".uppercased()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+        
+        
+        
         self.SubscriptionView.isHidden             = true
         self.SubscriptionViewHeightLyout.constant  = 0
         self.SubscriptionViewTopLyout.constant     = 0
@@ -375,6 +427,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     
     
     
+
     
     
     
@@ -472,12 +525,23 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         }
        
         self.VersionNumber.text = "V \(version)"
-        self.VersionNumber.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+        self.VersionNumber.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
         self.ViewdItemsEstate.removeAll()
         self.FavoriteItemsEstate.removeAll()
         self.FavoriteItemCount = 0
         self.ViewdItemCount = 0
-        self.Location.text = "\("IRAQ-\(UserDefaults.standard.string(forKey: "CityName")?.uppercased() ?? "")")"
+        
+        
+        if XLanguage.get() == .English{
+            //self.Location.text = UserDefaults.standard.string(forKey: "CityName")?.uppercased() ?? ""
+            self.Location.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+        }else if XLanguage.get() == .Kurdish{
+            //self.Location.text = UserDefaults.standard.string(forKey: "CityName")?.uppercased() ?? ""
+            self.Location.font = UIFont(name: "PeshangDes2", size: 11)!
+        }else{
+            //self.Location.text = UserDefaults.standard.string(forKey: "CityName")?.uppercased() ?? ""
+            self.Location.font = UIFont(name: "PeshangDes2", size: 10)!
+        }
         
         GetCity()
         if UserDefaults.standard.bool(forKey: "Login") == false {print("is not-----------------")
@@ -583,7 +647,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                             dayTimePeriodFormatter.dateFormat = "dd-MM-YYYY  h:mm"
                                             let dateTimeString = dayTimePeriodFormatter.string(from: date as Date)
                                             let dateTime = dateTimeString.split(separator: ".")
-                                            self.StartDate.text = "\(dateTime[0])"
+                                            self.StartDate.text = "\(dateTime[0])".convertedDigitsToLocale(Locale(identifier: "EN"))
                                             
                                             
                                             let date1 = NSDate(timeIntervalSince1970: sub.end_date ?? 0.0)
@@ -591,7 +655,8 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                             dayTimePeriodFormatter1.dateFormat = "dd-MM-YYYY  h:mm"
                                             let dateTimeString1 = dayTimePeriodFormatter1.string(from: date1 as Date)
                                             let dateTime1 = dateTimeString1.split(separator: ".")
-                                            self.EndDate.text = "\(dateTime1[0])"
+                                            self.EndDate.text = "\(dateTime1[0])".convertedDigitsToLocale(Locale(identifier: "EN"))
+                                            
                                             
                                             
                                             print("dayyyssssss-----------------")
@@ -992,6 +1057,49 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     
     @objc func LangChanged(){
         print(self.lang)
+        
+        if XLanguage.get() == .English{
+            CityObjectAip.GetCities { cities in
+                if let cityId = UserDefaults.standard.string(forKey: "CityId"){
+                    for city in cities {
+                        if city.id == cityId{
+                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
+                                self.Location.text = "\(country.name ?? "")-\(city.name ?? "")".uppercased()
+                                self.Location.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+                            }
+                        }
+                    }
+                }
+            }
+        }else if XLanguage.get() == .Arabic{
+            CityObjectAip.GetCities { cities in
+                if let cityId = UserDefaults.standard.string(forKey: "CityId"){
+                    for city in cities {
+                        if city.id == cityId{
+                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
+                                self.Location.text = "\(country.ar_name ?? "")-\(city.ar_name ?? "")".uppercased()
+                                self.Location.font = UIFont(name: "PeshangDes2", size: 11)!
+                            }
+                        }
+                    }
+                }
+            }
+        }else{
+            CityObjectAip.GetCities { cities in
+                if let cityId = UserDefaults.standard.string(forKey: "CityId"){
+                    for city in cities {
+                        if city.id == cityId{
+                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
+                                self.Location.text = "\(country.ku_name ?? "")-\(city.ku_name ?? "")".uppercased()
+                                self.Location.font = UIFont(name: "PeshangDes2", size: 11)!
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             if settings.authorizationStatus == .authorized {
                 if XLanguage.get() == .English{
@@ -1140,7 +1248,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             if XLanguage.get() == .Kurdish{
                 self.ViewdItems.text = "0 بینراو"
                 self.FavoriteItems.text = "0 خوازراو"
-                self.ViewdItems.font =  UIFont(name: "PeshangDes2", size: 11)!
+                self.ViewdItems.font =     UIFont(name: "PeshangDes2", size: 11)!
                 self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 11)!
             }else if XLanguage.get() == .English{
                 self.ViewdItems.text = "0 ITEMS"
@@ -1154,6 +1262,13 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                 self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 11)!
             }
         }else{
+            
+            
+            
+            
+            
+            
+            
             
             
             if XLanguage.get() == .Kurdish{
@@ -1302,8 +1417,25 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         ac.view.addSubview(pickerView)
         ac.addAction(UIAlertAction(title: cityAction , style: .default, handler: { _ in
             let pickerValue = self.CityArray[self.pickerView.selectedRow(inComponent: 0)]
-            UserDefaults.standard.set(pickerValue.name, forKey: "CityName")
-            self.Location.text = "\("IRAQ-\(pickerValue.name ?? "")")".uppercased()
+            if XLanguage.get() == .English{
+                CountryObjectAip.GeCountryById(id: pickerValue.country_id ?? "") { country in
+                    self.Location.text = "\(country.name ?? "")-\(pickerValue.name ?? "")".uppercased()
+                    UserDefaults.standard.set("\(country.name ?? "")-\(pickerValue.name ?? "")".uppercased(), forKey: "CityName")
+                }
+            }else if XLanguage.get() == .Arabic{
+                CountryObjectAip.GeCountryById(id: pickerValue.country_id ?? "") { country in
+                    self.Location.text = "\(country.ar_name ?? "")-\(pickerValue.ar_name ?? "")".uppercased()
+                    UserDefaults.standard.set("\(country.ar_name ?? "")-\(pickerValue.ar_name ?? "")".uppercased(), forKey: "CityName")
+                }
+            }else{
+                CountryObjectAip.GeCountryById(id: pickerValue.country_id ?? "") { country in
+                    self.Location.text = "\(country.ku_name ?? "")-\(pickerValue.ku_name ?? "")".uppercased()
+                    UserDefaults.standard.set("\(country.ku_name ?? "")-\(pickerValue.ku_name ?? "")".uppercased(), forKey: "CityName")
+                }
+            }
+            
+            UserDefaults.standard.set(pickerValue.id, forKey: "CityId")
+            UserDefaults.standard.set(pickerValue.country_id, forKey: "CountryId")
         }))
         ac.addAction(UIAlertAction(title: cityCancel, style: .cancel, handler: nil))
         present(ac, animated: true)

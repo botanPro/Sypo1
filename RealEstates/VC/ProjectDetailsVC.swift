@@ -117,7 +117,8 @@ class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         
         
         RelatedCollectionView.register(UINib(nibName: "AllEstatessCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "RelatedCell")
@@ -138,12 +139,25 @@ class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDel
         
         if let data = ProjectEstate{
             ProjectStatesAip.GetProjectStatesId(id: data.project_state_id ?? "") { state in
-                self.State.text = state.title
+                if XLanguage.get() == .English{
+                    self.State.text = state.title
+                }else if XLanguage.get() == .Arabic{
+                    self.State.text = state.ar_title
+                }else{
+                    self.State.text = state.ku_title
+                }
             }
             self.sliderImages = data.images ?? []
             self.PagerControl.pages = data.images?.count ?? 0
             
-            self.Name.text = data.project_name ?? ""
+            if XLanguage.get() == .English{
+                self.Name.text = data.project_name ?? ""
+            }else if XLanguage.get() == .Arabic{
+                self.Name.text = data.project_ar_name ?? ""
+            }else{
+                self.Name.text = data.project_ku_name ?? ""
+            }
+          
             self.Price.text = "\(data.from_price?.description.currencyFormatting() ?? "") to \(data.to_price?.description.currencyFormatting() ?? "")"
             self.Location.text = data.address ?? ""
             self.lat = data.latitude ?? ""
@@ -158,7 +172,14 @@ class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDel
                 }
                 self.view.layoutIfNeeded()
             }else{
-                self.Description.text = data.desc
+                if XLanguage.get() == .English{
+                    self.Description.text = data.desc
+                }else if XLanguage.get() == .Arabic{
+                    self.Description.text = data.ar_desc
+                }else{
+                    self.Description.text = data.ku_desc
+                }
+                
                 self.DescHight.constant = self.Description.contentSize.height
                 UIView.animate(withDuration: 0.2) {
                     self.DescHight.constant = self.Description.contentSize.height
@@ -195,7 +216,7 @@ class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDel
                 self.keys.append("هاتف المكتب")
             }
             
-            self.value.append("\(dateTime[0])")
+            self.value.append("\(dateTime[0])".convertedDigitsToLocale(Locale(identifier: "EN")))
             
             self.value.append(data.Buildings_count ?? "")
             

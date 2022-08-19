@@ -32,11 +32,8 @@ class EditProfileVC: UIViewController ,UITextFieldDelegate, UITextViewDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        Save.setTitleTextAttributes(
-//            [
-//                NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 15)!,
-//                NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.07560480386, green: 0.2257080078, blue: 0.3554315865, alpha: 1)
-//            ], for: .normal)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         
         if XLanguage.get() == .English{
             self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "ArialRoundedMTBold", size: 16)!]

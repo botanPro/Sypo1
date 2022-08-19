@@ -32,12 +32,8 @@ class FirstVC: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         return pickerLabel!
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        UserDefaults.standard.set(self.CityArray[row].name, forKey: "CityName")
-    }
-    
-    
-    
+
+
 
     @IBOutlet weak var Next: UIButton!
     
@@ -50,9 +46,16 @@ class FirstVC: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         ac.view.addSubview(pickerView)
         ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
             let pickerValue = self.CityArray[self.pickerView.selectedRow(inComponent: 0)]
-            print("Picker value: \(pickerValue) was selected")
-            UserDefaults.standard.set("false", forKey: "IsFirst")
-            self.performSegue(withIdentifier: "GoToApp", sender: nil)
+            
+            CountryObjectAip.GeCountryById(id: pickerValue.country_id ?? "") { country in
+                print("-=-=-=-=-=-=-=-")
+                UserDefaults.standard.set("\(country.name ?? "")-\(pickerValue.name ?? "")".uppercased(), forKey: "CityName")
+                UserDefaults.standard.set("false", forKey: "IsFirst")
+                self.performSegue(withIdentifier: "GoToApp", sender: nil)
+            }
+            
+            UserDefaults.standard.set(pickerValue.id, forKey: "CityId")
+            UserDefaults.standard.set(pickerValue.country_id, forKey: "CountryId")
         }))
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(ac, animated: true)

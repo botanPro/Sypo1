@@ -30,8 +30,6 @@ class Home: UIViewController ,UITextFieldDelegate {
     var SearchArray : [EstateObject] = []
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        
-        
         SearchArray = AllEstateArray.filter({ estate -> Bool in
             
                       let titleMatch = estate.name?.range(of: textField.text!, options: NSString.CompareOptions.caseInsensitive)
@@ -225,6 +223,8 @@ class Home: UIViewController ,UITextFieldDelegate {
         self.AllEstatesCollectionView.reloadData()
         self.ApartmentEstatesCollectionView.reloadData()
         self.NearYouCollectionView.reloadData()
+        self.EstateTypeCollectionView.reloadData()
+        self.TitleSubTile()
     }
     
     
@@ -449,7 +449,6 @@ class Home: UIViewController ,UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        TitleSubTile()
         if !CheckInternet.Connection(){
             MessageBox.ShowMessage()
         }
@@ -482,19 +481,61 @@ class Home: UIViewController ,UITextFieldDelegate {
         label.textAlignment = .center
         label.textColor = .darkGray
         let text = NSMutableAttributedString()
+        
+    
+        
+        
         if XLanguage.get() == .English{
             self.location = "Location"
             text.append(NSAttributedString(string: self.location, attributes: [.font : UIFont(name: "ArialRoundedMTBold", size: titleSize)!]))
-        }else if XLanguage.get() == .Kurdish{
+            CityObjectAip.GetCities { cities in
+                if let cityId = UserDefaults.standard.string(forKey: "CityId"){
+                    for city in cities {
+                        if city.id == cityId{
+                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
+                                text.append(NSAttributedString(string: "\n\(country.name ?? "")-\(city.name ?? "")".uppercased(), attributes: [.font : UIFont(name: "ArialRoundedMTBold", size: subtitleSize)!]))
+                                label.attributedText = text
+                                self.navigationItem.titleView = label
+                            }
+                        }
+                    }
+                }
+            }
+        }else if XLanguage.get() == .Arabic{
             self.location = "شوێن"
             text.append(NSAttributedString(string: self.location, attributes: [.font : UIFont(name: "PeshangDes2", size: 12)!]))
+            CityObjectAip.GetCities { cities in
+                if let cityId = UserDefaults.standard.string(forKey: "CityId"){
+                    for city in cities {
+                        if city.id == cityId{
+                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
+                                text.append(NSAttributedString(string: "\n\(country.ar_name ?? "")-\(city.ar_name ?? "")", attributes: [.font : UIFont(name: "PeshangDes2", size: subtitleSize)!]))
+                                label.attributedText = text
+                                self.navigationItem.titleView = label
+                            }
+                        }
+                    }
+                }
+            }
         }else{
             self.location = "الموقع"
             text.append(NSAttributedString(string: self.location, attributes: [.font : UIFont(name: "PeshangDes2", size: 12)!]))
+            CityObjectAip.GetCities { cities in
+                if let cityId = UserDefaults.standard.string(forKey: "CityId"){
+                    for city in cities {
+                        if city.id == cityId{
+                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
+                                text.append(NSAttributedString(string: "\n\(country.ku_name ?? "")-\(city.ku_name ?? "")", attributes: [.font : UIFont(name: "PeshangDes2", size: subtitleSize)!]))
+                                label.attributedText = text
+                                self.navigationItem.titleView = label
+                            }
+                        }
+                    }
+                }
+            }
         }
-        text.append(NSAttributedString(string: "\n\("IRAQ-\(UserDefaults.standard.string(forKey: "CityName")?.uppercased() ?? "")")", attributes: [.font : UIFont(name: "ArialRoundedMTBold", size: subtitleSize)!]))
-        label.attributedText = text
-        self.navigationItem.titleView = label
+        
+        
     }
     
     
@@ -596,7 +637,16 @@ extension Home : UICollectionViewDataSource, UICollectionViewDelegate , UICollec
         if self.EstatesType.count != 0{
             cell.Vieww.backgroundColor = .white
             cell.Name.textColor = #colorLiteral(red: 0.4430069923, green: 0.4869378209, blue: 0.5339931846, alpha: 1)
-            cell.Name.text = EstatesType[indexPath.row].name
+            if XLanguage.get() == .English{
+                cell.Name.text = EstatesType[indexPath.row].name
+                cell.Name.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
+            }else if XLanguage.get() == .Arabic{
+                cell.Name.text = EstatesType[indexPath.row].ar_name
+                cell.Name.font =  UIFont(name: "PeshangDes2", size: 12)!
+            }else{
+                cell.Name.text = EstatesType[indexPath.row].ku_name
+                cell.Name.font =  UIFont(name: "PeshangDes2", size: 12)!
+            }
         }
         return cell
         }
@@ -765,7 +815,7 @@ extension Home : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! SearchHistoryTableViewCell
-        cell.Name.text = SearchArray[indexPath.row].name
+              cell.Name.text = SearchArray[indexPath.row].name
             return cell
     }
     

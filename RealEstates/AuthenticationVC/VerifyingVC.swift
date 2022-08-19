@@ -27,11 +27,16 @@ class VerifyingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         self.Dismiss.isHidden = true
         
         
         if self.IsFromAnotherVc == true{
             self.Dismiss.isHidden = false
+        }else{
+            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+            self.navigationController?.navigationBar.shadowImage = UIImage()
         }
         
         
@@ -97,7 +102,7 @@ var count = 0
             Verify.showLoader(userInteraction: true)
             credential = PhoneAuthProvider.provider().credential(
                 withVerificationID: self.ver ,
-                verificationCode: self.OTPCode.text!)
+                verificationCode: self.OTPCode.text!.convertedDigitsToLocale(Locale(identifier: "EN")))
             Auth.auth().signIn(with: credential) { (authResult, error) in
                 if let error = error {
                     UserDefaults.standard.set(false, forKey: "Login")

@@ -106,7 +106,8 @@ class OfficeVC: UIViewController {
         super.viewDidLoad()
         
         
-        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         
         
         let deviceName = device.modelNamee

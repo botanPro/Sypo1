@@ -16,7 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if XLanguage.get() == .none{
             XLanguage.set(Language: .English)
-            UserDefaults.standard.set(2, forKey: "language")
         }
         
         UserDefaults.standard.set(nil, forKey: "dynamiclink")

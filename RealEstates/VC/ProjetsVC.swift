@@ -109,6 +109,7 @@ class ProjetsVC: UIViewController {
     
     @objc func LanguageChanged(){
         self.ProjectsCollectionView.reloadData()
+        self.CityCollectionView.reloadData()
     }
 
     func GetSliderImages(){
@@ -193,7 +194,16 @@ extension ProjetsVC : UICollectionViewDataSource, UICollectionViewDelegate , UIC
                     cell.Vieww.backgroundColor = .white
                     cell.Name.textColor = #colorLiteral(red: 0.4430069923, green: 0.4869378209, blue: 0.5339931846, alpha: 1)
                 }
-                cell.Name.text = CityArray[indexPath.row].name
+                if XLanguage.get() == .English{
+                    cell.Name.text = CityArray[indexPath.row].name
+                    cell.Name.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
+                }else if XLanguage.get() == .Arabic{
+                    cell.Name.text = CityArray[indexPath.row].ar_name
+                    cell.Name.font =  UIFont(name: "PeshangDes2", size: 11)!
+                }else{
+                    cell.Name.text = CityArray[indexPath.row].ku_name
+                    cell.Name.font =  UIFont(name: "PeshangDes2", size: 11)!
+                }
             }
             return cell
         }
@@ -201,8 +211,6 @@ extension ProjetsVC : UICollectionViewDataSource, UICollectionViewDelegate , UIC
         if collectionView == ProjectsCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProjectCell", for: indexPath) as! ProjectsCollectionViewCell
             cell.update(self.ProjectArray[indexPath.row])
-            print(self.ProjectArray[indexPath.row].latitude)
-            print(self.ProjectArray[indexPath.row].longitude)
             return cell
         }
         return UICollectionViewCell()

@@ -89,7 +89,13 @@ class ProjectMapVC: UIViewController , MKMapViewDelegate, CLLocationManagerDeleg
             for pro in AllProjects{
                 let lat = Double(pro.latitude ?? "")
                 let long = Double(pro.longitude ?? "")
+                if XLanguage.get() == .English{
                 self.Locations.append(Place(coordinate: CLLocationCoordinate2D(latitude: lat ?? 0.0, longitude: long ?? 0.0), profileId: pro.id ?? "", title: pro.project_name ?? "", subtitle: pro.address ?? ""))
+                }else if XLanguage.get() == .Arabic{
+                    self.Locations.append(Place(coordinate: CLLocationCoordinate2D(latitude: lat ?? 0.0, longitude: long ?? 0.0), profileId: pro.id ?? "", title: pro.project_ar_name ?? "", subtitle: pro.address ?? ""))
+                }else{
+                    self.Locations.append(Place(coordinate: CLLocationCoordinate2D(latitude: lat ?? 0.0, longitude: long ?? 0.0), profileId: pro.id ?? "", title: pro.project_ku_name ?? "", subtitle: pro.address ?? ""))
+                }
             }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.NVLoaderView.stopAnimating()

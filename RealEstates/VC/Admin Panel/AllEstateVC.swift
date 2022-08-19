@@ -20,7 +20,8 @@ class AllEstateVC: UIViewController {
         super.viewDidLoad()
         AllEstateCollectionView.register(UINib(nibName: "AllEstatessCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AllCell")
         
-        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         
         if AllEstate.count != 0{
             for UnArchived in AllEstate{

@@ -36,32 +36,53 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
     }
     
     
-    
-    
-    
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         var pickerLabel: UILabel? = (view as? UILabel)
         if pickerLabel == nil {
             pickerLabel = UILabel()
-            if XLanguage.get() == .English{
-                pickerLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-            }else if XLanguage.get() == .Kurdish || XLanguage.get() == .Arabic{
-                pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
-            }
+            
             pickerLabel?.textAlignment = .center
+            
+            if pickerView == ProjectpickerView{
+                
+                if XLanguage.get() == .English{
+                    pickerLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+                    pickerLabel?.text = self.ProjectArray[row].project_name
+                }else if XLanguage.get() == .Arabic{
+                    pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
+                    pickerLabel?.text = self.ProjectArray[row].project_ar_name
+                }else{
+                    pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
+                    pickerLabel?.text = self.ProjectArray[row].project_ku_name
+                }
+            }
+            
+            if pickerView == EstateTypepickerView{
+                if XLanguage.get() == .English{
+                    pickerLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+                    pickerLabel?.text = self.EstatesType[row].name
+                }else if XLanguage.get() == .Arabic{
+                    pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
+                    pickerLabel?.text = self.EstatesType[row].ar_name
+                }else{
+                    pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
+                    pickerLabel?.text = self.EstatesType[row].ku_name
+                }
+            }
+            
+            if pickerView == TypepickerView{
+                if XLanguage.get() == .English{
+                    pickerLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+                    pickerLabel?.text = self.typees[row].name
+                }else if XLanguage.get() == .Arabic{
+                    pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
+                    pickerLabel?.text = self.typees[row].ar_name
+                }else{
+                    pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
+                    pickerLabel?.text = self.typees[row].ku_name
+                }
+            }
         }
-        if pickerView == ProjectpickerView{
-        pickerLabel?.text = self.ProjectArray[row].project_name
-        }
-        
-        if pickerView == EstateTypepickerView{
-            pickerLabel?.text = self.EstatesType[row].name
-        }
-        
-        if pickerView == TypepickerView{
-            pickerLabel?.text = self.typees[row].name
-        }
-        
         return pickerLabel!
     }
 
@@ -219,6 +240,10 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
     override func viewDidLoad() {
         super.viewDidLoad()
         setupGroup2()
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
         self.ProjectHeight.constant = 0
         self.ProjectTopConstans.constant = 0
         self.ProjectView.isHidden = true
@@ -282,6 +307,17 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
         }else{
             self.ImageCount.text = "صور (\(self.Images.count))"
             self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
+        }
+        
+        if XLanguage.get() == .English{
+            self.LatLongAddress.text = "LOCATION ()"
+            self.LatLongAddress.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        }else if XLanguage.get() == .Arabic{
+            self.LatLongAddress.text = "الموقع ()"
+            self.LatLongAddress.font = UIFont(name: "PeshangDes2", size: 12)!
+        }else{
+            self.LatLongAddress.text = "شوێن ()"
+            self.LatLongAddress.font = UIFont(name: "PeshangDes2", size: 12)!
         }
         
         
@@ -371,7 +407,14 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             self.Desc.text = data.desc
             self.lat = data.lat ?? ""
             self.long = data.long ?? ""
-            self.LatLongAddress.text = "LOCATION (\(self.lat), \(self.long))"
+            
+            if XLanguage.get() == .English{
+                self.LatLongAddress.text = "LOCATION (\(self.lat), \(self.long))"
+            }else if XLanguage.get() == .Arabic{
+                self.LatLongAddress.text = "الموقع (\(self.lat), \(self.long))"
+            }else{
+                self.LatLongAddress.text = "شوێن (\(self.lat), \(self.long))"
+            }
             
             if data.Furnished == "0" && XLanguage.get() == .English{
                 self.Furnished.text = "Furnished"
@@ -418,7 +461,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             self.city = data.city_name ?? ""
             self.CityId = data.city_id ?? ""
             
-            self.selecteEstatedcell = EstateTypeObject(name: "", id:data.estate_type_id ??  "")
+            self.selecteEstatedcell = EstateTypeObject(name: "", id:data.estate_type_id ??  "",ar_name: "" , ku_name: "")
             
             EstateTypeAip.GeEstateTypeNameById(id: data.estate_type_id ?? "") { type in
                 self.EstateTypeLable.text = type.name
@@ -532,7 +575,18 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
         ac.view.addSubview(TypepickerView)
         ac.addAction(UIAlertAction(title:  self.ProjectsAction, style: .default, handler: { _ in
             let pickerValue = self.typees[self.TypepickerView.selectedRow(inComponent: 0)]
+            if XLanguage.get() == .English{
             self.Typelable.text = pickerValue.name
+                self.Typelable.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            }else if XLanguage.get() == .Arabic{
+                self.Typelable.text = pickerValue.ar_name
+                self.Typelable.font = UIFont(name: "PeshangDes2", size: 12)!
+            }else{
+                self.Typelable.text = pickerValue.ku_name
+                self.Typelable.font = UIFont(name: "PeshangDes2", size: 12)!
+            }
+            
+            
             print("Picker value: \(pickerValue) was selected")
         }))
         ac.addAction(UIAlertAction(title: self.ProjectsCancel, style: .cancel, handler: nil))
@@ -581,7 +635,16 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
         ac.view.addSubview(EstateTypepickerView)
         ac.addAction(UIAlertAction(title:  self.ProjectsAction, style: .default, handler: { _ in
             let pickerValue = self.EstatesType[self.EstateTypepickerView.selectedRow(inComponent: 0)]
+            if XLanguage.get() == .English{
             self.EstateTypeLable.text = pickerValue.name
+                self.EstateTypeLable.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            }else if XLanguage.get() == .Arabic{
+                self.EstateTypeLable.text = pickerValue.ar_name
+                self.EstateTypeLable.font = UIFont(name: "PeshangDes2", size: 12)!
+            }else{
+                self.EstateTypeLable.text = pickerValue.ku_name
+                self.EstateTypeLable.font = UIFont(name: "PeshangDes2", size: 12)!
+            }
             self.selecteEstatedcell = pickerValue
             print(pickerValue.id ?? "")
             if pickerValue.id == "UTY25FYJHkliygt4nvPP"{
@@ -665,7 +728,13 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                 let arrLong = Array(Long)
                 self.lat = String(arrLat[0..<8])
                 self.long = String(arrLong[0..<8])
-                self.LatLongAddress.text = "LOCATION (\(String(arrLat[0..<8])), \(String(arrLong[0..<8])))"
+                if XLanguage.get() == .English{
+                    self.LatLongAddress.text = "LOCATION (\(String(arrLat[0..<8])), \(String(arrLong[0..<8])))"
+                }else if XLanguage.get() == .Arabic{
+                    self.LatLongAddress.text = "الموقع (\(String(arrLat[0..<8])), \(String(arrLong[0..<8])))"
+                }else{
+                    self.LatLongAddress.text = "شوێن (\(String(arrLat[0..<8])), \(String(arrLong[0..<8])))"
+                }
                 self.Address.becomeFirstResponder()
             }
         }
@@ -1743,7 +1812,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                                                   , address: self.Address.text!
                                                   , lat: self.lat
                                                   , long: self.long
-                                                  , price: (self.Price.text! as NSString).doubleValue
+                                                  , price: (self.Price.text!.convertedDigitsToLocale(Locale(identifier: "EN")) as NSString).doubleValue
                                                   , desc: self.Desc.text!
                                                   , office_id: office.id ?? ""
                                                   , fire_id: FireId
@@ -1751,16 +1820,16 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                                                   , city_id: self.CityId
                                                   , estate_type_id: self.selecteEstatedcell?.id ?? ""
                                                   , Direction: self.Direction
-                                                  , floor: self.Floor.text!
-                                                  , Building: self.Building.text!
-                                                  , Year: self.Year.text!
+                                                  , floor: self.Floor.text!.convertedDigitsToLocale(Locale(identifier: "EN"))
+                                                  , Building: self.Building.text!.convertedDigitsToLocale(Locale(identifier: "EN"))
+                                                  , Year: self.Year.text!.convertedDigitsToLocale(Locale(identifier: "EN"))
                                                   , Furnished: self.SelectedFurnished
                                                   , bound_id: self.SelectedBoundTypeId
-                                                  , MonthlyService: self.MonthlyFee.text!
+                                                  , MonthlyService: self.MonthlyFee.text!.convertedDigitsToLocale(Locale(identifier: "EN"))
                                                   , RoomNo:"\(self.selecteNumbercell)"
                                                   , WashNo: "\(self.selecteWashcell)"
-                                                  , space: self.Space.text!
-                                                  , propertyNo: self.PropertyNo.text!
+                                                  , space: self.Space.text!.convertedDigitsToLocale(Locale(identifier: "EN"))
+                                                  , propertyNo: self.PropertyNo.text!.convertedDigitsToLocale(Locale(identifier: "EN"))
                                                   , state: "0"
                                                   , project_id: self.ProjectId
                                                   , video_link: ""
@@ -1807,7 +1876,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                                               , address: self.Address.text!
                                               , lat: self.lat
                                               , long: self.long
-                                              , price: (self.Price.text! as NSString).doubleValue
+                                              , price: (self.Price.text!.convertedDigitsToLocale(Locale(identifier: "EN")) as NSString).doubleValue
                                               , desc: self.Desc.text!
                                               , office_id: office.id ?? ""
                                               , fire_id: FireId
@@ -1815,16 +1884,16 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                                               , city_id: self.CityId
                                               , estate_type_id: self.selecteEstatedcell?.id ?? ""
                                               , Direction: self.Direction
-                                              , floor: self.Floor.text!
-                                              , Building: self.Building.text!
-                                              , Year: self.Year.text!
+                                              , floor: self.Floor.text!.convertedDigitsToLocale(Locale(identifier: "EN"))
+                                              , Building: self.Building.text!.convertedDigitsToLocale(Locale(identifier: "EN"))
+                                              , Year: self.Year.text!.convertedDigitsToLocale(Locale(identifier: "EN"))
                                               , Furnished: self.SelectedFurnished
                                               , bound_id: self.SelectedBoundTypeId
-                                              , MonthlyService: self.MonthlyFee.text!
+                                              , MonthlyService: self.MonthlyFee.text!.convertedDigitsToLocale(Locale(identifier: "EN"))
                                               , RoomNo:"\(self.selecteNumbercell)"
                                               , WashNo: "\(self.selecteWashcell)"
-                                              , space: self.Space.text!
-                                              , propertyNo: self.PropertyNo.text!
+                                              , space: self.Space.text!.convertedDigitsToLocale(Locale(identifier: "EN"))
+                                              , propertyNo: self.PropertyNo.text!.convertedDigitsToLocale(Locale(identifier: "EN"))
                                               , state: "0"
                                               , project_id: self.ProjectId
                                               , video_link: ""

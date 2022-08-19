@@ -101,16 +101,14 @@ class NearCollectionViewCell: UICollectionViewCell {
         
         
        
-        EstateTypeAip.GeEstateTypeNameById(id:  cell.estate_type_id ?? "") { type in
-            self.Typee.text = type.name
-        }
+       
         
         let date = NSDate(timeIntervalSince1970: cell.Stamp ?? 0.0)
         let dayTimePeriodFormatter = DateFormatter()
         dayTimePeriodFormatter.dateFormat = "dd MM,YYYY"
         let dateTimeString = dayTimePeriodFormatter.string(from: date as Date)
         let dateTime = dateTimeString.split(separator: ".")
-        self.Date.text = "\(dateTime[0])"
+        self.Date.text = "\(dateTime[0])".convertedDigitsToLocale(Locale(identifier: "EN"))
         
         
         if XLanguage.get() == .English{
@@ -201,6 +199,20 @@ class NearCollectionViewCell: UICollectionViewCell {
                 self.Direction.text = "الشمال الغربي"
             }else{
                 self.Direction.text = "باکوورێ رۆژئاڤا"
+            }
+        }
+        
+        
+        EstateTypeAip.GeEstateTypeNameById(id:  cell.estate_type_id ?? "") { type in
+            if XLanguage.get() == .English{
+                self.Typee.text = type.name
+                self.Typee.font =  UIFont(name: "ArialRoundedMTBold", size: 10)!
+            }else if XLanguage.get() == .Arabic{
+                self.Typee.text = type.ar_name
+                self.Typee.font =  UIFont(name: "PeshangDes2", size: 11)!
+            }else{
+                self.Typee.text = type.ku_name
+                self.Typee.font =  UIFont(name: "PeshangDes2", size: 11)!
             }
         }
         

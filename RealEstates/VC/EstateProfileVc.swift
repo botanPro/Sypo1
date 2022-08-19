@@ -236,7 +236,6 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
         }
     }
     
-  
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -252,12 +251,17 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
             pickerLabel = UILabel()
             if XLanguage.get() == .English{
                 pickerLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-            }else if XLanguage.get() == .Kurdish || XLanguage.get() == .Arabic{
+                pickerLabel?.text = self.NighborArray[row].name
+            }else if XLanguage.get() == .Arabic{
                 pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
+                pickerLabel?.text = self.NighborArray[row].ar_name
+            }else{
+                pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
+                pickerLabel?.text = self.NighborArray[row].ku_name
             }
             pickerLabel?.textAlignment = .center
         }
-        pickerLabel?.text = self.NighborArray[row].name
+        
 
         return pickerLabel!
     }
@@ -420,7 +424,7 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         GetAllEstates()
-        
+        self.ProjectNameTop.constant = 0
         let deviceName = device.modelNamee
         print(UIDevice.current.modelNamee)
         if deviceName == "iPhone 8" ||  deviceName == "iPhone 7" ||  deviceName == "iPhone 6"{
@@ -430,7 +434,13 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
         
         print(self.CommingEstate?.bound_id ?? "")
         BoundTypeAip.GetBoundTypeByOfficeId(id: self.CommingEstate?.bound_id ?? "") { bound in
+            if XLanguage.get() == .English{
             self.BoundType = bound.en_title ?? ""
+            }else if XLanguage.get() == .Arabic{
+                self.BoundType = bound.ar_title ?? ""
+            }else{
+                self.BoundType = bound.ku_title ?? ""
+            }
             self.GetData()
         }
         EstateTypeView.layer.backgroundColor = UIColor.clear.cgColor
@@ -504,6 +514,8 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     var RealDirection  = ""
     var lang : Int = UserDefaults.standard.integer(forKey: "language")
     var m2 = ""
+    @IBOutlet weak var ProjectNameTop: NSLayoutConstraint!
+    @IBOutlet weak var ProjectName: UILabel!
     @IBOutlet weak var DescLable: LanguageLable!
     @IBOutlet weak var DescBottomLayout: NSLayoutConstraint!
     var BoundType = ""
@@ -522,13 +534,16 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
             self.RoomNo.text = data.RoomNo
             let font:UIFont? = UIFont(name: "ArialRoundedMTBold", size: 23)!
             let fontSuper:UIFont? = UIFont(name: "ArialRoundedMTBold", size: 15)!
-            if self.lang == 2{
+            if XLanguage.get() == .English{
                 self.m2 = "m2"
-            }else if lang == 3{
+            }else if XLanguage.get() == .Arabic{
                 self.m2 = "م٢"
             }else{
                 self.m2 = "م٢"
             }
+            
+            
+            
             let attString:NSMutableAttributedString = NSMutableAttributedString(string: "\(data.space ?? "")\(self.m2)", attributes: [.font:font!])
             attString.setAttributes([.font:fontSuper!,.baselineOffset:4], range: NSRange(location:(data.space?.count ?? 0) + 1,length:1))
             self.Meters.attributedText = attString
@@ -552,28 +567,35 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
                 }
                 self.view.layoutIfNeeded()
             }
-
+            let date = NSDate(timeIntervalSince1970: data.Stamp ?? 0.0)
+            let dayTimePeriodFormatter = DateFormatter()
+            dayTimePeriodFormatter.dateFormat = "dd MM,YYYY"
+            let dateTimeString = dayTimePeriodFormatter.string(from: date as Date)
+            let dateTime = dateTimeString.split(separator: ".")
             
             if XLanguage.get() == .Kurdish{
+                self.keys.append("بەروار")
                 self.keys.append("مۆبیلیات کراوە")
-                self.keys.append("جۆری بەند")
+                self.keys.append("جۆری سەنەد")
                 self.keys.append("ساڵی دروست کردن")
                 self.keys.append("ئاڕاستە")
                 self.keys.append("ئەم خانووبەرە")
             }else if XLanguage.get() == .English{
+                self.keys.append("Date")
                 self.keys.append("Furnished")
                 self.keys.append("Bond Type")
                 self.keys.append("Constraction year")
                 self.keys.append("Direction")
                 self.keys.append("This estate is")
             }else{
+                self.keys.append("تاريخ")
                 self.keys.append("مفروشة")
                 self.keys.append("نوع السند")
                 self.keys.append("سنة البناء")
                 self.keys.append("الاتجاه")
                 self.keys.append("هذا العقار")
             }
-            
+            self.value.append("\(dateTime[0])".convertedDigitsToLocale(Locale(identifier: "EN")))
             
             
             if data.Furnished == "0" && XLanguage.get() == .English{
@@ -601,9 +623,9 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
 
             
             if data.Direction == "N"{
-                if self.lang == 2{
+                if XLanguage.get() == .English{
                     self.value.append("North")
-                }else if lang == 3{
+                }else if XLanguage.get() == .Arabic{
                     self.value.append("شمال")
                 }else{
                     self.value.append("باکور")
@@ -611,9 +633,9 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
             }
             
             if data.Direction == "NE"{
-                if self.lang == 2{
+                if XLanguage.get() == .English{
                     self.value.append("Northeast")
-                }else if lang == 3{
+                }else if XLanguage.get() == .Arabic{
                     self.value.append("الشمال الشرقي")
                 }else{
                     self.value.append("باکوورێ رۆژهەڵات")
@@ -621,9 +643,9 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
             }
             
             if data.Direction == "E"{
-                if self.lang == 2{
+                if XLanguage.get() == .English{
                     self.value.append("East")
-                }else if lang == 3{
+                }else if XLanguage.get() == .Arabic{
                     self.value.append("شرق")
                 }else{
                     self.value.append("رۆژهەڵات")
@@ -632,9 +654,9 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
             
             
             if data.Direction == "SE"{
-                if self.lang == 2{
+                if XLanguage.get() == .English{
                     self.value.append("Southeast")
-                }else if lang == 3{
+                }else if XLanguage.get() == .Arabic{
                     self.value.append("الجنوب الشرقي")
                 }else{
                     self.value.append("باشوورێ رۆژهەڵات")
@@ -643,9 +665,9 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
             
             
             if data.Direction == "S"{
-                if self.lang == 2{
+                if XLanguage.get() == .English{
                     self.value.append("South")
-                }else if lang == 3{
+                }else if XLanguage.get() == .Arabic{
                     self.value.append("الجنوب")
                 }else{
                     self.value.append("باشور")
@@ -653,9 +675,9 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
             }
             
             if data.Direction == "SW"{
-                if self.lang == 2{
+                if XLanguage.get() == .English{
                     self.value.append("Southwest")
-                }else if lang == 3{
+                }else if XLanguage.get() == .Arabic{
                     self.value.append("جنوب غرب")
                 }else{
                     self.value.append("باشوورێ رۆژئاڤا")
@@ -663,9 +685,9 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
             }
             
             if data.Direction == "W"{
-                if self.lang == 2{
+                if XLanguage.get() == .English{
                     self.value.append("West")
-                }else if lang == 3{
+                }else if XLanguage.get() == .Arabic{
                     self.value.append("الغرب")
                 }else{
                     self.value.append("رۆژئاڤا")
@@ -673,10 +695,10 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
             }
             
             if data.Direction == "NW"{
-                if self.lang == 2{
+                if XLanguage.get() == .English{
                     self.value.append("Northwest")
-                }else if lang == 3{
-                    self.value.append("الشمال الغربي")
+                }else if XLanguage.get() == .Arabic{
+                    self.value.append( "الشمال الغربي")
                 }else{
                     self.value.append("باکوورێ رۆژئاڤا")
                 }
@@ -736,7 +758,6 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
            
             
             
-            
             if data.video_link == ""{
                 self.VideoHeightLayout.constant = 0
             }else{
@@ -749,6 +770,19 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
             
             
             if data.estate_type_id == "UTY25FYJHkliygt4nvPP"{
+                self.ProjectNameTop.constant = 8
+                GetAllProjectsAip.GeeProjectById(fire_id: data.project_id ?? "") { project in
+                    if XLanguage.get() == .English{
+                        self.ProjectName.text = project.project_name
+                        self.ProjectName.font = UIFont(name: "ArialRoundedMTBold", size: 17)!
+                    }else if XLanguage.get() == .Arabic{
+                        self.ProjectName.text = project.project_ar_name
+                        self.ProjectName.font = UIFont(name: "PeshangDes2", size: 17)!
+                    }else{
+                        self.ProjectName.text = project.project_ku_name
+                        self.ProjectName.font = UIFont(name: "PeshangDes2", size: 17)!
+                    }
+                }
                 
                 if XLanguage.get() == .Kurdish{
                     self.keys.append("کرێی خزمەتگوزارییەکانی مانگانە")
@@ -766,6 +800,7 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
                     self.keys.append("الطابق")
                     self.keys.append("رقم العقار")
                 }
+                
                 
                 self.value.append(data.MonthlyService?.description.currencyFormattingIQD() ?? "")
                 

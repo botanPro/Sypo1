@@ -28,14 +28,31 @@ class ProjectsCollectionViewCell: UICollectionViewCell {
     var to = ""
     var lang : Int = UserDefaults.standard.integer(forKey: "language")
     func update(_ cell: ProjectObject){
-        print(cell.project_state_id ?? "")
         ProjectStatesAip.GetProjectStatesId(id: cell.project_state_id ?? "") { state in
-            self.State.text = state.title
+            if XLanguage.get() == .English{
+                self.State.text = state.title
+                self.State.font = UIFont(name: "ArialRoundedMTBold", size: 13)!
+            }else if XLanguage.get() == .Arabic{
+                self.State.text = state.ar_title
+                self.State.font = UIFont(name: "PeshangDes2", size: 13)!
+            }else{
+                self.State.text = state.ku_title
+                self.State.font = UIFont(name: "PeshangDes2", size: 13)!
+            }
         }
         
         guard let imagrUrl = cell.images, let url = URL(string: imagrUrl[0]) else {return}
         self.Image.sd_setImage(with: url, completed: nil)
-        self.Name.text = cell.project_name
+        if XLanguage.get() == .English{
+            self.Name.text = cell.project_name
+            self.Name.font = UIFont(name: "ArialRoundedMTBold", size: 14)!
+        }else if XLanguage.get() == .Arabic{
+            self.Name.text = cell.project_ar_name
+            self.Name.font = UIFont(name: "PeshangDes2", size: 14)!
+        }else{
+            self.Name.text = cell.project_ku_name
+            self.Name.font = UIFont(name: "PeshangDes2", size: 14)!
+        }
         self.Location.text = cell.address
         if XLanguage.get() == .English{
             self.Buildings = "Buildings"
@@ -57,7 +74,7 @@ class ProjectsCollectionViewCell: UICollectionViewCell {
         dayTimePeriodFormatter.dateFormat = "dd MM,YYYY"
         let dateTimeString = dayTimePeriodFormatter.string(from: date as Date)
         let dateTime = dateTimeString.split(separator: ".")
-        self.Date.text = "\(dateTime[0])"
+        self.Date.text = "\(dateTime[0])".convertedDigitsToLocale(Locale(identifier: "EN"))
     }
 
 }

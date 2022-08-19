@@ -17,6 +17,9 @@ class CityVC: UIViewController {
         self.TableView.cr.addHeadRefresh(animator: FastAnimator()) {
             self.GetCity()
         }
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
 }
     
     func GetCity(){
@@ -44,7 +47,13 @@ extension CityVC : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell  = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CuntryAndCityTableViewCell
-        cell.Name.text = City[indexPath.row].name ?? ""
+        if XLanguage.get() == .English{
+            cell.Name.text = City[indexPath.row].name ?? ""
+        }else if XLanguage.get() == .Arabic{
+            cell.Name.text = City[indexPath.row].ar_name ?? ""
+        }else{
+            cell.Name.text = City[indexPath.row].ku_name ?? ""
+        }
         return cell
     }
 
@@ -53,8 +62,16 @@ extension CityVC : UITableViewDelegate , UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if City.count != 0{
             print(self.City[indexPath.row].id ?? "")
-        let CityName : [String : String] = ["City" : self.City[indexPath.row].name ?? "" ,"CityId":self.City[indexPath.row].id ?? ""]
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CityName"), object: nil ,userInfo:CityName)
+            if XLanguage.get() == .English{
+                let CityName : [String : String] = ["City" : self.City[indexPath.row].name ?? "" ,"CityId":self.City[indexPath.row].id ?? ""]
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CityName"), object: nil ,userInfo:CityName)
+            }else if XLanguage.get() == .Arabic{
+                let CityName : [String : String] = ["City" : self.City[indexPath.row].ar_name ?? "" ,"CityId":self.City[indexPath.row].id ?? ""]
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CityName"), object: nil ,userInfo:CityName)
+            }else{
+                let CityName : [String : String] = ["City" : self.City[indexPath.row].ku_name ?? "" ,"CityId":self.City[indexPath.row].id ?? ""]
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CityName"), object: nil ,userInfo:CityName)
+            }
             self.popBack(2)
         }
     }

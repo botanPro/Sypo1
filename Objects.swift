@@ -689,12 +689,16 @@ class SlidesAip{
 
 class EstateTypeObject{
     
+    var ku_name : String?
+    var ar_name : String?
     var name : String?
     var id : String?
     
-    init(name : String,id : String) {
+    init(name : String,id : String , ar_name : String , ku_name : String) {
         self.name               = name
         self.id                 = id
+        self.ku_name            = ku_name
+        self.ar_name            = ar_name
     }
     
     
@@ -702,6 +706,8 @@ class EstateTypeObject{
     init(Dictionary : [String : AnyObject]) {
         self.id   = Dictionary[ "Id" ]   as? String
         self.name = Dictionary[ "Name" ] as? String
+        self.ku_name = Dictionary[ "ku_name" ] as? String
+        self.ar_name = Dictionary[ "ar_name" ] as? String
     }
     
 
@@ -709,6 +715,8 @@ class EstateTypeObject{
         var New  : [String : AnyObject]  = [:]
         New["Id"]   = self.id       as AnyObject
         New["Name"] = self.name     as AnyObject
+        New["ku_name"] = self.ku_name     as AnyObject
+        New["ar_name"] = self.ar_name     as AnyObject
         return New
     }
     
@@ -745,7 +753,7 @@ class EstateTypeAip{
                 }
             }
             }else{
-                completion(EstateTypeObject.init(name: "", id: ""))
+                completion(EstateTypeObject.init(name: "", id: "",ar_name : "" ,ku_name : ""))
             }
         }
     }
@@ -755,14 +763,17 @@ class EstateTypeAip{
 
 
 class CityObject{
-    
+    var ku_name : String?
+    var ar_name : String?
     var name : String?
     var id : String?
     var country_id : String?
-    init(name : String,id : String , country_id : String) {
+    init(name : String,id : String , country_id : String, ar_name : String , ku_name : String) {
         self.name               = name
         self.id                 = id
         self.country_id         = country_id
+        self.ku_name            = ku_name
+        self.ar_name            = ar_name
     }
     
     
@@ -771,6 +782,8 @@ class CityObject{
         self.id   = Dictionary[ "Id" ]   as? String
         self.name = Dictionary[ "Name" ] as? String
         self.country_id = Dictionary["country_id"] as? String
+        self.ku_name = Dictionary[ "ku_name" ] as? String
+        self.ar_name = Dictionary[ "ar_name" ] as? String
     }
     
 
@@ -779,6 +792,8 @@ class CityObject{
         New["Id"]   = self.id       as AnyObject
         New["Name"] = self.name     as AnyObject
         New["country_id"] = self.country_id  as AnyObject
+        New["ku_name"] = self.ku_name     as AnyObject
+        New["ar_name"] = self.ar_name     as AnyObject
         return New
     }
     
@@ -801,14 +816,20 @@ class CityObjectAip{
     }
 }
 
-class TypesObject{
-    
+
+
+
+
+class CountryObject{
+    var ku_name : String?
+    var ar_name : String?
     var name : String?
     var id : String?
-    
-    init(name : String,id : String) {
+    init(name : String,id : String , ar_name : String , ku_name : String) {
         self.name               = name
         self.id                 = id
+        self.ku_name            = ku_name
+        self.ar_name            = ar_name
     }
     
     
@@ -816,6 +837,8 @@ class TypesObject{
     init(Dictionary : [String : AnyObject]) {
         self.id   = Dictionary[ "id" ]   as? String
         self.name = Dictionary[ "name" ] as? String
+        self.ku_name = Dictionary[ "ku_name" ] as? String
+        self.ar_name = Dictionary[ "ar_name" ] as? String
     }
     
 
@@ -823,6 +846,83 @@ class TypesObject{
         var New  : [String : AnyObject]  = [:]
         New["id"]   = self.id       as AnyObject
         New["name"] = self.name     as AnyObject
+        New["ku_name"] = self.ku_name     as AnyObject
+        New["ar_name"] = self.ar_name     as AnyObject
+        return New
+    }
+    
+    
+}
+
+class CountryObjectAip{
+    static func GetCountries(completion : @escaping (_ Product : [CountryObject])->()){
+        var New : [CountryObject] = []
+        Firestore.firestore().collection("Countries").getDocuments { (Snapshot, error) in
+            if error != nil { print("Error") ; return }
+            guard let documents = Snapshot?.documents else { return }
+            for P in documents {
+                if let data = P.data() as [String : AnyObject]? {
+                    New.append(CountryObject(Dictionary: data))
+                }
+            }
+            completion(New)
+        }
+    }
+    
+    
+    static func GeCountryById(id : String , completion : @escaping (_ Product : CountryObject)->()){
+        Firestore.firestore().collection("Countries").whereField("id", isEqualTo: id).getDocuments { (Snapshot, error) in
+            if error != nil { print(error.debugDescription) ; return }
+            guard let documents = Snapshot?.documents else { return }
+            if documents != []{
+            for P in documents {
+                if let data = P.data() as [String : AnyObject]? {
+                    let New = CountryObject(Dictionary: data)
+                    print(JSON(data))
+                    completion(New)
+                }
+            }
+            }else{
+                completion(CountryObject.init(name: "", id: "",ar_name : "" ,ku_name : ""))
+            }
+        }
+    }
+}
+
+
+
+
+
+
+class TypesObject{
+    var ku_name : String?
+    var ar_name : String?
+    var name : String?
+    var id : String?
+    
+    init(name : String,id : String, ar_name : String , ku_name : String) {
+        self.name               = name
+        self.id                 = id
+        self.ku_name            = ku_name
+        self.ar_name            = ar_name
+    }
+    
+    
+    
+    init(Dictionary : [String : AnyObject]) {
+        self.id   = Dictionary[ "id" ]   as? String
+        self.name = Dictionary[ "name" ] as? String
+        self.ku_name = Dictionary[ "ku_name" ] as? String
+        self.ar_name = Dictionary[ "ar_name" ] as? String
+    }
+    
+
+    func MakeDictionary() -> [String : AnyObject] {
+        var New  : [String : AnyObject]  = [:]
+        New["id"]   = self.id       as AnyObject
+        New["name"] = self.name     as AnyObject
+        New["ku_name"] = self.ku_name     as AnyObject
+        New["ar_name"] = self.ar_name     as AnyObject
         return New
     }
     
@@ -1071,6 +1171,8 @@ class FavoriteItemsObjectAip{
 class ProjectObject{
     
     var project_name : String?
+    var project_ar_name : String?
+    var project_ku_name : String?
     var id : String?
     var uploaded_date_stamp : TimeInterval?
     var Buildings_count : String?
@@ -1082,12 +1184,15 @@ class ProjectObject{
     var longitude : String?
     var to_price : Double?
     var desc : String?
+    var ar_desc : String?
+    var ku_desc : String?
     var images : [String]?
     var project_state_id : String?
     var year : String?
     var video_link : String?
     var city_id : String?
-    init(project_name : String,id : String , uploaded_date_stamp : TimeInterval ,Buildings_count: String, from_price : Double , monthly_fee : String , address : String ,latitude : String , longitude : String , to_price: Double, desc:String , project_office_phone : String , images : [String] , project_state_id : String, year:String,video_link : String , city_id: String) {
+    
+    init(project_name : String,id : String , uploaded_date_stamp : TimeInterval ,Buildings_count: String, from_price : Double , monthly_fee : String , address : String ,latitude : String , longitude : String , to_price: Double, desc:String ,ar_desc : String,ku_desc : String , project_office_phone : String , images : [String] , project_state_id : String, year:String,video_link : String , city_id: String, project_ku_name : String , project_ar_name : String) {
         
         self.project_name        = project_name
         self.id                  = id
@@ -1103,32 +1208,40 @@ class ProjectObject{
         self.Buildings_count     = Buildings_count
         self.project_state_id    = project_state_id
         self.desc                = desc
+        self.ar_desc             = ar_desc
+        self.ku_desc             = ku_desc
         self.project_office_phone = project_office_phone
         self.video_link          = video_link
         self.city_id             = city_id
+        self.project_ar_name     = project_ar_name
+        self.project_ku_name     = project_ku_name
         
     }
     
     
     
     init(Dictionary : [String : AnyObject]) {
-        self.project_name        = Dictionary[ "project_name"         ] as? String
-        self.id                  = Dictionary[ "id"                   ] as? String
-        self.address             = Dictionary[ "address"              ] as? String
-        self.monthly_fee         = Dictionary[ "monthly_fee"          ] as? String
-        self.from_price          = Dictionary[ "from_price"           ] as? Double
-        self.to_price            = Dictionary[ "to_price"             ] as? Double
-        self.images              = Dictionary[ "images"               ] as? [String]
-        self.latitude            = Dictionary[ "latitude"             ] as? String
-        self.longitude           = Dictionary[ "longitude"            ] as? String
-        self.desc                = Dictionary[ "desc"                 ] as? String
-        self.year                = Dictionary[ "year"                 ] as? String
-        self.video_link          = Dictionary[ "youtube_link_id"      ] as? String
-        self.uploaded_date_stamp = Dictionary[ "uploaded_date_stamp"  ] as? TimeInterval
-        self.project_state_id    = Dictionary[ "project_state_id"     ] as? String
-        self.Buildings_count     = Dictionary[ "Buildings_count"      ] as? String
-        self.city_id             = Dictionary[ "city_id"      ] as? String
-        self.project_office_phone     = Dictionary[ "project_office_phone" ] as? String
+        self.project_name         = Dictionary[ "project_name"         ] as? String
+        self.id                   = Dictionary[ "id"                   ] as? String
+        self.address              = Dictionary[ "address"              ] as? String
+        self.monthly_fee          = Dictionary[ "monthly_fee"          ] as? String
+        self.from_price           = Dictionary[ "from_price"           ] as? Double
+        self.to_price             = Dictionary[ "to_price"             ] as? Double
+        self.images               = Dictionary[ "images"               ] as? [String]
+        self.latitude             = Dictionary[ "latitude"             ] as? String
+        self.longitude            = Dictionary[ "longitude"            ] as? String
+        self.desc                 = Dictionary[ "desc"                 ] as? String
+        self.ar_desc              = Dictionary[ "ar_desc"                 ] as? String
+        self.ku_desc              = Dictionary[ "ku_desc"                 ] as? String
+        self.year                 = Dictionary[ "year"                 ] as? String
+        self.video_link           = Dictionary[ "youtube_link_id"      ] as? String
+        self.uploaded_date_stamp  = Dictionary[ "uploaded_date_stamp"  ] as? TimeInterval
+        self.project_state_id     = Dictionary[ "project_state_id"     ] as? String
+        self.Buildings_count      = Dictionary[ "Buildings_count"      ] as? String
+        self.project_ku_name      = Dictionary[ "project_ku_name"     ] as? String
+        self.project_ar_name      = Dictionary[ "project_ar_name"      ] as? String
+        self.city_id              = Dictionary[ "city_id"      ] as? String
+        self.project_office_phone = Dictionary[ "project_office_phone" ] as? String
         
     }
     
@@ -1148,6 +1261,27 @@ class GetAllProjectsAip{
                 }
             }
             completion(New)
+        }
+    }
+    
+    
+    
+    
+    static func GeeProjectById(fire_id : String , completion : @escaping (_ Product : ProjectObject)->()){
+        Firestore.firestore().collection("AllProjects").whereField("id", isEqualTo: fire_id).getDocuments { (Snapshot, error) in
+            if error != nil { print(error.debugDescription) ; return }
+            guard let documents = Snapshot?.documents else { return }
+            if documents != []{
+            for P in documents {
+                if let data = P.data() as [String : AnyObject]? {
+                    let New = ProjectObject(Dictionary: data)
+                    print(JSON(data))
+                    completion(New)
+                }
+            }
+            }else{
+                completion(ProjectObject(Dictionary: [:]))
+            }
         }
     }
     
@@ -1364,11 +1498,15 @@ class SubscriptionsTypeAip{
 class BoundTypeObject{
     
     var en_title : String?
+    var ar_title : String?
+    var ku_title : String?
     var id : String?
     
-    init(en_title : String,id : String ) {
+    init(en_title : String,id : String , ar_title : String, ku_title : String) {
         self.en_title           = en_title
         self.id                 = id
+        self.ar_title           = ar_title
+        self.ku_title           = ku_title
     }
     
     
@@ -1376,6 +1514,8 @@ class BoundTypeObject{
     init(Dictionary : [String : AnyObject]) {
         self.id   = Dictionary[ "id" ]   as? String
         self.en_title = Dictionary[ "en_title" ] as? String
+        self.ar_title   = Dictionary[ "ar_title" ]   as? String
+        self.ku_title = Dictionary[ "ku_title" ] as? String
     }
     
 
@@ -1383,6 +1523,8 @@ class BoundTypeObject{
         var New  : [String : AnyObject]  = [:]
         New["id"]   = self.id       as AnyObject
         New["en_title"] = self.en_title     as AnyObject
+        New["ar_title"]   = self.ar_title       as AnyObject
+        New["ku_title"] = self.ku_title     as AnyObject
         return New
     }
     
@@ -1417,7 +1559,7 @@ class BoundTypeAip{
                 }
             }
             }else{
-                completion(BoundTypeObject.init(en_title: "", id: ""))
+                completion(BoundTypeObject.init(en_title: "", id: "",ar_title: "" , ku_title: ""))
             }
         }
     }
@@ -1430,18 +1572,28 @@ class BoundTypeAip{
 
 class ProjectStatesObject{
     
+    
+    var ar_title : String?
+    var ku_title : String?
     var title : String?
     var id : String?
     
-    init(title : String,id : String ) {
+    
+    init(title : String,id : String , ar_title : String, ku_title: String) {
         self.title           = title
         self.id              = id
+        
+        self.ar_title           = ar_title
+        self.ku_title           = ku_title
     }
-    
+
     
     init(Dictionary : [String : AnyObject]) {
         self.id    = Dictionary[ "id" ]   as? String
         self.title = Dictionary[ "title" ] as? String
+        
+        self.ar_title    = Dictionary[ "ar_title" ]   as? String
+        self.ku_title = Dictionary[ "ku_title" ] as? String
     }
     
 
@@ -1449,6 +1601,9 @@ class ProjectStatesObject{
         var New  : [String : AnyObject]  = [:]
         New["id"]    = self.id       as AnyObject
         New["title"] = self.title     as AnyObject
+        
+        New["ar_title"]    = self.ar_title       as AnyObject
+        New["ku_title"] = self.ku_title     as AnyObject
         return New
     }
     
@@ -1483,7 +1638,7 @@ class ProjectStatesAip{
                 }
             }
             }else{
-                completion(ProjectStatesObject.init(title: "", id: ""))
+                completion(ProjectStatesObject.init(title: "", id: "",ar_title: "", ku_title: ""))
             }
         }
     }

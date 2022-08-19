@@ -14,6 +14,8 @@ class FavoritesVC: UIViewController {
     @IBOutlet weak var TableView: UITableView!{didSet{self.TableView.delegate = self; self.TableView.dataSource = self }}
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         TableView.register(UINib(nibName: "FavoriteTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         if let FireId = UserDefaults.standard.string(forKey: "UserId"){print(FireId)
             FavoriteItemsObjectAip.GetFavoriteItemsById(fire_id: FireId) { [self] Item in
