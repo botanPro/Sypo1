@@ -16,6 +16,8 @@ class EstatesVC: UIViewController {
     var Offices : [OfficesObject] = []
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.InternetViewHeight.constant = 0
+        self.InternetConnectionView.isHidden = true
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
        
@@ -34,18 +36,39 @@ class EstatesVC: UIViewController {
         self.EstateCollectionView.reloadData()
     }
     
+    var IsInternetChecked = false
+    @IBOutlet weak var InternetViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var InternetConnectionView: UIView!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-            if !CheckInternet.Connection(){
-                MessageBox.ShowMessage()
+        
+        if CheckInternet.Connection(){
+            self.IsInternetChecked = false
+            UIView.animate(withDuration: 0.3) {
+                self.InternetViewHeight.constant = 0
+                self.InternetConnectionView.isHidden = true
+                self.view.layoutIfNeeded()
             }
+        }
+        if !CheckInternet.Connection(){
+            self.InternetViewHeight.constant = 20
+            self.InternetConnectionView.isHidden = false
+        }else{
+            self.IsInternetChecked = false
+            UIView.animate(withDuration: 0.3) {
+                self.InternetViewHeight.constant = 0
+                self.InternetConnectionView.isHidden = true
+                self.view.layoutIfNeeded()
+            }
+        }
+        
     }
     
    func GetOffices(){
         self.Offices.removeAll()
         OfficeAip.GetAllOffice{ office in
             for off in office {
-                if off.archived != "1"{
+                if off.archived != "1" && off.type_id == "h9nFfUrHgSwIg17uRwTD"{
                     self.Offices.append(off)
                 }
             }

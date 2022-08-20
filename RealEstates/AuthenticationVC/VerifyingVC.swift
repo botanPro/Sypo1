@@ -48,13 +48,15 @@ class VerifyingVC: UIViewController {
         Verify.layer.shadowRadius = 2
         
         if XLanguage.get() == .Kurdish{
-            self.VerifingLable.text = "کورتەنامەیەک نێردراوە بۆ \(UserDefaults.standard.string(forKey: "PhoneNumber") ?? "")"
+            let phone = UserDefaults.standard.string(forKey: "PhoneNumber") ?? ""
+            self.VerifingLable.text = "کورتەنامەیەک نێردراوە بۆ \(phone.reversed())"
             self.VerifingLable.font = UIFont(name: "PeshangDes2", size: 12)!
         }else if XLanguage.get() == .English{
             self.VerifingLable.text = "An SMS was sent to \(UserDefaults.standard.string(forKey: "PhoneNumber") ?? "")"
             self.VerifingLable.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
         }else{
-            self.VerifingLable.text = "تم إرسال SMS إلى \(UserDefaults.standard.string(forKey: "PhoneNumber") ?? "")"
+            let phone = UserDefaults.standard.string(forKey: "PhoneNumber") ?? ""
+            self.VerifingLable.text = "تم إرسال SMS إلى \(phone.reversed())"
             self.VerifingLable.font = UIFont(name: "PeshangDes2", size: 12)!
         }
         

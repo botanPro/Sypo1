@@ -127,6 +127,15 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         
         
         dialog.addAction(AZDialogAction(title: self.Ktitle) { (dialog) -> (Void) in
+            self.Etitle = "ئینگلیزی"
+            self.Atitle = "عەرەبی"
+            self.Ktitle = "کوردی"
+            self.titlee = "گۆڕینی زمان"
+            self.message = "زمان"
+            self.LanguageLable.text = self.Ktitle
+            self.LanguageLable.font =  UIFont(name: "PeshangDes2", size: 11)!
+            
+            self.loadingLableMessage = "تكایه‌ چاوه‌ڕێبه‌..."
             self.LoadingView()
             XLanguage.set(Language: .Kurdish)
             self.LanguageLable.text = self.Ktitle
@@ -137,7 +146,16 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             dialog.dismiss()
         })
         
-        dialog.addAction(AZDialogAction(title: self.Etitle) { (dialog) -> (Void) in 
+        dialog.addAction(AZDialogAction(title: self.Etitle) { (dialog) -> (Void) in
+            self.Etitle = "English"
+            self.Atitle = "Arabic"
+            self.Ktitle = "Kurdish"
+            self.titlee = "Change Language"
+            self.message = "Language"
+            self.LanguageLable.text = self.Etitle
+            self.LanguageLable.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
+            
+            self.loadingLableMessage = "Please wait..."
             self.LoadingView()
             XLanguage.set(Language: .English)
             self.LanguageLable.text = self.Etitle
@@ -149,6 +167,14 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         })
         
         dialog.addAction(AZDialogAction(title: self.Atitle) { (dialog) -> (Void) in
+            self.Etitle = "إنجليزي"
+            self.Atitle = "العربة"
+            self.Ktitle = "الکردیة"
+            self.titlee = "تغيير اللغة"
+            self.message = "لغة"
+            self.LanguageLable.text = self.Atitle
+            self.LanguageLable.font =  UIFont(name: "PeshangDes2", size: 11)!
+            self.loadingLableMessage = "يرجى الانتظار..."
             self.LoadingView()
             XLanguage.set(Language: .Arabic)
             self.LanguageLable.text = self.Atitle
@@ -357,43 +383,49 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         
         
         if XLanguage.get() == .English{
-            self.Location.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            if let cityId = UserDefaults.standard.string(forKey: "CityId"){
             CityObjectAip.GetCities { cities in
-                if let cityId = UserDefaults.standard.string(forKey: "CityId"){
                     for city in cities {
                         if city.id == cityId{
                             CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
                                 self.Location.text = "\(country.name ?? "")-\(city.name ?? "")".uppercased()
+                                self.Location.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
                             }
                         }
                     }
                 }
+            }else{
+                self.Location.text = "iraq-\(UserDefaults.standard.string(forKey: "CityName") ?? "".uppercased())"
             }
-        }else if XLanguage.get() == .Kurdish{
-            self.Location.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+        }else if XLanguage.get() == .Arabic{
+            if let cityId = UserDefaults.standard.string(forKey: "CityId"){
             CityObjectAip.GetCities { cities in
-                if let cityId = UserDefaults.standard.string(forKey: "CityId"){
                     for city in cities {
                         if city.id == cityId{
                             CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
                                 self.Location.text = "\(country.ar_name ?? "")-\(city.ar_name ?? "")".uppercased()
+                                self.Location.font = UIFont(name: "PeshangDes2", size: 11)!
                             }
                         }
                     }
                 }
+            }else{
+                self.Location.text = "iraq-\(UserDefaults.standard.string(forKey: "CityName") ?? "".uppercased())"
             }
         }else{
-            self.Location.font = UIFont(name: "PeshangDes2", size: 11)!
+            if let cityId = UserDefaults.standard.string(forKey: "CityId"){
             CityObjectAip.GetCities { cities in
-                if let cityId = UserDefaults.standard.string(forKey: "CityId"){
                     for city in cities {
                         if city.id == cityId{
                             CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
                                 self.Location.text = "\(country.ku_name ?? "")-\(city.ku_name ?? "")".uppercased()
+                                self.Location.font = UIFont(name: "PeshangDes2", size: 11)!
                             }
                         }
                     }
                 }
+            }else{
+                self.Location.text = "iraq-\(UserDefaults.standard.string(forKey: "CityName") ?? "".uppercased())"
             }
         }
         
@@ -475,8 +507,34 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     
     
     let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"]!
+    
+    var IsInternetChecked = false
+    @IBOutlet weak var InternetViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var InternetConnectionView: UIView!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if CheckInternet.Connection(){
+            self.IsInternetChecked = false
+            UIView.animate(withDuration: 0.3) {
+                self.InternetViewHeight.constant = 0
+                self.InternetConnectionView.isHidden = true
+                self.view.layoutIfNeeded()
+            }
+        }
+        
+        if !CheckInternet.Connection(){
+            self.InternetViewHeight.constant = 20
+            self.InternetConnectionView.isHidden = false
+        }else{
+            self.IsInternetChecked = false
+            UIView.animate(withDuration: 0.3) {
+                self.InternetViewHeight.constant = 0
+                self.InternetConnectionView.isHidden = true
+                self.view.layoutIfNeeded()
+            }
+        }
+        
+       
         
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             if settings.authorizationStatus == .authorized {
@@ -520,10 +578,8 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         
         
         
-        if !CheckInternet.Connection(){
-            MessageBox.ShowMessage()
-        }
-       
+
+        
         self.VersionNumber.text = "V \(version)"
         self.VersionNumber.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
         self.ViewdItemsEstate.removeAll()
@@ -1059,8 +1115,8 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         print(self.lang)
         
         if XLanguage.get() == .English{
+            if let cityId = UserDefaults.standard.string(forKey: "CityId"){
             CityObjectAip.GetCities { cities in
-                if let cityId = UserDefaults.standard.string(forKey: "CityId"){
                     for city in cities {
                         if city.id == cityId{
                             CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
@@ -1070,10 +1126,12 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                         }
                     }
                 }
+            }else{
+                self.Location.text = "iraq-\(UserDefaults.standard.string(forKey: "CityName") ?? "".uppercased())"
             }
         }else if XLanguage.get() == .Arabic{
+            if let cityId = UserDefaults.standard.string(forKey: "CityId"){
             CityObjectAip.GetCities { cities in
-                if let cityId = UserDefaults.standard.string(forKey: "CityId"){
                     for city in cities {
                         if city.id == cityId{
                             CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
@@ -1083,10 +1141,12 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                         }
                     }
                 }
+            }else{
+                self.Location.text = "iraq-\(UserDefaults.standard.string(forKey: "CityName") ?? "".uppercased())"
             }
         }else{
+            if let cityId = UserDefaults.standard.string(forKey: "CityId"){
             CityObjectAip.GetCities { cities in
-                if let cityId = UserDefaults.standard.string(forKey: "CityId"){
                     for city in cities {
                         if city.id == cityId{
                             CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
@@ -1096,6 +1156,8 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                         }
                     }
                 }
+            }else{
+                self.Location.text = "iraq-\(UserDefaults.standard.string(forKey: "CityName") ?? "".uppercased())"
             }
         }
         
@@ -1189,6 +1251,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             self.titlee = "تغيير اللغة"
             self.message = "لغة"
             self.loadingLableMessage = "يرجى الانتظار..."
+            
             
             self.cityTitle = "اختر مدينتك"
             

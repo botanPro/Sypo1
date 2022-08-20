@@ -42,6 +42,7 @@ ${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework
 ${BUILT_PRODUCTS_DIR}/OTPTextField/OTPTextField.framework
 ${BUILT_PRODUCTS_DIR}/PhoneNumberKit/PhoneNumberKit.framework
 ${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework
+${BUILT_PRODUCTS_DIR}/PullToDismissTransition/PullToDismissTransition.framework
 ${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework
 ${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
 ${BUILT_PRODUCTS_DIR}/SKPhotoBrowser/SKPhotoBrowser.framework

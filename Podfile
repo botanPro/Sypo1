@@ -71,6 +71,7 @@ target 'RealEstates' do
   
   pod 'FirebaseCheckVersion'
   
+  pod "PullToDismissTransition"
   target 'RealEstatesTests' do
     inherit! :search_paths
     # Pods for testing

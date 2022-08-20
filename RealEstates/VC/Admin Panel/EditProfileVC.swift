@@ -29,9 +29,16 @@ class EditProfileVC: UIViewController ,UITextFieldDelegate, UITextViewDelegate{
     var Offiecid = ""
     var OfficeImage = ""
     @IBOutlet weak var Save: UIBarButtonItem!
-    
+    var IsInternetChecked = false
+    @IBOutlet weak var InternetViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var InternetConnectionView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.InternetViewHeight.constant = 0
+        self.InternetConnectionView.isHidden = true
+
+    
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
@@ -119,7 +126,12 @@ class EditProfileVC: UIViewController ,UITextFieldDelegate, UITextViewDelegate{
     var Action = ""
     var cancel = ""
     @IBAction func Save(_ sender: Any) {
-        
+        if CheckInternet.Connection(){
+            UIView.animate(withDuration: 0.3) {
+                self.InternetViewHeight.constant = 0
+                self.InternetConnectionView.isHidden = true
+                self.view.layoutIfNeeded()
+            }
         if XLanguage.get() == .Kurdish{
             self.titlee = "بەرزکردنەوەی زانیاریەکان"
             self.message = "ئایا دڵنیای لە نەرزکردنەوەی زانیاریەکان؟"
@@ -201,7 +213,13 @@ class EditProfileVC: UIViewController ,UITextFieldDelegate, UITextViewDelegate{
                 }
                 
             }
-
+        }else{
+            UIView.animate(withDuration: 0.3) {
+                self.InternetViewHeight.constant = 20
+                self.InternetConnectionView.isHidden = false
+                self.view.layoutIfNeeded()
+            }
+        }
     }
     
     

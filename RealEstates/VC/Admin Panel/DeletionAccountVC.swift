@@ -10,9 +10,15 @@ import Firebase
 import FirebaseAuth
 class DeletionAccountVC: UIViewController {
 
+    
+    
+    @IBOutlet weak var InternetViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var InternetConnectionView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         GetMyEstates()
+        self.InternetViewHeight.constant = 0
+        self.InternetConnectionView.isHidden = true
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
@@ -43,6 +49,12 @@ class DeletionAccountVC: UIViewController {
     
     var count = 0
     @IBAction func DeleteAccount(_ sender: Any) {
+        if CheckInternet.Connection(){
+            UIView.animate(withDuration: 0.3) {
+                self.InternetViewHeight.constant = 0
+                self.InternetConnectionView.isHidden = true
+                self.view.layoutIfNeeded()
+            }
         var title  = ""
         var mess   = ""
         var note    = ""
@@ -112,6 +124,13 @@ class DeletionAccountVC: UIViewController {
         }))
         myAlert.addAction(UIAlertAction(title: no, style: .cancel, handler: nil))
         self.present(myAlert, animated: true, completion: nil)
+        }else{
+            UIView.animate(withDuration: 0.3) {
+                self.InternetViewHeight.constant = 20
+                self.InternetConnectionView.isHidden = false
+                self.view.layoutIfNeeded()
+            }
+        }
     }
     
     

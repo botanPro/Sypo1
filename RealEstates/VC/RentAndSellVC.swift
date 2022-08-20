@@ -23,7 +23,6 @@ class RentAndSellVC: MXSegmentedPagerController {
     var KArray :[String] = ["فرۆشتن", "کرێ"]
     var EArray :[String] = ["Sell", "Rent"]
     var AArray :[String] = ["البيع", "الايجار"]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -61,12 +60,9 @@ class RentAndSellVC: MXSegmentedPagerController {
         segmentedPager.reloadData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if !CheckInternet.Connection(){
-            MessageBox.ShowMessage()
-        }
-    }
+    var IsInternetChecked = false
+   
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -116,8 +116,11 @@ class Home: UIViewController ,UITextFieldDelegate {
     var Action = ""
     var cancel = ""
     func IsUpdateAvaible(){
-        let IsUpdateAvaiable = self.remoteConfig.configValue(forKey: "maskani_version").boolValue
-        if IsUpdateAvaiable == true{
+        let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"]!
+        let IsUpdateAvaiable = self.remoteConfig.configValue(forKey: "maskani_version").stringValue
+        print("old version is : V \(version)")
+        print("new version is : V \(IsUpdateAvaiable)")
+        if IsUpdateAvaiable != "\(version)"{
             DispatchQueue.main.async {
                 if XLanguage.get() == .Kurdish{
                     self.titlee = "ئاگاداری"
@@ -153,17 +156,22 @@ class Home: UIViewController ,UITextFieldDelegate {
             }
         }
     }
+    var Isupdated = false
     
-    
-    
+
     @IBOutlet weak var LoadingIndecator: UIActivityIndicatorView!
     
     var currentLocation: CLLocation?
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.InternetViewHeight.constant = 0
+        self.InternetConnectionView.isHidden = true
         fetchRemoteConfig()
 
 
+       
+        
+        
         
         TitleSubTile()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -232,28 +240,28 @@ class Home: UIViewController ,UITextFieldDelegate {
 
     var window: UIWindow?
     func handleIncomeDynamicLink(_ dynamicLink: DynamicLink){
-        guard let url = dynamicLink.url else{
-            print("no object")
-            return
-        }
-        guard (dynamicLink.matchType == .unique || dynamicLink.matchType == .default) else{
-            print("not a strong enough match type to conitunie)")
-            return
-        }
-        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-              let queryItems = components.queryItems  else{
-            return
-        }
-        if components.path == "/maskani"{
-            if let productIdQueryItem = queryItems.first(where: {$0.name == "estate_id"}){
-                guard let productId = productIdQueryItem.value else{return}
-                ProductAip.GetProduct(ID: productId) { estate in
-                    self.InsertViewdItem(id : productId)
-                    self.performSegue(withIdentifier: "Next", sender: estate)
-                }
-            }
-        }
-        UserDefaults.standard.set(nil, forKey: "dynamiclink")
+//        guard let url = dynamicLink.url else{
+//            print("no object")
+//            return
+//        }
+//        guard (dynamicLink.matchType == .unique || dynamicLink.matchType == .default) else{
+//            print("not a strong enough match type to conitunie)")
+//            return
+//        }
+//        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+//              let queryItems = components.queryItems  else{
+//            return
+//        }
+//        if components.path == "/maskani"{
+//            if let productIdQueryItem = queryItems.first(where: {$0.name == "id"}){
+//                guard let productId = productIdQueryItem.value else{return}
+//                ProductAip.GetProduct(ID: productId) { estate in
+//                    self.InsertViewdItem(id : productId)
+//                    self.performSegue(withIdentifier: "Next", sender: estate)
+//                }
+//            }
+//        }
+//        UserDefaults.standard.set(nil, forKey: "dynamiclink")
     }
 
 
@@ -307,9 +315,16 @@ class Home: UIViewController ,UITextFieldDelegate {
     @IBOutlet weak var GoToMyProfile: UIBarButtonItem!
     @IBAction func GoToMyProfile(_ sender: Any) {
         if UserDefaults.standard.bool(forKey: "Login") == true {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let myVC = storyboard.instantiateViewController(withIdentifier: "GoToRegisterVC") as! EditProfileVC
-            self.navigationController?.pushViewController(myVC, animated: true)
+            if let officeId = UserDefaults.standard.string(forKey: "OfficeId"){
+                OfficeAip.GetOffice(ID: officeId) { [self] office in
+                    if office.type_id == "h9nFfUrHgSwIg17uRwTD"{
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let myVC = storyboard.instantiateViewController(withIdentifier: "GoToRegisterVC") as! EditProfileVC
+                        self.navigationController?.pushViewController(myVC, animated: true)
+                    }
+                }
+            }
+           
         }else{
             let vc = storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVCViewController
             self.navigationController?.pushViewController(vc, animated: true)
@@ -447,11 +462,52 @@ class Home: UIViewController ,UITextFieldDelegate {
     }
     
     
+    var IsInternetChecked = false
+    @IBOutlet weak var InternetViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var InternetConnectionView: UIView!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if !CheckInternet.Connection(){
-            MessageBox.ShowMessage()
+        if let officeId = UserDefaults.standard.string(forKey: "OfficeId"){
+            OfficeAip.GetOffice(ID: officeId) {office in
+                if office.type_id != "h9nFfUrHgSwIg17uRwTD"{
+                    self.navigationController?.navigationBar.topItem?.rightBarButtonItem?.isEnabled = false
+                }else{
+                    self.navigationController?.navigationBar.topItem?.rightBarButtonItem?.isEnabled = true
+                }
+            }
         }
+        
+        if CheckInternet.Connection(){
+            self.IsInternetChecked = false
+            UIView.animate(withDuration: 0.3) {
+                self.InternetViewHeight.constant = 0
+                self.InternetConnectionView.isHidden = true
+                self.view.layoutIfNeeded()
+            }
+        }
+        
+        if IsInternetChecked == false{
+            self.IsInternetChecked = true
+            if !CheckInternet.Connection(){
+                MessageBox.ShowMessage()
+            }else{
+                self.IsInternetChecked = false
+                UIView.animate(withDuration: 0.3) {
+                    self.InternetViewHeight.constant = 0
+                    self.InternetConnectionView.isHidden = true
+                    self.view.layoutIfNeeded()
+                }
+            }
+        }else{
+            UIView.animate(withDuration: 0.3) {
+                self.InternetViewHeight.constant = 20
+                self.InternetConnectionView.isHidden = false
+                self.view.layoutIfNeeded()
+            }
+        }
+       
+        
+        
         NotificationCenter.default.addObserver(self, selector: #selector(EstateVCDismissed), name:  NSNotification.Name(rawValue: "EstateVCDismissed"), object: nil)
     }
     
@@ -488,8 +544,8 @@ class Home: UIViewController ,UITextFieldDelegate {
         if XLanguage.get() == .English{
             self.location = "Location"
             text.append(NSAttributedString(string: self.location, attributes: [.font : UIFont(name: "ArialRoundedMTBold", size: titleSize)!]))
+            if let cityId = UserDefaults.standard.string(forKey: "CityId"){
             CityObjectAip.GetCities { cities in
-                if let cityId = UserDefaults.standard.string(forKey: "CityId"){
                     for city in cities {
                         if city.id == cityId{
                             CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
@@ -500,12 +556,17 @@ class Home: UIViewController ,UITextFieldDelegate {
                         }
                     }
                 }
+            }else{
+                text.append(NSAttributedString(string: "\nIraq-\(UserDefaults.standard.string(forKey: "CityName") ?? "")".uppercased(), attributes: [.font : UIFont(name: "PeshangDes2", size: subtitleSize)!]))
+                label.attributedText = text
+                self.navigationItem.titleView = label
             }
         }else if XLanguage.get() == .Arabic{
             self.location = "شوێن"
             text.append(NSAttributedString(string: self.location, attributes: [.font : UIFont(name: "PeshangDes2", size: 12)!]))
-            CityObjectAip.GetCities { cities in
+            
                 if let cityId = UserDefaults.standard.string(forKey: "CityId"){
+            CityObjectAip.GetCities { cities in
                     for city in cities {
                         if city.id == cityId{
                             CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
@@ -516,12 +577,16 @@ class Home: UIViewController ,UITextFieldDelegate {
                         }
                     }
                 }
+            }else{
+                text.append(NSAttributedString(string: "\nIraq-\(UserDefaults.standard.string(forKey: "CityName") ?? "")".uppercased(), attributes: [.font : UIFont(name: "PeshangDes2", size: subtitleSize)!]))
+                label.attributedText = text
+                self.navigationItem.titleView = label
             }
         }else{
             self.location = "الموقع"
             text.append(NSAttributedString(string: self.location, attributes: [.font : UIFont(name: "PeshangDes2", size: 12)!]))
+            if let cityId = UserDefaults.standard.string(forKey: "CityId"){
             CityObjectAip.GetCities { cities in
-                if let cityId = UserDefaults.standard.string(forKey: "CityId"){
                     for city in cities {
                         if city.id == cityId{
                             CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
@@ -532,6 +597,10 @@ class Home: UIViewController ,UITextFieldDelegate {
                         }
                     }
                 }
+            }else{
+                text.append(NSAttributedString(string: "\nIraq-\(UserDefaults.standard.string(forKey: "CityName") ?? "")".uppercased(), attributes: [.font : UIFont(name: "PeshangDes2", size: subtitleSize)!]))
+                label.attributedText = text
+                self.navigationItem.titleView = label
             }
         }
         

@@ -237,8 +237,13 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
     @IBOutlet weak var Typelable: UILabel!
     @IBOutlet weak var EstateTypeLable: UILabel!
     
+    @IBOutlet weak var InternetViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var InternetConnectionView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.InternetViewHeight.constant = 0
+        self.InternetConnectionView.isHidden = true
         setupGroup2()
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -1673,6 +1678,12 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
     var lang : Int = UserDefaults.standard.integer(forKey: "language")
     var RealDirection = "S"
     @IBAction func Upload(_ sender: Any) {
+        if CheckInternet.Connection(){
+            UIView.animate(withDuration: 0.3) {
+                self.InternetViewHeight.constant = 0
+                self.InternetConnectionView.isHidden = true
+                self.view.layoutIfNeeded()
+            }
         AudioServicesPlaySystemSound(1519);
         self.Name.layer.borderWidth = 0
         self.Name.layer.shadowOpacity = 0
@@ -1913,6 +1924,13 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                         self.navigationController?.pushViewController(myVC, animated: true)
                     }
                 }
+            }
+        }
+        }else{
+            UIView.animate(withDuration: 0.3) {
+                self.InternetViewHeight.constant = 20
+                self.InternetConnectionView.isHidden = false
+                self.view.layoutIfNeeded()
             }
         }
     }

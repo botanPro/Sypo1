@@ -15,8 +15,12 @@ class MXTextViewController: UIViewController {
     @IBOutlet weak var RentAndSellCollectionView: UICollectionView!{didSet{self.RentAndSellCollectionView.delegate = self; self.RentAndSellCollectionView.dataSource = self}}
     
     
+    @IBOutlet weak var InternetViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var InternetConnectionView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.InternetViewHeight.constant = 0
+        self.InternetConnectionView.isHidden = true
         RentAndSellCollectionView.register(UINib(nibName: "AllEstatessCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         
 
@@ -33,6 +37,31 @@ class MXTextViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if CheckInternet.Connection(){
+            UIView.animate(withDuration: 0.3) {
+                self.InternetViewHeight.constant = 0
+                self.InternetConnectionView.isHidden = true
+                self.view.layoutIfNeeded()
+            }
+        }
+        if !CheckInternet.Connection(){
+                self.InternetViewHeight.constant = 20
+                self.InternetConnectionView.isHidden = false
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                UIView.animate(withDuration: 0.3) {
+                    self.InternetViewHeight.constant = 0
+                    self.InternetConnectionView.isHidden = true
+                    self.view.layoutIfNeeded()
+                }
+            }
+        }else{
+            UIView.animate(withDuration: 0.3) {
+                self.InternetViewHeight.constant = 0
+                self.InternetConnectionView.isHidden = true
+                self.view.layoutIfNeeded()
+            }
+        }
         GetEstatesByType()
     }
     func GetEstatesByType(){

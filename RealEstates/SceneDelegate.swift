@@ -12,12 +12,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        print("anything??")
+        if let incomingurl = userActivity.webpageURL{
+            print("incomingurl is \(incomingurl)")
+            let handled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingurl) { (dynamiclink, error) in
 
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
+                guard error == nil else{
+                    print("found an error! \(error!.localizedDescription)")
+                    return
+                }
+
+                self.handleIncomeDynamicLink(dynamiclink!)
+
+            }
+        }
+    }
+
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         if let url = connectionOptions.userActivities.first?.webpageURL{
             DynamicLinks.dynamicLinks().handleUniversalLink(url) { (dynamiclink, error) in
                 if let dynamiclink = dynamiclink {
-                    //self.handleIncomeDynamicLink(dynamiclink)
+                    self.handleIncomeDynamicLink(dynamiclink)
                 }
             }
             
@@ -25,7 +41,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let url = connectionOptions.urlContexts.first?.url{
             DynamicLinks.dynamicLinks().handleUniversalLink(url) { (dynamiclink, error) in
                 if let dynamiclink = dynamiclink {
-                    //self.handleIncomeDynamicLink(dynamiclink)
+                    self.handleIncomeDynamicLink(dynamiclink)
                 }
             }
         }
@@ -45,7 +61,43 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     }
     
-    
+    func handleIncomeDynamicLink(_ dynamicLink: DynamicLink){
+        guard let url = dynamicLink.url else{
+            print("no object")
+            return
+        }
+        print(url)
+        guard (dynamicLink.matchType == .unique || dynamicLink.matchType == .default) else{
+            print("not a strong enough match type to conitunie)")
+            return
+        }
+        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+              let queryItems = components.queryItems  else{
+            return
+        }
+        if components.path == "/maskani"{
+            if let productIdQueryItem = queryItems.first(where: {$0.name == "estateid"}){
+                guard let productId = productIdQueryItem.value else{return}
+                print(productId)
+                if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GoToEstateProfileVc") as? EstateProfileVc {
+                    if let window = self.window, let rootViewController = window.rootViewController {
+                        var currentController = rootViewController
+                        while let presentedController = currentController.presentedViewController {
+                            currentController = presentedController
+                        }
+                        ProductAip.GetProduct(ID: productId) { estate in
+                            controller.CommingEstate = estate
+                            controller.modalPresentationStyle = .fullScreen
+                            currentController.present(controller, animated: true, completion: nil)
+                        }
+                        
+                    }
+                }
+            }
+        }
+        print(queryItems.first?.value! as Any)
+        print(dynamicLink.url?.absoluteString as Any);
+    }
 
     
 

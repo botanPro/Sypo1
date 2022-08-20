@@ -12,9 +12,14 @@ class MyEstatesVc: UIViewController {
     
     @IBOutlet weak var IndecatorView: UIView!
     var ProductArray : [EstateObject] = []
-    @IBOutlet weak var TableView: UITableView!{didSet{self.TableView.delegate = self; self.TableView.dataSource = self ;self.GetMyEstates()}}
+    @IBOutlet weak var TableView: UITableView!{didSet{self.TableView.delegate = self; self.TableView.dataSource = self }}
+    @IBOutlet weak var InternetViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var InternetConnectionView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        GetMyEstates()
+        self.InternetViewHeight.constant = 0
+        self.InternetConnectionView.isHidden = true
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
@@ -39,22 +44,22 @@ class MyEstatesVc: UIViewController {
     }
     
     
+    
+    
     func GetMyEstates(){
         self.ProductArray.removeAll()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.TableView.cr.endHeaderRefresh()
         }
-        if let FireId = UserDefaults.standard.string(forKey: "UserId"){
-            OfficeAip.GetOfficeById(Id: FireId) { office in
-                ProductAip.GetMyEstates(office_id: office.id ?? "") { estates in
-                    if estates.archived != "1"{
+        if let officeId = UserDefaults.standard.string(forKey: "OfficeId"){
+            ProductAip.GetMyEstates(office_id: officeId ) { estates in
+                if estates.archived != "1"{
                     self.ProductArray.append(estates)
-                    }
-                    UIView.animate(withDuration: 0.2, delay: 0.0) {
-                        self.IndecatorView.isHidden = true
-                    }
-                    self.TableView.reloadData()
                 }
+                UIView.animate(withDuration: 0.2, delay: 0.0) {
+                    self.IndecatorView.isHidden = true
+                }
+                self.TableView.reloadData()
             }
         }
     }
@@ -80,6 +85,14 @@ class MyEstatesVc: UIViewController {
     
     
     @objc func remov(sender : UIButton){
+        if CheckInternet.Connection(){
+            UIView.animate(withDuration: 0.3) {
+                self.InternetViewHeight.constant = 0
+                self.InternetConnectionView.isHidden = true
+                self.view.layoutIfNeeded()
+            }
+            
+            
         if XLanguage.get() == .Kurdish{
             self.Title = "لابردن"
             self.message = "ئایا دڵنیای کە دەتەوێت ئەم خانوبەرە لە فرۆشتن لاببەیت؟"
@@ -123,6 +136,13 @@ class MyEstatesVc: UIViewController {
         }))
         myAlert.addAction(UIAlertAction(title: self.cancel, style: .cancel, handler: nil))
         self.present(myAlert, animated: true, completion: nil)
+        }else{
+            UIView.animate(withDuration: 0.3) {
+                self.InternetViewHeight.constant = 20
+                self.InternetConnectionView.isHidden = false
+                self.view.layoutIfNeeded()
+            }
+        }
     }
     
     

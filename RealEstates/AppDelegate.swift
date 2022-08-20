@@ -6,8 +6,13 @@
 //
 
 import UIKit
+import CoreData
 import Firebase
+import FirebaseFirestore
+import FirebaseAuth
 import FirebaseDynamicLinks
+import FirebaseAnalytics
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -15,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         if XLanguage.get() == .none{
-            XLanguage.set(Language: .English)
+            XLanguage.set(Language: .Kurdish)
         }
         
         UserDefaults.standard.set(nil, forKey: "dynamiclink")
@@ -25,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
  
-        
         sleep(1)
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -38,43 +42,79 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     
-    
-    
-    // DynamicLinks
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
-        DynamicLinks.dynamicLinks().handleUniversalLink(url) { (dynamiclink, error) in
-            if let dynamiclink = dynamiclink {
-                UserDefaults.standard.set(dynamiclink, forKey: "dynamiclink")
-            }
-        }
-        return false
-    }
-    
-    
-
-    private func application(_ application: UIApplication, continue userActivity: NSUserActivity,restorationHandler: @escaping ([Any]?) -> Void) -> Bool{
-        if let incomingurl = userActivity.webpageURL{
-            print("incomingurl is \(incomingurl)")
-            let handled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingurl) { (dynamiclink, error) in
-                guard error == nil else{
-                    print("found an error! \(error!.localizedDescription)")
-                    return
-                }
-                UserDefaults.standard.set(dynamiclink, forKey: "dynamiclink")
-                
-            }
-            return handled
-        }
-        
-        return false
-    }
-      
-    
-    
-    
-    
-    
-    
+//// dynamic link not working in AppDelegate
+//
+//    // DynamicLinks
+//    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
+//        DynamicLinks.dynamicLinks().handleUniversalLink(url) { (dynamiclink, error) in
+//            if let dynamiclink = dynamiclink {
+//                self.handleIncomeDynamicLink(dynamiclink)
+//            }
+//        }
+//        return false
+//    }
+//
+//
+//
+//
+//
+//    // DynamicLinks
+//    private func application(_ application: UIApplication, continue userActivity: NSUserActivity,restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+//        print("anything??")
+//        if let incomingurl = userActivity.webpageURL{
+//            print("incomingurl is \(incomingurl)")
+//            let handled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingurl) { (dynamiclink, error) in
+//
+//                guard error == nil else{
+//                    print("found an error! \(error!.localizedDescription)")
+//                    return
+//                }
+//
+//                self.handleIncomeDynamicLink(dynamiclink!)
+//
+//            }
+//            return handled
+//        }
+//
+//        return false
+//    }
+//
+//
+//
+//    func handleIncomeDynamicLink(_ dynamicLink: DynamicLink){
+//        guard let url = dynamicLink.url else{
+//            print("no object")
+//            return
+//        }
+//        guard (dynamicLink.matchType == .unique || dynamicLink.matchType == .default) else{
+//            print("not a strong enough match type to conitunie)")
+//            return
+//        }
+//        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+//              let queryItems = components.queryItems  else{
+//            return
+//        }
+//        if components.path == "/maskani"{
+//            if let productIdQueryItem = queryItems.first(where: {$0.name == "estateid"}){
+////                guard let productId = productIdQueryItem.value else{return}
+////                if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GoToProductVC") as? EstateProfileVc {
+////                    if let window = self.window, let rootViewController = window.rootViewController {
+////                        var currentController = rootViewController
+////                        while let presentedController = currentController.presentedViewController {
+////                            currentController = presentedController
+////                        }
+////                        //ontroller.ThisId = "\(productId)"
+////                        controller.modalPresentationStyle = .fullScreen
+////                        currentController.present(controller, animated: true, completion: nil)
+////                    }
+////                }
+//            }
+//        }
+//        print(queryItems.first?.value! as Any)
+//        print(dynamicLink.url?.absoluteString as Any);
+//    }
+//
+//
     
     
     

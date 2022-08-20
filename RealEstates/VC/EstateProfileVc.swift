@@ -20,8 +20,8 @@ import FirebaseDynamicLinks
 import FCAlertView
 import Drops
 import NVActivityIndicatorView
-class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDelegate , FCAlertViewDelegate, MKMapViewDelegate, CLLocationManagerDelegate,UIPickerViewDelegate , UIPickerViewDataSource, UIScrollViewDelegate{
 
+class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDelegate , FCAlertViewDelegate, MKMapViewDelegate, CLLocationManagerDelegate,UIPickerViewDelegate , UIPickerViewDataSource, UIScrollViewDelegate, UIGestureRecognizerDelegate{
     
     func playerViewDidBecomeReady(_ playerView: WKYTPlayerView) {
     player.stopVideo()
@@ -51,8 +51,9 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     @IBAction func DismissAfterScroll(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset.y)
+        
         if scrollView.contentOffset.y >= 80{
             UIView.animate(withDuration: 0.5) {
                 self.DismissAfterScrollTopLayout.constant = 60
@@ -66,6 +67,7 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
                 self.view.layoutIfNeeded()
             }
         }
+        
     }
     
     
@@ -98,17 +100,17 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     @IBAction func Share(_ sender: Any) {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = "example.com"
+        components.host = "www.example.com"
         components.path = "/maskani"
         if let estateid = self.CommingEstate{
-            let maskaniIdQueryItem = URLQueryItem(name: "estate_id", value: "\(estateid.id ?? "")")
+            let maskaniIdQueryItem = URLQueryItem(name: "estateid", value: "\(estateid.id ?? "")")
             components.queryItems = [maskaniIdQueryItem]
             
             
             guard let linkParameter =  components.url else{return}
             print("i'm sharing \(linkParameter.absoluteString)")
             
-            guard let shareLink = DynamicLinkComponents.init(link: linkParameter, domainURIPrefix: "https://maskanir.page.link") else {
+            guard let shareLink = DynamicLinkComponents.init(link: linkParameter, domainURIPrefix: "https://maskanis.page.link") else {
                 print("could not create FDL components")
                 return
             }
@@ -420,7 +422,6 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     
     @IBOutlet weak var EstateTypeLable: UILabel!
     @IBOutlet weak var EstateTypeView: UIView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         GetAllEstates()
@@ -466,10 +467,7 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
         
         
         GetEstateType()
-        
-        
-        
-        
+ 
         if let FireId = UserDefaults.standard.string(forKey: "UserId"){
             FavoriteItemsObjectAip.GetFavoriteItemsById(fire_id: FireId) { item in
                 if item.fire_id == FireId && item.estate_id == self.CommingEstate?.id ?? ""{
@@ -479,7 +477,10 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
                 }
             }
         }
+        
     }
+    
+
     
     
     
@@ -1169,4 +1170,7 @@ extension String {
     }
     
 }
+
+
+
 
