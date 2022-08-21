@@ -23,6 +23,7 @@ class VerifyingVC: UIViewController {
     }
     
     @IBOutlet weak var VerifingLable: LanguageLable!
+    @IBOutlet weak var phonenumber: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +40,6 @@ class VerifyingVC: UIViewController {
             self.navigationController?.navigationBar.shadowImage = UIImage()
         }
         
-        
         self.OTPCode.becomeFirstResponder()
         self.Verify.layer.cornerRadius = 4
         Verify.layer.shadowColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
@@ -49,15 +49,25 @@ class VerifyingVC: UIViewController {
         
         if XLanguage.get() == .Kurdish{
             let phone = UserDefaults.standard.string(forKey: "PhoneNumber") ?? ""
-            self.VerifingLable.text = "کورتەنامەیەک نێردراوە بۆ \(phone.reversed())"
+
+            self.phonenumber.text = " کورتەنامەیەک نێردراوە بۆ"
+            self.VerifingLable.text = phone
+            self.VerifingLable.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
             self.VerifingLable.font = UIFont(name: "PeshangDes2", size: 12)!
+            self.phonenumber.font = UIFont(name: "PeshangDes2", size: 12)!
         }else if XLanguage.get() == .English{
-            self.VerifingLable.text = "An SMS was sent to \(UserDefaults.standard.string(forKey: "PhoneNumber") ?? "")"
+            self.VerifingLable.text = "An SMS was sent to "
+            self.phonenumber.text = UserDefaults.standard.string(forKey: "PhoneNumber") ?? ""
             self.VerifingLable.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            self.phonenumber.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            self.phonenumber.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         }else{
             let phone = UserDefaults.standard.string(forKey: "PhoneNumber") ?? ""
-            self.VerifingLable.text = "تم إرسال SMS إلى \(phone.reversed())"
+            self.phonenumber.text = " تم إرسال SMS إلى"
+            self.VerifingLable.text = phone
+            self.VerifingLable.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
             self.VerifingLable.font = UIFont(name: "PeshangDes2", size: 12)!
+            self.phonenumber.font = UIFont(name: "PeshangDes2", size: 12)!
         }
         
         

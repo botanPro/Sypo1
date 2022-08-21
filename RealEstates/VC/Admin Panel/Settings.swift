@@ -214,7 +214,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     }
                 }else{
                     DispatchQueue.main.async {
-                        self.NotificationLable.text = "مفعّلة"
+                        self.NotificationLable.text = "مفعلة"
                         self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
                     }
                 }
@@ -232,7 +232,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     }
                 }else{
                     DispatchQueue.main.async {
-                        self.NotificationLable.text = "معطّل"
+                        self.NotificationLable.text = "غیر مفعلة"
                         self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
                     }
                 }
@@ -569,7 +569,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     }
                 }else{
                     DispatchQueue.main.async {
-                        self.NotificationLable.text = "معطّل"
+                        self.NotificationLable.text = "غیر مفعلة"
                         self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
                     }
                 }
@@ -1176,7 +1176,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     }
                 }else{
                     DispatchQueue.main.async {
-                    self.NotificationLable.text = "مفعّلة"
+                    self.NotificationLable.text = "مفعلة"
                         self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
                     }
                 }
@@ -1194,7 +1194,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     }
                 }else{
                     DispatchQueue.main.async {
-                    self.NotificationLable.text = "معطّل"
+                    self.NotificationLable.text = "غیر مفعلة"
                         self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
                     }
                 }

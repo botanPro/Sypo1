@@ -118,9 +118,11 @@ class Home: UIViewController ,UITextFieldDelegate {
     func IsUpdateAvaible(){
         let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"]!
         let IsUpdateAvaiable = self.remoteConfig.configValue(forKey: "maskani_version").stringValue
+        let IsAvaiable = self.remoteConfig.configValue(forKey: "IsAvaiable").boolValue
+        
         print("old version is : V \(version)")
-        print("new version is : V \(IsUpdateAvaiable)")
-        if IsUpdateAvaiable != "\(version)"{
+        print("new version is : V \(IsUpdateAvaiable ?? "")")
+        if IsUpdateAvaiable != "\(version)" && IsAvaiable == true{
             DispatchQueue.main.async {
                 if XLanguage.get() == .Kurdish{
                     self.titlee = "ئاگاداری"
