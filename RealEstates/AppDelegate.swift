@@ -12,6 +12,7 @@ import FirebaseFirestore
 import FirebaseAuth
 import FirebaseDynamicLinks
 import FirebaseAnalytics
+import Messages
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -41,6 +42,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+            Messaging.messaging().apnsToken = deviceToken
+            Messaging.messaging().setAPNSToken(deviceToken, type: MessagingAPNSTokenType.prod)
+            Auth.auth().setAPNSToken(deviceToken, type: .unknown)
+    }
     
 //// dynamic link not working in AppDelegate
 //
