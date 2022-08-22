@@ -125,7 +125,7 @@ class EditProfileVC: UIViewController ,UITextFieldDelegate, UITextViewDelegate{
     var message = ""
     var Action = ""
     var cancel = ""
-    @IBAction func Save(_ sender: Any) {
+    @IBAction func Save(_ sender: Any){
         if CheckInternet.Connection(){
             UIView.animate(withDuration: 0.3) {
                 self.InternetViewHeight.constant = 0
@@ -163,8 +163,7 @@ class EditProfileVC: UIViewController ,UITextFieldDelegate, UITextViewDelegate{
     
             if self.Name.text!.trimmingCharacters(in: .whitespaces).isEmpty == false{
                 let alertController = UIAlertController(title: self.titlee, message: self.message, preferredStyle: .alert)
-                let okAction = UIAlertAction(title: self.Action, style: UIAlertAction.Style.default) {
-                    UIAlertAction in
+                let okAction = UIAlertAction(title: self.Action, style: UIAlertAction.Style.default){  UIAlertAction in
                    
                     if let FireId = UserDefaults.standard.string(forKey: "UserId"){
                             if self.Images.count == 0{
@@ -174,7 +173,21 @@ class EditProfileVC: UIViewController ,UITextFieldDelegate, UITextViewDelegate{
                                 let imageUrl = self.OfficeImage.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
                                 if let range = imageUrl.range(of: "?") {
                                     let ImageId = imageUrl.substring(to: range.lowerBound)
-                                    Storage.storage().reference().child("Pictures").child(String(ImageId.suffix(36))).delete()
+                                    
+                                    
+                                    
+                                    
+                                    Task{
+                                        do{
+                                            try await Storage.storage().reference().child("Pictures").child(String(ImageId.suffix(36))).delete()
+                                        }catch {
+                                            print(error)
+                                        }
+                                    }
+                                    
+                                    
+                                    
+                                    
                                 }
                                 
                                 self.uploadManyImage { URLs in

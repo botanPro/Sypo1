@@ -110,6 +110,7 @@ class VerifyingVC: UIViewController {
 var count = 0
     var UserTypeFound = false
     @IBAction func Verify(_ sender: Any) {
+        self.Verify.isEnabled = false
         if self.OTPCode.text! != ""{
             Verify.showLoader(userInteraction: true)
             credential = PhoneAuthProvider.provider().credential(
@@ -120,6 +121,7 @@ var count = 0
                     UserDefaults.standard.set(false, forKey: "Login")
                     UserDefaults.standard.set("", forKey: "PhoneNumber")
                     self.Verify.hideLoader()
+                    self.Verify.isEnabled = true
                     let myMessage = error.localizedDescription
                     let myAlert = UIAlertController(title: myMessage, message: nil, preferredStyle: UIAlertController.Style.alert)
                     myAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))

@@ -12,7 +12,7 @@ import WebKit
 class AboutrVC: UIViewController {
 
     
-    @IBOutlet weak var WebView: UIWebView!
+    @IBOutlet weak var WebView: WKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,7 @@ class AboutrVC: UIViewController {
         }
         let url = URL(string: "http://www.shark-team.com")
         let requestObj = URLRequest(url: url! as URL)
-         WebView.loadRequest(requestObj)
+        WebView.load(requestObj)
     }
 
     

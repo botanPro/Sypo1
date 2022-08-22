@@ -4554,15 +4554,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xSX-bx-sLl">
                                         <rect key="frame" x="12" y="82" width="390" height="40"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vuesax-twotone-arrow-right" translatesAutoresizingMaskIntoConstraints="NO" id="7g2-33-j8n">
-                                                <rect key="frame" x="357" y="12.5" width="15" height="15"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="15" id="KM1-sI-Xc1"/>
-                                                    <constraint firstAttribute="width" constant="15" id="iGz-7t-3bt"/>
-                                                </constraints>
-                                            </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact us for creating office account." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EW6-ID-taw">
-                                                <rect key="frame" x="20" y="12" width="332" height="16"/>
+                                                <rect key="frame" x="16" y="12" width="358" height="16"/>
                                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
                                                 <color key="textColor" red="0.15985291970000001" green="0.13185534669999999" blue="0.21287212950000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
@@ -4571,13 +4564,10 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstItem="EW6-ID-taw" firstAttribute="leading" secondItem="xSX-bx-sLl" secondAttribute="leading" constant="20" id="My1-kD-85q"/>
-                                            <constraint firstAttribute="bottom" secondItem="7g2-33-j8n" secondAttribute="bottom" constant="12.5" id="UXn-o4-Acg"/>
+                                            <constraint firstItem="EW6-ID-taw" firstAttribute="leading" secondItem="xSX-bx-sLl" secondAttribute="leading" constant="16" id="My1-kD-85q"/>
                                             <constraint firstAttribute="bottom" secondItem="EW6-ID-taw" secondAttribute="bottom" constant="12" id="a0Z-Jq-rLJ"/>
-                                            <constraint firstItem="7g2-33-j8n" firstAttribute="top" secondItem="xSX-bx-sLl" secondAttribute="top" constant="12.5" id="d0z-4T-Eao"/>
+                                            <constraint firstAttribute="trailing" secondItem="EW6-ID-taw" secondAttribute="trailing" constant="16" id="lUd-9l-s68"/>
                                             <constraint firstItem="EW6-ID-taw" firstAttribute="top" secondItem="xSX-bx-sLl" secondAttribute="top" constant="12" id="nYG-Si-ECc"/>
-                                            <constraint firstItem="7g2-33-j8n" firstAttribute="leading" secondItem="EW6-ID-taw" secondAttribute="trailing" constant="5" id="pXd-Lk-uGH"/>
-                                            <constraint firstAttribute="trailing" secondItem="7g2-33-j8n" secondAttribute="trailing" constant="18" id="xWO-rY-dXV"/>
                                             <constraint firstAttribute="height" constant="40" id="y6u-vF-F9h"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>

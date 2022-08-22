@@ -1656,7 +1656,13 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                 let imageUrl = image.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
                 if let range = imageUrl.range(of: "?") {
                     let ImageId = imageUrl.substring(to: range.lowerBound)
-                    Storage.storage().reference().child("Pictures").child(String(ImageId.suffix(36))).delete()
+                    Task{
+                        do{
+                            try await Storage.storage().reference().child("Pictures").child(String(ImageId.suffix(36))).delete()
+                        }catch {
+                            print(error)
+                        }
+                    }
                 }
             }
         }
@@ -1874,7 +1880,14 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                                     let imageUrl = image.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
                                     if let range = imageUrl.range(of: "?") {
                                         let ImageId = imageUrl.substring(to: range.lowerBound)
-                                        Storage.storage().reference().child("Pictures").child(String(ImageId.suffix(36))).delete()
+                                        Task{
+                                            do{
+                                                try await Storage.storage().reference().child("Pictures").child(String(ImageId.suffix(36))).delete()
+                                            }catch{
+                                                print(error)
+                                            }
+                                        }
+                                       
                                     }
                                 }
                             }

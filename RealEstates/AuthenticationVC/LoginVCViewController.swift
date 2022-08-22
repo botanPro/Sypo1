@@ -81,6 +81,7 @@ class LoginVCViewController: UIViewController ,UITextFieldDelegate{
     
     var phone = ""
     @IBAction func Login(_ sender: Any) {
+        self.Login.isEnabled = false
         print(self.PhoneNumber.text!)
         if self.PhoneNumber.text != ""{
             let str = self.PhoneNumber.text!
@@ -100,6 +101,7 @@ class LoginVCViewController: UIViewController ,UITextFieldDelegate{
                 if let error = error {
                     print(error)
                     self.Login.hideLoader()
+                    self.Login.isEnabled = true
                     let myMessage = error.localizedDescription
                     let myAlert = UIAlertController(title: myMessage, message: nil, preferredStyle: UIAlertController.Style.alert)
                     myAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
@@ -134,6 +136,7 @@ class LoginVCViewController: UIViewController ,UITextFieldDelegate{
                     mss = "الرجاء إدخال رقم الهاتف"
                     action = "حسنا"
                 }
+                self.Login.isEnabled = true
                 let myAlert = UIAlertController(title: nil, message: mss, preferredStyle: UIAlertController.Style.alert)
                 myAlert.addAction(UIAlertAction(title: action, style: UIAlertAction.Style.default, handler: nil))
                 self.present(myAlert, animated: true, completion: nil)
