@@ -50,11 +50,13 @@ class VerifyingVC: UIViewController {
         if XLanguage.get() == .Kurdish{
             let phone = UserDefaults.standard.string(forKey: "PhoneNumber") ?? ""
 
-            self.phonenumber.text = " کورتەنامەیەک نێردراوە بۆ"
+            self.phonenumber.text = "کورتەنامەیەک نێردراوە بۆ "
             self.VerifingLable.text = phone
+            self.VerifingLable.textAlignment = .right
+            self.phonenumber.textAlignment = .right
             self.VerifingLable.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-            self.VerifingLable.font = UIFont(name: "PeshangDes2", size: 12)!
-            self.phonenumber.font = UIFont(name: "PeshangDes2", size: 12)!
+            self.VerifingLable.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            self.phonenumber.font = UIFont(name: "PeshangDes2", size: 13)!
         }else if XLanguage.get() == .English{
             self.VerifingLable.text = "An SMS was sent to "
             self.phonenumber.text = UserDefaults.standard.string(forKey: "PhoneNumber") ?? ""
@@ -63,11 +65,13 @@ class VerifyingVC: UIViewController {
             self.phonenumber.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         }else{
             let phone = UserDefaults.standard.string(forKey: "PhoneNumber") ?? ""
-            self.phonenumber.text = " تم إرسال SMS إلى"
+            self.phonenumber.text = "تم إرسال SMS إلى "
             self.VerifingLable.text = phone
+            self.VerifingLable.textAlignment = .right
+            self.phonenumber.textAlignment = .right
             self.VerifingLable.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-            self.VerifingLable.font = UIFont(name: "PeshangDes2", size: 12)!
-            self.phonenumber.font = UIFont(name: "PeshangDes2", size: 12)!
+            self.VerifingLable.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            self.phonenumber.font = UIFont(name: "PeshangDes2", size: 13)!
         }
         
         

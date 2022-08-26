@@ -12,7 +12,7 @@ import FirebaseFirestore
 import FirebaseAuth
 import FirebaseDynamicLinks
 import FirebaseAnalytics
-import Messages
+import OneSignal
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -28,6 +28,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set("true", forKey: "IsFirst")
         }
         
+        
+        
+        OneSignal.setLogLevel(.LL_VERBOSE, visualLevel: .LL_NONE)
+        OneSignal.initWithLaunchOptions(launchOptions)
+        OneSignal.setAppId("bbbfdf2e-0518-4da0-9200-7135829e0156")
+        OneSignal.promptForPushNotifications(userResponse: { accepted in
+            print("User accepted notifications: \(accepted)")
+            UserDefaults.standard.set(OneSignal.getDeviceState().userId ?? "", forKey: "OneSignalId")
+          })
+        
+        
         FirebaseApp.configure()
  
         sleep(1)
@@ -41,82 +52,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    
-//// dynamic link not working in AppDelegate
-//
-//    // DynamicLinks
-//    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
-//        DynamicLinks.dynamicLinks().handleUniversalLink(url) { (dynamiclink, error) in
-//            if let dynamiclink = dynamiclink {
-//                self.handleIncomeDynamicLink(dynamiclink)
-//            }
-//        }
-//        return false
-//    }
-//
-//
-//
-//
-//
-//    // DynamicLinks
-//    private func application(_ application: UIApplication, continue userActivity: NSUserActivity,restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-//        print("anything??")
-//        if let incomingurl = userActivity.webpageURL{
-//            print("incomingurl is \(incomingurl)")
-//            let handled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingurl) { (dynamiclink, error) in
-//
-//                guard error == nil else{
-//                    print("found an error! \(error!.localizedDescription)")
-//                    return
-//                }
-//
-//                self.handleIncomeDynamicLink(dynamiclink!)
-//
-//            }
-//            return handled
-//        }
-//
-//        return false
-//    }
-//
-//
-//
-//    func handleIncomeDynamicLink(_ dynamicLink: DynamicLink){
-//        guard let url = dynamicLink.url else{
-//            print("no object")
-//            return
-//        }
-//        guard (dynamicLink.matchType == .unique || dynamicLink.matchType == .default) else{
-//            print("not a strong enough match type to conitunie)")
-//            return
-//        }
-//        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-//              let queryItems = components.queryItems  else{
-//            return
-//        }
-//        if components.path == "/maskani"{
-//            if let productIdQueryItem = queryItems.first(where: {$0.name == "estateid"}){
-////                guard let productId = productIdQueryItem.value else{return}
-////                if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GoToProductVC") as? EstateProfileVc {
-////                    if let window = self.window, let rootViewController = window.rootViewController {
-////                        var currentController = rootViewController
-////                        while let presentedController = currentController.presentedViewController {
-////                            currentController = presentedController
-////                        }
-////                        //ontroller.ThisId = "\(productId)"
-////                        controller.modalPresentationStyle = .fullScreen
-////                        currentController.present(controller, animated: true, completion: nil)
-////                    }
-////                }
-//            }
-//        }
-//        print(queryItems.first?.value! as Any)
-//        print(dynamicLink.url?.absoluteString as Any);
-//    }
-//
-//
-    
-    
+
+    func onOSSubscriptionChanged(_ stateChanges: OSSubscriptionStateChanges) {
+       if !stateChanges.from.isSubscribed && stateChanges.to.isSubscribed {
+           print("Subscribed for OneSignal push notifications!")
+       }
+       print("SubscriptionStateChange: \n\(String(describing: stateChanges))")
+       
+       if let playerId = stateChanges.to.userId {
+           print("Current playerId \(playerId)")
+           UserDefaults.standard.set(playerId, forKey: "OneSignalId")
+       }
+   }
+   
     
     // MARK: UISceneSession Lifecycle
 

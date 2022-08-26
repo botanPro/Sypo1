@@ -413,7 +413,16 @@ extension FilterVC : UICollectionViewDataSource, UICollectionViewDelegate , UICo
                     cell.Vieww.backgroundColor = .white
                     cell.Name.textColor = #colorLiteral(red: 0.4430069923, green: 0.4869378209, blue: 0.5339931846, alpha: 1)
                 }
-                cell.Name.text = EstatesType[indexPath.row].name
+                if XLanguage.get() == .English{
+                    cell.Name.text = EstatesType[indexPath.row].name
+                    cell.Name.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
+                }else if XLanguage.get() == .Arabic{
+                    cell.Name.text = EstatesType[indexPath.row].ar_name
+                    cell.Name.font =  UIFont(name: "PeshangDes2", size: 12)!
+                }else{
+                    cell.Name.text = EstatesType[indexPath.row].ku_name
+                    cell.Name.font =  UIFont(name: "PeshangDes2", size: 12)!
+                }
             }
             return cell
         }

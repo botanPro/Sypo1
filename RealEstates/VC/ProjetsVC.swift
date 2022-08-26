@@ -151,7 +151,11 @@ class ProjetsVC: UIViewController {
     func GetAllProjects(){
         self.ProjectArray.removeAll()
         GetAllProjectsAip.GetAllProducts { pro in
-            self.ProjectArray = pro
+            for proj in pro{
+                if proj.id != "ZlFVOHo5MUXQ8NtnZfZ7"{
+                    self.ProjectArray.append(proj)
+                }
+            }
             self.ProjectArray.shuffle()
             self.ScrollView.isHidden = false
             self.LoadingIndecator.stopAnimating()
@@ -235,7 +239,9 @@ extension ProjetsVC : UICollectionViewDataSource, UICollectionViewDelegate , UIC
         
         if collectionView == ProjectsCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProjectCell", for: indexPath) as! ProjectsCollectionViewCell
-            cell.update(self.ProjectArray[indexPath.row])
+           
+               cell.update(self.ProjectArray[indexPath.row])
+
             return cell
         }
         return UICollectionViewCell()

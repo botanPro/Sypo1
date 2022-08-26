@@ -44,7 +44,9 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             pickerLabel?.textAlignment = .center
             
             if pickerView == ProjectpickerView{
-                
+                if self.ProjectArray[row].id == "ZlFVOHo5MUXQ8NtnZfZ7"{
+                    pickerLabel?.textColor = #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1)
+                }
                 if XLanguage.get() == .English{
                     pickerLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
                     pickerLabel?.text = self.ProjectArray[row].project_name
@@ -269,19 +271,19 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
         
         
         if XLanguage.get() == .English{
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "ArialRoundedMTBold", size: 16)!]
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "ArialRoundedMTBold", size: 16)!,.foregroundColor: #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)]
             self.RentRadioButton.setTitle("RENT", for: .normal)
             self.SellRadioButton.setTitle("SELL", for: .normal)
             self.RentRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
             self.SellRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
         }else if XLanguage.get() == .Arabic{
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "PeshangDes2", size: 17)!]
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "PeshangDes2", size: 16)!,.foregroundColor: #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)]
             self.RentRadioButton.setTitle("بیع", for: .normal)
             self.SellRadioButton.setTitle("ايجار", for: .normal)
             self.RentRadioButton.titleLabel?.font = UIFont(name: "PeshangDes2", size: 14)!
             self.SellRadioButton.titleLabel?.font = UIFont(name: "PeshangDes2", size: 14)!
         }else if XLanguage.get() == .Kurdish{
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "PeshangDes2", size: 17)!]
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "PeshangDes2", size: 16)!,.foregroundColor: #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)]
             self.RentRadioButton.setTitle("کرێ", for: .normal)
             self.SellRadioButton.setTitle("فروشتن", for: .normal)
             self.RentRadioButton.titleLabel?.font = UIFont(name: "PeshangDes2", size: 14)!
@@ -579,6 +581,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
         let ac = UIAlertController(title:  self.ProjectsTitle, message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         ac.view.addSubview(TypepickerView)
         ac.addAction(UIAlertAction(title:  self.ProjectsAction, style: .default, handler: { _ in
+            if self.typees.count != 0{
             let pickerValue = self.typees[self.TypepickerView.selectedRow(inComponent: 0)]
             if XLanguage.get() == .English{
             self.Typelable.text = pickerValue.name
@@ -593,6 +596,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             
             
             print("Picker value: \(pickerValue) was selected")
+            }
         }))
         ac.addAction(UIAlertAction(title: self.ProjectsCancel, style: .cancel, handler: nil))
         present(ac, animated: true)
@@ -639,6 +643,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
         let ac = UIAlertController(title:  self.ProjectsTitle, message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         ac.view.addSubview(EstateTypepickerView)
         ac.addAction(UIAlertAction(title:  self.ProjectsAction, style: .default, handler: { _ in
+            if self.EstatesType.count != 0{
             let pickerValue = self.EstatesType[self.EstateTypepickerView.selectedRow(inComponent: 0)]
             if XLanguage.get() == .English{
             self.EstateTypeLable.text = pickerValue.name
@@ -682,6 +687,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                 }
             }
             print("Picker value: \(pickerValue.name ?? "") was selected")
+            }
         }))
         ac.addAction(UIAlertAction(title: self.ProjectsCancel, style: .cancel, handler: nil))
         present(ac, animated: true)
@@ -761,7 +767,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
     @IBOutlet weak var ProjectView : UIView!
     private var alertController = UIAlertController()
     private var tblView = UITableView()
-    var ProjectpickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 150))
+    var ProjectpickerView = UIPickerView(frame: CGRect(x: 10, y: 50, width: 250, height: 150))
     @IBOutlet weak var ProjectName : UILabel!
     var ProjectId = ""
     
@@ -795,10 +801,12 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
         let ac = UIAlertController(title: self.ProjectsTitle, message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         ac.view.addSubview(ProjectpickerView)
         ac.addAction(UIAlertAction(title: self.ProjectsAction, style: .default, handler: { _ in
+            if self.ProjectArray.count != 0{
             let pickerValue = self.ProjectArray[self.ProjectpickerView.selectedRow(inComponent: 0)]
             self.ProjectName.text = pickerValue.project_name
             self.ProjectId = pickerValue.id ?? ""
             print("Picker value: \(pickerValue) was selected")
+            }
         }))
         ac.addAction(UIAlertAction(title: self.ProjectsCancel, style: .cancel, handler: nil))
         present(ac, animated: true)

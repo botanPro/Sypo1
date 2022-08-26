@@ -849,6 +849,16 @@ PODS:
   - NVActivityIndicatorView (5.1.1):
     - NVActivityIndicatorView/Base (= 5.1.1)
   - NVActivityIndicatorView/Base (5.1.1)
+  - OneSignalXCFramework (3.11.2):
+    - OneSignalXCFramework/OneSignalCore (= 3.11.2)
+    - OneSignalXCFramework/OneSignalExtension (= 3.11.2)
+    - OneSignalXCFramework/OneSignalOutcomes (= 3.11.2)
+  - OneSignalXCFramework/OneSignalCore (3.11.2)
+  - OneSignalXCFramework/OneSignalExtension (3.11.2):
+    - OneSignalXCFramework/OneSignalCore
+    - OneSignalXCFramework/OneSignalOutcomes
+  - OneSignalXCFramework/OneSignalOutcomes (3.11.2):
+    - OneSignalXCFramework/OneSignalCore
   - OTPTextField (1.1.5)
   - PhoneNumberKit (3.3.4):
     - PhoneNumberKit/PhoneNumberKitCore (= 3.3.4)
@@ -903,6 +913,7 @@ DEPENDENCIES:
   - MXSegmentedPager
   - NSFWDetector
   - NVActivityIndicatorView
+  - OneSignalXCFramework (< 4.0, >= 3.0.0)
   - OTPTextField
   - PhoneNumberKit (~> 3.3)
   - PullToDismissTransition
@@ -973,6 +984,7 @@ SPEC REPOS:
     - nanopb
     - NSFWDetector
     - NVActivityIndicatorView
+    - OneSignalXCFramework
     - OTPTextField
     - PhoneNumberKit
     - PromisesObjC
@@ -1054,6 +1066,7 @@ SPEC CHECKSUMS:
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   NSFWDetector: aefec2254932bdc933cccc9385abfe07ae36a7a1
   NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
+  OneSignalXCFramework: 81ceac017a290f23793443323090cfbe888f74ea
   OTPTextField: 9d35010a6356972471298aea37bf8d6d5f9974f7
   PhoneNumberKit: 441e8b26ec88d598e3591de9061eff18f5dd12e8
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
@@ -1070,6 +1083,6 @@ SPEC CHECKSUMS:
   ValidationTextField: 91bc04170ba4b4358912c372e12d7af4c9143ad5
   YoutubePlayer-in-WKWebView: 4dad12b3ece938a6456fa4374df78942f88b485a
 
-PODFILE CHECKSUM: ba15f07563cfe389f2805b45ef68e1c16ec264e9
+PODFILE CHECKSUM: 028af99a8be3f6ea1f60534a408e13fbc59c2456
 
 COCOAPODS: 1.11.3

@@ -171,7 +171,9 @@ class Home: UIViewController ,UITextFieldDelegate {
         fetchRemoteConfig()
 
 
-       
+        let yourBackImage = UIImage(named: "left-chevron")
+        self.navigationController?.navigationBar.backIndicatorImage = yourBackImage
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = yourBackImage
         
         
         
@@ -305,7 +307,7 @@ class Home: UIViewController ,UITextFieldDelegate {
             }else if XLanguage.get() == .Arabic{
                 myVC.title = "العناصر المفضلة"
             }else{
-                myVC.title = "Favorite Items"
+                myVC.title = "FAVORITE ITEMS"
             }
             self.navigationController?.pushViewController(myVC, animated: true)
         }else{
@@ -326,7 +328,6 @@ class Home: UIViewController ,UITextFieldDelegate {
                     }
                 }
             }
-           
         }else{
             let vc = storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVCViewController
             self.navigationController?.pushViewController(vc, animated: true)
@@ -488,22 +489,14 @@ class Home: UIViewController ,UITextFieldDelegate {
             }
         }
         
-        if IsInternetChecked == false{
-            self.IsInternetChecked = true
-            if !CheckInternet.Connection(){
-                MessageBox.ShowMessage()
-            }else{
-                self.IsInternetChecked = false
-                UIView.animate(withDuration: 0.3) {
-                    self.InternetViewHeight.constant = 0
-                    self.InternetConnectionView.isHidden = true
-                    self.view.layoutIfNeeded()
-                }
-            }
-        }else{
-            UIView.animate(withDuration: 0.3) {
+        if !CheckInternet.Connection(){
                 self.InternetViewHeight.constant = 20
                 self.InternetConnectionView.isHidden = false
+        }else{
+            self.IsInternetChecked = false
+            UIView.animate(withDuration: 0.3) {
+                self.InternetViewHeight.constant = 0
+                self.InternetConnectionView.isHidden = true
                 self.view.layoutIfNeeded()
             }
         }
@@ -801,7 +794,13 @@ extension Home : UICollectionViewDataSource, UICollectionViewDelegate , UICollec
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let myVC = storyboard.instantiateViewController(withIdentifier: "AllEstateVC") as! AllEstateVC
             myVC.EstateType = self.EstatesType[indexPath.row].id ?? ""
+            if XLanguage.get() == .English{
             myVC.title = self.EstatesType[indexPath.row].name ?? ""
+            }else if XLanguage.get() == .Arabic{
+                myVC.title = self.EstatesType[indexPath.row].ar_name ?? ""
+            }else{
+                myVC.title = self.EstatesType[indexPath.row].ku_name ?? ""
+            }
             self.navigationController?.pushViewController(myVC, animated: true)
         }
         if collectionView == ApartmentEstatesCollectionView{

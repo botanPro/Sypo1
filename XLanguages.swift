@@ -271,10 +271,8 @@ class LanguagePlaceHolder: UITextField{
 
 
 class LanguageNvigationItem: UINavigationItem{
-
-
     
-    
+
     @IBInspectable var ArabicText : String = ""{
         didSet{
             update()
@@ -292,7 +290,6 @@ class LanguageNvigationItem: UINavigationItem{
     }
     
     @objc func update(){
-        
         if XLanguage.get() == .Arabic{
             self.title = ArabicText
         }else if XLanguage.get() == .Kurdish{
@@ -306,7 +303,7 @@ class LanguageNvigationItem: UINavigationItem{
     override func awakeFromNib() {
         super.awakeFromNib()
         NotificationCenter.default.addObserver(self, selector: #selector(LanguageNvigationItem.update), name: NSNotification.Name(rawValue: "LanguageChanged"), object: nil)
-}
+    }
 }
 
 
@@ -375,6 +372,63 @@ class LanguageBarItem: UIBarButtonItem{
         NotificationCenter.default.addObserver(self, selector: #selector(LanguageBarItem.update), name: NSNotification.Name(rawValue: "LanguageChanged"), object: nil)
 }
 }
+
+
+
+
+
+
+
+
+class NavigationBarLang: UINavigationBar{
+    
+    
+    @IBInspectable var ArabicTextSize : CGFloat = 0{
+        didSet{
+            update()
+        }
+    }
+    
+    @IBInspectable var EnglishTextSize : CGFloat = 0{
+        didSet{
+            update()
+        }
+    }
+    
+    
+    
+    @objc func update(){
+        
+        if XLanguage.get() == .Arabic{
+            self.titleTextAttributes =
+            [
+                NSAttributedString.Key.font: UIFont(name: "PeshangDes2", size: ArabicTextSize)!,
+                NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.07560480386, green: 0.2257080078, blue: 0.3554315865, alpha: 1)
+            ]
+        }else if XLanguage.get() == .Kurdish{
+            self.titleTextAttributes =
+            [
+                NSAttributedString.Key.font: UIFont(name: "PeshangDes2", size: ArabicTextSize)!,
+                NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.07560480386, green: 0.2257080078, blue: 0.3554315865, alpha: 1)
+            ]
+        }else if XLanguage.get() == .English{
+            self.titleTextAttributes =
+            [
+                NSAttributedString.Key.font: UIFont(name: "ArialRoundedMTBold", size: EnglishTextSize)!,
+                NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.07560480386, green: 0.2257080078, blue: 0.3554315865, alpha: 1)
+            ]
+        }
+        
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        NotificationCenter.default.addObserver(self, selector: #selector(NavigationBarLang.update), name: NSNotification.Name(rawValue: "LanguageChanged"), object: nil)
+    }
+}
+
+
+
 
 
 

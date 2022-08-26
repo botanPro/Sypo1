@@ -116,7 +116,7 @@ class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDel
     @IBOutlet weak var VideoHeightLayout: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.Description.isUserInteractionEnabled = false
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         

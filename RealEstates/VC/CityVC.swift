@@ -49,10 +49,13 @@ extension CityVC : UITableViewDelegate , UITableViewDataSource{
         let cell  = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CuntryAndCityTableViewCell
         if XLanguage.get() == .English{
             cell.Name.text = City[indexPath.row].name ?? ""
+            cell.Name.font =  UIFont(name: "ArialRoundedMTBold", size: 13)!
         }else if XLanguage.get() == .Arabic{
             cell.Name.text = City[indexPath.row].ar_name ?? ""
+            cell.Name.font =  UIFont(name: "PeshangDes2", size: 13)!
         }else{
             cell.Name.text = City[indexPath.row].ku_name ?? ""
+            cell.Name.font =  UIFont(name: "PeshangDes2", size: 13)!
         }
         return cell
     }

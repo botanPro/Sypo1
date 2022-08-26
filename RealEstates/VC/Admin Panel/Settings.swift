@@ -249,13 +249,6 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     
     
     
-    
-    
-    
-    
-    
-    
-    
     @IBAction func Fav(_ sender: Any) {
         if UserDefaults.standard.bool(forKey: "Login") == true {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -265,7 +258,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             }else if XLanguage.get() == .Arabic{
                 myVC.title = "العناصر المفضلة"
             }else{
-                myVC.title = "Favorite Items"
+                myVC.title = "FAVORITE ITEMS"
             }
             self.navigationController?.pushViewController(myVC, animated: true)
         }
@@ -275,13 +268,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         if UserDefaults.standard.bool(forKey: "Login") == true {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let myVC = storyboard.instantiateViewController(withIdentifier: "ViewdItemsVc") as! ViewdVC
-            if XLanguage.get() == .Kurdish{
-                myVC.title = "بینراوەکان"
-            }else if XLanguage.get() == .Arabic{
-                myVC.title = "تمت المشاهدة"
-            }else{
-                myVC.title = "Viewd Items"
-            }
+
             self.navigationController?.pushViewController(myVC, animated: true)
         }
     }
@@ -352,6 +339,12 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         super.viewDidLoad()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)]
+
+        let yourBackImage = UIImage(named: "left-chevron")
+        self.navigationController?.navigationBar.backIndicatorImage = yourBackImage
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = yourBackImage
+        
         
         if XLanguage.get() == .Kurdish{
             self.Etitle = "ئینگلیزی"
@@ -462,7 +455,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
 
     
     
-    
+    var IsSubscriptionAlertShowed = false
     
     @IBAction func GetYAAction(_ sender: Any) {
         self.dialNumber(phoneNumber: "+9647514505411")
@@ -652,10 +645,10 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             
             
         }else{print("is -----------------")
-            if lang == 1{
+            if XLanguage.get() == .Kurdish{
                 self.LoginOrLogoutLable.text = "چوونە دەرەوە"
                 self.LoginOrLogoutLable.font = UIFont(name: "PeshangDes2", size: 14)!
-            }else if lang == 2{
+            }else if XLanguage.get() == .English{
                 self.LoginOrLogoutLable.text = "LOGOUT"
                 self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
             }else{
@@ -750,6 +743,39 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                                                 self.MyPropertiesAction.isEnabled = true
                                                                 self.AddPropetiesAction.isEnabled = true
                                                             }
+                                                            
+                                                            
+                                                            if self.IsSubscriptionAlertShowed == false{
+                                                                self.IsSubscriptionAlertShowed = true
+                                                            if days == 0 || Int(posts.number_of_post ?? "") == self.MyEstates.count{
+                                                                var message = ""
+                                                                var action  = ""
+                                                                var cancel  = ""
+                                                                
+                                                                if XLanguage.get() == .English{
+                                                                    message = "Your subscription is expired, contact us to renew."
+                                                                    action  = "Renew"
+                                                                    cancel  = "Later"
+                                                                    
+                                                                }else if XLanguage.get() == .Arabic{
+                                                                    message = "انتهى اشتراكك ، اتصل بنا للتجديد."
+                                                                    action  = "تجديد"
+                                                                    cancel  = "لاحقاً"
+                                                                }else{
+                                                                    message = "بەشداریکردنەکەت بەسەرچووە، پەیوەندیمان پێوە بکە بۆ نوێکردنەوە."
+                                                                    action  = "نوێکردنەوە"
+                                                                    cancel  = "دواتر"
+                                                                }
+                                                            
+                                                                let myAlert = UIAlertController(title: nil, message: message, preferredStyle: UIAlertController.Style.alert)
+                                                                myAlert.addAction(UIAlertAction(title: action, style: .default, handler: { (UIAlertAction) in
+                                                                    self.dialNumber(phoneNumber: "+9647514505411")
+                                                                }))
+                                                                myAlert.addAction(UIAlertAction(title: cancel, style: .cancel, handler: nil))
+                                                                self.present(myAlert, animated: true, completion: nil)
+                                            
+                                                            }
+                                                        }
                                                         }
                                                         
                                                     }
@@ -1024,7 +1050,13 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     UserDefaults.standard.set(false, forKey: "Login")
                     UserDefaults.standard.set("", forKey: "UserId")
                     UserDefaults.standard.set("", forKey: "PhoneNumber")
-                    self.LoginOrLogoutLable.text = "LOGIN"
+                    if XLanguage.get() == .English{
+                        self.LoginOrLogoutLable.text = "LOGIN"
+                    }else if XLanguage.get() == .Arabic{
+                        self.LoginOrLogoutLable.text = "تسجيل الدخول"
+                    }else{
+                        self.LoginOrLogoutLable.text = "چونه‌ ژووره‌وه‌"
+                    }
                     self.LoginImage.image = UIImage(named: "vuesax-bold-login")
                     self.ProfileInfoStackView.isHidden = true
                     self.ProfileInfoStackViewLayout.constant = 0
@@ -1479,6 +1511,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         let ac = UIAlertController(title: cityTitle, message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         ac.view.addSubview(pickerView)
         ac.addAction(UIAlertAction(title: cityAction , style: .default, handler: { _ in
+            if self.CityArray.count != 0{
             let pickerValue = self.CityArray[self.pickerView.selectedRow(inComponent: 0)]
             if XLanguage.get() == .English{
                 CountryObjectAip.GeCountryById(id: pickerValue.country_id ?? "") { country in
@@ -1499,6 +1532,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             
             UserDefaults.standard.set(pickerValue.id, forKey: "CityId")
             UserDefaults.standard.set(pickerValue.country_id, forKey: "CountryId")
+            }
         }))
         ac.addAction(UIAlertAction(title: cityCancel, style: .cancel, handler: nil))
         present(ac, animated: true)

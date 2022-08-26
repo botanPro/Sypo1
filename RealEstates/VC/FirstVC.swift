@@ -45,6 +45,7 @@ class FirstVC: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         let ac = UIAlertController(title: "Cities", message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         ac.view.addSubview(pickerView)
         ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            if self.CityArray.count != 0{
             let pickerValue = self.CityArray[self.pickerView.selectedRow(inComponent: 0)]
             
             CountryObjectAip.GeCountryById(id: pickerValue.country_id ?? "") { country in
@@ -56,6 +57,7 @@ class FirstVC: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             
             UserDefaults.standard.set(pickerValue.id, forKey: "CityId")
             UserDefaults.standard.set(pickerValue.country_id, forKey: "CountryId")
+            }
         }))
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(ac, animated: true)

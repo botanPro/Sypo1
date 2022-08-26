@@ -424,6 +424,7 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     @IBOutlet weak var EstateTypeView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.Description.isUserInteractionEnabled = false
         GetAllEstates()
         self.ProjectNameTop.constant = 0
         let deviceName = device.modelNamee
