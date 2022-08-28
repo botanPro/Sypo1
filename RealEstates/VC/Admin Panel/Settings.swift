@@ -387,8 +387,6 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                         }
                     }
                 }
-            }else{
-                self.Location.text = "iraq-\(UserDefaults.standard.string(forKey: "CityName") ?? "".uppercased())"
             }
         }else if XLanguage.get() == .Arabic{
             if let cityId = UserDefaults.standard.string(forKey: "CityId"){
@@ -402,8 +400,6 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                         }
                     }
                 }
-            }else{
-                self.Location.text = "iraq-\(UserDefaults.standard.string(forKey: "CityName") ?? "".uppercased())"
             }
         }else{
             if let cityId = UserDefaults.standard.string(forKey: "CityId"){
@@ -417,8 +413,6 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                         }
                     }
                 }
-            }else{
-                self.Location.text = "iraq-\(UserDefaults.standard.string(forKey: "CityName") ?? "".uppercased())"
             }
         }
         
@@ -443,11 +437,11 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         self.ProfileRightImage.isHidden = false
         ProductAip.GetAllProducts { estate in
             self.AllEstate = estate
-            print("--=-=-=-=-=-=-=-=-=-=- \(self.AllEstate.count)")
         }
         self.Image.layer.cornerRadius = self.Image.bounds.width / 2
      
-        //navigationController?.navigationBar.shadowImage = UIImage.imageWithColor(color: .darkGray)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.LocationChanged), name: NSNotification.Name(rawValue: "LocationChanged"), object: nil)
     }
     
     
@@ -955,6 +949,52 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     
                 }
                 
+            }
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.LocationChanged), name: NSNotification.Name(rawValue: "LocationChanged"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.LangChanged), name: NSNotification.Name(rawValue: "LanguageChanged"), object: nil)
+    }
+    
+    @objc func LocationChanged(){
+        if XLanguage.get() == .English{
+            if let cityId = UserDefaults.standard.string(forKey: "CityId"){
+            CityObjectAip.GetCities { cities in
+                    for city in cities {
+                        if city.id == cityId{
+                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
+                                self.Location.text = "\(country.name ?? "")-\(city.name ?? "")".uppercased()
+                                self.Location.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+                            }
+                        }
+                    }
+                }
+            }
+        }else if XLanguage.get() == .Arabic{
+            if let cityId = UserDefaults.standard.string(forKey: "CityId"){
+            CityObjectAip.GetCities { cities in
+                    for city in cities {
+                        if city.id == cityId{
+                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
+                                self.Location.text = "\(country.ar_name ?? "")-\(city.ar_name ?? "")".uppercased()
+                                self.Location.font = UIFont(name: "PeshangDes2", size: 11)!
+                            }
+                        }
+                    }
+                }
+            }
+        }else{
+            if let cityId = UserDefaults.standard.string(forKey: "CityId"){
+            CityObjectAip.GetCities { cities in
+                    for city in cities {
+                        if city.id == cityId{
+                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
+                                self.Location.text = "\(country.ku_name ?? "")-\(city.ku_name ?? "")".uppercased()
+                                self.Location.font = UIFont(name: "PeshangDes2", size: 11)!
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -1517,16 +1557,19 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                 CountryObjectAip.GeCountryById(id: pickerValue.country_id ?? "") { country in
                     self.Location.text = "\(country.name ?? "")-\(pickerValue.name ?? "")".uppercased()
                     UserDefaults.standard.set("\(country.name ?? "")-\(pickerValue.name ?? "")".uppercased(), forKey: "CityName")
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LocationChangedS"), object: nil)
                 }
             }else if XLanguage.get() == .Arabic{
                 CountryObjectAip.GeCountryById(id: pickerValue.country_id ?? "") { country in
                     self.Location.text = "\(country.ar_name ?? "")-\(pickerValue.ar_name ?? "")".uppercased()
                     UserDefaults.standard.set("\(country.ar_name ?? "")-\(pickerValue.ar_name ?? "")".uppercased(), forKey: "CityName")
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LocationChangedS"), object: nil)
                 }
             }else{
                 CountryObjectAip.GeCountryById(id: pickerValue.country_id ?? "") { country in
                     self.Location.text = "\(country.ku_name ?? "")-\(pickerValue.ku_name ?? "")".uppercased()
                     UserDefaults.standard.set("\(country.ku_name ?? "")-\(pickerValue.ku_name ?? "")".uppercased(), forKey: "CityName")
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LocationChangedS"), object: nil)
                 }
             }
             

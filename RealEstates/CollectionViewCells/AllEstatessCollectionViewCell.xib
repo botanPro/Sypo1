@@ -74,7 +74,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="15" id="1rH-LI-fZC"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="15"/>
+                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="16"/>
                                         <color key="textColor" red="0.1176470588" green="0.22352941179999999" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -187,26 +187,44 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sold" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J32-Tc-nTs" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
-                                <rect key="frame" x="59.5" y="71" width="69.5" height="29"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oqc-R3-C73">
+                                <rect key="frame" x="57" y="65" width="74.5" height="35"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sold" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J32-Tc-nTs" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="3" width="54.5" height="29"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="29" id="Y7Z-vJ-6w5"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="25"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Sold"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="فرۆشرا"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="تم البيع"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
+                                                <real key="value" value="25"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
+                                                <real key="value" value="23"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="29" id="Y7Z-vJ-6w5"/>
+                                    <constraint firstItem="J32-Tc-nTs" firstAttribute="leading" secondItem="oqc-R3-C73" secondAttribute="leading" constant="10" id="P6Y-yX-iZu"/>
+                                    <constraint firstItem="J32-Tc-nTs" firstAttribute="top" secondItem="oqc-R3-C73" secondAttribute="top" constant="3" id="hgS-J3-fxC"/>
+                                    <constraint firstAttribute="height" constant="35" id="kuP-1d-x61"/>
+                                    <constraint firstAttribute="bottom" secondItem="J32-Tc-nTs" secondAttribute="bottom" constant="3" id="xXE-UP-qnB"/>
+                                    <constraint firstAttribute="trailing" secondItem="J32-Tc-nTs" secondAttribute="trailing" constant="10" id="zPJ-po-eek"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="32"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Sold"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="فرۆشرا"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="تم البيع"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
-                                        <real key="value" value="30"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
-                                        <real key="value" value="32"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="CornerRadius">
+                                        <integer key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                            </label>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -217,15 +235,14 @@
                             <constraint firstAttribute="bottom" secondItem="aKE-nP-hsf" secondAttribute="bottom" constant="9" id="NEG-XY-r6m"/>
                             <constraint firstAttribute="trailing" secondItem="eJJ-F6-bfK" secondAttribute="trailing" constant="12" id="SIl-GC-U5p"/>
                             <constraint firstAttribute="trailing" secondItem="E9v-1z-lhz" secondAttribute="trailing" constant="8" id="TnN-fn-7Of"/>
-                            <constraint firstItem="eJJ-F6-bfK" firstAttribute="top" secondItem="J32-Tc-nTs" secondAttribute="bottom" constant="24" id="XEq-LD-VpX"/>
                             <constraint firstItem="Bhs-Bt-wU8" firstAttribute="top" secondItem="De8-av-24c" secondAttribute="top" constant="12" id="Zd7-DS-D6I"/>
                             <constraint firstItem="eJJ-F6-bfK" firstAttribute="leading" secondItem="De8-av-24c" secondAttribute="leading" constant="12" id="aiq-6P-JKF"/>
-                            <constraint firstItem="J32-Tc-nTs" firstAttribute="centerX" secondItem="De8-av-24c" secondAttribute="centerX" id="enz-Tm-2Ob"/>
+                            <constraint firstItem="oqc-R3-C73" firstAttribute="centerX" secondItem="De8-av-24c" secondAttribute="centerX" id="gk9-La-Ydf"/>
+                            <constraint firstItem="eJJ-F6-bfK" firstAttribute="top" secondItem="oqc-R3-C73" secondAttribute="bottom" constant="24" id="lIj-GI-Hcd"/>
                             <constraint firstAttribute="trailing" secondItem="Bhs-Bt-wU8" secondAttribute="trailing" constant="12" id="pbX-bQ-ge1"/>
                             <constraint firstItem="aKE-nP-hsf" firstAttribute="top" secondItem="E9v-1z-lhz" secondAttribute="bottom" constant="8" id="sBq-fk-snN"/>
                             <constraint firstItem="aKE-nP-hsf" firstAttribute="leading" secondItem="De8-av-24c" secondAttribute="leading" constant="8" id="tAh-2F-mOG"/>
                             <constraint firstItem="E9v-1z-lhz" firstAttribute="leading" secondItem="De8-av-24c" secondAttribute="leading" constant="8" id="waX-Wp-pXU"/>
-                            <constraint firstItem="J32-Tc-nTs" firstAttribute="top" secondItem="De8-av-24c" secondAttribute="top" constant="71" id="zl8-JB-xQH"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -248,6 +265,7 @@
                 <outlet property="Price" destination="WOq-ld-bJa" id="6pv-x9-M1y"/>
                 <outlet property="RoomNumber" destination="yzb-pJ-eKs" id="3ml-pI-c9C"/>
                 <outlet property="Sold" destination="J32-Tc-nTs" id="B7r-Vl-YQT"/>
+                <outlet property="SoldView" destination="oqc-R3-C73" id="veT-Lk-h48"/>
                 <outlet property="Typee" destination="6uO-xT-fMc" id="62Z-cs-tLr"/>
             </connections>
             <point key="canvasLocation" x="231.8840579710145" y="196.54017857142856"/>

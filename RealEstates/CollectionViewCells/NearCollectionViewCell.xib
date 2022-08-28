@@ -121,64 +121,67 @@
                                 </subviews>
                             </stackView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QYO-gA-hix">
-                                <rect key="frame" x="35" y="133" width="178" height="65"/>
+                                <rect key="frame" x="35" y="129" width="178" height="69"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="GEe-ue-Nof">
-                                    <rect key="frame" x="0.0" y="0.0" width="178" height="65"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="178" height="69"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csO-cH-bqv">
-                                            <rect key="frame" x="89" y="7" width="0.0" height="12"/>
-                                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="10"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Cer-cb-9jC">
-                                            <rect key="frame" x="7" y="26" width="164" height="31"/>
+                                            <rect key="frame" x="7" y="3" width="164" height="58"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pjo-oJ-YT8" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
-                                                    <rect key="frame" x="68" y="0.0" width="28.5" height="11"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="11" id="w53-Gk-3qv"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="11"/>
-                                                    <color key="textColor" red="0.84652185921717171" green="0.84652185921717171" blue="0.84652185921717171" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Price"/>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="نرخ"/>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="السعر"/>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
-                                                            <real key="value" value="11"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
-                                                            <real key="value" value="12"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbJ-7G-1FU">
-                                                    <rect key="frame" x="37" y="16" width="90" height="15"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="15" id="2s6-7m-NVR"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="15"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csO-cH-bqv">
+                                                    <rect key="frame" x="48.5" y="0.0" width="67.5" height="22"/>
+                                                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="13"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="BUI-ow-wQQ">
+                                                    <rect key="frame" x="46" y="27" width="72" height="31"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pjo-oJ-YT8" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
+                                                            <rect key="frame" x="19.5" y="0.0" width="33.5" height="11"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="11" id="w53-Gk-3qv"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="13"/>
+                                                            <color key="textColor" red="0.84652185921717171" green="0.84652185921717171" blue="0.84652185921717171" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Price"/>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="نرخ"/>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="السعر"/>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
+                                                                    <real key="value" value="13"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
+                                                                    <real key="value" value="13"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbJ-7G-1FU">
+                                                            <rect key="frame" x="0.0" y="16" width="72" height="15"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="15" id="2s6-7m-NVR"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="16"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                         </stackView>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="Cer-cb-9jC" firstAttribute="top" secondItem="GEe-ue-Nof" secondAttribute="top" constant="3" id="0So-qF-FtZ"/>
                                         <constraint firstItem="Cer-cb-9jC" firstAttribute="leading" secondItem="GEe-ue-Nof" secondAttribute="leading" constant="7" id="B9q-Sa-L5k"/>
                                         <constraint firstAttribute="trailing" secondItem="Cer-cb-9jC" secondAttribute="trailing" constant="7" id="SMH-BU-fmE"/>
                                         <constraint firstAttribute="bottom" secondItem="Cer-cb-9jC" secondAttribute="bottom" constant="8" id="SoQ-lX-Bn7"/>
-                                        <constraint firstItem="Cer-cb-9jC" firstAttribute="top" secondItem="csO-cH-bqv" secondAttribute="bottom" constant="7" id="auj-ob-JPX"/>
-                                        <constraint firstItem="csO-cH-bqv" firstAttribute="top" secondItem="GEe-ue-Nof" secondAttribute="top" constant="7" id="kRB-GC-2NS"/>
-                                        <constraint firstItem="csO-cH-bqv" firstAttribute="centerX" secondItem="GEe-ue-Nof" secondAttribute="centerX" id="mwv-oK-X8b"/>
                                     </constraints>
                                 </view>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="65" id="bgc-we-NiR"/>
+                                    <constraint firstAttribute="height" constant="69" id="bgc-we-NiR"/>
                                 </constraints>
                                 <blurEffect style="light"/>
                                 <userDefinedRuntimeAttributes>
@@ -211,26 +214,47 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sold" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CrT-mg-B85" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
-                                <rect key="frame" x="91.5" y="82" width="65.5" height="29"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6GH-YX-aMk">
+                                <rect key="frame" x="87" y="76" width="74.5" height="35"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sold" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CrT-mg-B85" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="3" width="54.5" height="29"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="29" id="Pdw-2T-wFq"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="25"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Sold"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="فرۆشرا"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="تم البيع"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
+                                                <real key="value" value="25"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
+                                                <real key="value" value="23"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="29" id="Pdw-2T-wFq"/>
+                                    <constraint firstItem="CrT-mg-B85" firstAttribute="top" secondItem="6GH-YX-aMk" secondAttribute="top" constant="3" id="G8T-uO-kCg"/>
+                                    <constraint firstItem="CrT-mg-B85" firstAttribute="centerX" secondItem="6GH-YX-aMk" secondAttribute="centerX" id="V7K-hi-93i"/>
+                                    <constraint firstItem="CrT-mg-B85" firstAttribute="leading" secondItem="6GH-YX-aMk" secondAttribute="leading" constant="10" id="XoV-Ea-bBT"/>
+                                    <constraint firstItem="CrT-mg-B85" firstAttribute="centerX" secondItem="6GH-YX-aMk" secondAttribute="centerX" id="a0D-Ay-1NQ"/>
+                                    <constraint firstItem="CrT-mg-B85" firstAttribute="centerY" secondItem="6GH-YX-aMk" secondAttribute="centerY" id="ctB-zn-W2c"/>
+                                    <constraint firstAttribute="trailing" secondItem="CrT-mg-B85" secondAttribute="trailing" constant="10" id="eBY-Ar-TNO"/>
+                                    <constraint firstAttribute="height" constant="35" id="ukm-U6-WUU"/>
+                                    <constraint firstAttribute="bottom" secondItem="CrT-mg-B85" secondAttribute="bottom" constant="3" id="ulm-Ba-QcS"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="30"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Sold"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="فرۆشرا"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="تم البيع"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
-                                        <real key="value" value="35"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
-                                        <real key="value" value="38"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="CornerRadius">
+                                        <integer key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                            </label>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -240,17 +264,16 @@
                             <constraint firstAttribute="trailing" secondItem="KEi-hO-gNl" secondAttribute="trailing" constant="8" id="FKa-Nr-3F5"/>
                             <constraint firstItem="KEi-hO-gNl" firstAttribute="top" secondItem="QYO-gA-hix" secondAttribute="bottom" constant="20" id="JFs-0U-aaA"/>
                             <constraint firstAttribute="trailing" secondItem="vmS-4W-Qe2" secondAttribute="trailing" constant="8" id="KLQ-2I-rHx"/>
-                            <constraint firstItem="CrT-mg-B85" firstAttribute="centerX" secondItem="VaW-CI-SiI" secondAttribute="centerX" id="Kls-Qf-fIC"/>
-                            <constraint firstItem="QYO-gA-hix" firstAttribute="top" secondItem="CrT-mg-B85" secondAttribute="bottom" constant="22" id="SDT-7m-4no"/>
+                            <constraint firstItem="QYO-gA-hix" firstAttribute="top" secondItem="6GH-YX-aMk" secondAttribute="bottom" constant="18" id="QO4-tg-zuX"/>
                             <constraint firstItem="NOQ-re-GDA" firstAttribute="leading" secondItem="VaW-CI-SiI" secondAttribute="leading" constant="8" id="VMM-21-f2F"/>
                             <constraint firstAttribute="trailing" secondItem="NOQ-re-GDA" secondAttribute="trailing" constant="8" id="YZu-fc-0Rp"/>
                             <constraint firstItem="NOQ-re-GDA" firstAttribute="top" secondItem="KEi-hO-gNl" secondAttribute="bottom" constant="8" symbolic="YES" id="apu-bZ-Tov"/>
                             <constraint firstAttribute="bottom" secondItem="NOQ-re-GDA" secondAttribute="bottom" constant="8" id="c49-ks-gQe"/>
-                            <constraint firstItem="CrT-mg-B85" firstAttribute="top" secondItem="VaW-CI-SiI" secondAttribute="top" constant="82" id="dZC-nk-0y1"/>
                             <constraint firstItem="RaA-UR-NF5" firstAttribute="top" secondItem="VaW-CI-SiI" secondAttribute="top" constant="13" id="ekP-gC-H6a"/>
                             <constraint firstAttribute="height" constant="290" id="iFM-ic-ulI"/>
                             <constraint firstItem="KEi-hO-gNl" firstAttribute="top" secondItem="vmS-4W-Qe2" secondAttribute="bottom" constant="10" id="nup-ff-D0c"/>
                             <constraint firstItem="vmS-4W-Qe2" firstAttribute="leading" secondItem="VaW-CI-SiI" secondAttribute="leading" constant="8" id="puX-Ln-Bu0"/>
+                            <constraint firstItem="6GH-YX-aMk" firstAttribute="centerX" secondItem="VaW-CI-SiI" secondAttribute="centerX" id="rhE-si-jcg"/>
                             <constraint firstItem="KEi-hO-gNl" firstAttribute="leading" secondItem="VaW-CI-SiI" secondAttribute="leading" constant="8" id="tp9-t4-pum"/>
                             <constraint firstItem="QYO-gA-hix" firstAttribute="leading" secondItem="VaW-CI-SiI" secondAttribute="leading" constant="35" id="wuh-cT-lj4"/>
                         </constraints>
@@ -277,6 +300,7 @@
                 <outlet property="Price" destination="tbJ-7G-1FU" id="Ba6-og-7UK"/>
                 <outlet property="RoomNumber" destination="I9b-OA-lVl" id="btx-W0-ddQ"/>
                 <outlet property="Sold" destination="CrT-mg-B85" id="djg-HR-e25"/>
+                <outlet property="SoldView" destination="6GH-YX-aMk" id="ZbU-L3-l2P"/>
                 <outlet property="Typee" destination="csO-cH-bqv" id="dxB-SF-SEn"/>
             </connections>
             <point key="canvasLocation" x="275.36231884057975" y="210.9375"/>

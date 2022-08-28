@@ -18,6 +18,7 @@ class NearCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var Price: UILabel!
     @IBOutlet weak var Date: UILabel!
     @IBOutlet weak var Sold: LanguageLable!
+    @IBOutlet weak var SoldView: UIView!
     @IBOutlet weak var Typee: UILabel!
     @IBOutlet weak var Direction: UILabel!
     override func awakeFromNib() {
@@ -27,7 +28,7 @@ class NearCollectionViewCell: UICollectionViewCell {
         self.Imagee.layer.cornerRadius = 10
         self.BackView.layer.cornerRadius = 10
         self.Sold.isHidden = true
-       
+        self.SoldView.isHidden = true
         
         
         
@@ -38,8 +39,10 @@ class NearCollectionViewCell: UICollectionViewCell {
     func update(_ cell: EstateObject){
         if cell.sold == "1"{
             self.Sold.isHidden = false
+            self.SoldView.isHidden = false
         }else{print("222222")
             self.Sold.isHidden = true
+            self.SoldView.isHidden = true
         }
         
         guard let imagrUrl = cell.ImageURL, let url = URL(string: imagrUrl[0]) else {return}
@@ -69,9 +72,9 @@ class NearCollectionViewCell: UICollectionViewCell {
                 let longestWord = "مانگانە"
                 let longestWordRange = (longString as NSString).range(of: longestWord)
 
-                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 15)!])
+                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 16)!])
 
-                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "PeshangDes2", size: 12)!, NSAttributedString.Key.foregroundColor : UIColor.white], range: longestWordRange)
+                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "PeshangDes2", size: 14)!, NSAttributedString.Key.foregroundColor : UIColor.white], range: longestWordRange)
                 
                 self.Price.attributedText = attributedString
             }else if XLanguage.get() == .English{
@@ -79,9 +82,9 @@ class NearCollectionViewCell: UICollectionViewCell {
                 let longestWord = "Monthly"
                 let longestWordRange = (longString as NSString).range(of: longestWord)
 
-                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 15)!])
+                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 16)!])
 
-                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 10)!, NSAttributedString.Key.foregroundColor : UIColor.white], range: longestWordRange)
+                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 14)!, NSAttributedString.Key.foregroundColor : UIColor.white], range: longestWordRange)
                 
                 self.Price.attributedText = attributedString
             }else{
@@ -89,9 +92,9 @@ class NearCollectionViewCell: UICollectionViewCell {
                 let longestWord  = "شهريا"
                 let longestWordRange = (longString as NSString).range(of: longestWord)
 
-                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 15)!])
+                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 16)!])
 
-                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "PeshangDes2", size: 12)!, NSAttributedString.Key.foregroundColor : UIColor.white], range: longestWordRange)
+                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "PeshangDes2", size: 14)!, NSAttributedString.Key.foregroundColor : UIColor.white], range: longestWordRange)
                 
                 self.Price.attributedText = attributedString
             }
@@ -206,13 +209,13 @@ class NearCollectionViewCell: UICollectionViewCell {
         EstateTypeAip.GeEstateTypeNameById(id:  cell.estate_type_id ?? "") { type in
             if XLanguage.get() == .English{
                 self.Typee.text = type.name
-                self.Typee.font =  UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.Typee.font =  UIFont(name: "ArialRoundedMTBold", size: 13)!
             }else if XLanguage.get() == .Arabic{
                 self.Typee.text = type.ar_name
-                self.Typee.font =  UIFont(name: "PeshangDes2", size: 11)!
+                self.Typee.font =  UIFont(name: "PeshangDes2", size: 13)!
             }else{
                 self.Typee.text = type.ku_name
-                self.Typee.font =  UIFont(name: "PeshangDes2", size: 11)!
+                self.Typee.font =  UIFont(name: "PeshangDes2", size: 13)!
             }
         }
         

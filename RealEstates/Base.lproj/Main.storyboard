@@ -187,10 +187,10 @@
                                         <rect key="frame" x="10" y="5" width="440" height="49"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="F1w-7V-Y3B">
-                                                <rect key="frame" x="16" y="5" width="363" height="39"/>
+                                                <rect key="frame" x="16" y="5" width="327" height="39"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search for your dream house..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nRf-4B-U9q" customClass="LanguagePlaceHolder" customModule="RealEstates" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.5" width="329" height="38"/>
+                                                        <rect key="frame" x="0.0" y="0.5" width="293" height="38"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="38" id="9WV-XI-HTL"/>
                                                         </constraints>
@@ -199,13 +199,13 @@
                                                         <textInputTraits key="textInputTraits"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
-                                                                <color key="value" red="0.69276197028882569" green="0.69276197028882569" blue="0.69276197028882569" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <color key="value" red="0.82562201914161149" green="0.82562201914161149" blue="0.82562201914161149" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Search for your dream house..."/>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="بەدوای خانووی خەونەکانتدا بگەڕێ..."/>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="ابحث عن منزل أحلامك ..."/>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
-                                                                <real key="value" value="12"/>
+                                                                <real key="value" value="14"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
                                                                 <real key="value" value="14"/>
@@ -213,7 +213,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingglass" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Sv7-0D-g4f">
-                                                        <rect key="frame" x="341" y="9" width="22" height="20.5"/>
+                                                        <rect key="frame" x="305" y="9" width="22" height="20.5"/>
                                                         <color key="tintColor" red="0.80467270359999998" green="0.80467270359999998" blue="0.80467270359999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="22" id="CD4-Ba-AHf"/>
@@ -222,44 +222,76 @@
                                                     </imageView>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IZx-Kr-3QL">
-                                                <rect key="frame" x="389" y="0.0" width="51" height="49"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="IZx-Kr-3QL">
+                                                <rect key="frame" x="356" y="0.0" width="76" height="49"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NUH-5K-OV9">
-                                                        <rect key="frame" x="0.0" y="0.0" width="1" height="49"/>
-                                                        <color key="backgroundColor" red="0.87391431403882569" green="0.87391431403882569" blue="0.87391431403882569" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="1" id="pal-8s-WzT"/>
-                                                        </constraints>
-                                                    </view>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7UG-Xr-4kl">
-                                                        <rect key="frame" x="1" y="0.0" width="50" height="49"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="50" id="b82-Az-LUe"/>
-                                                        </constraints>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" image="filter-1"/>
-                                                        <connections>
-                                                            <segue destination="zrF-lH-J9w" kind="show" id="NPL-B9-qd3"/>
-                                                        </connections>
-                                                    </button>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="iVr-qe-Eek">
+                                                        <rect key="frame" x="0.0" y="0.0" width="76" height="49"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NUH-5K-OV9">
+                                                                <rect key="frame" x="0.0" y="0.0" width="1" height="49"/>
+                                                                <color key="backgroundColor" red="0.87391431403882569" green="0.87391431403882569" blue="0.87391431403882569" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="1" id="pal-8s-WzT"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="wes-KR-Wou">
+                                                                <rect key="frame" x="14" y="0.0" width="62" height="49"/>
+                                                                <subviews>
+                                                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7UG-Xr-4kl">
+                                                                        <rect key="frame" x="0.0" y="14.5" width="20" height="20"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="20" id="RVb-oi-SZn"/>
+                                                                            <constraint firstAttribute="width" constant="20" id="b82-Az-LUe"/>
+                                                                        </constraints>
+                                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <state key="normal" image="filter-1"/>
+                                                                    </button>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPj-MX-Zed" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
+                                                                        <rect key="frame" x="27" y="17" width="35" height="15.5"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="35" id="oyC-Xs-Eh7"/>
+                                                                        </constraints>
+                                                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="13"/>
+                                                                        <color key="textColor" red="0.1176470588" green="0.22352941179999999" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Filter"/>
+                                                                            <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="فلتر"/>
+                                                                            <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="فلتەر"/>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
+                                                                                <real key="value" value="13"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
+                                                                                <real key="value" value="13"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </label>
+                                                                </subviews>
+                                                                <gestureRecognizers/>
+                                                                <connections>
+                                                                    <outletCollection property="gestureRecognizers" destination="F7N-zs-OfC" appends="YES" id="5Dg-L0-e80"/>
+                                                                </connections>
+                                                            </stackView>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="IZx-Kr-3QL" firstAttribute="leading" secondItem="F1w-7V-Y3B" secondAttribute="trailing" constant="10" id="4kK-Ka-Bf2"/>
+                                            <constraint firstItem="IZx-Kr-3QL" firstAttribute="leading" secondItem="F1w-7V-Y3B" secondAttribute="trailing" constant="13" id="4kK-Ka-Bf2"/>
                                             <constraint firstAttribute="bottom" secondItem="F1w-7V-Y3B" secondAttribute="bottom" constant="5" id="5YP-oP-FkZ"/>
                                             <constraint firstAttribute="height" constant="49" id="MKr-rA-VT4"/>
                                             <constraint firstItem="F1w-7V-Y3B" firstAttribute="leading" secondItem="Jtu-AV-JHT" secondAttribute="leading" constant="16" id="OKW-eZ-G3f"/>
                                             <constraint firstItem="IZx-Kr-3QL" firstAttribute="top" secondItem="Jtu-AV-JHT" secondAttribute="top" id="YWL-h2-UoV"/>
                                             <constraint firstAttribute="bottom" secondItem="IZx-Kr-3QL" secondAttribute="bottom" id="oFH-qt-R34"/>
-                                            <constraint firstAttribute="trailing" secondItem="IZx-Kr-3QL" secondAttribute="trailing" id="rOA-Ij-7jE"/>
+                                            <constraint firstAttribute="trailing" secondItem="IZx-Kr-3QL" secondAttribute="trailing" constant="8" id="rOA-Ij-7jE"/>
                                             <constraint firstItem="F1w-7V-Y3B" firstAttribute="top" secondItem="Jtu-AV-JHT" secondAttribute="top" constant="5" id="zwM-id-x14"/>
                                         </constraints>
                                     </view>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="blc-yi-VpH">
-                                        <rect key="frame" x="0.0" y="820.5" width="460" height="194"/>
+                                        <rect key="frame" x="0.0" y="823" width="460" height="194"/>
                                         <color key="backgroundColor" red="0.95029202859999995" green="0.95029202859999995" blue="0.95029202859999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="194" id="RUT-j2-TyZ"/>
@@ -328,7 +360,7 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Near You" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uLF-89-yHx" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="22"/>
-                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="15"/>
+                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                                                 <color key="textColor" red="0.062268862402412931" green="0.15907922468186567" blue="0.32772426412563127" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                                 <userDefinedRuntimeAttributes>
@@ -336,7 +368,7 @@
                                                     <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="بالقرب منك"/>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="نزیک لە تۆ"/>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
-                                                        <real key="value" value="15"/>
+                                                        <real key="value" value="17"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
                                                         <real key="value" value="17"/>
@@ -350,7 +382,7 @@
                                                     <constraint firstAttribute="height" constant="22" id="0q5-zv-9eG"/>
                                                     <constraint firstAttribute="width" constant="79" id="KUM-fg-5yN"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
+                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="13"/>
                                                 <state key="normal" title="See All">
                                                     <color key="titleColor" red="0.51624475344262943" green="0.51624475344262943" blue="0.51624475344262943" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
@@ -359,10 +391,10 @@
                                                     <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="اظهار الكل"/>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="هەموویان ببینە"/>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
-                                                        <real key="value" value="12"/>
+                                                        <real key="value" value="13"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
-                                                        <real key="value" value="12"/>
+                                                        <real key="value" value="13"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
@@ -394,7 +426,7 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apartments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i3n-mV-bKB" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="22"/>
-                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="15"/>
+                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                                                 <color key="textColor" red="0.0622688624" green="0.15907922469999999" blue="0.3277242641" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                                 <userDefinedRuntimeAttributes>
@@ -402,7 +434,7 @@
                                                     <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Apartments"/>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="شقق سكنية"/>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
-                                                        <real key="value" value="15"/>
+                                                        <real key="value" value="17"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
                                                         <real key="value" value="17"/>
@@ -416,7 +448,7 @@
                                                     <constraint firstAttribute="height" constant="22" id="gex-uv-3Ve"/>
                                                     <constraint firstAttribute="width" constant="79" id="xeI-IE-PDj"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
+                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="13"/>
                                                 <state key="normal" title="See All">
                                                     <color key="titleColor" red="0.51624475339999998" green="0.51624475339999998" blue="0.51624475339999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
@@ -425,10 +457,10 @@
                                                     <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="اظهار الكل"/>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="هەموویان ببینە"/>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
-                                                        <real key="value" value="12"/>
+                                                        <real key="value" value="13"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
-                                                        <real key="value" value="12"/>
+                                                        <real key="value" value="13"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
@@ -438,11 +470,11 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SoM-IS-HeU">
-                                        <rect key="frame" x="13" y="798" width="434" height="17.5"/>
+                                        <rect key="frame" x="13" y="798" width="434" height="20"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pmf-Dt-Lft" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="434" height="17.5"/>
-                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="15"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="434" height="20"/>
+                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                                                 <color key="textColor" red="0.0622688624" green="0.15907922469999999" blue="0.3277242641" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                                 <userDefinedRuntimeAttributes>
@@ -450,7 +482,7 @@
                                                     <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="الجميع"/>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="گشتی"/>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
-                                                        <real key="value" value="15"/>
+                                                        <real key="value" value="17"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
                                                         <real key="value" value="17"/>
@@ -500,7 +532,7 @@
                                 </constraints>
                             </scrollView>
                             <tableView clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="LXq-nf-kP5">
-                                <rect key="frame" x="0.0" y="165" width="460" height="1152"/>
+                                <rect key="frame" x="0.0" y="162" width="460" height="1155"/>
                                 <color key="backgroundColor" red="0.95029202859999995" green="0.95029202859999995" blue="0.95029202859999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
                                     <outlet property="dataSource" destination="ly3-8u-cAX" id="UQa-hO-O1S"/>
@@ -551,7 +583,7 @@
                             <constraint firstItem="Bmr-Kb-f1e" firstAttribute="bottom" secondItem="byp-e0-auu" secondAttribute="bottom" id="Qj1-gO-T4R"/>
                             <constraint firstItem="iK8-gf-7Sy" firstAttribute="centerY" secondItem="uHX-ys-xqu" secondAttribute="centerY" id="Wms-ue-Dsx"/>
                             <constraint firstItem="Bmr-Kb-f1e" firstAttribute="leading" secondItem="byp-e0-auu" secondAttribute="leading" id="Xik-T6-9oi"/>
-                            <constraint firstItem="LXq-nf-kP5" firstAttribute="top" secondItem="qmb-FU-yeQ" secondAttribute="bottom" constant="57" id="Z5k-W3-z2r"/>
+                            <constraint firstItem="LXq-nf-kP5" firstAttribute="top" secondItem="qmb-FU-yeQ" secondAttribute="bottom" constant="54" id="Z5k-W3-z2r"/>
                             <constraint firstItem="byp-e0-auu" firstAttribute="bottom" secondItem="LXq-nf-kP5" secondAttribute="bottom" id="avm-yr-fkl"/>
                             <constraint firstItem="byp-e0-auu" firstAttribute="trailing" secondItem="qmb-FU-yeQ" secondAttribute="trailing" id="fT5-9w-vDe"/>
                             <constraint firstItem="qmb-FU-yeQ" firstAttribute="centerX" secondItem="uHX-ys-xqu" secondAttribute="centerX" id="wGe-Wv-ZRK"/>
@@ -559,14 +591,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="Z5O-dS-vJP">
                         <barButtonItem key="backBarButtonItem" title="  " id="dYL-kP-Spj"/>
-                        <barButtonItem key="leftBarButtonItem" image="favicon" landscapeImage="favicon" largeContentSizeImage="favicon" id="Z9Y-f3-do0">
+                        <barButtonItem key="leftBarButtonItem" image="heart-1" landscapeImage="heart-1" largeContentSizeImage="heart-1" id="Z9Y-f3-do0">
                             <inset key="imageInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <inset key="largeContentSizeImageInsets" minX="1" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <connections>
                                 <action selector="GoToFavorites:" destination="ly3-8u-cAX" id="kDb-Rs-97i"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="profileicon" landscapeImage="profileicon" largeContentSizeImage="profileicon" id="EuB-0N-Rof">
+                        <barButtonItem key="rightBarButtonItem" image="language-circle" landscapeImage="language-circle" largeContentSizeImage="language-circle" id="EuB-0N-Rof">
                             <inset key="imageInsets" minX="0.0" minY="0.0" maxX="-8" maxY="0.0"/>
                             <connections>
                                 <action selector="GoToMyProfile:" destination="ly3-8u-cAX" id="QXc-aG-Vwy"/>
@@ -579,6 +611,8 @@
                         <outlet property="AllEstatesCollectionView" destination="blc-yi-VpH" id="RmX-rY-InW"/>
                         <outlet property="ApartmentEstatesCollectionView" destination="gJ6-AH-nN2" id="aQH-rg-gux"/>
                         <outlet property="EstateTypeCollectionView" destination="XdT-iW-7Ks" id="mx9-fI-bUA"/>
+                        <outlet property="FilterLable" destination="SPj-MX-Zed" id="gmh-h5-rZx"/>
+                        <outlet property="FilterLableWidth" destination="oyC-Xs-Eh7" id="mj4-fo-uaR"/>
                         <outlet property="GoToFavorites" destination="Z9Y-f3-do0" id="qM8-tm-FuK"/>
                         <outlet property="GoToMyProfile" destination="EuB-0N-Rof" id="Cqd-6v-1bO"/>
                         <outlet property="InternetConnectionView" destination="qmb-FU-yeQ" id="gIr-rM-SW8"/>
@@ -595,6 +629,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w3d-ON-34i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="F7N-zs-OfC">
+                    <connections>
+                        <segue destination="zrF-lH-J9w" kind="show" id="RhP-dn-smz"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="141" y="2744"/>
         </scene>
@@ -671,7 +710,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bur-1b-wM5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="833" y="2576"/>
+            <point key="canvasLocation" x="5580" y="3226"/>
         </scene>
         <!--All EstateVC-->
         <scene sceneID="anV-a3-ZSm">
@@ -941,10 +980,10 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xwJ-3a-sLJ">
-                                                <rect key="frame" x="363" y="10" width="35" height="35"/>
+                                                <rect key="frame" x="353" y="10" width="45" height="45"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="35" id="UVC-y1-IJV"/>
-                                                    <constraint firstAttribute="height" constant="35" id="cNB-l2-18v"/>
+                                                    <constraint firstAttribute="width" constant="45" id="UVC-y1-IJV"/>
+                                                    <constraint firstAttribute="height" constant="45" id="cNB-l2-18v"/>
                                                 </constraints>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" image="Closee"/>
@@ -1840,7 +1879,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hnw-Bb-xFP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-568" y="3883"/>
+            <point key="canvasLocation" x="-568" y="3834"/>
         </scene>
         <!--Project MapVC-->
         <scene sceneID="nfe-rA-OCL">
@@ -2393,7 +2432,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="834" y="3223"/>
+            <point key="canvasLocation" x="830" y="2577"/>
         </scene>
         <!--ProjetsVC-->
         <scene sceneID="Laq-Ih-oEO">
@@ -3090,25 +3129,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tn3-gw-fmi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="833" y="3883"/>
+            <point key="canvasLocation" x="830" y="3226"/>
         </scene>
         <!--CityVC-->
         <scene sceneID="XeU-GT-TIW">
             <objects>
                 <viewController storyboardIdentifier="GoToCityVC" id="Vyx-tY-L0D" customClass="CityVC" customModule="RealEstates" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="n9b-0P-nfK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty-box" translatesAutoresizingMaskIntoConstraints="NO" id="QJZ-jF-MqN">
-                                <rect key="frame" x="131" y="399" width="152" height="98"/>
+                                <rect key="frame" x="131" y="372" width="152" height="98"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="152" id="5PM-vn-5qh"/>
                                     <constraint firstAttribute="height" constant="98" id="I8Q-yC-097"/>
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rOc-mt-heY">
-                                <rect key="frame" x="0.0" y="98" width="414" height="715"/>
+                                <rect key="frame" x="0.0" y="54" width="414" height="788"/>
                                 <color key="backgroundColor" red="0.94901961089999998" green="0.94901961089999998" blue="0.94901961089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Vyx-tY-L0D" id="vct-dl-i4i"/>
@@ -4582,14 +4621,6 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s32-dm-WSw">
                                         <rect key="frame" x="12" y="134" width="390" height="85"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Untitled-2" translatesAutoresizingMaskIntoConstraints="NO" id="cHK-sT-8FP">
-                                                <rect key="frame" x="0.0" y="0.0" width="390" height="85"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="CornerRadius">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="BtW-15-WG0">
                                                 <rect key="frame" x="16" y="12" width="145" height="24"/>
                                                 <subviews>
@@ -4609,7 +4640,7 @@
                                                             <constraint firstAttribute="height" constant="21" id="EKI-XW-iNn"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="13"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="textColor" red="0.26946499759999998" green="0.3191690962" blue="0.36137576269999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Days remaining"/>
@@ -4645,7 +4676,7 @@
                                                                     <constraint firstAttribute="width" constant="100" id="w5L-WW-OF5"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="11"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="textColor" red="0.37688233919771491" green="0.44640007661888609" blue="0.50543166651870264" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Days remaining"/>
@@ -4672,7 +4703,7 @@
                                                                     <constraint firstAttribute="width" constant="100" id="sGB-HO-023"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="11"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="textColor" red="0.37688233920000003" green="0.44640007659999997" blue="0.50543166650000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Days remaining"/>
@@ -4685,12 +4716,12 @@
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 Posts /0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evq-nU-fmH">
-                                                <rect key="frame" x="313.5" y="15" width="60.5" height="21"/>
+                                                <rect key="frame" x="318" y="15" width="56" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="pfL-mW-QmE"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="13"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
+                                                <color key="textColor" red="0.26946499759999998" green="0.3191690962" blue="0.36137576269999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="Days remaining"/>
@@ -4701,15 +4732,11 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="cHK-sT-8FP" firstAttribute="top" secondItem="s32-dm-WSw" secondAttribute="top" id="4wB-fp-9PS"/>
                                             <constraint firstItem="K1u-PC-R0X" firstAttribute="top" secondItem="BtW-15-WG0" secondAttribute="bottom" constant="12" id="C49-0c-wjh"/>
                                             <constraint firstItem="evq-nU-fmH" firstAttribute="top" secondItem="s32-dm-WSw" secondAttribute="top" constant="15" id="Zdh-Fj-nlE"/>
                                             <constraint firstAttribute="trailing" secondItem="evq-nU-fmH" secondAttribute="trailing" constant="16" id="aUo-tL-dRz"/>
-                                            <constraint firstItem="cHK-sT-8FP" firstAttribute="leading" secondItem="s32-dm-WSw" secondAttribute="leading" id="caw-8n-OVq"/>
                                             <constraint firstItem="BtW-15-WG0" firstAttribute="leading" secondItem="s32-dm-WSw" secondAttribute="leading" constant="16" id="eru-bo-jgt"/>
-                                            <constraint firstAttribute="bottom" secondItem="cHK-sT-8FP" secondAttribute="bottom" id="gLF-k3-AHp"/>
                                             <constraint firstAttribute="height" constant="85" id="hhl-RS-scR"/>
-                                            <constraint firstAttribute="trailing" secondItem="cHK-sT-8FP" secondAttribute="trailing" id="ing-6G-67N"/>
                                             <constraint firstItem="K1u-PC-R0X" firstAttribute="leading" secondItem="s32-dm-WSw" secondAttribute="leading" constant="16" id="jpd-KH-Ehc"/>
                                             <constraint firstAttribute="bottom" secondItem="K1u-PC-R0X" secondAttribute="bottom" constant="12" id="t7i-OI-Zpe"/>
                                             <constraint firstItem="BtW-15-WG0" firstAttribute="top" secondItem="s32-dm-WSw" secondAttribute="top" constant="12" id="z0J-S0-UQn"/>
@@ -7481,10 +7508,10 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="bVW-1x-iCi"/>
-        <segue reference="TET-tT-GAj"/>
+        <segue reference="4dm-Bt-ax1"/>
+        <segue reference="Kzd-dD-rof"/>
         <segue reference="t5N-62-9lD"/>
-        <segue reference="YGm-Ua-7iS"/>
+        <segue reference="iMt-Ud-AWk"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="365" width="61" height="61"/>
@@ -7495,7 +7522,6 @@
         <image name="Heart" width="45.333332061767578" height="45.333332061767578"/>
         <image name="RICE" width="128" height="128"/>
         <image name="StreetView_small-file-700x467" width="700" height="467"/>
-        <image name="Untitled-2" width="4000" height="850"/>
         <image name="about3" width="170.66667175292969" height="170.66667175292969"/>
         <image name="arrow" width="234" height="1580"/>
         <image name="back" width="7801" height="4001"/>
@@ -7505,13 +7531,14 @@
         <image name="empty-box" width="170.66667175292969" height="170.66667175292969"/>
         <image name="empty-star" width="24" height="24"/>
         <image name="fav1" width="170.66667175292969" height="170.66667175292969"/>
-        <image name="favicon" width="52" height="52"/>
         <image name="fill-star" width="24" height="24"/>
         <image name="filter-1" width="24" height="24"/>
+        <image name="heart-1" width="36" height="36"/>
         <image name="home" width="24" height="24"/>
         <image name="icons8-real_estate" width="24" height="24"/>
         <image name="icons8-settings" width="24" height="24"/>
         <image name="lang4" width="170.66667175292969" height="170.66667175292969"/>
+        <image name="language-circle" width="35" height="35"/>
         <image name="location" width="24" height="24"/>
         <image name="logog" width="216" height="232.66667175292969"/>
         <image name="logoooooooo" width="133" height="178.66667175292969"/>
@@ -7520,7 +7547,6 @@
         <image name="photo-1558472306-75b150ac26eb" width="1000" height="1400"/>
         <image name="pin" width="170.66667175292969" height="170.66667175292969"/>
         <image name="png-linea-3" width="930" height="407"/>
-        <image name="profileicon" width="52" height="52"/>
         <image name="rentAndSell" width="24" height="24"/>
         <image name="right" width="24" height="24"/>
         <image name="right-1" width="170.66667175292969" height="170.66667175292969"/>

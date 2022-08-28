@@ -1,15 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "language-circle.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "language-circle@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "wqeqwe.jpg",
+      "filename" : "language-circle@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

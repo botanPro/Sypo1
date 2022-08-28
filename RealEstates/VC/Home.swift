@@ -14,7 +14,143 @@ import SwiftyJSON
 import FirebaseDynamicLinks
 import GameplayKit
 import FirebaseRemoteConfig
-class Home: UIViewController ,UITextFieldDelegate {
+
+import AZDialogView
+class Home: UIViewController ,UITextFieldDelegate ,UIPickerViewDelegate , UIPickerViewDataSource{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return CityArray.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        var pickerLabel: UILabel? = (view as? UILabel)
+        if pickerLabel == nil {
+            pickerLabel = UILabel()
+            if XLanguage.get() == .English{
+                pickerLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+                pickerLabel?.text = self.CityArray[row].name
+            }else if XLanguage.get() == .Arabic{
+                pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
+                pickerLabel?.text = self.CityArray[row].ar_name
+            }else{
+                pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
+                pickerLabel?.text = self.CityArray[row].ku_name
+            }
+            pickerLabel?.textAlignment = .center
+        }
+        
+        
+        return pickerLabel!
+    }
+    
+    
+    
+    
+    
+    var pickerView = UIPickerView(frame: CGRect(x: 10, y: 50, width: 250, height: 150))
+    var CityArray : [CityObject] = []
+    
+    var cityTitle = ""
+    var cityAction = ""
+    var cityCancel = ""
+    private func setupCitySelectionAlert() {
+        if XLanguage.get() == .English{
+            cityTitle = "Cities"
+            cityAction = "Select"
+            cityCancel = "Cancel"
+        }else if XLanguage.get() == .Kurdish{
+            cityTitle = "شارەکان"
+            cityAction = "هەڵبژێرە"
+            cityCancel = "هەڵوەشاندنەوە"
+        }else{
+            cityTitle = "مدن"
+            cityAction = "تحديد"
+            cityCancel = "إلغاء"
+        }
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        let ac = UIAlertController(title: cityTitle, message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
+        ac.view.addSubview(pickerView)
+        ac.addAction(UIAlertAction(title: cityAction , style: .default, handler: { [self] _ in
+            if self.CityArray.count != 0{
+                let pickerValue = self.CityArray[self.pickerView.selectedRow(inComponent: 0)]
+                
+                
+                for _ in 0..<text.length{
+                    text.replaceCharacters(in: NSMakeRange(0, text.length), with: "")
+                    text.setAttributes([:], range: NSRange(0..<text.length))
+                    //self.label.attributedText = text
+                }
+                
+                
+                print("text is : \(self.text)")
+                if XLanguage.get() == .English{
+                    self.location = "Location"
+                    text.append(NSAttributedString(string: self.location, attributes: [.font : UIFont(name: "ArialRoundedMTBold", size: titleSize)!]))
+                    CountryObjectAip.GeCountryById(id: pickerValue.country_id ?? "") { [self] country in
+                        text.append(NSAttributedString(string: "\n\(country.name ?? "")-\(pickerValue.name ?? "")".uppercased(), attributes: [.font : UIFont(name: "ArialRoundedMTBold", size: subtitleSize)!]))
+                        label.attributedText = text
+                        self.navigationItem.titleView = label
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LocationChanged"), object: nil)
+                    }
+                }else if XLanguage.get() == .Kurdish{
+                    self.location = "شوێن"
+                    text.append(NSAttributedString(string: self.location, attributes: [.font : UIFont(name: "PeshangDes2", size: 12)!]))
+                    CountryObjectAip.GeCountryById(id: pickerValue.country_id ?? "") { [self] country in
+                        text.append(NSAttributedString(string: "\n\(country.ku_name ?? "")-\(pickerValue.ku_name ?? "")", attributes: [.font : UIFont(name: "PeshangDes2", size: subtitleSize)!]))
+                        label.attributedText = text
+                        self.navigationItem.titleView = label
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LocationChanged"), object: nil)
+                    }
+                }else{
+                    self.location = "الموقع"
+                    text.append(NSAttributedString(string: self.location, attributes: [.font : UIFont(name: "PeshangDes2", size: 12)!]))
+                    CountryObjectAip.GeCountryById(id: pickerValue.country_id ?? "") { [self] country in
+                        text.append(NSAttributedString(string: "\n\(country.ar_name ?? "")-\(pickerValue.ar_name ?? "")", attributes: [.font : UIFont(name: "PeshangDes2", size: subtitleSize)!]))
+                        label.attributedText = text
+                        self.navigationItem.titleView = label
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LocationChanged"), object: nil)
+                    }
+                }
+                
+                
+                UserDefaults.standard.set(pickerValue.id, forKey: "CityId")
+                UserDefaults.standard.set(pickerValue.country_id, forKey: "CountryId")
+            }
+        }))
+        ac.addAction(UIAlertAction(title: cityCancel, style: .cancel, handler: nil))
+        present(ac, animated: true)
+    }
+    
+    func GetCity(){
+        self.CityArray.removeAll()
+        CityObjectAip.GetCities { city in
+            self.CityArray = city
+            self.pickerView.reloadAllComponents()
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     @IBOutlet weak var SliderView: FSPagerView!{
         didSet{
             self.SliderView.layer.masksToBounds = true
@@ -86,6 +222,7 @@ class Home: UIViewController ,UITextFieldDelegate {
         UIView.animate(withDuration: 0.2) {
             self.SearchTableView.alpha = 0
             self.SearchViewRight.constant = 10
+            self.FilterLableWidth.constant = 0
             self.SearchText.text = ""
             self.ScrollView.isScrollEnabled = true
             self.view.layoutIfNeeded()
@@ -166,7 +303,9 @@ class Home: UIViewController ,UITextFieldDelegate {
     var currentLocation: CLLocation?
     override func viewDidLoad() {
         super.viewDidLoad()
+        GetCity()
         self.InternetViewHeight.constant = 0
+        self.FilterLableWidth.constant = 0
         self.InternetConnectionView.isHidden = true
         fetchRemoteConfig()
 
@@ -181,7 +320,6 @@ class Home: UIViewController ,UITextFieldDelegate {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
 
-//      self.SearchText.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
         self.SearchText.delegate = self
         self.SearchView.layer.cornerRadius = 10
         self.SliderView.layer.cornerRadius = 10
@@ -217,9 +355,6 @@ class Home: UIViewController ,UITextFieldDelegate {
             self.GetEstateType()
         }
         
-        if let dynamiclink = UserDefaults.standard.value(forKey: "dynamiclink"){
-           handleIncomeDynamicLink(dynamiclink as! DynamicLink)
-        }
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.LanguageChanged), name: NSNotification.Name(rawValue: "LanguageChanged"), object: nil)
@@ -238,40 +373,6 @@ class Home: UIViewController ,UITextFieldDelegate {
         self.EstateTypeCollectionView.reloadData()
         self.TitleSubTile()
     }
-    
-    
-    
-
-    var window: UIWindow?
-    func handleIncomeDynamicLink(_ dynamicLink: DynamicLink){
-//        guard let url = dynamicLink.url else{
-//            print("no object")
-//            return
-//        }
-//        guard (dynamicLink.matchType == .unique || dynamicLink.matchType == .default) else{
-//            print("not a strong enough match type to conitunie)")
-//            return
-//        }
-//        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-//              let queryItems = components.queryItems  else{
-//            return
-//        }
-//        if components.path == "/maskani"{
-//            if let productIdQueryItem = queryItems.first(where: {$0.name == "id"}){
-//                guard let productId = productIdQueryItem.value else{return}
-//                ProductAip.GetProduct(ID: productId) { estate in
-//                    self.InsertViewdItem(id : productId)
-//                    self.performSegue(withIdentifier: "Next", sender: estate)
-//                }
-//            }
-//        }
-//        UserDefaults.standard.set(nil, forKey: "dynamiclink")
-    }
-
-
-    
-    
- 
     
     
     
@@ -317,21 +418,128 @@ class Home: UIViewController ,UITextFieldDelegate {
     }
     
     @IBOutlet weak var GoToMyProfile: UIBarButtonItem!
+    
+    
+    var Etitle = ""
+    var Atitle = ""
+    var Ktitle = ""
+    var titleee = ""
+    var message = ""
     @IBAction func GoToMyProfile(_ sender: Any) {
-        if UserDefaults.standard.bool(forKey: "Login") == true {
-            if let officeId = UserDefaults.standard.string(forKey: "OfficeId"){
-                OfficeAip.GetOffice(ID: officeId) { [self] office in
-                    if office.type_id == "h9nFfUrHgSwIg17uRwTD"{
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let myVC = storyboard.instantiateViewController(withIdentifier: "GoToRegisterVC") as! EditProfileVC
-                        self.navigationController?.pushViewController(myVC, animated: true)
-                    }
-                }
-            }
+        if XLanguage.get() == .Kurdish{
+            self.Etitle = "ئینگلیزی"
+            self.Atitle = "عەرەبی"
+            self.Ktitle = "کوردی"
+            self.titleee = "گۆڕینی زمان"
+            self.message = "زمان"
+        }else if XLanguage.get() == .English{
+            self.Etitle = "English"
+            self.Atitle = "Arabic"
+            self.Ktitle = "Kurdish"
+            self.titleee = "Change Language"
+            self.message = "Language"
         }else{
-            let vc = storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVCViewController
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.Etitle = "إنجليزي"
+            self.Atitle = "العربة"
+            self.Ktitle = "الکردیة"
+            self.titleee = "تغيير اللغة"
+            self.message = "لغة"
         }
+        
+        let dialog = AZDialogViewController(title: titleee, message: message)
+        dialog.titleColor = .black
+        
+        dialog.messageColor = .black
+        
+        dialog.alertBackgroundColor = .white
+        
+        dialog.dismissDirection = .bottom
+        
+        dialog.dismissWithOutsideTouch = true
+        
+        dialog.showSeparator = false
+        
+        dialog.separatorColor = UIColor.blue
+        
+        dialog.allowDragGesture = false
+        
+        dialog.rubberEnabled = true
+        
+        dialog.blurBackground = false
+        
+        dialog.blurEffectStyle = .light
+        
+        
+        
+        dialog.addAction(AZDialogAction(title: self.Ktitle) { (dialog) -> (Void) in
+            self.Etitle = "ئینگلیزی"
+            self.Atitle = "عەرەبی"
+            self.Ktitle = "کوردی"
+            self.titleee = "گۆڕینی زمان"
+            self.message = "زمان"
+            
+            self.loadingLableMessage = "تكایه‌ چاوه‌ڕێبه‌..."
+            self.LoadingView()
+            XLanguage.set(Language: .Kurdish)
+            
+            UserDefaults.standard.set(1, forKey: "language")
+            self.LanguageChanged()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LanguageChanged"), object: nil)
+            self.alert.dismiss(animated: true, completion: nil)
+            dialog.dismiss()
+        })
+        
+        dialog.addAction(AZDialogAction(title: self.Etitle) { (dialog) -> (Void) in
+            self.Etitle = "English"
+            self.Atitle = "Arabic"
+            self.Ktitle = "Kurdish"
+            self.titleee = "Change Language"
+            self.message = "Language"
+            
+            self.loadingLableMessage = "Please wait..."
+            self.LoadingView()
+            XLanguage.set(Language: .English)
+            UserDefaults.standard.set(2, forKey: "language")
+            self.LanguageChanged()
+            self.alert.dismiss(animated: true, completion: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LanguageChanged"), object: nil)
+            dialog.dismiss()
+        })
+        
+        dialog.addAction(AZDialogAction(title: self.Atitle) { (dialog) -> (Void) in
+            self.Etitle = "إنجليزي"
+            self.Atitle = "العربة"
+            self.Ktitle = "الکردیة"
+            self.titleee = "تغيير اللغة"
+            self.message = "لغة"
+            self.loadingLableMessage = "يرجى الانتظار..."
+            self.LoadingView()
+            XLanguage.set(Language: .Arabic)
+            self.LanguageChanged()
+            UserDefaults.standard.set(3, forKey: "language")
+            self.alert.dismiss(animated: true, completion: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LanguageChanged"), object: nil)
+            dialog.dismiss()
+        })
+        
+        self.present(dialog, animated: false, completion: nil)
+        
+    }
+    
+    
+    
+    var alert = UIAlertController()
+    var loadingLableMessage = ""
+    func LoadingView(){
+        alert = UIAlertController(title: nil, message: self.loadingLableMessage, preferredStyle: .alert)
+        
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.medium
+        loadingIndicator.startAnimating();
+        
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
     }
     
     
@@ -436,9 +644,10 @@ class Home: UIViewController ,UITextFieldDelegate {
     
     func GetApartmentEstates(){
         self.ApartmentArray.removeAll()
-        ProductAip.GetAllSectionProducts(TypeId: "UTY25FYJHkliygt4nvPP") { Product in
-                if Product.archived != "1"{
-                   self.ApartmentArray.append(Product)
+        
+        ProductAip.GetAllSectionProducts(TypeId: "UTY25FYJHkliygt4nvPP") { estate in
+                if estate.archived != "1"{
+                   self.ApartmentArray.append(estate)
                 }
             self.ApartmentArray.shuffle()
             self.ScrollView.isHidden = false
@@ -449,6 +658,9 @@ class Home: UIViewController ,UITextFieldDelegate {
     }
     
     
+
+    @IBOutlet weak var FilterLableWidth: NSLayoutConstraint!
+    @IBOutlet weak var FilterLable: LanguageLable!
     var IsFirst = true
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
             self.navigationItem.rightBarButtonItem?.isEnabled = false
@@ -458,6 +670,7 @@ class Home: UIViewController ,UITextFieldDelegate {
                 self.ScrollView.scrollToTop()
                 self.SearchTableView.alpha = 1
                 self.SearchViewRight.constant = 85
+                self.FilterLableWidth.constant = 40
                 self.ScrollView.isScrollEnabled = false
                 self.view.layoutIfNeeded()
             }
@@ -504,6 +717,7 @@ class Home: UIViewController ,UITextFieldDelegate {
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(EstateVCDismissed), name:  NSNotification.Name(rawValue: "EstateVCDismissed"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LocationChangedS), name: NSNotification.Name(rawValue: "LocationChangedS"), object: nil)
     }
     
     @objc func EstateVCDismissed(){
@@ -521,19 +735,29 @@ class Home: UIViewController ,UITextFieldDelegate {
     }
     var lang : Int = UserDefaults.standard.integer(forKey: "language")
     var location = ""
+    let rect = CGRect(x: 0, y: 0, width: 400, height: 50)
+    let titleSize: CGFloat = 10
+    let label = UILabel(frame: CGRect(x: 0, y: 0, width: 400, height: 50))
+    let subtitleSize: CGFloat = 13
+    let text = NSMutableAttributedString()
     func TitleSubTile(){
-        let rect = CGRect(x: 0, y: 0, width: 400, height: 50)
-        let titleSize: CGFloat = 10
-        let subtitleSize: CGFloat = 13
         
-        let label = UILabel(frame: rect)
+        
+       
         label.backgroundColor = .clear
         label.numberOfLines = 2
         label.textAlignment = .center
         label.textColor = .darkGray
-        let text = NSMutableAttributedString()
         
-    
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(self.titleWasTapped))
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(recognizer)
+       
+        for _ in 0..<text.length{
+            text.replaceCharacters(in: NSMakeRange(0, text.length), with: "")
+            text.setAttributes([:], range: NSRange(0..<text.length))
+        }
         
         
         if XLanguage.get() == .English{
@@ -543,7 +767,7 @@ class Home: UIViewController ,UITextFieldDelegate {
             CityObjectAip.GetCities { cities in
                     for city in cities {
                         if city.id == cityId{
-                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
+                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { [self] country in
                                 text.append(NSAttributedString(string: "\n\(country.name ?? "")-\(city.name ?? "")".uppercased(), attributes: [.font : UIFont(name: "ArialRoundedMTBold", size: subtitleSize)!]))
                                 label.attributedText = text
                                 self.navigationItem.titleView = label
@@ -551,12 +775,8 @@ class Home: UIViewController ,UITextFieldDelegate {
                         }
                     }
                 }
-            }else{
-                text.append(NSAttributedString(string: "\nIraq-\(UserDefaults.standard.string(forKey: "CityName") ?? "")".uppercased(), attributes: [.font : UIFont(name: "PeshangDes2", size: subtitleSize)!]))
-                label.attributedText = text
-                self.navigationItem.titleView = label
             }
-        }else if XLanguage.get() == .Arabic{
+        }else if XLanguage.get() == .Kurdish{
             self.location = "شوێن"
             text.append(NSAttributedString(string: self.location, attributes: [.font : UIFont(name: "PeshangDes2", size: 12)!]))
             
@@ -564,18 +784,14 @@ class Home: UIViewController ,UITextFieldDelegate {
             CityObjectAip.GetCities { cities in
                     for city in cities {
                         if city.id == cityId{
-                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
-                                text.append(NSAttributedString(string: "\n\(country.ar_name ?? "")-\(city.ar_name ?? "")", attributes: [.font : UIFont(name: "PeshangDes2", size: subtitleSize)!]))
+                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { [self] country in
+                                text.append(NSAttributedString(string: "\n\(country.ku_name ?? "")-\(city.ku_name ?? "")", attributes: [.font : UIFont(name: "PeshangDes2", size: subtitleSize)!]))
                                 label.attributedText = text
                                 self.navigationItem.titleView = label
                             }
                         }
                     }
                 }
-            }else{
-                text.append(NSAttributedString(string: "\nIraq-\(UserDefaults.standard.string(forKey: "CityName") ?? "")".uppercased(), attributes: [.font : UIFont(name: "PeshangDes2", size: subtitleSize)!]))
-                label.attributedText = text
-                self.navigationItem.titleView = label
             }
         }else{
             self.location = "الموقع"
@@ -584,22 +800,92 @@ class Home: UIViewController ,UITextFieldDelegate {
             CityObjectAip.GetCities { cities in
                     for city in cities {
                         if city.id == cityId{
-                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
-                                text.append(NSAttributedString(string: "\n\(country.ku_name ?? "")-\(city.ku_name ?? "")", attributes: [.font : UIFont(name: "PeshangDes2", size: subtitleSize)!]))
+                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { [self] country in
+                                text.append(NSAttributedString(string: "\n\(country.ar_name ?? "")-\(city.ar_name ?? "")", attributes: [.font : UIFont(name: "PeshangDes2", size: subtitleSize)!]))
                                 label.attributedText = text
                                 self.navigationItem.titleView = label
+                                print(text)
                             }
                         }
                     }
                 }
-            }else{
-                text.append(NSAttributedString(string: "\nIraq-\(UserDefaults.standard.string(forKey: "CityName") ?? "")".uppercased(), attributes: [.font : UIFont(name: "PeshangDes2", size: subtitleSize)!]))
-                label.attributedText = text
-                self.navigationItem.titleView = label
             }
         }
         
         
+    }
+    
+    
+    
+    
+    @objc func LocationChangedS(){
+        
+         for _ in 0..<text.length{
+             text.replaceCharacters(in: NSMakeRange(0, text.length), with: "")
+             text.setAttributes([:], range: NSRange(0..<text.length))
+         }
+         
+         
+         if XLanguage.get() == .English{
+             self.location = "Location"
+             text.append(NSAttributedString(string: self.location, attributes: [.font : UIFont(name: "ArialRoundedMTBold", size: titleSize)!]))
+             if let cityId = UserDefaults.standard.string(forKey: "CityId"){
+             CityObjectAip.GetCities { cities in
+                     for city in cities {
+                         if city.id == cityId{
+                             CountryObjectAip.GeCountryById(id: city.country_id ?? "") { [self] country in
+                                 text.append(NSAttributedString(string: "\n\(country.name ?? "")-\(city.name ?? "")".uppercased(), attributes: [.font : UIFont(name: "ArialRoundedMTBold", size: subtitleSize)!]))
+                                 label.attributedText = text
+                                 self.navigationItem.titleView = label
+                             }
+                         }
+                     }
+                 }
+             }
+         }else if XLanguage.get() == .Kurdish{
+             self.location = "شوێن"
+             text.append(NSAttributedString(string: self.location, attributes: [.font : UIFont(name: "PeshangDes2", size: 12)!]))
+             
+                 if let cityId = UserDefaults.standard.string(forKey: "CityId"){
+             CityObjectAip.GetCities { cities in
+                     for city in cities {
+                         if city.id == cityId{
+                             CountryObjectAip.GeCountryById(id: city.country_id ?? "") { [self] country in
+                                 text.append(NSAttributedString(string: "\n\(country.ku_name ?? "")-\(city.ku_name ?? "")", attributes: [.font : UIFont(name: "PeshangDes2", size: subtitleSize)!]))
+                                 label.attributedText = text
+                                 self.navigationItem.titleView = label
+                             }
+                         }
+                     }
+                 }
+             }
+         }else{
+             self.location = "الموقع"
+             text.append(NSAttributedString(string: self.location, attributes: [.font : UIFont(name: "PeshangDes2", size: 12)!]))
+             if let cityId = UserDefaults.standard.string(forKey: "CityId"){
+             CityObjectAip.GetCities { cities in
+                     for city in cities {
+                         if city.id == cityId{
+                             CountryObjectAip.GeCountryById(id: city.country_id ?? "") { [self] country in
+                                 text.append(NSAttributedString(string: "\n\(country.ar_name ?? "")-\(city.ar_name ?? "")", attributes: [.font : UIFont(name: "PeshangDes2", size: subtitleSize)!]))
+                                 label.attributedText = text
+                                 self.navigationItem.titleView = label
+                             }
+                         }
+                     }
+                 }
+             }
+         }
+         
+         
+    }
+    
+    
+    
+    
+    
+    @objc private func titleWasTapped() {
+        self.setupCitySelectionAlert()
     }
     
     

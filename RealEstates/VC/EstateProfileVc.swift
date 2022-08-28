@@ -522,6 +522,8 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     @IBOutlet weak var DescBottomLayout: NSLayoutConstraint!
     var BoundType = ""
     @IBOutlet weak var VideoHeightLayout: NSLayoutConstraint!
+    
+    
     func GetData(){
         if let data = CommingEstate{
             
@@ -773,7 +775,10 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
             
             if data.estate_type_id == "UTY25FYJHkliygt4nvPP"{
                 self.ProjectNameTop.constant = 8
+                
+                
                 GetAllProjectsAip.GeeProjectById(fire_id: data.project_id ?? "") { project in
+                    
                     if XLanguage.get() == .English{
                         self.ProjectName.text = project.project_name
                         self.ProjectName.font = UIFont(name: "ArialRoundedMTBold", size: 17)!
@@ -784,6 +789,8 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
                         self.ProjectName.text = project.project_ku_name
                         self.ProjectName.font = UIFont(name: "PeshangDes2", size: 17)!
                     }
+                    
+                    
                 }
                 
                 if XLanguage.get() == .Kurdish{
@@ -819,18 +826,26 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
             
             
                 OfficeAip.GetOffice(ID: data.office_id ?? "") { office in
+                    
                     self.OfficeData = office
                     let url = URL(string: office.ImageURL ?? "")
                     self.OfficeImage.sd_setImage(with: url, completed: nil)
                     self.OfficeName.text = office.name?.description.uppercased()
                     self.OfficeLocation.text = office.address
                     
+                    
+                    
                     OfficeRatingAip.GetRatingByOfficeId(office_id: office.id ?? "") { arr in
                         self.count += 1
                         self.RateValue = self.RateValue + (arr.rate ?? 0.0)
                         self.OfficeRate.text = "\((self.RateValue / self.count).rounded(toPlaces: 1))"
                     }
+                    
+                    
+                    
                 }
+            
+            
                 self.lat = data.lat ?? ""
                 self.long = data.long ?? ""
                 let dbLat = Double(data.lat ?? "")

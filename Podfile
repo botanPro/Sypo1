@@ -91,6 +91,12 @@ target 'RealEstates' do
   pod "PullToDismissTransition"
   
   
+  
+  
+  
+  pod 'NSFWDetector'
+  
+  
   target 'RealEstatesTests' do
     inherit! :search_paths
     # Pods for testing
