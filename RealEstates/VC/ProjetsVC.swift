@@ -17,13 +17,14 @@ class ProjetsVC: UIViewController {
     @IBOutlet weak var CityCollectionView: UICollectionView!
     @IBOutlet weak var ProjectsCollectionView: UICollectionView!
 
+    @IBOutlet weak var ProjectCollectionView: UICollectionView!
     
     @IBOutlet weak var NavTitle: LanguageBarItem!
     @IBOutlet weak var ScrollView: UIScrollView!
     var sliderImages : [SlidesObject] = []
     var CityArray : [CityObject] = []
     var ProjectArray : [ProjectObject] = []
-    
+    var NewestProjectArray : [ProjectObject] = []
     
     @IBOutlet weak var NVLoaderView: NVActivityIndicatorView!
     @IBOutlet weak var SliderView: FSPagerView!{
@@ -59,6 +60,7 @@ class ProjetsVC: UIViewController {
         self.AllEstatesCollectionLayout.constant = 0
         self.SliderView.layer.cornerRadius = 10
         CityCollectionView.register(UINib(nibName: "EstateTypeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CityCell")
+        ProjectCollectionView.register(UINib(nibName: "HorizantlyProjectsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "pCell")
         ProjectsCollectionView.register(UINib(nibName: "ProjectsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProjectCell")
         self.ProjectsCollectionView.isScrollEnabled = false
         GetSliderImages()
@@ -153,6 +155,11 @@ class ProjetsVC: UIViewController {
         GetAllProjectsAip.GetAllProducts { pro in
             for proj in pro{
                 if proj.id != "ZlFVOHo5MUXQ8NtnZfZ7"{
+                    let date = NSDate(timeIntervalSince1970: proj.uploaded_date_stamp ?? 0.0)
+                    let days = (Date().days(sinceDate: date as Date) ?? 0) * -1
+                    if days <= 30{
+                        self.NewestProjectArray.append(proj)
+                    }
                     self.ProjectArray.append(proj)
                 }
             }
@@ -160,6 +167,7 @@ class ProjetsVC: UIViewController {
             self.ScrollView.isHidden = false
             self.LoadingIndecator.stopAnimating()
             self.ProjectsCollectionView.reloadData()
+            self.ProjectCollectionView.reloadData()
         }
         
     }
@@ -205,6 +213,13 @@ extension ProjetsVC : UICollectionViewDataSource, UICollectionViewDelegate , UIC
             }
             return ProjectArray.count
         }
+        
+        if collectionView == ProjectCollectionView{
+            if NewestProjectArray.count == 0{
+                return 0
+            }
+            return NewestProjectArray.count
+        }
         return 0
     }
     
@@ -244,6 +259,12 @@ extension ProjetsVC : UICollectionViewDataSource, UICollectionViewDelegate , UIC
 
             return cell
         }
+        
+        if collectionView == ProjectCollectionView{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pCell", for: indexPath) as! HorizantlyProjectsCollectionViewCell
+            cell.update(self.NewestProjectArray[indexPath.row])
+            return cell
+        }
         return UICollectionViewCell()
     }
     
@@ -258,30 +279,62 @@ extension ProjetsVC : UICollectionViewDataSource, UICollectionViewDelegate , UIC
         }
         
         if collectionView == CityCollectionView{
-            return CGSize(width: collectionView.frame.size.width / 4, height: 40)
+            if XLanguage.get() == .English{
+            let text = self.CityArray[indexPath.row].name ?? ""
+             let width = self.estimatedFrame(text: text, font:  UIFont(name: "ArialRoundedMTBold", size: 11)!).width
+             return CGSize(width: width + 50, height: 40)
+            }else if XLanguage.get() == .Arabic{
+                let text = self.CityArray[indexPath.row].ar_name ?? ""
+                 let width = self.estimatedFrame(text: text, font: UIFont(name: "PeshangDes2", size: 11)!).width
+                 return CGSize(width: width + 50, height: 40)
+            }else{
+                let text = self.CityArray[indexPath.row].ku_name ?? ""
+                 let width = self.estimatedFrame(text: text, font: UIFont(name: "PeshangDes2", size: 11)!).width
+                 return CGSize(width: width + 50, height: 40)
+            }
+        }
+        
+        if collectionView == ProjectCollectionView{
+            return CGSize(width: collectionView.frame.size.width / 1.06, height: 120)
         }
         
         return CGSize()
+    }
+    
+    func estimatedFrame(text: String, font: UIFont) -> CGRect {
+        let size = CGSize(width: 200, height: 100) // temporary size
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        return NSString(string: text).boundingRect(with: size,
+                                                   options: options,
+                                                   attributes: [NSAttributedString.Key.font: font],
+                                                   context: nil)
     }
 
     
      func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
          if collectionView == CityCollectionView{
-         return 5
+         return 0
          }
          if collectionView == ProjectsCollectionView{
              return spacingBetweenCells
+         }
+         if collectionView == ProjectCollectionView{
+             return 10
          }
          return CGFloat()
      }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if collectionView == CityCollectionView{
-           return UIEdgeInsets(top: 0.0, left: 8.0, bottom: 0.0, right: 8.0)
+           return UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
         }
         
         if collectionView == ProjectsCollectionView{
             return sectionInsets
+        }
+        
+        if collectionView == ProjectCollectionView{
+            return UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
         }
         return UIEdgeInsets()
     }
@@ -351,6 +404,12 @@ extension ProjetsVC : UICollectionViewDataSource, UICollectionViewDelegate , UIC
         if collectionView == ProjectsCollectionView{
             if self.ProjectArray.count != 0 && indexPath.row <= self.ProjectArray.count{
             self.performSegue(withIdentifier: "Next", sender: self.ProjectArray[indexPath.row])
+            }
+        }
+        
+        if collectionView == ProjectCollectionView{
+            if self.NewestProjectArray.count != 0 && indexPath.row <= self.NewestProjectArray.count{
+            self.performSegue(withIdentifier: "Next", sender: self.NewestProjectArray[indexPath.row])
             }
         }
     }

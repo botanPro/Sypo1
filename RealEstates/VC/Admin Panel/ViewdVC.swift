@@ -81,6 +81,8 @@ extension ViewdVC : UITableViewDelegate , UITableViewDataSource{
             cell.Delete.isHidden = true
             cell.Edit.isHidden = true
             cell.Sold.isHidden = true
+            cell.RightLayoutConstraint.constant = 10
+            cell.RightLayoutConstraint2.constant = 10
             cell.update(self.ProductArray[indexPath.row])
         }
         return cell

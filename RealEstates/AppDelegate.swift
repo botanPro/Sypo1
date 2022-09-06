@@ -13,7 +13,11 @@ import FirebaseAuth
 import FirebaseDynamicLinks
 import FirebaseAnalytics
 import OneSignal
+import CoreLocation
+import UserNotifications
 @main
+
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?

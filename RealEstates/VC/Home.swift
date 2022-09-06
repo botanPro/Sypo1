@@ -16,7 +16,10 @@ import GameplayKit
 import FirebaseRemoteConfig
 
 import AZDialogView
-class Home: UIViewController ,UITextFieldDelegate ,UIPickerViewDelegate , UIPickerViewDataSource{
+class Home: UIViewController ,UITextFieldDelegate ,UIPickerViewDelegate , UIPickerViewDataSource, CLLocationManagerDelegate{
+    
+    
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -297,10 +300,15 @@ class Home: UIViewController ,UITextFieldDelegate ,UIPickerViewDelegate , UIPick
     }
     var Isupdated = false
     
-
+    @IBOutlet weak var NearYouCollectionViewheight: NSLayoutConstraint!
+    let locManager = CLLocationManager()
+    @IBOutlet weak var NearyouLableStackBottom: NSLayoutConstraint!
+    @IBOutlet weak var NearYouLableStackTop: NSLayoutConstraint!
+    @IBOutlet weak var NearYourLableAndSeeAll: UIStackView!
     @IBOutlet weak var LoadingIndecator: UIActivityIndicatorView!
-    
+    var UserDeniedLocation = false
     var currentLocation: CLLocation?
+    private var locationManager: CLLocationManager!
     override func viewDidLoad() {
         super.viewDidLoad()
         GetCity()
@@ -339,13 +347,68 @@ class Home: UIViewController ,UITextFieldDelegate ,UIPickerViewDelegate , UIPick
             self.ScrollView.isHidden = true
             self.LoadingIndecator.startAnimating()
         }
+        self.NearYouCollectionViewheight.constant = 0
+        self.NearYourLableAndSeeAll.isHidden = true
+        self.NearYouLableStackTop.constant = 0
+        self.NearyouLableStackBottom.constant = 0
         
-        
-        let locManager = CLLocationManager()
         locManager.requestWhenInUseAuthorization()
         
+//        let ls = LocationService.shared
+//        ls.requestAlwaysLocation()
+        
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse || CLLocationManager.authorizationStatus() ==  .authorizedAlways{
+            print("----1")
             currentLocation = locManager.location
+            self.GetNearEstates()
+            UserDefaults.standard.set(currentLocation?.coordinate.latitude, forKey: "LastUserLocationLat")
+            UserDefaults.standard.set(currentLocation?.coordinate.longitude, forKey: "LastUserLocationLong")
+            self.UserDeniedLocation = false
+            UIView.animate(withDuration: 0.3, delay: 0.0) {
+                self.NearYouCollectionViewheight.constant = 290
+                self.NearYourLableAndSeeAll.isHidden = false
+                self.NearYouLableStackTop.constant = 20
+                self.NearyouLableStackBottom.constant = 5
+                self.view.layoutIfNeeded()
+            }
+        }
+        
+        if CLLocationManager.authorizationStatus() == .denied && UserDefaults.standard.value(forKey: "LastUserLocationLat") == nil{
+            self.UserDeniedLocation = true
+            UIView.animate(withDuration: 0.3, delay: 0.0) {
+            self.NearYouCollectionViewheight.constant = 0
+                self.NearYouLableStackTop.constant = 0
+                self.NearyouLableStackBottom.constant = 0
+            self.NearYourLableAndSeeAll.isHidden = true
+            }
+        }else if CLLocationManager.authorizationStatus() == .denied && UserDefaults.standard.value(forKey: "LastUserLocationLat") != nil{
+            if XLanguage.get() == .Kurdish{
+                self.titlee = "تێبینی"
+                self.messagee = "'نزیکترین موڵکەکان' نزیکترین موڵکەکان بەپێی دوایین شوێنی تۆمارکراوت پیشان دەدات"
+                self.cancel = "باشە"
+            }else if XLanguage.get() == . English{
+                self.titlee = "Note"
+                self.messagee = "'Near estates collection' will show the nearest estates by your latest registered location"
+                self.cancel = "Ok"
+            }else{
+                self.titlee = "ملاحظة"
+                self.messagee = "ستعرض 'مجموعة العقارات القريب' أقرب العقارات حسب آخر موقع مسجل لك"
+                self.cancel = "لا"
+            }
+            let alertController = UIAlertController(title: self.titlee, message: self.messagee, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: self.cancel, style: UIAlertAction.Style.default) { UIAlertAction in
+                self.GetNearEstates()
+                self.UserDeniedLocation = false
+                UIView.animate(withDuration: 0.3, delay: 0.0) {
+                    self.NearYouCollectionViewheight.constant = 290
+                    self.NearYourLableAndSeeAll.isHidden = false
+                    self.NearYouLableStackTop.constant = 20
+                    self.NearyouLableStackBottom.constant = 5
+                    self.view.layoutIfNeeded()
+                }
+                alertController.dismiss(animated: true)}
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
         }
         
         self.ScrollView.cr.addHeadRefresh(animator: FastAnimator()) {
@@ -353,6 +416,9 @@ class Home: UIViewController ,UITextFieldDelegate ,UIPickerViewDelegate , UIPick
             self.GetAllEstates()
             self.GetApartmentEstates()
             self.GetEstateType()
+            if self.UserDeniedLocation == false{
+                self.GetNearEstates()
+            }
         }
         
         
@@ -361,6 +427,11 @@ class Home: UIViewController ,UITextFieldDelegate ,UIPickerViewDelegate , UIPick
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.ReloadData), name: NSNotification.Name(rawValue: "EstateInserted"), object: nil)
     }
+    
+    
+
+    
+    
     @objc func ReloadData(){
         self.GetAllEstates()
         self.GetApartmentEstates()
@@ -565,8 +636,6 @@ class Home: UIViewController ,UITextFieldDelegate ,UIPickerViewDelegate , UIPick
     
     
     func GetAllEstates(){
-        self.LocationdsArray.removeAll()
-        self.NearArray.removeAll()
         self.AllEstateArray.removeAll()
         ProductAip.GetAllProducts { Product in
             for UnArchived in Product{
@@ -574,31 +643,52 @@ class Home: UIViewController ,UITextFieldDelegate ,UIPickerViewDelegate , UIPick
                    self.AllEstateArray.append(UnArchived)
                 }
             }
-            
-            
-            for product in self.AllEstateArray{
-                let dbLat = Double(product.lat ?? "")
-                let dbLong = Double(product.long ?? "")
-                self.LocationdsArray.append(CLLocationCoordinate2D(latitude: dbLat!, longitude:dbLong!))
-            }
-            self.ClosestArray = self.getNearestPoints(array: self.LocationdsArray, currentLocation: self.currentLocation?.coordinate ?? CLLocationCoordinate2D())
-            for loc in self.ClosestArray{
-                for (j,_) in self.AllEstateArray.enumerated(){
-                    if loc.latitude == Double(self.AllEstateArray[j].lat ?? "") &&  loc.longitude == Double(self.AllEstateArray[j].long ?? ""){
-                        self.NearArray.append(self.AllEstateArray[j])
-                    }
-                }
-            }
-            
- 
+
             self.AllEstateArray.shuffle()
-
-
 
             self.ScrollView.isHidden = false
             self.LoadingIndecator.stopAnimating()
-            self.NearYouCollectionView.reloadData()
             self.AllEstatesCollectionView.reloadData()
+        }
+    }
+    
+    
+    
+    func GetNearEstates(){
+        self.LocationdsArray.removeAll()
+        self.NearArray.removeAll()
+        var New : [EstateObject] = []
+        ProductAip.GetAllProducts { Product in
+            for UnArchived in Product{
+                if UnArchived.archived != "1"{
+                   New.append(UnArchived)
+                }
+            }
+            
+            for product in New{
+                let dbLat = Double(product.lat ?? "")
+                let dbLong = Double(product.long ?? "")
+                self.LocationdsArray.append(NearYouObject(id: product.id ?? "", cordinate: CLLocation(latitude: dbLat!, longitude:dbLong!)))
+            }
+            if let userlocationLat = UserDefaults.standard.value(forKey: "LastUserLocationLat") ,let userlocationLong = UserDefaults.standard.value(forKey: "LastUserLocationLong"){
+                let currentLocation = CLLocation(latitude: userlocationLat as! CLLocationDegrees, longitude:userlocationLong as! CLLocationDegrees)
+            for loc in self.LocationdsArray{
+                let distanceInKm = currentLocation.distance(from: loc.cordinate ?? CLLocation()) / 1000
+                print("distanc ::::: \(distanceInKm)")
+                if distanceInKm <= 5{
+                    for (_,estate) in New.enumerated(){
+                        if loc.id == estate.id{
+                            self.NearArray.append(estate)
+                        }
+                    }
+                    
+                }
+
+            }
+            self.ScrollView.isHidden = false
+            self.LoadingIndecator.stopAnimating()
+            self.NearYouCollectionView.reloadData()
+            }
         }
     }
     
@@ -636,8 +726,8 @@ class Home: UIViewController ,UITextFieldDelegate ,UIPickerViewDelegate , UIPick
     
     
     
-    var LocationdsArray : [CLLocationCoordinate2D] = []
-    var ClosestArray : [CLLocationCoordinate2D] = []
+    var LocationdsArray : [NearYouObject] = []
+    var ClosestArray : [CLLocation] = []
 
     
     
@@ -662,6 +752,7 @@ class Home: UIViewController ,UITextFieldDelegate ,UIPickerViewDelegate , UIPick
     @IBOutlet weak var FilterLableWidth: NSLayoutConstraint!
     @IBOutlet weak var FilterLable: LanguageLable!
     var IsFirst = true
+    
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
             self.navigationItem.rightBarButtonItem?.isEnabled = false
            self.navigationItem.leftBarButtonItem?.isEnabled = false
@@ -677,12 +768,54 @@ class Home: UIViewController ,UITextFieldDelegate ,UIPickerViewDelegate , UIPick
         return true
     }
     
-    
     var IsInternetChecked = false
     @IBOutlet weak var InternetViewHeight: NSLayoutConstraint!
     @IBOutlet weak var InternetConnectionView: UIView!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.NearYouCollectionViewheight.constant = 0
+        self.NearYouLableStackTop.constant = 0
+        self.NearyouLableStackBottom.constant = 0
+        self.NearYourLableAndSeeAll.isHidden = true
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse || CLLocationManager.authorizationStatus() ==  .authorizedAlways{
+            currentLocation = locManager.location
+            self.GetNearEstates()
+            UserDefaults.standard.set(currentLocation?.coordinate.latitude, forKey: "LastUserLocationLat")
+            UserDefaults.standard.set(currentLocation?.coordinate.longitude, forKey: "LastUserLocationLong")
+            self.UserDeniedLocation = false
+            UIView.animate(withDuration: 0.3, delay: 0.0) {
+                self.NearYouCollectionViewheight.constant = 290
+                self.NearYourLableAndSeeAll.isHidden = false
+                self.NearYouLableStackTop.constant = 20
+                self.NearyouLableStackBottom.constant = 5
+                self.view.layoutIfNeeded()
+            }
+        }
+        
+        if CLLocationManager.authorizationStatus() == .denied && UserDefaults.standard.value(forKey: "LastUserLocationLat") == nil{
+            self.UserDeniedLocation = true
+            UIView.animate(withDuration: 0.3, delay: 0.0) {
+                self.NearYouCollectionViewheight.constant = 0
+                self.NearYouLableStackTop.constant = 0
+                self.NearyouLableStackBottom.constant = 0
+                self.NearYourLableAndSeeAll.isHidden = true
+            }
+        }else if CLLocationManager.authorizationStatus() == .denied && UserDefaults.standard.value(forKey: "LastUserLocationLat") != nil{
+            self.GetNearEstates()
+            UIView.animate(withDuration: 0.3, delay: 0.0) {
+                self.NearYouCollectionViewheight.constant = 290
+                self.NearYourLableAndSeeAll.isHidden = false
+                self.NearYouLableStackTop.constant = 20
+                self.NearyouLableStackBottom.constant = 5
+                self.view.layoutIfNeeded()
+            }
+        }
+        
+        
+
+        
+        
         if let officeId = UserDefaults.standard.string(forKey: "OfficeId"){
             OfficeAip.GetOffice(ID: officeId) {office in
                 if office.type_id != "h9nFfUrHgSwIg17uRwTD"{
@@ -1035,7 +1168,19 @@ extension Home : UICollectionViewDataSource, UICollectionViewDelegate , UICollec
         
         
         if collectionView == EstateTypeCollectionView{
-            return CGSize(width: collectionView.frame.size.width / 4, height: 40)
+            if XLanguage.get() == .English{
+            let text = self.EstatesType[indexPath.row].name ?? ""
+             let width = self.estimatedFrame(text: text, font:  UIFont(name: "ArialRoundedMTBold", size: 11)!).width
+             return CGSize(width: width + 45, height: 40)
+            }else if XLanguage.get() == .Arabic{
+                let text = self.EstatesType[indexPath.row].ar_name ?? ""
+                 let width = self.estimatedFrame(text: text, font: UIFont(name: "PeshangDes2", size: 11)!).width
+                 return CGSize(width: width + 45, height: 40)
+            }else{
+                let text = self.EstatesType[indexPath.row].ku_name ?? ""
+                 let width = self.estimatedFrame(text: text, font: UIFont(name: "PeshangDes2", size: 11)!).width
+                 return CGSize(width: width + 45, height: 40)
+            }
         }
         
         if collectionView == ApartmentEstatesCollectionView{
@@ -1049,11 +1194,20 @@ extension Home : UICollectionViewDataSource, UICollectionViewDelegate , UICollec
         
         return CGSize()
     }
+    
+    func estimatedFrame(text: String, font: UIFont) -> CGRect {
+        let size = CGSize(width: 200, height: 100) // temporary size
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        return NSString(string: text).boundingRect(with: size,
+                                                   options: options,
+                                                   attributes: [NSAttributedString.Key.font: font],
+                                                   context: nil)
+    }
 
     
      func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
          if collectionView == EstateTypeCollectionView{
-         return 5
+             return 5
          }
          if collectionView == ApartmentEstatesCollectionView{
              return 10
@@ -1219,4 +1373,16 @@ extension UIScrollView {
         let desiredOffset = CGPoint(x: 0, y: -contentInset.top)
         setContentOffset(desiredOffset, animated: true)
    }
+}
+
+
+
+class NearYouObject{
+    var id : String?
+    var cordinate : CLLocation?
+    
+    init(id : String , cordinate : CLLocation){
+        self.id = id
+        self.cordinate = cordinate
+    }
 }

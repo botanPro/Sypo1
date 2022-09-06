@@ -35,6 +35,13 @@ class EditProfileVC: UIViewController ,UITextFieldDelegate, UITextViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+        
+        
+        
+        
+        
         self.InternetViewHeight.constant = 0
         self.InternetConnectionView.isHidden = true
 

@@ -337,6 +337,10 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     @IBOutlet weak var NavTitle: LanguageBarItem!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.AddPropertyView.alpha = 0.5
+        self.ViewPropertyVicew.alpha = 0.5
+        self.MyPropertiesAction.isEnabled = false
+        self.AddPropetiesAction.isEnabled = false
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)]
@@ -494,12 +498,13 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     
     
     let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"]!
-    
+    var days = 0
     var IsInternetChecked = false
     @IBOutlet weak var InternetViewHeight: NSLayoutConstraint!
     @IBOutlet weak var InternetConnectionView: UIView!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         if CheckInternet.Connection(){
             self.IsInternetChecked = false
             UIView.animate(withDuration: 0.3) {
@@ -604,10 +609,10 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             self.Profileimageheight.constant = 0
             self.AddPropertyView.alpha = 0.5
             self.ViewPropertyVicew.alpha = 0.5
-            self.FavoriteItemsView.alpha = 0.5
-            self.ViewdItemAction.isEnabled = false
             self.MyPropertiesAction.isEnabled = false
             self.AddPropetiesAction.isEnabled = false
+            self.FavoriteItemsView.alpha = 0.5
+            self.ViewdItemAction.isEnabled = false
             self.FavoriteItemAction.isEnabled = false
             self.ViewditemView.alpha = 0.5
             if XLanguage.get() == .Kurdish{
@@ -664,13 +669,13 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                             self.ProfileInfoStackView.isHidden = false
                             self.ProfileInfoStackViewLayout.constant = 55
                             self.Profileimageheight.constant = 55
-                            self.AddPropertyView.alpha = 1
-                            self.ViewPropertyVicew.alpha = 1
+//                            self.AddPropertyView.alpha = 1
+//                            self.ViewPropertyVicew.alpha = 1
                             self.ViewditemView.alpha = 1
                             self.FavoriteItemsView.alpha = 1
                             self.ViewdItemAction.isEnabled = true
-                            self.MyPropertiesAction.isEnabled = true
-                            self.AddPropetiesAction.isEnabled = true
+//                            self.MyPropertiesAction.isEnabled = true
+//                            self.AddPropetiesAction.isEnabled = true
                             self.FavoriteItemAction.isEnabled = true
                             
                             
@@ -703,8 +708,14 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                             
                                             
                                             print("dayyyssssss-----------------")
-                                            let days = (Date().days(sinceDate: date1 as Date) ?? 0) * -1
-                                            self.SubscriptionDays.text = "\(days)"
+                                            self.days = (Date().days(sinceDate: date1 as Date) ?? 0) * -1
+                                            if self.days < 0{
+                                                self.days = 0
+                                                self.SubscriptionDays.text = "0"
+                                            }else{
+                                                self.SubscriptionDays.text = "\(self.days)"
+                                            }
+                                            
                                             print((Date().days(sinceDate: date1 as Date) ?? 0) * -1)
                                             
                                             
@@ -713,20 +724,30 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                                 OfficeAip.GetOfficeById(Id: FireId) { office in
                                                     ProductAip.GetAllMyEstates(office_id: office.id ?? "") { estates in
                                                         print("sub id -------: \(sub.subscription_type_id ?? "")")
-                                                        self.MyEstates = estates
+                                                        
+                                                        
+                                                        
+                                                        for estate in estates{
+                                                            if Double(estate.Stamp ?? TimeInterval()) >= Double(sub.start_date ?? TimeInterval()) {
+                                                                self.MyEstates.append(estate)
+                                                            }
+                                                        }
+                                                
+                                                        
+                                                        
                                                         SubscriptionsTypeAip.GetSubscriptionsTypeByOfficeId(id: sub.subscription_type_id ?? "") { posts in
                                                             if XLanguage.get() == .Kurdish{
                                                                 self.SubscriptionPosts.text = "\(posts.number_of_post ?? "") /پۆست \(self.MyEstates.count)"
-                                                                self.SubscriptionPosts.font = UIFont(name: "PeshangDes2", size: 11)!
+                                                                self.SubscriptionPosts.font = UIFont(name: "PeshangDes2", size: 12)!
                                                             }else if XLanguage.get() == .English{
                                                                 self.SubscriptionPosts.text = "\(self.MyEstates.count) Post /\(posts.number_of_post ?? "")"
-                                                                self.SubscriptionPosts.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+                                                                self.SubscriptionPosts.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
                                                             }else{
                                                                 self.SubscriptionPosts.text = "\(posts.number_of_post ?? "")/ منشور \(self.MyEstates.count)"
-                                                                self.SubscriptionPosts.font = UIFont(name: "PeshangDes2", size: 11)!
+                                                                self.SubscriptionPosts.font = UIFont(name: "PeshangDes2", size: 12)!
                                                             }
                                                             
-                                                            if days == 0 || Int(posts.number_of_post ?? "") == self.MyEstates.count{
+                                                            if self.days == 0 || Int(posts.number_of_post ?? "") == self.MyEstates.count{
                                                                 self.AddPropertyView.alpha = 0.5
                                                                 self.ViewPropertyVicew.alpha = 0.5
                                                                 self.MyPropertiesAction.isEnabled = false
@@ -741,7 +762,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                                             
                                                             if self.IsSubscriptionAlertShowed == false{
                                                                 self.IsSubscriptionAlertShowed = true
-                                                            if days == 0 || Int(posts.number_of_post ?? "") == self.MyEstates.count{
+                                                                if self.days == 0 || Int(posts.number_of_post ?? "") == self.MyEstates.count{
                                                                 var message = ""
                                                                 var action  = ""
                                                                 var cancel  = ""

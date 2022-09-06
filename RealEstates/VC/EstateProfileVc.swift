@@ -424,6 +424,8 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     @IBOutlet weak var EstateTypeView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.Sold.isHidden = true
+        self.SoldView.isHidden = true
         self.Description.isUserInteractionEnabled = false
         GetAllEstates()
         self.ProjectNameTop.constant = 0
@@ -522,10 +524,20 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     @IBOutlet weak var DescBottomLayout: NSLayoutConstraint!
     var BoundType = ""
     @IBOutlet weak var VideoHeightLayout: NSLayoutConstraint!
-    
+    @IBOutlet weak var Sold: LanguageLable!
+    @IBOutlet weak var SoldView: UIView!
     
     func GetData(){
+       
         if let data = CommingEstate{
+            
+            if data.sold == "1"{
+                self.Sold.isHidden = false
+                self.SoldView.isHidden = false
+            }else{
+                self.Sold.isHidden = true
+                self.SoldView.isHidden = true
+            }
             
             self.profileID = data.id ?? ""
             self.sliderImages = data.ImageURL ?? []

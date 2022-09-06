@@ -116,6 +116,7 @@ extension FavoritesVC : UITableViewDelegate , UITableViewDataSource{
         if ProductArray.count != 0{
             cell.Edit.isHidden = true
             cell.Sold.isHidden = true
+            cell.RightLayoutConstraint2.constant = 10
             if let FireId = UserDefaults.standard.string(forKey: "UserId"){
                 FavoriteItemsObjectAip.GetFavoriteItemsById(fire_id: FireId) { item in
                     if item.fire_id == FireId && item.estate_id == self.ProductArray[indexPath.row].id ?? ""{

@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="3" width="80" height="40"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojT-vU-8fr">
-                                <rect key="frame" x="5" y="14" width="70" height="12"/>
+                                <rect key="frame" x="16" y="14" width="48" height="12"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="10"/>
                                 <color key="textColor" red="0.095019873903811461" green="0.11567751782427087" blue="0.13725111219618058" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -29,9 +29,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ojT-vU-8fr" firstAttribute="leading" secondItem="MT7-t7-awd" secondAttribute="leading" constant="5" id="8tU-Ig-UmL"/>
+                            <constraint firstItem="ojT-vU-8fr" firstAttribute="leading" secondItem="MT7-t7-awd" secondAttribute="leading" constant="16" id="8tU-Ig-UmL"/>
                             <constraint firstItem="ojT-vU-8fr" firstAttribute="centerY" secondItem="MT7-t7-awd" secondAttribute="centerY" id="Iq6-YE-zrD"/>
-                            <constraint firstAttribute="trailing" secondItem="ojT-vU-8fr" secondAttribute="trailing" constant="5" id="OSW-N4-a7e"/>
+                            <constraint firstAttribute="trailing" secondItem="ojT-vU-8fr" secondAttribute="trailing" constant="16" id="OSW-N4-a7e"/>
                             <constraint firstAttribute="height" constant="40" id="SDA-5X-7l0"/>
                             <constraint firstItem="ojT-vU-8fr" firstAttribute="centerX" secondItem="MT7-t7-awd" secondAttribute="centerX" id="z95-DU-ZYE"/>
                         </constraints>

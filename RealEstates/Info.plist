@@ -84,6 +84,10 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>would you like to access to camera?</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Allow $(PRODUCT_NAME) to use your location? Turning on location services allows app to show you when estates are nearby.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Allow $(PRODUCT_NAME) to use your location? Turning on location services allows app to show you when estates are nearby.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Allow $(PRODUCT_NAME) to use your location? Turning on location services allows app to show you when estates are nearby.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
@@ -118,6 +122,7 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
+		<string>location</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

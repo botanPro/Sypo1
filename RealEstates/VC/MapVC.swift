@@ -36,6 +36,8 @@ class MapVC: UIViewController ,MKMapViewDelegate ,CLLocationManagerDelegate, UIG
         gestureRecognizer.delegate = self
         MapView.addGestureRecognizer(gestureRecognizer)
         self.MapView.showsUserLocation = true
+        
+        
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -44,6 +46,8 @@ class MapVC: UIViewController ,MKMapViewDelegate ,CLLocationManagerDelegate, UIG
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
         }
+        
+        
     }
     
     
@@ -62,25 +66,7 @@ class MapVC: UIViewController ,MKMapViewDelegate ,CLLocationManagerDelegate, UIG
   }
     
     
-//    var SeeProfileId = ""
-//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-//        if view.annotation is MKUserLocation{
-//
-//        }else{
-//            if let profileID = view.annotation as? profile {
-//                print(profileID)
-//                self.SeeProfileId = profileID.profileId
-//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                let myVC = storyboard.instantiateViewController(withIdentifier: "GoToEstateProfileVC") as! EstateProfileVc
-//                myVC.EstateId = self.SeeProfileId
-//                myVC.modalPresentationStyle = .fullScreen
-//                self.present(myVC, animated: true, completion: nil)
-//            }
-//
-//        }
-//    }
-    
-    
+
     
     var cordinate : CLLocationCoordinate2D!
     var latitude : CLLocationDegrees!

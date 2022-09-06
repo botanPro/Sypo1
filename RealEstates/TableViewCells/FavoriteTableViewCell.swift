@@ -19,6 +19,9 @@ class FavoriteTableViewCell: UITableViewCell {
     @IBOutlet weak var Direction: UILabel!
     @IBOutlet weak var Name: UILabel!
     @IBOutlet weak var Imagee: UIImageView!
+    @IBOutlet weak var Date: UILabel!
+    @IBOutlet weak var RightLayoutConstraint2: NSLayoutConstraint!
+    @IBOutlet weak var RightLayoutConstraint: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -88,6 +91,16 @@ class FavoriteTableViewCell: UITableViewCell {
         }else{
             self.Price.text = cell.price?.description.currencyFormatting()
         }
+        
+        
+        
+        
+        let date = NSDate(timeIntervalSince1970: cell.Stamp ?? 0.0)
+        let dayTimePeriodFormatter = DateFormatter()
+        dayTimePeriodFormatter.dateFormat = "dd MM,YYYY"
+        let dateTimeString = dayTimePeriodFormatter.string(from: date as Date)
+        let dateTime = dateTimeString.split(separator: ".")
+        self.Date.text = "\(dateTime[0])".convertedDigitsToLocale(Locale(identifier: "EN"))
  
         
         if XLanguage.get() == .English{

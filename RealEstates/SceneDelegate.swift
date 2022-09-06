@@ -13,6 +13,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        
+        
         print("anything??")
         if let incomingurl = userActivity.webpageURL{
             print("incomingurl is \(incomingurl)")
