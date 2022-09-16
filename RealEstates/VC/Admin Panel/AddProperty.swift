@@ -112,6 +112,27 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
     var SelectedFurnished = "0"
     var SelectedBoundTypeId = "0"
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        if !CheckInternet.Connection(){
+            if XLanguage.get() == .English{
+                let ac = UIAlertController(title: "Error", message: "Please check your internet connection.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else if XLanguage.get() == .Arabic{
+                let ac = UIAlertController(title: "خطأ", message: "الرجاء التحقق من اتصال الانترنت الخاص بك.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "نعم", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else{
+                let ac = UIAlertController(title: "هەڵە", message: "تکایە هێڵی ئینتەرنێتەکەت بپشکنە.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "باشە", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }
+        }else{
         if textField == self.Furnished {
             self.view.endEditing(true)
             
@@ -137,7 +158,14 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             BoundTypeAip.GetAllBoundType { bounds in
                 self.BoudTypes = bounds
                 for bound in bounds{
-                    self.dropDown1.dataSource.append(bound.en_title ?? "")
+                    if XLanguage.get() == .English{
+                        self.dropDown1.dataSource.append(bound.en_title ?? "")
+                    }else if XLanguage.get() == .Arabic{
+                        self.dropDown1.dataSource.append(bound.ar_title ?? "")
+                    }else{
+                        self.dropDown1.dataSource.append(bound.ku_title ?? "")
+                    }
+                    
                 }
                 self.dropDown1.show()
                 self.dropDown1.selectionAction = { [unowned self] (index: Int, item: String) in
@@ -147,6 +175,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                 }
             }
             
+        }
         }
     }
     
@@ -449,7 +478,13 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             
             BoundTypeAip.GetBoundTypeByOfficeId(id: data.bound_id ?? "") { bound in
                 self.SelectedBoundTypeId = bound.id ?? ""
+                if XLanguage.get() == .English{
                 self.BondType.text = bound.en_title ?? ""
+                }else if XLanguage.get() == .Arabic{
+                    self.BondType.text = bound.ar_title ?? ""
+                }else{
+                    self.BondType.text = bound.ku_title ?? ""
+                }
             }
             
 
@@ -470,9 +505,38 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             
             self.selecteEstatedcell = EstateTypeObject(name: "", id:data.estate_type_id ??  "",ar_name: "" , ku_name: "")
             
-            EstateTypeAip.GeEstateTypeNameById(id: data.estate_type_id ?? "") { type in
-                self.EstateTypeLable.text = type.name
+            EstateTypeAip.GeEstateTypeNameById(id: data.estate_type_id ?? "") { estatetype in
+               
+                if XLanguage.get() == .English{
+                    self.EstateTypeLable.text = estatetype.name
+                    self.EstateTypeLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+                }else if XLanguage.get() == .Arabic{
+                    self.EstateTypeLable.text = estatetype.ar_name
+                    self.EstateTypeLable.font = UIFont(name: "PeshangDes2", size: 11)!
+                }else{
+                    self.EstateTypeLable.text = estatetype.ku_name
+                    self.EstateTypeLable.font = UIFont(name: "PeshangDes2", size: 11)!
+                }
             }
+            
+            
+          
+            
+            
+            self.TypeId = data.type_id ?? ""
+            TypesObjectAip.GetTypeById(id: data.type_id ?? "") { type in
+                if XLanguage.get() == .English{
+                    self.Typelable.text = type.name
+                    self.Typelable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+                }else if XLanguage.get() == .Arabic{
+                    self.Typelable.text = type.ar_name
+                    self.Typelable.font = UIFont(name: "PeshangDes2", size: 11)!
+                }else{
+                    self.Typelable.text = type.ku_name
+                    self.Typelable.font = UIFont(name: "PeshangDes2", size: 11)!
+                }
+            }
+
            
 
             print("===================================")
@@ -484,6 +548,23 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                         }
                     }
                 }
+                
+                
+                self.ProjectId = data.project_id ?? ""
+                GetAllProjectsAip.GetProjectById(ID: data.project_id ?? "") { project in
+                    if XLanguage.get() == .English{
+                        self.ProjectName.text = project.project_name
+                        self.ProjectName.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+                    }else if XLanguage.get() == .Arabic{
+                        self.ProjectName.text = project.project_ar_name
+                        self.ProjectName.font = UIFont(name: "PeshangDes2", size: 11)!
+                    }else{
+                        self.ProjectName.text = project.project_ku_name
+                        self.ProjectName.font = UIFont(name: "PeshangDes2", size: 11)!
+                    }
+                }
+                
+                
                 self.ProjectId = data.project_id ?? ""
                 self.IsApartment = true
                 self.Floor.isUserInteractionEnabled = true
@@ -554,12 +635,34 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
     
     
     @IBAction func ChooseType(_ sender: Any) {
+        if !CheckInternet.Connection(){
+            if XLanguage.get() == .English{
+                let ac = UIAlertController(title: "Error", message: "Please check your internet connection.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else if XLanguage.get() == .Arabic{
+                let ac = UIAlertController(title: "خطأ", message: "الرجاء التحقق من اتصال الانترنت الخاص بك.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "نعم", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else{
+                let ac = UIAlertController(title: "هەڵە", message: "تکایە هێڵی ئینتەرنێتەکەت بپشکنە.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "باشە", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }
+        }else{
         setupTypesAlert()
+        }
     }
     
     var IsPickerSelected = ""
     var TypepickerView = UIPickerView(frame: CGRect(x: 10, y: 50, width: 250, height: 150))
-    
+    var TypeId = ""
     private func setupTypesAlert() {
         GetType()
         TypepickerView.delegate = self
@@ -593,8 +696,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                 self.Typelable.text = pickerValue.ku_name
                 self.Typelable.font = UIFont(name: "PeshangDes2", size: 12)!
             }
-            
-            
+            self.TypeId = pickerValue.id ?? ""
             print("Picker value: \(pickerValue) was selected")
             }
         }))
@@ -617,7 +719,29 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
     
     
     @IBAction func ChooseEstateType(_ sender: Any) {
+        if !CheckInternet.Connection(){
+            if XLanguage.get() == .English{
+                let ac = UIAlertController(title: "Error", message: "Please check your internet connection.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else if XLanguage.get() == .Arabic{
+                let ac = UIAlertController(title: "خطأ", message: "الرجاء التحقق من اتصال الانترنت الخاص بك.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "نعم", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else{
+                let ac = UIAlertController(title: "هەڵە", message: "تکایە هێڵی ئینتەرنێتەکەت بپشکنە.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "باشە", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }
+        }else{
         setupEstateTypesAlert()
+        }
     }
     
     
@@ -772,7 +896,29 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
     var ProjectId = ""
     
     @IBAction func ChooseProject(_ sender: Any) {
-        setupCitySelectionAlert()
+        if !CheckInternet.Connection(){
+            if XLanguage.get() == .English{
+                let ac = UIAlertController(title: "Error", message: "Please check your internet connection.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else if XLanguage.get() == .Arabic{
+                let ac = UIAlertController(title: "خطأ", message: "الرجاء التحقق من اتصال الانترنت الخاص بك.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "نعم", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else{
+                let ac = UIAlertController(title: "هەڵە", message: "تکایە هێڵی ئینتەرنێتەکەت بپشکنە.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "باشە", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }
+        }else{
+        setupProjectSelectionAlert()
+        }
     }
     
     
@@ -780,7 +926,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
     var ProjectsTitle = ""
     var ProjectsAction = ""
     var ProjectsCancel = ""
-    private func setupCitySelectionAlert() {
+    private func setupProjectSelectionAlert() {
         ProjectpickerView.delegate = self
         ProjectpickerView.dataSource = self
         IsPickerSelected = "3"
@@ -1597,11 +1743,13 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
 
     
     
+    @IBOutlet weak var AddressLableView: UIView!
     
     
     var pleaseEnter = ""
     var chooseProject = ""
     func EmptyTextField(_ textfield : UITextField){
+        textfield.becomeFirstResponder()
         if XLanguage.get() == .Kurdish{
             pleaseEnter = "تکایە داخڵ بکە"
             chooseProject = "تکایە پڕۆژەیەک بۆ موڵکەکەت هەڵبژێرە."
@@ -1631,18 +1779,79 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
     
     func EmptyLable(_ textfield : UILabel){
         if textfield == self.ProjectName{
-            self.view.makeToast("Please choose project for your estate.", duration: 3.0, position: .top)
+            if XLanguage.get() == .English{
+                self.view.makeToast("Please choose a project for your estate.", duration: 3.0, position: .top)
+            }else if XLanguage.get() == .Arabic{
+                self.view.makeToast("الرجاء اختيار مشروع لممتلكاتك.", duration: 3.0, position: .top)
+            }else{
+                self.view.makeToast("تکایە پڕۆژەیەک بۆ موڵکەکەت هەڵبژێرە.", duration: 3.0, position: .top)
+            }
+            AudioServicesPlaySystemSound(1519);
+            ProjectView.layer.borderColor = UIColor.red.cgColor
+            ProjectView.layer.borderWidth = 1.5
+            ProjectView.layer.cornerRadius = 5
+            ProjectView.clipsToBounds = false
+            ProjectView.layer.shadowOpacity=0.4
+            ProjectView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        }else if textfield == self.EstateTypeLable{
+            if XLanguage.get() == .English{
+                self.view.makeToast("Please choose estate type.", duration: 3.0, position: .top)
+            }else if XLanguage.get() == .Arabic{
+                self.view.makeToast("الرجاء اختيار نوع العقار.", duration: 3.0, position: .top)
+            }else{
+                self.view.makeToast("تکایە جۆری خانوبەر هەڵبژێرە.", duration: 3.0, position: .top)
+            }
+            
+            AudioServicesPlaySystemSound(1519);
+            EstateTypeView.layer.borderColor = UIColor.red.cgColor
+            EstateTypeView.layer.borderWidth = 1.5
+            EstateTypeView.layer.cornerRadius = 5
+            EstateTypeView.clipsToBounds = false
+            EstateTypeView.layer.shadowOpacity=0.4
+            EstateTypeView.layer.shadowOffset = CGSize(width: 0, height: 0)
+          
+        }else if textfield == Typelable{
+            if XLanguage.get() == .English{
+                self.view.makeToast("Please choose the type of property.", duration: 3.0, position: .top)
+            }else if XLanguage.get() == .Arabic{
+                self.view.makeToast("الرجاء اختيار نوع الملكية.", duration: 3.0, position: .top)
+            }else{
+                self.view.makeToast("تکایە جۆری موڵکەکە هەڵبژێرە.", duration: 3.0, position: .top)
+            }
+            AudioServicesPlaySystemSound(1519);
+            TypeView.layer.borderColor = UIColor.red.cgColor
+            TypeView.layer.borderWidth = 1.5
+            TypeView.layer.cornerRadius = 5
+            TypeView.clipsToBounds = false
+            TypeView.layer.shadowOpacity=0.4
+            TypeView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        }else if textfield == self.AddressLable{
+            if XLanguage.get() == .English{
+                self.view.makeToast("Please choose City.", duration: 3.0, position: .top)
+            }else if XLanguage.get() == .Arabic{
+                self.view.makeToast("الرجاء اختيار المدينة.", duration: 3.0, position: .top)
+            }else{
+                self.view.makeToast("تکایە شار هەڵبژێرە.", duration: 3.0, position: .top)
+            }
+            ToastManager.shared.isTapToDismissEnabled = true
+            AudioServicesPlaySystemSound(1519);
+            AddressLableView.layer.borderColor = UIColor.red.cgColor;
+            AddressLableView.layer.borderWidth = 1.5 ;
+            AddressLableView.layer.cornerRadius = 5 ;
+            AddressLableView.clipsToBounds = false
+            AddressLableView.layer.shadowOpacity=0.4
+            AddressLableView.layer.shadowOffset = CGSize(width: 0, height: 0)
         }else{
+            AudioServicesPlaySystemSound(1519);
+            textfield.layer.borderColor = UIColor.red.cgColor;
+            textfield.layer.borderWidth = 1.5 ;
+            textfield.layer.cornerRadius = 5 ;
+            textfield.clipsToBounds = false
+            textfield.layer.shadowOpacity=0.4
+            textfield.layer.shadowOffset = CGSize(width: 0, height: 0)
             self.view.makeToast("\(pleaseEnter) \(textfield.text!).", duration: 3.0, position: .top)
         }
         ToastManager.shared.isTapToDismissEnabled = true
-        AudioServicesPlaySystemSound(1519);
-        textfield.layer.borderColor = UIColor.red.cgColor;
-        textfield.layer.borderWidth = 1.5 ;
-        textfield.layer.cornerRadius = 5 ;
-        textfield.clipsToBounds = false
-        textfield.layer.shadowOpacity=0.4
-        textfield.layer.shadowOffset = CGSize(width: 0, height: 0)
     }
     
     func EmptyLatidute(_ button : UIButton){
@@ -1741,12 +1950,12 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
         if IsUpdate == false{
             guard self.Images.count != 0 else{
                 AudioServicesPlaySystemSound(1519);
-                if XLanguage.get() == .English{
+                if XLanguage.get() == .Kurdish{
                     let myAlert = UIAlertController(title: "تکایە لانیکەم یەک وێنە هەڵبژێرە.", message: nil, preferredStyle: UIAlertController.Style.alert)
                     myAlert.addAction(UIAlertAction(title: "بەڵێ", style: UIAlertAction.Style.cancel, handler: nil))
                     self.present(myAlert, animated: true, completion: nil)
                     return
-                }else if XLanguage.get() == .Kurdish{
+                }else if XLanguage.get() == .English{
                     let myAlert = UIAlertController(title: "Please choose at least one image.", message: nil, preferredStyle: UIAlertController.Style.alert)
                     myAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
                     self.present(myAlert, animated: true, completion: nil)
@@ -1774,12 +1983,13 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             guard self.LatLongAddress.text! != "موقعك ( )" else{ EmptyLatidute(self.ViewmapButton); return}
         }
        
-        guard self.AddressLable.text!.isEmpty == false else{EmptyLable(self.AddressLable); return}
+            
+        guard self.CityId != "" else{EmptyLable(self.AddressLable); return}
        
-        guard self.Space.text!.isEmpty == false else{EmptyTextField(self.Space); return}
+            
+        guard self.EstateTypeLable.text!.isEmpty == false else{EmptyLable(self.EstateTypeLable); return}
         
-        guard self.Furnished.text!.isEmpty == false else{EmptyTextField(self.Furnished); return}
-        
+
         if self.IsApartment == true{
             guard self.Floor.text!.isEmpty == false else{EmptyTextField(self.Floor); return}
             
@@ -1789,7 +1999,12 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             
             guard self.ProjectName.text!.isEmpty == false else{EmptyLable(self.ProjectName); return}
         }
+        guard self.TypeId != "" else{EmptyLable(self.Typelable); return}
         
+            
+            guard self.Space.text!.isEmpty == false else{EmptyTextField(self.Space); return}
+            guard self.Furnished.text!.isEmpty == false else{EmptyTextField(self.Furnished); return}
+            
         guard self.BondType.text!.isEmpty == false else{EmptyTextField(self.BondType); return}
         
         guard self.Year.text!.isEmpty == false else{EmptyTextField(self.Year); return}
@@ -1859,7 +2074,8 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                                                   , project_id: self.ProjectId
                                                   , video_link: ""
                                                   , archived: "0"
-                                                  , sold: "0").Upload()
+                                                  , sold: "0"
+                                                  , type_id: self.TypeId).Upload()
                             }
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "EstateInserted"), object: nil)
                             self.navigationController?.popViewController(animated: true)
@@ -1930,7 +2146,8 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                                               , project_id: self.ProjectId
                                               , video_link: ""
                                               , archived: "0"
-                                              , sold: "0").Update()
+                                              , sold: "0"
+                                              , type_id: self.TypeId).Update()
                             
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "EstateInserted"), object: nil)
                             self.navigationController?.popViewController(animated: true)

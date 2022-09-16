@@ -1222,7 +1222,7 @@
 #pragma  mark - Presenting AlertView
 
 - (void) showAlertInView:(UIViewController *)view withTitle:(NSString *)title withSubtitle:(NSString *)subTitle withCustomImage:(UIImage *)image withDoneButtonTitle:(NSString *)done andButtons:(NSArray *)buttons {
-    printf(",ldplf,pld,fpl");
+    
     // Blur Effect
     
     if (_blurBackground && NSClassFromString(@"UIVisualEffectView") != nil) {
@@ -1381,46 +1381,46 @@
     
     [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         self.alpha = 1;
-        if (self->_bounceAnimations) {
-            if (!self->_animateAlertInFromTop && !self->_animateAlertInFromLeft && !self->_animateAlertInFromRight && !self->_animateAlertInFromBottom)
-                self->alertViewContents.transform = CGAffineTransformMakeScale(0.95, 0.95);
-            if (self->_animateAlertInFromTop)
-                self->alertViewContents.frame = CGRectMake(self->alertViewFrame.origin.x,
-                                                     self->alertViewFrame.origin.y + 7.5,
-                                                     self->alertViewFrame.size.width,
-                                                     self->alertViewFrame.size.height);
-            if (self->_animateAlertInFromRight)
-                self->alertViewContents.frame = CGRectMake(self->alertViewFrame.origin.x - 7.5,
-                                                     self->alertViewFrame.origin.y,
-                                                     self->alertViewFrame.size.width,
-                                                     self->alertViewFrame.size.height);
-            if (self->_animateAlertInFromBottom)
-                self->alertViewContents.frame = CGRectMake(self->alertViewFrame.origin.x,
-                                                     self->alertViewFrame.origin.y - 7.5,
-                                                     self->alertViewFrame.size.width,
-                                                     self->alertViewFrame.size.height);
-            if (self->_animateAlertInFromLeft)
-                self->alertViewContents.frame = CGRectMake(self->alertViewFrame.origin.x + 7.5,
-                                                     self->alertViewFrame.origin.y,
-                                                     self->alertViewFrame.size.width,
-                                                     self->alertViewFrame.size.height);
+        if (_bounceAnimations) {
+            if (!_animateAlertInFromTop && !_animateAlertInFromLeft && !_animateAlertInFromRight && !_animateAlertInFromBottom)
+                alertViewContents.transform = CGAffineTransformMakeScale(0.95, 0.95);
+            if (_animateAlertInFromTop)
+                alertViewContents.frame = CGRectMake(alertViewFrame.origin.x,
+                                                     alertViewFrame.origin.y + 7.5,
+                                                     alertViewFrame.size.width,
+                                                     alertViewFrame.size.height);
+            if (_animateAlertInFromRight)
+                alertViewContents.frame = CGRectMake(alertViewFrame.origin.x - 7.5,
+                                                     alertViewFrame.origin.y,
+                                                     alertViewFrame.size.width,
+                                                     alertViewFrame.size.height);
+            if (_animateAlertInFromBottom)
+                alertViewContents.frame = CGRectMake(alertViewFrame.origin.x,
+                                                     alertViewFrame.origin.y - 7.5,
+                                                     alertViewFrame.size.width,
+                                                     alertViewFrame.size.height);
+            if (_animateAlertInFromLeft)
+                alertViewContents.frame = CGRectMake(alertViewFrame.origin.x + 7.5,
+                                                     alertViewFrame.origin.y,
+                                                     alertViewFrame.size.width,
+                                                     alertViewFrame.size.height);
         } else {
-            self->alertViewContents.transform = CGAffineTransformMakeScale(1.0, 1.0);
-            self->alertViewContents.frame = CGRectMake(self->alertViewFrame.origin.x,
-                                                 self->alertViewFrame.origin.y,
-                                                 self->alertViewFrame.size.width,
-                                                 self->alertViewFrame.size.height);
+            alertViewContents.transform = CGAffineTransformMakeScale(1.0, 1.0);
+            alertViewContents.frame = CGRectMake(alertViewFrame.origin.x,
+                                                 alertViewFrame.origin.y,
+                                                 alertViewFrame.size.width,
+                                                 alertViewFrame.size.height);
         }
         
     } completion:^(BOOL finished) {
-        if (self->_bounceAnimations)
+        if (_bounceAnimations)
             [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-                if (!self->_animateAlertInFromTop && !self->_animateAlertInFromLeft && !self->_animateAlertInFromRight && !self->_animateAlertInFromBottom)
-                    self->alertViewContents.transform = CGAffineTransformMakeScale(1.00, 1.00);
-                self->alertViewContents.frame = CGRectMake(self->alertViewFrame.origin.x,
-                                                     self->alertViewFrame.origin.y,
-                                                     self->alertViewFrame.size.width,
-                                                     self->alertViewFrame.size.height);
+                if (!_animateAlertInFromTop && !_animateAlertInFromLeft && !_animateAlertInFromRight && !_animateAlertInFromBottom)
+                    alertViewContents.transform = CGAffineTransformMakeScale(1.00, 1.00);
+                alertViewContents.frame = CGRectMake(alertViewFrame.origin.x,
+                                                     alertViewFrame.origin.y,
+                                                     alertViewFrame.size.width,
+                                                     alertViewFrame.size.height);
             } completion:nil];
         if (self.autoHideSeconds != 0) {
             [self performSelector:@selector(dismissAlertView) withObject:nil afterDelay:self.autoHideSeconds];
@@ -1437,98 +1437,98 @@
     
     [UIView animateWithDuration:0.175 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         
-        if (!self->_animateAlertOutToTop && !self->_animateAlertOutToLeft && !self->_animateAlertOutToRight && !self->_animateAlertOutToBottom) {
+        if (!_animateAlertOutToTop && !_animateAlertOutToLeft && !_animateAlertOutToRight && !_animateAlertOutToBottom) {
             self.alpha = 0;
-            self->backgroundVisualEffectView.alpha = 0;
-            self->alertViewContents.transform = CGAffineTransformMakeScale(0.9, 0.9);
+            backgroundVisualEffectView.alpha = 0;
+            alertViewContents.transform = CGAffineTransformMakeScale(0.9, 0.9);
         } else {
             
-            if (self->_bounceAnimations) {
-                if (self->_animateAlertOutToTop)
-                    self->alertViewContents.frame = CGRectMake(self->alertViewFrame.origin.x,
-                                                         self->alertViewFrame.origin.y + 7.5,
-                                                         self->alertViewFrame.size.width,
-                                                         self->alertViewFrame.size.height);
-                if (self->_animateAlertOutToRight)
-                    self->alertViewContents.frame = CGRectMake(self->alertViewFrame.origin.x - 7.5,
-                                                         self->alertViewFrame.origin.y,
-                                                         self->alertViewFrame.size.width,
-                                                         self->alertViewFrame.size.height);
-                if (self->_animateAlertOutToBottom)
-                    self->alertViewContents.frame = CGRectMake(self->alertViewFrame.origin.x,
-                                                         self->alertViewFrame.origin.y - 7.5,
-                                                         self->alertViewFrame.size.width,
-                                                         self->alertViewFrame.size.height);
-                if (self->_animateAlertOutToLeft)
-                    self->alertViewContents.frame = CGRectMake(self->alertViewFrame.origin.x + 7.5,
-                                                         self->alertViewFrame.origin.y,
-                                                         self->alertViewFrame.size.width,
-                                                         self->alertViewFrame.size.height);
+            if (_bounceAnimations) {
+                if (_animateAlertOutToTop)
+                    alertViewContents.frame = CGRectMake(alertViewFrame.origin.x,
+                                                         alertViewFrame.origin.y + 7.5,
+                                                         alertViewFrame.size.width,
+                                                         alertViewFrame.size.height);
+                if (_animateAlertOutToRight)
+                    alertViewContents.frame = CGRectMake(alertViewFrame.origin.x - 7.5,
+                                                         alertViewFrame.origin.y,
+                                                         alertViewFrame.size.width,
+                                                         alertViewFrame.size.height);
+                if (_animateAlertOutToBottom)
+                    alertViewContents.frame = CGRectMake(alertViewFrame.origin.x,
+                                                         alertViewFrame.origin.y - 7.5,
+                                                         alertViewFrame.size.width,
+                                                         alertViewFrame.size.height);
+                if (_animateAlertOutToLeft)
+                    alertViewContents.frame = CGRectMake(alertViewFrame.origin.x + 7.5,
+                                                         alertViewFrame.origin.y,
+                                                         alertViewFrame.size.width,
+                                                         alertViewFrame.size.height);
             } else {
                 self.alpha = 0;
-                self->backgroundVisualEffectView.alpha = 0;
+                backgroundVisualEffectView.alpha = 0;
                 
-                if (self->_animateAlertOutToTop)
-                    self->alertViewContents.frame = CGRectMake(self->alertViewFrame.origin.x,
-                                                         0 - self->alertViewFrame.size.height - 15,
-                                                         self->alertViewFrame.size.width,
-                                                         self->alertViewFrame.size.height);
-                if (self->_animateAlertOutToRight)
-                    self->alertViewContents.frame = CGRectMake(self.frame.size.width + self->alertViewFrame.size.width + 15,
-                                                               self->alertViewFrame.origin.y,
-                                                               self->alertViewFrame.size.width,
-                                                               self->alertViewFrame.size.height);
-                if (self->_animateAlertOutToBottom)
-                    self->alertViewContents.frame = CGRectMake(self->alertViewFrame.origin.x,
-                                                         self.frame.size.height + self->alertViewFrame.size.height + 15,
-                                                         self->alertViewFrame.size.width,
-                                                         self->alertViewFrame.size.height);
-                if (self->_animateAlertOutToLeft)
-                    self->alertViewContents.frame = CGRectMake(0 - self->alertViewFrame.size.width - 15,
-                                                         self->alertViewFrame.origin.y,
-                                                         self->alertViewFrame.size.width,
-                                                         self->alertViewFrame.size.height);
+                if (_animateAlertOutToTop)
+                    alertViewContents.frame = CGRectMake(alertViewFrame.origin.x,
+                                                         0 - alertViewFrame.size.height - 15,
+                                                         alertViewFrame.size.width,
+                                                         alertViewFrame.size.height);
+                if (_animateAlertOutToRight)
+                    alertViewContents.frame = CGRectMake(self.frame.size.width + alertViewFrame.size.width + 15,
+                                                         alertViewFrame.origin.y,
+                                                         alertViewFrame.size.width,
+                                                         alertViewFrame.size.height);
+                if (_animateAlertOutToBottom)
+                    alertViewContents.frame = CGRectMake(alertViewFrame.origin.x,
+                                                         self.frame.size.height + alertViewFrame.size.height + 15,
+                                                         alertViewFrame.size.width,
+                                                         alertViewFrame.size.height);
+                if (_animateAlertOutToLeft)
+                    alertViewContents.frame = CGRectMake(0 - alertViewFrame.size.width - 15,
+                                                         alertViewFrame.origin.y,
+                                                         alertViewFrame.size.width,
+                                                         alertViewFrame.size.height);
             }
         }
         
     } completion:^(BOOL finished) {
         
-        if (!self->_animateAlertOutToTop && !self->_animateAlertOutToLeft && !self->_animateAlertOutToRight && !self->_animateAlertOutToBottom) {
+        if (!_animateAlertOutToTop && !_animateAlertOutToLeft && !_animateAlertOutToRight && !_animateAlertOutToBottom) {
             id<FCAlertViewDelegate> strongDelegate = self.delegate;
             
             if ([strongDelegate respondsToSelector:@selector(FCAlertViewDismissed:)]) {
                 [strongDelegate FCAlertViewDismissed:self];
             }
             
-            [self->backgroundVisualEffectView removeFromSuperview];
+            [backgroundVisualEffectView removeFromSuperview];
             [self removeFromSuperview];
         } else {
-            if (self->_bounceAnimations) {
+            if (_bounceAnimations) {
                 [UIView animateWithDuration:0.175 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                     
                     self.alpha = 0;
-                    self->backgroundVisualEffectView.alpha = 0;
+                    backgroundVisualEffectView.alpha = 0;
                     
-                    if (self->_animateAlertOutToTop)
-                        self->alertViewContents.frame = CGRectMake(self->alertViewFrame.origin.x,
-                                                             0 - self->alertViewFrame.size.height - 15,
-                                                             self->alertViewFrame.size.width,
-                                                             self->alertViewFrame.size.height);
-                    if (self->_animateAlertOutToRight)
-                        self->alertViewContents.frame = CGRectMake(self.frame.size.width + self->alertViewFrame.size.width + 15,
-                                                             self->alertViewFrame.origin.y,
-                                                             self->alertViewFrame.size.width,
-                                                             self->alertViewFrame.size.height);
-                    if (self->_animateAlertOutToBottom)
-                        self->alertViewContents.frame = CGRectMake(self->alertViewFrame.origin.x,
-                                                             self.frame.size.height + self->alertViewFrame.size.height + 15,
-                                                             self->alertViewFrame.size.width,
-                                                             self->alertViewFrame.size.height);
-                    if (self->_animateAlertOutToLeft)
-                        self->alertViewContents.frame = CGRectMake(0 - self->alertViewFrame.size.width - 15,
-                                                                   self->alertViewFrame.origin.y,
-                                                                   self->alertViewFrame.size.width,
-                                                                   self->alertViewFrame.size.height);
+                    if (_animateAlertOutToTop)
+                        alertViewContents.frame = CGRectMake(alertViewFrame.origin.x,
+                                                             0 - alertViewFrame.size.height - 15,
+                                                             alertViewFrame.size.width,
+                                                             alertViewFrame.size.height);
+                    if (_animateAlertOutToRight)
+                        alertViewContents.frame = CGRectMake(self.frame.size.width + alertViewFrame.size.width + 15,
+                                                             alertViewFrame.origin.y,
+                                                             alertViewFrame.size.width,
+                                                             alertViewFrame.size.height);
+                    if (_animateAlertOutToBottom)
+                        alertViewContents.frame = CGRectMake(alertViewFrame.origin.x,
+                                                             self.frame.size.height + alertViewFrame.size.height + 15,
+                                                             alertViewFrame.size.width,
+                                                             alertViewFrame.size.height);
+                    if (_animateAlertOutToLeft)
+                        alertViewContents.frame = CGRectMake(0 - alertViewFrame.size.width - 15,
+                                                             alertViewFrame.origin.y,
+                                                             alertViewFrame.size.width,
+                                                             alertViewFrame.size.height);
                 }completion:^(BOOL finished) {
                     id<FCAlertViewDelegate> strongDelegate = self.delegate;
                     
@@ -1536,7 +1536,7 @@
                         [strongDelegate FCAlertViewDismissed:self];
                     }
                     
-                    [self->backgroundVisualEffectView removeFromSuperview];
+                    [backgroundVisualEffectView removeFromSuperview];
                     [self removeFromSuperview];
                 }];
             } else {
@@ -1546,7 +1546,7 @@
                     [strongDelegate FCAlertViewDismissed:self];
                 }
                 
-                [self->backgroundVisualEffectView removeFromSuperview];
+                [backgroundVisualEffectView removeFromSuperview];
                 [self removeFromSuperview];
             }
         }
@@ -1576,7 +1576,6 @@
     
     if (action != nil)
         self.doneBlock = action;
-    //self.removeFromSuperview;
     
 }
 
@@ -1633,8 +1632,8 @@
         
         [UIView animateWithDuration:0.15 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             self.alpha = 1;
-            if (self->_bounceAnimations)
-                self->alertViewContents.transform = CGAffineTransformMakeScale(0.95, 0.95);
+            if (_bounceAnimations)
+                alertViewContents.transform = CGAffineTransformMakeScale(0.95, 0.95);
         }completion:nil];
         
     }
@@ -1671,7 +1670,6 @@
         _ratingBlock(currentRating);
     
     [self dismissAlertView];
-
     
 }
 
@@ -1680,10 +1678,10 @@
     if (_bounceAnimations) {
         
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            self->alertViewContents.transform = CGAffineTransformMakeScale(1.05, 1.05);
+            alertViewContents.transform = CGAffineTransformMakeScale(1.05, 1.05);
         }completion:^(BOOL finished) {
             [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-                self->alertViewContents.transform = CGAffineTransformMakeScale(1.00, 1.00);
+                alertViewContents.transform = CGAffineTransformMakeScale(1.00, 1.00);
             }completion:nil];
         }];
         
@@ -1728,10 +1726,10 @@
     currentAVCFrames = alertViewContents.frame;
     
     [UIView animateWithDuration:0.30 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self->alertViewContents.frame = CGRectMake(self->currentAVCFrames.origin.x,
-                                                   self->currentAVCFrames.origin.y - 80,
-                                                   self->currentAVCFrames.size.width,
-                                                   self->currentAVCFrames.size.height);
+        alertViewContents.frame = CGRectMake(currentAVCFrames.origin.x,
+                                             currentAVCFrames.origin.y - 80,
+                                             currentAVCFrames.size.width,
+                                             currentAVCFrames.size.height);
     } completion:nil];
     
 }
@@ -1741,10 +1739,10 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     
     [UIView animateWithDuration:0.30 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self->alertViewContents.frame = CGRectMake(self->currentAVCFrames.origin.x,
-                                                   self->currentAVCFrames.origin.y,
-                                                   self->currentAVCFrames.size.width,
-                                                   self->currentAVCFrames.size.height);
+        alertViewContents.frame = CGRectMake(currentAVCFrames.origin.x,
+                                             currentAVCFrames.origin.y,
+                                             currentAVCFrames.size.width,
+                                             currentAVCFrames.size.height);
     } completion:nil];
     
 }
@@ -1776,10 +1774,10 @@
     
     if (_bounceAnimations) {
         [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self->item1.transform = CGAffineTransformMakeScale(0.9, 0.9);
+            item1.transform = CGAffineTransformMakeScale(0.9, 0.9);
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.35 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                self->item1.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                item1.transform = CGAffineTransformMakeScale(1.0, 1.0);
             } completion:nil];
         }];
     }
@@ -1792,10 +1790,10 @@
     
     if (_bounceAnimations) {
         [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self->item2.transform = CGAffineTransformMakeScale(0.9, 0.9);
+            item2.transform = CGAffineTransformMakeScale(0.9, 0.9);
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.35 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                self->item2.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                item2.transform = CGAffineTransformMakeScale(1.0, 1.0);
             } completion:nil];
         }];
     }
@@ -1807,10 +1805,10 @@
     
     if (_bounceAnimations) {
         [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self->item3.transform = CGAffineTransformMakeScale(0.9, 0.9);
+            item3.transform = CGAffineTransformMakeScale(0.9, 0.9);
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.35 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                self->item3.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                item3.transform = CGAffineTransformMakeScale(1.0, 1.0);
             } completion:nil];
         }];
     }
@@ -1822,10 +1820,10 @@
     
     if (_bounceAnimations) {
         [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self->item4.transform = CGAffineTransformMakeScale(0.9, 0.9);
+            item4.transform = CGAffineTransformMakeScale(0.9, 0.9);
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.35 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                self->item4.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                item4.transform = CGAffineTransformMakeScale(1.0, 1.0);
             } completion:nil];
         }];
     }
@@ -1837,10 +1835,10 @@
     
     if (_bounceAnimations) {
         [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self->item5.transform = CGAffineTransformMakeScale(0.9, 0.9);
+            item5.transform = CGAffineTransformMakeScale(0.9, 0.9);
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.35 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                self->item5.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                item5.transform = CGAffineTransformMakeScale(1.0, 1.0);
             } completion:nil];
         }];
     }
@@ -1848,11 +1846,11 @@
 
 - (void) setActiveRating:(NSInteger)rating {
     
-    self->item1.tintColor = [UIColor colorWithWhite:228.0f/255.0f alpha:1.0];
-    self->item2.tintColor = [UIColor colorWithWhite:228.0f/255.0f alpha:1.0];
-    self->item3.tintColor = [UIColor colorWithWhite:228.0f/255.0f alpha:1.0];
-    self->item4.tintColor = [UIColor colorWithWhite:228.0f/255.0f alpha:1.0];
-    self->item5.tintColor = [UIColor colorWithWhite:228.0f/255.0f alpha:1.0];
+    item1.tintColor = [UIColor colorWithWhite:228.0f/255.0f alpha:1.0];
+    item2.tintColor = [UIColor colorWithWhite:228.0f/255.0f alpha:1.0];
+    item3.tintColor = [UIColor colorWithWhite:228.0f/255.0f alpha:1.0];
+    item4.tintColor = [UIColor colorWithWhite:228.0f/255.0f alpha:1.0];
+    item5.tintColor = [UIColor colorWithWhite:228.0f/255.0f alpha:1.0];
     
     if (rating == 1) {
         item1.tintColor = self.colorScheme;

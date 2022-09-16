@@ -292,7 +292,7 @@ open class CollieGallery: UIViewController, UIScrollViewDelegate, CollieGalleryV
             let image = UIImage(named: customImageName) {
             closeButton.setImage(image, for: UIControl.State())
         } else {
-            actionButton.setTitle("•••", for: UIControl.State())
+            actionButton.setTitle("•••", for: .normal)
             actionButton.titleLabel!.font = UIFont(name: "HelveticaNeue-Thin", size: 15)
             actionButton.setTitleColor(theme.closeButtonColor, for: UIControl.State())
         }

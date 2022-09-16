@@ -304,6 +304,7 @@ class Home: UIViewController ,UITextFieldDelegate ,UIPickerViewDelegate , UIPick
     let locManager = CLLocationManager()
     @IBOutlet weak var NearyouLableStackBottom: NSLayoutConstraint!
     @IBOutlet weak var NearYouLableStackTop: NSLayoutConstraint!
+    @IBOutlet weak var NearYouStackBottom: NSLayoutConstraint!
     @IBOutlet weak var NearYourLableAndSeeAll: UIStackView!
     @IBOutlet weak var LoadingIndecator: UIActivityIndicatorView!
     var UserDeniedLocation = false
@@ -341,8 +342,8 @@ class Home: UIViewController ,UITextFieldDelegate ,UIPickerViewDelegate , UIPick
         
         self.GetAllEstates()
         self.GetApartmentEstates()
-        GetEstateType()
-
+        self.GetEstateType()
+        //self.GetNearEstates()
         if self.AllEstateArray.count == 0 && self.ApartmentArray.count == 0{
             self.ScrollView.isHidden = true
             self.LoadingIndecator.startAnimating()
@@ -350,17 +351,14 @@ class Home: UIViewController ,UITextFieldDelegate ,UIPickerViewDelegate , UIPick
         self.NearYouCollectionViewheight.constant = 0
         self.NearYourLableAndSeeAll.isHidden = true
         self.NearYouLableStackTop.constant = 0
+        self.NearYouStackBottom.constant = 0
         self.NearyouLableStackBottom.constant = 0
         
         locManager.requestWhenInUseAuthorization()
         
-//        let ls = LocationService.shared
-//        ls.requestAlwaysLocation()
-        
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse || CLLocationManager.authorizationStatus() ==  .authorizedAlways{
             print("----1")
             currentLocation = locManager.location
-            self.GetNearEstates()
             UserDefaults.standard.set(currentLocation?.coordinate.latitude, forKey: "LastUserLocationLat")
             UserDefaults.standard.set(currentLocation?.coordinate.longitude, forKey: "LastUserLocationLong")
             self.UserDeniedLocation = false
@@ -368,6 +366,7 @@ class Home: UIViewController ,UITextFieldDelegate ,UIPickerViewDelegate , UIPick
                 self.NearYouCollectionViewheight.constant = 290
                 self.NearYourLableAndSeeAll.isHidden = false
                 self.NearYouLableStackTop.constant = 20
+                self.NearYouStackBottom.constant = 20
                 self.NearyouLableStackBottom.constant = 5
                 self.view.layoutIfNeeded()
             }
@@ -378,6 +377,7 @@ class Home: UIViewController ,UITextFieldDelegate ,UIPickerViewDelegate , UIPick
             UIView.animate(withDuration: 0.3, delay: 0.0) {
             self.NearYouCollectionViewheight.constant = 0
                 self.NearYouLableStackTop.constant = 0
+                self.NearYouStackBottom.constant = 0
                 self.NearyouLableStackBottom.constant = 0
             self.NearYourLableAndSeeAll.isHidden = true
             }
@@ -397,12 +397,12 @@ class Home: UIViewController ,UITextFieldDelegate ,UIPickerViewDelegate , UIPick
             }
             let alertController = UIAlertController(title: self.titlee, message: self.messagee, preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: self.cancel, style: UIAlertAction.Style.default) { UIAlertAction in
-                self.GetNearEstates()
                 self.UserDeniedLocation = false
                 UIView.animate(withDuration: 0.3, delay: 0.0) {
                     self.NearYouCollectionViewheight.constant = 290
                     self.NearYourLableAndSeeAll.isHidden = false
                     self.NearYouLableStackTop.constant = 20
+                    self.NearYouStackBottom.constant = 20
                     self.NearyouLableStackBottom.constant = 5
                     self.view.layoutIfNeeded()
                 }
@@ -671,7 +671,7 @@ class Home: UIViewController ,UITextFieldDelegate ,UIPickerViewDelegate , UIPick
                 self.LocationdsArray.append(NearYouObject(id: product.id ?? "", cordinate: CLLocation(latitude: dbLat!, longitude:dbLong!)))
             }
             if let userlocationLat = UserDefaults.standard.value(forKey: "LastUserLocationLat") ,let userlocationLong = UserDefaults.standard.value(forKey: "LastUserLocationLong"){
-                let currentLocation = CLLocation(latitude: userlocationLat as! CLLocationDegrees, longitude:userlocationLong as! CLLocationDegrees)
+                var currentLocation = CLLocation(latitude: userlocationLat as! CLLocationDegrees, longitude:userlocationLong as! CLLocationDegrees)
             for loc in self.LocationdsArray{
                 let distanceInKm = currentLocation.distance(from: loc.cordinate ?? CLLocation()) / 1000
                 print("distanc ::::: \(distanceInKm)")
@@ -685,6 +685,57 @@ class Home: UIViewController ,UITextFieldDelegate ,UIPickerViewDelegate , UIPick
                 }
 
             }
+                print("o============[[[[[[[[[[")
+                if self.NearArray.count == 0{
+                    UIView.animate(withDuration: 0.3, delay: 0.0) {
+                    self.NearYouCollectionViewheight.constant = 0
+                        self.NearYouLableStackTop.constant = 0
+                        self.NearyouLableStackBottom.constant = 0
+                        self.NearYouStackBottom.constant = 0
+                        self.NearYourLableAndSeeAll.isHidden = true
+                        self.view.layoutIfNeeded()
+                    }
+                }else{
+                    if CLLocationManager.authorizationStatus() == .authorizedWhenInUse || CLLocationManager.authorizationStatus() ==  .authorizedAlways{
+                        currentLocation = self.locManager.location ?? CLLocation()
+                        print(CLLocationManager.authorizationStatus() == .authorizedAlways)
+                        print("--------=========000000333")
+                        UserDefaults.standard.set(currentLocation.coordinate.latitude, forKey: "LastUserLocationLat")
+                        UserDefaults.standard.set(currentLocation.coordinate.longitude, forKey: "LastUserLocationLong")
+                        self.UserDeniedLocation = false
+                        UIView.animate(withDuration: 0.3, delay: 0.0) {
+                            self.NearYouCollectionViewheight.constant = 290
+                            self.NearYourLableAndSeeAll.isHidden = false
+                            self.NearYouLableStackTop.constant = 20
+                            self.NearYouStackBottom.constant = 20
+                            self.NearyouLableStackBottom.constant = 5
+                            self.view.layoutIfNeeded()
+                        }
+                    }
+                    
+                    if CLLocationManager.authorizationStatus() == .denied && UserDefaults.standard.value(forKey: "LastUserLocationLat") == nil{
+                        print("--------=========00000022")
+                        UIView.animate(withDuration: 0.3, delay: 0.0) {
+                            self.NearYouCollectionViewheight.constant = 0
+                            self.NearYouLableStackTop.constant = 0
+                            self.NearyouLableStackBottom.constant = 0
+                            self.NearYouStackBottom.constant = 0
+                            self.NearYourLableAndSeeAll.isHidden = true
+                        }
+                    }else if CLLocationManager.authorizationStatus() == .denied && UserDefaults.standard.value(forKey: "LastUserLocationLat") != nil{
+                        UIView.animate(withDuration: 0.3, delay: 0.0) {
+                            print("--------=========00000011")
+                            self.NearYouCollectionViewheight.constant = 290
+                            self.NearYourLableAndSeeAll.isHidden = false
+                            self.NearYouLableStackTop.constant = 20
+                            self.NearYouStackBottom.constant = 20
+                            self.NearyouLableStackBottom.constant = 5
+                            self.view.layoutIfNeeded()
+                        }
+                    }
+                    
+                }
+                
             self.ScrollView.isHidden = false
             self.LoadingIndecator.stopAnimating()
             self.NearYouCollectionView.reloadData()
@@ -773,48 +824,9 @@ class Home: UIViewController ,UITextFieldDelegate ,UIPickerViewDelegate , UIPick
     @IBOutlet weak var InternetConnectionView: UIView!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.NearYouCollectionViewheight.constant = 0
-        self.NearYouLableStackTop.constant = 0
-        self.NearyouLableStackBottom.constant = 0
-        self.NearYourLableAndSeeAll.isHidden = true
-        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse || CLLocationManager.authorizationStatus() ==  .authorizedAlways{
-            currentLocation = locManager.location
-            self.GetNearEstates()
-            UserDefaults.standard.set(currentLocation?.coordinate.latitude, forKey: "LastUserLocationLat")
-            UserDefaults.standard.set(currentLocation?.coordinate.longitude, forKey: "LastUserLocationLong")
-            self.UserDeniedLocation = false
-            UIView.animate(withDuration: 0.3, delay: 0.0) {
-                self.NearYouCollectionViewheight.constant = 290
-                self.NearYourLableAndSeeAll.isHidden = false
-                self.NearYouLableStackTop.constant = 20
-                self.NearyouLableStackBottom.constant = 5
-                self.view.layoutIfNeeded()
-            }
-        }
-        
-        if CLLocationManager.authorizationStatus() == .denied && UserDefaults.standard.value(forKey: "LastUserLocationLat") == nil{
-            self.UserDeniedLocation = true
-            UIView.animate(withDuration: 0.3, delay: 0.0) {
-                self.NearYouCollectionViewheight.constant = 0
-                self.NearYouLableStackTop.constant = 0
-                self.NearyouLableStackBottom.constant = 0
-                self.NearYourLableAndSeeAll.isHidden = true
-            }
-        }else if CLLocationManager.authorizationStatus() == .denied && UserDefaults.standard.value(forKey: "LastUserLocationLat") != nil{
-            self.GetNearEstates()
-            UIView.animate(withDuration: 0.3, delay: 0.0) {
-                self.NearYouCollectionViewheight.constant = 290
-                self.NearYourLableAndSeeAll.isHidden = false
-                self.NearYouLableStackTop.constant = 20
-                self.NearyouLableStackBottom.constant = 5
-                self.view.layoutIfNeeded()
-            }
-        }
-        
-        
+        self.GetNearEstates()
 
-        
+        self.SearchText.textAlignment = .left
         
         if let officeId = UserDefaults.standard.string(forKey: "OfficeId"){
             OfficeAip.GetOffice(ID: officeId) {office in
@@ -1018,7 +1030,29 @@ class Home: UIViewController ,UITextFieldDelegate ,UIPickerViewDelegate , UIPick
     
     
     @objc private func titleWasTapped() {
+        if !CheckInternet.Connection(){
+            if XLanguage.get() == .English{
+                let ac = UIAlertController(title: "Error", message: "Please check your internet connection.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else if XLanguage.get() == .Arabic{
+                let ac = UIAlertController(title: "خطأ", message: "الرجاء التحقق من اتصال الانترنت الخاص بك.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "نعم", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else{
+                let ac = UIAlertController(title: "هەڵە", message: "تکایە هێڵی ئینتەرنێتەکەت بپشکنە.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "باشە", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }
+        }else{
         self.setupCitySelectionAlert()
+        }
     }
     
     

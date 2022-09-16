@@ -15,6 +15,7 @@ import AAShimmerView
 import ShimmerLabel
 import FlipLabel
 import Drops
+import FirebaseRemoteConfig
 class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -276,9 +277,31 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     
     
     @IBAction func AboutUs(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let myVC = storyboard.instantiateViewController(withIdentifier: "AboutUsVc") as! AboutrVC
-        self.navigationController?.pushViewController(myVC, animated: true)
+        if !CheckInternet.Connection(){
+            if XLanguage.get() == .English{
+                let ac = UIAlertController(title: "Error", message: "Please check your internet connection.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else if XLanguage.get() == .Arabic{
+                let ac = UIAlertController(title: "خطأ", message: "الرجاء التحقق من اتصال الانترنت الخاص بك.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "نعم", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else{
+                let ac = UIAlertController(title: "هەڵە", message: "تکایە هێڵی ئینتەرنێتەکەت بپشکنە.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "باشە", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }
+        }else{
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let myVC = storyboard.instantiateViewController(withIdentifier: "AboutUsVc") as! AboutrVC
+            self.navigationController?.pushViewController(myVC, animated: true)
+        }
     }
     
     
@@ -725,15 +748,12 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                                     ProductAip.GetAllMyEstates(office_id: office.id ?? "") { estates in
                                                         print("sub id -------: \(sub.subscription_type_id ?? "")")
                                                         
-                                                        
-                                                        
                                                         for estate in estates{
                                                             if Double(estate.Stamp ?? TimeInterval()) >= Double(sub.start_date ?? TimeInterval()) {
                                                                 self.MyEstates.append(estate)
                                                             }
+                                                            
                                                         }
-                                                
-                                                        
                                                         
                                                         SubscriptionsTypeAip.GetSubscriptionsTypeByOfficeId(id: sub.subscription_type_id ?? "") { posts in
                                                             if XLanguage.get() == .Kurdish{
@@ -818,7 +838,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                             OfficeAip.GetOfficeById(Id: FireId) { office in
                                     self.Phone.isHidden = false
                                     let url = URL(string: office.ImageURL ?? "")
-                                    self.Image.sd_setImage(with: url, completed: nil)
+                                    self.Image.sd_setImage(with: url, placeholderImage: UIImage(named: "logoPlace"))
                                     self.Name.text = office.name?.description.uppercased()
                                     self.Phone.text = office.phone1
                             }
@@ -1023,66 +1043,137 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     
     
     @IBAction func CheckVersion(_ sender: Any) {
-        Drops.hideAll()
-        var title = "Version \(self.version)"
-        var message = "Is your current version."
+        fetchRemoteConfig()
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    var remoteConfig = RemoteConfig.remoteConfig()
+    let settings = RemoteConfigSettings()
+    func fetchRemoteConfig(){
+        settings.minimumFetchInterval = 0
+        remoteConfig.configSettings = settings
+        remoteConfig.fetch { (status, error) -> Void in
+          if error == nil {
+            print("Config fetched!")
+            self.remoteConfig.activate { changed, error in
+                self.IsUpdateAvaible()
+            }
+          } else {
+            print("Config not fetched")
+            print("Error: \(error?.localizedDescription ?? "No error available.")")
+          }
+        }
+    }
+    
+    
+    var messagee = ""
+    var Action = ""
+    var cancel = ""
+    func IsUpdateAvaible(){
+        let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"]!
+        let IsUpdateAvaiable = self.remoteConfig.configValue(forKey: "maskani_version").stringValue
+        let IsAvaiable = self.remoteConfig.configValue(forKey: "IsAvaiable").boolValue
         
-        if XLanguage.get() == .English{
-            title = "Version \(self.version)"
-            message = "Is your current version."
-        }else if XLanguage.get() == .Kurdish{
-            title = "وەشانی \(self.version)"
-            message = "وەشانی ئێستای تۆیە."
+        print("old version is : V \(version)")
+        print("new version is : V \(IsUpdateAvaiable ?? "")")
+        if IsUpdateAvaiable != "\(version)" && IsAvaiable == true{
+            DispatchQueue.main.async {
+                if XLanguage.get() == .Kurdish{
+                    self.titlee = "ئاگاداری"
+                    self.messagee = "ئەپدەیتی نوێ بەردەستە"
+                    self.Action = "نوێکردنەوە"
+                    self.cancel = "ئێستا نا"
+                }else if XLanguage.get() == . English{
+                    self.titlee = "Warning"
+                    self.messagee = "A new update is available"
+                    self.Action = "Update"
+                    self.cancel = "Not now"
+                }else{
+                    self.titlee = "تنبيه"
+                    self.messagee = "يتوفر تحديث جديد"
+                    self.Action = "تحديث"
+                    self.cancel = "ليس الان"
+                }
+                let alertController = UIAlertController(title: "", message: self.messagee, preferredStyle: .alert)
+                let okAction = UIAlertAction(title:  self.Action, style: UIAlertAction.Style.default) { _ in
+                    if let url = URL(string: "https://apps.apple.com/us/app/maskani/id1602905831"),
+                      UIApplication.shared.canOpenURL(url) {
+                         if #available(iOS 10, *) {
+                           UIApplication.shared.open(url, options: [:], completionHandler:nil)
+                          } else {
+                              UIApplication.shared.openURL(url)
+                          }
+                      } else { }
+                }
+                let cancelAction = UIAlertAction(title: self.cancel, style: UIAlertAction.Style.default) { UIAlertAction in  alertController.dismiss(animated: true)}
+                alertController.addAction(okAction)
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
         }else{
-            title = "الإصدار \(self.version)"
-            message = "هو نسختك الحالية."
+            DispatchQueue.main.async {
+            if XLanguage.get() == .Kurdish{
+                self.titlee = "نوێکردنەوە"
+                self.messagee = "ئەپەکەت نوێ بووەتەوە"
+                self.Action = "باشە"
+            }else if XLanguage.get() == . English{
+                self.titlee = "Update"
+                self.messagee = "Your app is up to date"
+                self.Action = "Ok"
+            }else{
+                self.titlee = "تحديث"
+                self.messagee = "التطبيق محدث"
+                self.Action = "حسنًا"
+            }
+            let alertController = UIAlertController(title: "", message: self.messagee, preferredStyle: .alert)
+            let okAction = UIAlertAction(title:  self.Action, style: UIAlertAction.Style.default) { _ in
+                alertController.dismiss(animated: true)
+            }
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
         }
-        let drop = Drop(
-            title: title,
-            subtitle: message,
-            icon: UIImage(named: "attention"),
-            action: .init {
-                print("Drop tapped")
-                Drops.hideCurrent()
-            },
-            position: .bottom,
-            duration: 3.0,
-            accessibility: "Alert: Title, Subtitle"
-        )
-        Drops.show(drop)
-    }
-    
-    
-    func isUpdateAvailable() throws -> Bool {
-        guard let info = Bundle.main.infoDictionary,
-              let currentVersion = info["CFBundleShortVersionString"] as? String,
-              let identifier = info["CFBundleIdentifier"] as? String,
-              let url = URL(string: "https://itunes.apple.com/lookup?bundleId=\(identifier)") else {
-            throw VersionError.invalidBundleInfo
         }
-        let data = try Data(contentsOf: url)
-        guard let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any] else {
-            throw VersionError.invalidResponse
-        }
-        if let result = (json["results"] as? [Any])?.first as? [String: Any], let version = result["version"] as? String {
-            return version != currentVersion
-        }
-        throw VersionError.invalidResponse
-    }
-    
-    enum VersionError: Error {
-        case invalidResponse, invalidBundleInfo
     }
     
     
     
     
+    
+   
     
     var logoutT = ""
     var logoutM = ""
-    var Action = ""
-    var cancel = ""
     @IBAction func LoginOrLogout(_ sender: Any) {
+        if !CheckInternet.Connection(){
+            if XLanguage.get() == .English{
+                let ac = UIAlertController(title: "Error", message: "Please check your internet connection.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else if XLanguage.get() == .Arabic{
+                let ac = UIAlertController(title: "خطأ", message: "الرجاء التحقق من اتصال الانترنت الخاص بك.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "نعم", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else{
+                let ac = UIAlertController(title: "هەڵە", message: "تکایە هێڵی ئینتەرنێتەکەت بپشکنە.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "باشە", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }
+        }else{
+        
         if UserDefaults.standard.bool(forKey: "Login") == true {
             if XLanguage.get() == .Kurdish{
                 self.logoutT = "چوونە دەرەوە"
@@ -1163,7 +1254,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
-        
+        }
     
         
         
@@ -1542,7 +1633,29 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     
     
     @IBAction func ChangLocation(_ sender: Any) {
-        setupCitySelectionAlert()
+        if !CheckInternet.Connection(){
+            if XLanguage.get() == .English{
+                let ac = UIAlertController(title: "Error", message: "Please check your internet connection.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else if XLanguage.get() == .Arabic{
+                let ac = UIAlertController(title: "خطأ", message: "الرجاء التحقق من اتصال الانترنت الخاص بك.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "نعم", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else{
+                let ac = UIAlertController(title: "هەڵە", message: "تکایە هێڵی ئینتەرنێتەکەت بپشکنە.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "باشە", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }
+        }else{
+            self.setupCitySelectionAlert()
+        }
     }
     
     @IBOutlet weak var Location : UILabel!

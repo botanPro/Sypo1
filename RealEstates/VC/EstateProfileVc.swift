@@ -26,10 +26,11 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     func playerViewDidBecomeReady(_ playerView: WKYTPlayerView) {
     player.stopVideo()
     }
+    
+    
     override func viewDidDisappear(_ animated: Bool) {
     player.stopVideo()
     }
-    
     
     
     @IBAction func Dismiss(_ sender: Any) {
@@ -75,6 +76,27 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     
     @IBOutlet weak var AddToFav: UIButton!
     @IBAction func AddToFav(_ sender: Any) {
+        if !CheckInternet.Connection(){
+            if XLanguage.get() == .English{
+                let ac = UIAlertController(title: "Error", message: "Please check your internet connection.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else if XLanguage.get() == .Arabic{
+                let ac = UIAlertController(title: "خطأ", message: "الرجاء التحقق من اتصال الانترنت الخاص بك.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "نعم", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else{
+                let ac = UIAlertController(title: "هەڵە", message: "تکایە هێڵی ئینتەرنێتەکەت بپشکنە.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "باشە", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }
+        }else{
         if UserDefaults.standard.bool(forKey: "Login") == true {
             if let FireId = UserDefaults.standard.string(forKey: "UserId"){
                 FavoriteItemsObjectAip.GetFavoriteItemsById(fire_id: FireId) { item in
@@ -94,6 +116,7 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
             vc.modalPresentationStyle = .fullScreen
             vc.IsFromAnotherVc = true
             self.present(vc, animated: true)
+        }
         }
     }
     
@@ -277,7 +300,29 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
  
     
     @IBAction func ChooseEstateType(_ sender: Any) {
+        if !CheckInternet.Connection(){
+            if XLanguage.get() == .English{
+                let ac = UIAlertController(title: "Error", message: "Please check your internet connection.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else if XLanguage.get() == .Arabic{
+                let ac = UIAlertController(title: "خطأ", message: "الرجاء التحقق من اتصال الانترنت الخاص بك.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "نعم", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else{
+                let ac = UIAlertController(title: "هەڵە", message: "تکایە هێڵی ئینتەرنێتەکەت بپشکنە.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "باشە", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }
+        }else{
         setupEstateTypesAlert()
+        }
     }
     var ProjectsTitle = ""
     var ProjectsAction = ""
@@ -435,6 +480,9 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
             self.ImagesHeightLayout.constant = 360
         }
         
+        self.Scrollview.cr.addHeadRefresh(animator: FastAnimator()) {
+            self.dismiss(animated: true)
+        }
         
         print(self.CommingEstate?.bound_id ?? "")
         BoundTypeAip.GetBoundTypeByOfficeId(id: self.CommingEstate?.bound_id ?? "") { bound in
@@ -576,12 +624,14 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
                 self.view.layoutIfNeeded()
             }else{
                 self.Description.text = data.desc
-                self.DescHight.constant = self.Description.contentSize.height
-                UIView.animate(withDuration: 0.2) {
-                    self.DescHight.constant = self.Description.contentSize.height
-                    self.DescBottomLayout.constant = 25
-                }
-                self.view.layoutIfNeeded()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                    UIView.animate(withDuration: 0.2) {
+                        self.DescHight.constant = self.Description.contentSize.height
+                        self.DescBottomLayout.constant = 25
+                        self.view.layoutIfNeeded()
+                    }
+                    
+                })
             }
             let date = NSDate(timeIntervalSince1970: data.Stamp ?? 0.0)
             let dayTimePeriodFormatter = DateFormatter()
@@ -721,6 +771,38 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
             }
             
             
+            
+            
+            EstateTypeAip.GeEstateTypeNameById(id: data.estate_type_id ?? "") { estatetype in
+                if XLanguage.get() == .Kurdish{
+                    self.keys.append("جوری خانۆبەر")
+                    self.value.append(estatetype.ku_name ?? "")
+                }else if XLanguage.get() == .English{
+                    self.keys.append("Estate Type")
+                    self.value.append(estatetype.name ?? "")
+                }else{
+                    self.keys.append("نوع العقار")
+                    self.value.append(estatetype.ar_name ?? "")
+                }
+                self.DataCollectionView.reloadData()
+            }
+            
+            TypesObjectAip.GetTypeById(id: data.type_id ?? "") { type in
+                if XLanguage.get() == .Kurdish{
+                    self.keys.append("جوری مولک")
+                    self.value.append(type.ku_name ?? "")
+                }else if XLanguage.get() == .English{
+                    self.keys.append("Property Type")
+                    self.value.append(type.name ?? "")
+                }else{
+                    self.keys.append("نوع الملک")
+                    self.value.append(type.ar_name ?? "")
+                }
+                self.DataCollectionView.reloadData()
+            }
+            
+            
+            
             if data.RentOrSell == "0"{
                 if XLanguage.get() == .Kurdish{
                     let longString = "\(data.price?.description.currencyFormatting() ?? "")/ مانگانە"
@@ -805,6 +887,7 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
                     
                 }
                 
+                
                 if XLanguage.get() == .Kurdish{
                     self.keys.append("کرێی خزمەتگوزارییەکانی مانگانە")
                     self.keys.append("باڵەخانە")
@@ -831,10 +914,17 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
                 
                 self.value.append(data.propertyNo ?? "")
                 
-
+                self.DataCollectionView.reloadData()
             }
             
-            self.DataCollectionView.reloadData()
+            
+           
+            
+            
+            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//                self.DataCollectionView.reloadData()
+//            }
             
             
                 OfficeAip.GetOffice(ID: data.office_id ?? "") { office in
@@ -1061,7 +1151,7 @@ extension EstateProfileVc : UICollectionViewDataSource, UICollectionViewDelegate
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ImageCollectionViewCell
             if self.sliderImages.count != 0{
                 let url = URL(string: sliderImages[indexPath.row])
-                cell.imagee.sd_setImage(with: url, completed: nil)
+                cell.imagee.sd_setImage(with: url, placeholderImage: UIImage(named: "logoPlace"))
             }
             return cell
         }

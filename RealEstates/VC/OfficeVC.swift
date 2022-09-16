@@ -81,8 +81,7 @@ class OfficeVC: UIViewController {
                     self.present(vc, animated: true)
                 }
             }
-            
-        }
+            }
     }
     
     

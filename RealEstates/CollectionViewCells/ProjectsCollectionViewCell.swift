@@ -42,7 +42,7 @@ class ProjectsCollectionViewCell: UICollectionViewCell {
         }
         
         guard let imagrUrl = cell.images, let url = URL(string: imagrUrl[0]) else {return}
-        self.Image.sd_setImage(with: url, completed: nil)
+        self.Image.sd_setImage(with: url, placeholderImage: UIImage(named: "logoPlace"))
         if XLanguage.get() == .English{
             self.Name.text = cell.project_name
             self.Name.font = UIFont(name: "ArialRoundedMTBold", size: 14)!
@@ -53,6 +53,8 @@ class ProjectsCollectionViewCell: UICollectionViewCell {
             self.Name.text = cell.project_ku_name
             self.Name.font = UIFont(name: "PeshangDes2", size: 14)!
         }
+
+        
         self.Location.text = cell.address
         if XLanguage.get() == .English{
             self.Buildings = "Buildings"

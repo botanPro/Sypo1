@@ -8,7 +8,8 @@
 import UIKit
 import CRRefresh
 class FavoritesVC: UIViewController {
-
+    @IBOutlet weak var InternetViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var InternetConnectionView: UIView!
     
     var ProductArray : [EstateObject] = []
     @IBOutlet weak var TableView: UITableView!{didSet{self.TableView.delegate = self; self.TableView.dataSource = self }}
@@ -16,7 +17,8 @@ class FavoritesVC: UIViewController {
         super.viewDidLoad()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        
+        self.InternetViewHeight.constant = 0
+        self.InternetConnectionView.isHidden = true
         
         
         if XLanguage.get() == .English{
@@ -71,6 +73,13 @@ class FavoritesVC: UIViewController {
     
     
     @objc func remov(sender : UIButton){
+        if CheckInternet.Connection(){
+            UIView.animate(withDuration: 0.3) {
+                self.InternetViewHeight.constant = 0
+                self.InternetConnectionView.isHidden = true
+                self.view.layoutIfNeeded()
+            }
+            
         if XLanguage.get() == .Kurdish{
             self.Title = "لابردن"
             self.message = "ئایا دڵنیای کە دەتەوێت لاببەیت؟"
@@ -96,6 +105,13 @@ class FavoritesVC: UIViewController {
         }))
         myAlert.addAction(UIAlertAction(title: self.cancel, style: .cancel, handler: nil))
         self.present(myAlert, animated: true, completion: nil)
+    }else{
+        UIView.animate(withDuration: 0.3) {
+            self.InternetViewHeight.constant = 20
+            self.InternetConnectionView.isHidden = false
+            self.view.layoutIfNeeded()
+        }
+    }
     }
 }
 
@@ -114,8 +130,7 @@ extension FavoritesVC : UITableViewDelegate , UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell  = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! FavoriteTableViewCell
         if ProductArray.count != 0{
-            cell.Edit.isHidden = true
-            cell.Sold.isHidden = true
+            
             cell.RightLayoutConstraint2.constant = 10
             if let FireId = UserDefaults.standard.string(forKey: "UserId"){
                 FavoriteItemsObjectAip.GetFavoriteItemsById(fire_id: FireId) { item in
@@ -127,6 +142,8 @@ extension FavoritesVC : UITableViewDelegate , UITableViewDataSource{
             }
             cell.Delete.addTarget(self, action: #selector(self.remov(sender:)), for: .touchUpInside)
             cell.update(self.ProductArray[indexPath.row])
+            cell.Edit.isHidden = true
+            cell.Sold.isHidden = true
         }
         return cell
     }

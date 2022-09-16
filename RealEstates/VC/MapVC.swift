@@ -101,9 +101,31 @@ class MapVC: UIViewController ,MKMapViewDelegate ,CLLocationManagerDelegate, UIG
                  self.dismiss(animated: true, completion: nil)
              }
          }else{
-             let Data:[String: CLLocationDegrees] = ["latitude": self.cordinate.latitude , "longtitude" : self.cordinate.longitude]
-             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CordinateComing"), object: nil , userInfo: Data)
-             self.dismiss(animated: true, completion: nil)
+             if let lat = self.cordinate?.latitude, let long = self.cordinate?.longitude{
+                 let Data:[String: CLLocationDegrees] = ["latitude": lat , "longtitude" : long]
+                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CordinateComing"), object: nil , userInfo: Data)
+                 self.dismiss(animated: true, completion: nil)
+             }else{
+                 if XLanguage.get() == .English{
+                     let ac = UIAlertController(title: "Location not found", message: "Please select location", preferredStyle: .alert)
+                     ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                         ac.dismiss(animated: true)
+                     }))
+                     present(ac, animated: true)
+                 }else if XLanguage.get() == .Arabic{
+                     let ac = UIAlertController(title: "لم يتم العثور على الموقع", message: "الرجاء تحديد الموقع", preferredStyle: .alert)
+                     ac.addAction(UIAlertAction(title: "نعم", style: .default, handler: { _ in
+                         ac.dismiss(animated: true)
+                     }))
+                     present(ac, animated: true)
+                 }else{
+                     let ac = UIAlertController(title: "شوێنەکە نەدۆزرایەوە", message: "تکایە شوێن هەڵبژێرە", preferredStyle: .alert)
+                     ac.addAction(UIAlertAction(title: "باشە", style: .default, handler: { _ in
+                         ac.dismiss(animated: true)
+                     }))
+                     present(ac, animated: true)
+                 }
+             }
          }
     }
 }

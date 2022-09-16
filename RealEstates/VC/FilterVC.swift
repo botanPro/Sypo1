@@ -242,7 +242,27 @@ class FilterVC: UIViewController ,UITextFieldDelegate, RadioButtonDelegate{
     var filter1 : [EstateObject] = []
     @IBAction func Apply(_ sender: Any) {
         Drops.hideAll()
-        
+        if !CheckInternet.Connection(){
+            if XLanguage.get() == .English{
+                let ac = UIAlertController(title: "Error", message: "Please check your internet connection.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else if XLanguage.get() == .Arabic{
+                let ac = UIAlertController(title: "خطأ", message: "الرجاء التحقق من اتصال الانترنت الخاص بك.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "نعم", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else{
+                let ac = UIAlertController(title: "هەڵە", message: "تکایە هێڵی ئینتەرنێتەکەت بپشکنە.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "باشە", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }
+        }else{
         
         var Price_Min = Double(self.PriceMin.text!) ?? 0.0
         var Price_Max = Double(self.PriceMax.text!) ?? 0.0
@@ -326,6 +346,7 @@ class FilterVC: UIViewController ,UITextFieldDelegate, RadioButtonDelegate{
                 accessibility: "Alert: Title, Subtitle"
             )
             Drops.show(drop)
+        }
         }
 
     }

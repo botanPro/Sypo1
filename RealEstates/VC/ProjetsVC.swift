@@ -115,10 +115,6 @@ class ProjetsVC: UIViewController {
     
     
     
-    
-    
-    
-    
     @IBAction func ShowProjectOnMap(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let myVC = storyboard.instantiateViewController(withIdentifier: "ProjectMapVc") as! ProjectMapVC

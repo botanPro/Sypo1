@@ -80,10 +80,11 @@ extension ViewdVC : UITableViewDelegate , UITableViewDataSource{
         if ProductArray.count != 0{
             cell.Delete.isHidden = true
             cell.Edit.isHidden = true
-            cell.Sold.isHidden = true
+           
             cell.RightLayoutConstraint.constant = 10
             cell.RightLayoutConstraint2.constant = 10
             cell.update(self.ProductArray[indexPath.row])
+            cell.Sold.isHidden = true
         }
         return cell
     }

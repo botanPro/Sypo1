@@ -29,6 +29,16 @@ class AllEstateCollectionView: UICollectionViewCell {
         self.Sold.isHidden = true
         self.SoldView.isHidden = true
     }
+    
+    func detectLanguage<T: StringProtocol>(for text: T) -> String? {
+        let tagger = NSLinguisticTagger.init(tagSchemes: [.language], options: 0)
+        tagger.string = String(text)
+
+        guard let languageCode = tagger.tag(at: 0, scheme: .language, tokenRange: nil, sentenceRange: nil) else { return nil }
+        print(languageCode.rawValue)
+        return Locale.current.localizedString(forIdentifier: languageCode.rawValue)
+    }
+    
     var rooms = ""
     var lang : Int = UserDefaults.standard.integer(forKey: "language")
     func update(_ cell: EstateObject){
@@ -42,8 +52,14 @@ class AllEstateCollectionView: UICollectionViewCell {
         }
         
         guard let imagrUrl = cell.ImageURL, let url = URL(string: imagrUrl[0]) else {return}
-        self.Imagee.sd_setImage(with: url, completed: nil)
+        self.Imagee.sd_setImage(with: url, placeholderImage: UIImage(named: "logoPlace"))
         self.Name.text = cell.name
+        print(detectLanguage(for:self.Name.text!))
+        if detectLanguage(for:self.Name.text!) == "Arabic"{
+            self.Name.font = UIFont(name: "PeshangDes2", size: 14)!
+        }else{
+            self.Name.font = UIFont(name: "ArialRoundedMTBold", size: 14)!
+        }
         self.Location.text = cell.address
         if XLanguage.get() == .English{
             self.rooms = "rooms"

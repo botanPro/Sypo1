@@ -47,14 +47,6 @@ class MXTextViewController: UIViewController {
         if !CheckInternet.Connection(){
                 self.InternetViewHeight.constant = 20
                 self.InternetConnectionView.isHidden = false
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                UIView.animate(withDuration: 0.3) {
-                    self.InternetViewHeight.constant = 0
-                    self.InternetConnectionView.isHidden = true
-                    self.view.layoutIfNeeded()
-                }
-            }
         }else{
             UIView.animate(withDuration: 0.3) {
                 self.InternetViewHeight.constant = 0

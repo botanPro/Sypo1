@@ -91,9 +91,6 @@ target 'RealEstates' do
   pod "PullToDismissTransition"
   
   
-  
-  
-  
   pod 'NSFWDetector'
   
   

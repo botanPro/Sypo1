@@ -36,6 +36,7 @@ class EstateObject{
     var ImageURL : [String]?
     
     var estate_type_id :String?
+    var type_id : String?
     var Direction : String?
     var floor : String?
     var Building : String?
@@ -56,7 +57,7 @@ class EstateObject{
     var sold : String?
     init(name : String,id : String , stamp : TimeInterval ,RentOrSell: String, city_name : String , address : String ,lat : String , long : String , price: Double, desc:String , office_id : String ,fire_id : String, ImageURL : [String] , city_id : String
          
-         , estate_type_id : String ,Direction : String , floor : String ,Building : String, Year: String, Furnished : String , bound_id:String , MonthlyService : String, RoomNo : String ,WashNo:String, space : String , propertyNo : String, state : String, project_id : String, video_link : String,archived : String , sold : String) {
+         , estate_type_id : String ,Direction : String , floor : String ,Building : String, Year: String, Furnished : String , bound_id:String , MonthlyService : String, RoomNo : String ,WashNo:String, space : String , propertyNo : String, state : String, project_id : String, video_link : String,archived : String , sold : String, type_id: String) {
         
         self.name               = name
         self.id                 = id
@@ -89,6 +90,7 @@ class EstateObject{
         self.project_id         = project_id
         self.archived           = archived
         self.sold               = sold
+        self.type_id = type_id
         
     }
     
@@ -126,6 +128,7 @@ class EstateObject{
         self.project_id     = Dictionary[ "project_id"      ] as? String
         self.archived       = Dictionary[ "archived"        ] as? String
         self.sold           = Dictionary[ "sold"            ] as? String
+        self.type_id          = Dictionary[ "type_id"            ] as? String
     }
     
     
@@ -164,6 +167,7 @@ class EstateObject{
         New["project_id"       ] = self.project_id     as AnyObject
         New["archived"         ] = self.archived     as AnyObject
         New["sold"             ] = self.sold           as AnyObject
+        New["type_id"          ] = self.type_id           as AnyObject
         return New
     }
     
@@ -292,7 +296,7 @@ class ProductAip{
     }
     
     
-    static func GetProjectsById(project_id : String , completion : @escaping (_ Product : EstateObject)->()){
+    static func GetEstateByProId(project_id : String , completion : @escaping (_ Product : EstateObject)->()){
         Firestore.firestore().collection("EstateProducts").whereField("project_id", isEqualTo: project_id).getDocuments { (Snapshot, error) in
             if error != nil { print(error.debugDescription) ; return }
             guard let documents = Snapshot?.documents else { return }
@@ -943,6 +947,17 @@ class TypesObjectAip{
             completion(New)
         }
     }
+    
+    
+    static func  GetTypeById(id :  String , completion : @escaping (_ office : TypesObject)->()){
+        Firestore.firestore().collection("Types").document(id).addSnapshotListener { ( snopshot :  DocumentSnapshot?, error : Error?) in
+            if error != nil { print("Error") ; return }
+            if let data = snopshot?.data() as [String: AnyObject ]? {
+                let New = TypesObject(Dictionary: data)
+                completion(New)
+            }
+        }
+    }
 }
 
 
@@ -1250,6 +1265,18 @@ class ProjectObject{
 
 
 class GetAllProjectsAip{
+    
+    
+    static func  GetProjectById(ID :  String , completion : @escaping (_ product : ProjectObject)->()){
+        Firestore.firestore().collection("AllProjects").document(ID).addSnapshotListener { ( snopshot :  DocumentSnapshot?, error : Error?) in
+            print(error.debugDescription)
+            if let data = snopshot?.data() as [String: AnyObject ]? {
+                let New = ProjectObject(Dictionary: data)
+                completion(New)
+            }
+        }
+    }
+    
     static func GetAllProducts(completion : @escaping (_ Product : [ProjectObject])->()){
         var New : [ProjectObject] = []
         Firestore.firestore().collection("AllProjects").getDocuments { (Snapshot, error) in

@@ -36,12 +36,6 @@ class EditProfileVC: UIViewController ,UITextFieldDelegate, UITextViewDelegate{
         super.viewDidLoad()
         
         
-        
-        
-        
-        
-        
-        
         self.InternetViewHeight.constant = 0
         self.InternetConnectionView.isHidden = true
 
@@ -68,7 +62,7 @@ class EditProfileVC: UIViewController ,UITextFieldDelegate, UITextViewDelegate{
                 self.Location.text = office.address
                 self.OfficeImage = office.ImageURL ?? ""
                 let url = URL(string: office.ImageURL ?? "")
-                self.Image.sd_setImage(with: url, completed: nil)
+                self.Image.sd_setImage(with: url,  placeholderImage: UIImage(named: "logoPlace"))
                 self.Name.text = office.name ?? ""
                 self.AboutMe.text = office.about ?? ""
                 self.userTypeId = office.type_id ?? ""

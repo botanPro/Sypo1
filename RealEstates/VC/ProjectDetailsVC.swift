@@ -120,6 +120,9 @@ class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDel
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
+        self.Scrollview.cr.addHeadRefresh(animator: FastAnimator()) {
+            self.dismiss(animated: true)
+        }
         
         RelatedCollectionView.register(UINib(nibName: "AllEstatessCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "RelatedCell")
         DataCollectionView.register(UINib(nibName: "DataCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "DataCell")
@@ -180,12 +183,14 @@ class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDel
                     self.Description.text = data.ku_desc
                 }
                 
-                self.DescHight.constant = self.Description.contentSize.height
-                UIView.animate(withDuration: 0.2) {
-                    self.DescHight.constant = self.Description.contentSize.height
-                    self.DescBottomLayout.constant = 25
-                }
-                self.view.layoutIfNeeded()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                    UIView.animate(withDuration: 0.2) {
+                        self.DescHight.constant = self.Description.contentSize.height
+                        self.DescBottomLayout.constant = 25
+                        self.view.layoutIfNeeded()
+                    }
+                })
+              
             }
             
             
@@ -240,7 +245,7 @@ class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDel
            
             
             
-            ProductAip.GetProjectsById(project_id: data.id ?? "") { estates in
+            ProductAip.GetEstateByProId(project_id: data.id ?? "") { estates in
                 if estates.archived != "1"{
                    self.SimilarArray.append(estates)
                 }
@@ -360,7 +365,7 @@ extension ProjectDetailsVC : UICollectionViewDataSource, UICollectionViewDelegat
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ImageCollectionViewCell
             if self.sliderImages.count != 0{
                 let url = URL(string: sliderImages[indexPath.row])
-                cell.imagee.sd_setImage(with: url, completed: nil)
+                cell.imagee.sd_setImage(with: url, placeholderImage: UIImage(named: "logoPlace"))
             }
             return cell
         }

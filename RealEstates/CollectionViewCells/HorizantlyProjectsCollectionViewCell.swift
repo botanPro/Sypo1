@@ -24,6 +24,16 @@ class HorizantlyProjectsCollectionViewCell: UICollectionViewCell {
         self.Image.layer.cornerRadius = 10
     }
     
+    
+    func detectLanguage<T: StringProtocol>(for text: T) -> String? {
+        let tagger = NSLinguisticTagger.init(tagSchemes: [.language], options: 0)
+        tagger.string = String(text)
+
+        guard let languageCode = tagger.tag(at: 0, scheme: .language, tokenRange: nil, sentenceRange: nil) else { return nil }
+        print(languageCode.rawValue)
+        return Locale.current.localizedString(forIdentifier: languageCode.rawValue)
+    }
+    
     var Buildings = ""
     var to = ""
     var lang : Int = UserDefaults.standard.integer(forKey: "language")
@@ -42,7 +52,7 @@ class HorizantlyProjectsCollectionViewCell: UICollectionViewCell {
         }
         
         guard let imagrUrl = cell.images, let url = URL(string: imagrUrl[0]) else {return}
-        self.Image.sd_setImage(with: url, completed: nil)
+        self.Image.sd_setImage(with: url, placeholderImage: UIImage(named: "logoPlace"))
         if XLanguage.get() == .English{
             self.Name.text = cell.project_name
             self.Name.font = UIFont(name: "ArialRoundedMTBold", size: 14)!
@@ -53,6 +63,13 @@ class HorizantlyProjectsCollectionViewCell: UICollectionViewCell {
             self.Name.text = cell.project_ku_name
             self.Name.font = UIFont(name: "PeshangDes2", size: 14)!
         }
+        
+        if detectLanguage(for:self.Name.text!) == "Arabic"{
+            self.Name.font = UIFont(name: "PeshangDes2", size: 14)!
+        }else{
+            self.Name.font = UIFont(name: "ArialRoundedMTBold", size: 14)!
+        }
+        
         if XLanguage.get() == .English{
             self.Buildings = "Buildings"
             self.EstateType.font = UIFont(name: "PeshangDes2", size: 14)!

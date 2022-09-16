@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -107,7 +107,7 @@
                                 </subviews>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoooooooo" translatesAutoresizingMaskIntoConstraints="NO" id="Pvj-BN-8v1">
-                                <rect key="frame" x="117" y="173" width="757" height="248"/>
+                                <rect key="frame" x="117" y="177" width="757" height="248"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="185" id="nq7-7K-HSR"/>
                                     <constraint firstAttribute="height" constant="248" id="whv-vv-HP9"/>
@@ -156,7 +156,7 @@
                                 <color key="color" red="0.4029953872" green="0.4773298003" blue="0.54045151219999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </activityIndicatorView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bmr-Kb-f1e">
-                                <rect key="frame" x="0.0" y="108" width="460" height="1209"/>
+                                <rect key="frame" x="0.0" y="112" width="460" height="1205"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ICX-yc-gdA" customClass="Languagebutton" customModule="RealEstates" customModuleProvider="target">
                                         <rect key="frame" x="383" y="14" width="67" height="31"/>
@@ -531,7 +531,7 @@
                                 </constraints>
                             </scrollView>
                             <tableView clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="LXq-nf-kP5">
-                                <rect key="frame" x="0.0" y="162" width="460" height="1155"/>
+                                <rect key="frame" x="0.0" y="166" width="460" height="1151"/>
                                 <color key="backgroundColor" red="0.95029202859999995" green="0.95029202859999995" blue="0.95029202859999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
                                     <outlet property="dataSource" destination="ly3-8u-cAX" id="UQa-hO-O1S"/>
@@ -539,7 +539,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qmb-FU-yeQ">
-                                <rect key="frame" x="0.0" y="88" width="460" height="20"/>
+                                <rect key="frame" x="0.0" y="92" width="460" height="20"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No internet connection." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hBw-14-MEe" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
                                         <rect key="frame" x="20" y="3" width="420" height="14"/>
@@ -620,6 +620,7 @@
                         <outlet property="NearYouCollectionView" destination="548-0c-Hw1" id="aGU-Jc-B9x"/>
                         <outlet property="NearYouCollectionViewheight" destination="ZEI-cT-AMD" id="07c-aN-NQ5"/>
                         <outlet property="NearYouLableStackTop" destination="OMf-W8-iWi" id="kyy-Hv-d1k"/>
+                        <outlet property="NearYouStackBottom" destination="VL8-bd-w54" id="L9U-cj-z1r"/>
                         <outlet property="NearYourLableAndSeeAll" destination="aTD-TR-rlg" id="lVk-yr-cGn"/>
                         <outlet property="NearyouLableStackBottom" destination="MQc-1L-Ypg" id="HuU-qn-Tsu"/>
                         <outlet property="ScrollView" destination="Bmr-Kb-f1e" id="EOg-5Y-Jat"/>
@@ -652,7 +653,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="beU-fi-t3V">
-                                <rect key="frame" x="20" y="64" width="50" height="50"/>
+                                <rect key="frame" x="20" y="68" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="4yO-Gf-8M4"/>
                                     <constraint firstAttribute="height" constant="50" id="nBe-rc-fd0"/>
@@ -731,7 +732,7 @@
                                 </constraints>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MfX-fW-buZ">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
                                 <color key="backgroundColor" red="0.94901961089999998" green="0.94901961089999998" blue="0.94901961089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WSd-Cy-AHa">
                                     <size key="itemSize" width="128" height="128"/>
@@ -1412,7 +1413,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V20-lJ-hsq" customClass="WKYTPlayerView">
-                                        <rect key="frame" x="10" y="1324.5" width="408" height="191"/>
+                                        <rect key="frame" x="10" y="1211.5" width="408" height="191"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="191" id="BUV-dS-teE"/>
@@ -1424,7 +1425,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="BnA-80-82g">
-                                        <rect key="frame" x="10" y="1234.5" width="408" height="70"/>
+                                        <rect key="frame" x="10" y="1121.5" width="408" height="70"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TMu-Wb-PT6">
                                                 <rect key="frame" x="0.0" y="0.0" width="75" height="70"/>
@@ -1508,7 +1509,7 @@
                                         </connections>
                                     </stackView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XVp-yU-tLm">
-                                        <rect key="frame" x="0.0" y="1580.5" width="428" height="194"/>
+                                        <rect key="frame" x="0.0" y="1467.5" width="428" height="194"/>
                                         <color key="backgroundColor" red="0.95029202859999995" green="0.95029202859999995" blue="0.95029202859999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="194" id="GaK-bg-Ckd"/>
@@ -1526,7 +1527,7 @@
                                         </connections>
                                     </collectionView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MORE ESTATES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u3F-AB-btz" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="1545.5" width="408" height="25"/>
+                                        <rect key="frame" x="10" y="1432.5" width="408" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="nEs-w8-xp1"/>
                                         </constraints>
@@ -1570,7 +1571,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="satellite" translatesAutoresizingMaskIntoConstraints="NO" id="p0L-Wv-tLX">
-                                        <rect key="frame" x="10" y="977.5" width="408" height="180"/>
+                                        <rect key="frame" x="10" y="864.5" width="408" height="180"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="180" id="XWn-VV-iOX"/>
                                         </constraints>
@@ -1583,17 +1584,17 @@
                                         </constraints>
                                     </view>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ZaT-7R-mPp">
-                                        <rect key="frame" x="10" y="808.5" width="408" height="114"/>
+                                        <rect key="frame" x="10" y="808.5" width="408" height="1"/>
                                         <color key="backgroundColor" red="0.95029202859999995" green="0.95029202859999995" blue="0.95029202859999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="114" id="PbF-fw-AV1"/>
+                                            <constraint firstAttribute="height" constant="1" id="PbF-fw-AV1"/>
                                         </constraints>
                                         <color key="textColor" red="0.11878470344837218" green="0.21522629863083964" blue="0.19902314945897712" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ESTATES NEARBY" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pzs-4I-OIi" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="947.5" width="408" height="20"/>
+                                        <rect key="frame" x="10" y="834.5" width="408" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="WWK-aP-AKt"/>
                                         </constraints>
@@ -1625,7 +1626,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rm9-Je-Vaf">
-                                        <rect key="frame" x="10" y="1167.5" width="408" height="47"/>
+                                        <rect key="frame" x="10" y="1054.5" width="408" height="47"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YrK-xU-gTk">
                                                 <rect key="frame" x="16" y="12.5" width="382" height="22"/>
@@ -1694,7 +1695,7 @@
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RnV-VR-k2b" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
-                                        <rect key="frame" x="179" y="1032" width="70" height="70"/>
+                                        <rect key="frame" x="179" y="919" width="70" height="70"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="70" id="qqc-v8-NDk"/>
@@ -1894,22 +1895,55 @@
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="e2T-qy-0I1">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="68" width="414" height="794"/>
                                 <color key="backgroundColor" red="0.94901961089999998" green="0.94901961089999998" blue="0.94901961089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
                                     <outlet property="dataSource" destination="HCg-YL-GNZ" id="K3g-a3-zip"/>
                                     <outlet property="delegate" destination="HCg-YL-GNZ" id="4JS-qn-vE3"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2rn-LN-3jm">
+                                <rect key="frame" x="0.0" y="48" width="414" height="20"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No internet connection." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gjt-Sg-UpX" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="3" width="374" height="14"/>
+                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="ArabicText" value="لا يوجد اتصال بالإنترنت."/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="KurdishText" value="هێڵی ئینتەرنێت نییە."/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="No internet connection."/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="EnglishTextSize">
+                                                <real key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="ArabicTextSize">
+                                                <real key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="0.75836646480000003" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Gjt-Sg-UpX" firstAttribute="centerY" secondItem="2rn-LN-3jm" secondAttribute="centerY" id="Iu3-sg-2Gu"/>
+                                    <constraint firstAttribute="height" constant="20" id="dJV-AG-LgF"/>
+                                    <constraint firstAttribute="trailing" secondItem="Gjt-Sg-UpX" secondAttribute="trailing" constant="20" id="hCp-xl-eCe"/>
+                                    <constraint firstItem="Gjt-Sg-UpX" firstAttribute="leading" secondItem="2rn-LN-3jm" secondAttribute="leading" constant="20" id="sgN-rk-jei"/>
+                                    <constraint firstItem="Gjt-Sg-UpX" firstAttribute="centerX" secondItem="2rn-LN-3jm" secondAttribute="centerX" id="ue8-uV-VTK"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="feP-rd-fMU"/>
                         <color key="backgroundColor" red="0.95029202859999995" green="0.95029202859999995" blue="0.95029202859999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="feP-rd-fMU" firstAttribute="trailing" secondItem="e2T-qy-0I1" secondAttribute="trailing" id="CqR-yA-rjI"/>
                             <constraint firstItem="e2T-qy-0I1" firstAttribute="leading" secondItem="feP-rd-fMU" secondAttribute="leading" id="L6U-Rv-Hjr"/>
+                            <constraint firstItem="e2T-qy-0I1" firstAttribute="top" secondItem="2rn-LN-3jm" secondAttribute="bottom" id="LlV-Kz-shh"/>
+                            <constraint firstItem="2rn-LN-3jm" firstAttribute="trailing" secondItem="feP-rd-fMU" secondAttribute="trailing" id="O1z-ud-JEf"/>
                             <constraint firstItem="HPd-iP-Sgz" firstAttribute="centerY" secondItem="0cn-zc-f0i" secondAttribute="centerY" id="XvF-Qm-UbB"/>
                             <constraint firstItem="feP-rd-fMU" firstAttribute="bottom" secondItem="e2T-qy-0I1" secondAttribute="bottom" id="e1j-5n-Ztt"/>
-                            <constraint firstItem="e2T-qy-0I1" firstAttribute="top" secondItem="feP-rd-fMU" secondAttribute="top" id="oCZ-IO-c1o"/>
+                            <constraint firstItem="2rn-LN-3jm" firstAttribute="top" secondItem="feP-rd-fMU" secondAttribute="top" id="l1q-dV-xmU"/>
+                            <constraint firstItem="2rn-LN-3jm" firstAttribute="leading" secondItem="feP-rd-fMU" secondAttribute="leading" id="mPj-bR-Gb8"/>
                             <constraint firstItem="HPd-iP-Sgz" firstAttribute="centerX" secondItem="0cn-zc-f0i" secondAttribute="centerX" id="qmY-fW-nHH"/>
                         </constraints>
                     </view>
@@ -1921,6 +1955,8 @@
                         </userDefinedRuntimeAttributes>
                     </navigationItem>
                     <connections>
+                        <outlet property="InternetConnectionView" destination="2rn-LN-3jm" id="6Wc-pi-DDG"/>
+                        <outlet property="InternetViewHeight" destination="dJV-AG-LgF" id="Qep-ab-HUm"/>
                         <outlet property="TableView" destination="e2T-qy-0I1" id="Xc6-BQ-gxd"/>
                         <segue destination="nx9-J7-yrf" kind="presentation" identifier="Next" modalPresentationStyle="fullScreen" id="iMt-Ud-AWk"/>
                     </connections>
@@ -1941,7 +1977,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24y-AH-0gw">
-                                <rect key="frame" x="8" y="56" width="50" height="50"/>
+                                <rect key="frame" x="8" y="60" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="MGl-IG-0rz"/>
                                     <constraint firstAttribute="height" constant="50" id="qzD-OM-Y2U"/>
@@ -2002,7 +2038,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YFE-Rm-7Nb">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="721"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="ImK-tc-Mi3">
                                         <rect key="frame" x="20" y="30" width="374" height="56"/>
@@ -2499,27 +2535,10 @@
                                 <color key="color" red="0.4029953872" green="0.4773298003" blue="0.54045151219999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </activityIndicatorView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qmh-NH-wDp">
-                                <rect key="frame" x="0.0" y="108" width="414" height="705"/>
+                                <rect key="frame" x="0.0" y="112" width="414" height="701"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JlN-EI-Gzf" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
-                                        <rect key="frame" x="157" y="302.5" width="100" height="100"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="ZDz-G0-mf8"/>
-                                            <constraint firstAttribute="width" constant="100" id="qNJ-6F-Sv0"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                                <color key="value" red="0.52618827051875183" green="0.63085979304814055" blue="0.71402439926609851" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballScaleMultiple"/>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="padding">
-                                                <real key="value" value="22"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="D5y-Cv-3Nx">
-                                        <rect key="frame" x="137" y="370" width="140.5" height="45"/>
+                                        <rect key="frame" x="137" y="368" width="140.5" height="45"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Empty List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M3F-y4-SOK" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
                                                 <rect key="frame" x="32" y="0.0" width="76.5" height="25"/>
@@ -2784,6 +2803,23 @@
                                             </label>
                                         </subviews>
                                     </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JlN-EI-Gzf" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                        <rect key="frame" x="157" y="300.5" width="100" height="100"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="ZDz-G0-mf8"/>
+                                            <constraint firstAttribute="width" constant="100" id="qNJ-6F-Sv0"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                <color key="value" red="0.52618827051875183" green="0.63085979304814055" blue="0.71402439926609851" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballScaleMultiple"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                                <real key="value" value="22"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94901961089999998" green="0.94901961089999998" blue="0.94901961089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
@@ -2821,7 +2857,7 @@
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P6d-b3-qM9">
-                                <rect key="frame" x="0.0" y="88" width="414" height="20"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="20"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No internet connection." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vpn-5W-8cT" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
                                         <rect key="frame" x="20" y="3" width="374" height="14"/>
@@ -2915,7 +2951,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Gq3-O5-dic">
-                                <rect key="frame" x="0.0" y="108" width="414" height="705"/>
+                                <rect key="frame" x="0.0" y="112" width="414" height="701"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uZA-50-OvP">
                                     <size key="itemSize" width="128" height="128"/>
@@ -2926,7 +2962,7 @@
                                 <cells/>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t3L-uE-hxy">
-                                <rect key="frame" x="0.0" y="88" width="414" height="20"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="20"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No internet connection." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wel-SE-YWO" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
                                         <rect key="frame" x="20" y="3" width="374" height="14"/>
@@ -3033,7 +3069,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="c6P-s2-DrV">
-                                <rect key="frame" x="12" y="148" width="390" height="58"/>
+                                <rect key="frame" x="12" y="152" width="390" height="58"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PHONE NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7u9-Sl-5e5" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="12"/>
@@ -3079,7 +3115,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1YR-K0-u2b" customClass="LoadingButton" customModule="MHLoadingButton">
-                                <rect key="frame" x="12" y="236" width="390" height="37"/>
+                                <rect key="frame" x="12" y="240" width="390" height="37"/>
                                 <color key="backgroundColor" red="0.27762734720522736" green="0.45648036045695495" blue="0.71672659209280298" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="Olc-jh-axx"/>
@@ -3099,7 +3135,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter phone number" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dy3-Rz-ZhK" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
-                                <rect key="frame" x="37" y="93" width="340" height="35"/>
+                                <rect key="frame" x="37" y="97" width="340" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="fle-wb-fKO"/>
                                 </constraints>
@@ -3119,7 +3155,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xtg-YS-hK3">
-                                <rect key="frame" x="12" y="100" width="24" height="21"/>
+                                <rect key="frame" x="12" y="104" width="24" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="0fE-XM-IYu"/>
                                     <constraint firstAttribute="width" constant="24" id="Ni6-PG-gFi"/>
@@ -3174,7 +3210,7 @@
                     <tabBarItem key="tabBarItem" title="" image="home" id="8fG-C1-tov" customClass="LanguageTabBarItem" customModule="RealEstates" customModuleProvider="target"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6LW-lG-kGd">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.1072525257" green="0.20344197880000001" blue="0.32661330100000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -3203,7 +3239,7 @@
                 <navigationController id="hha-qF-bKb" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="vuesax-linear-buildings" id="5Bc-Xm-6MY" customClass="LanguageTabBarItem" customModule="RealEstates" customModuleProvider="target"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jUY-EU-ZkT">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.1325884162" green="0.17458321530000001" blue="0.23248815049999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -3232,7 +3268,7 @@
                     <tabBarItem key="tabBarItem" title="" image="icons8-real_estate" id="OWu-2e-by6" customClass="LanguageTabBarItem" customModule="RealEstates" customModuleProvider="target"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="n3F-tk-uBu">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.1072525257" green="0.20344197880000001" blue="0.32661330100000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -3264,7 +3300,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ji5-ZV-ipE">
-                                <rect key="frame" x="0.0" y="54" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="58" width="414" height="804"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Nq2-C8-EKk" id="ujB-bu-4Dv"/>
@@ -3298,18 +3334,18 @@
             <objects>
                 <viewController storyboardIdentifier="GoToCityVC" id="Vyx-tY-L0D" customClass="CityVC" customModule="RealEstates" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="n9b-0P-nfK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty-box" translatesAutoresizingMaskIntoConstraints="NO" id="QJZ-jF-MqN">
-                                <rect key="frame" x="131" y="372" width="152" height="98"/>
+                                <rect key="frame" x="131" y="399" width="152" height="98"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="152" id="5PM-vn-5qh"/>
                                     <constraint firstAttribute="height" constant="98" id="I8Q-yC-097"/>
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rOc-mt-heY">
-                                <rect key="frame" x="0.0" y="54" width="414" height="788"/>
+                                <rect key="frame" x="0.0" y="102" width="414" height="711"/>
                                 <color key="backgroundColor" red="0.94901961089999998" green="0.94901961089999998" blue="0.94901961089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Vyx-tY-L0D" id="vct-dl-i4i"/>
@@ -3344,7 +3380,7 @@
                     <tabBarItem key="tabBarItem" title="" image="rentAndSell" id="slY-q7-qJi" customClass="LanguageTabBarItem" customModule="RealEstates" customModuleProvider="target"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Nna-hD-JQi">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.1072525257" green="0.20344197880000001" blue="0.32661330100000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -3383,7 +3419,7 @@
                                 </constraints>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vbP-g6-qE9">
-                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
+                                <rect key="frame" x="0.0" y="68" width="414" height="794"/>
                                 <color key="backgroundColor" red="0.95029202859999995" green="0.95029202859999995" blue="0.95029202859999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0Eb-eF-yag">
                                     <size key="itemSize" width="128" height="128"/>
@@ -3407,7 +3443,7 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zLP-UB-fsq">
-                                <rect key="frame" x="0.0" y="44" width="414" height="20"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="20"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No internet connection." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9lr-zy-6OT" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
                                         <rect key="frame" x="20" y="3" width="374" height="14"/>
@@ -3641,17 +3677,17 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xhH-W3-FdM">
-                                        <rect key="frame" x="10" y="652.5" width="408" height="114"/>
+                                        <rect key="frame" x="10" y="652.5" width="408" height="1"/>
                                         <color key="backgroundColor" red="0.95029202859999995" green="0.95029202859999995" blue="0.95029202859999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="114" id="Fvi-pn-esg"/>
+                                            <constraint firstAttribute="height" constant="1" id="Fvi-pn-esg"/>
                                         </constraints>
                                         <color key="textColor" red="0.1187847034" green="0.2152262986" blue="0.1990231495" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="11"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lf4-hi-Y8G">
-                                        <rect key="frame" x="0.0" y="1042.5" width="428" height="194"/>
+                                        <rect key="frame" x="0.0" y="929.5" width="428" height="194"/>
                                         <color key="backgroundColor" red="0.95029202859999995" green="0.95029202859999995" blue="0.95029202859999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="194" id="Gqx-FX-HRp"/>
@@ -3669,7 +3705,7 @@
                                         </connections>
                                     </collectionView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MORE ESTATES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eo8-aM-2iO" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="1007.5" width="408" height="25"/>
+                                        <rect key="frame" x="10" y="894.5" width="408" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="zzb-iF-ach"/>
                                         </constraints>
@@ -3689,7 +3725,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xgt-9i-ne2" customClass="WKYTPlayerView">
-                                        <rect key="frame" x="10" y="791.5" width="408" height="191"/>
+                                        <rect key="frame" x="10" y="678.5" width="408" height="191"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="191" id="ye3-Pn-yvw"/>
@@ -3822,7 +3858,7 @@
                                 </constraints>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0pv-7C-OV0">
-                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
+                                <rect key="frame" x="0.0" y="68" width="414" height="794"/>
                                 <color key="backgroundColor" red="0.95029202859999995" green="0.95029202859999995" blue="0.95029202859999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="q6m-jT-xKw">
                                     <size key="itemSize" width="128" height="128"/>
@@ -3846,7 +3882,7 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6UC-9j-mNz">
-                                <rect key="frame" x="0.0" y="44" width="414" height="20"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="20"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No internet connection." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qX-zX-9Eb" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
                                         <rect key="frame" x="20" y="3" width="374" height="14"/>
@@ -3910,7 +3946,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zvU-g6-fUZ" customClass="HMSegmentedControl">
-                                <rect key="frame" x="0.0" y="88" width="414" height="45"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="45"/>
                                 <color key="backgroundColor" red="0.95029202859999995" green="0.95029202859999995" blue="0.95029202859999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="7GH-Nh-2Db"/>
@@ -3959,7 +3995,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pu6-c8-Xf3">
-                                <rect key="frame" x="0.0" y="108" width="414" height="705"/>
+                                <rect key="frame" x="0.0" y="112" width="414" height="701"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="BSg-6P-lGj">
                                         <rect key="frame" x="12" y="231" width="390" height="530"/>
@@ -4928,7 +4964,7 @@
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kb2-me-pNH">
-                                <rect key="frame" x="0.0" y="88" width="414" height="20"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="20"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No internet connection." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x3H-4G-BNs" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
                                         <rect key="frame" x="20" y="3" width="374" height="14"/>
@@ -5045,7 +5081,6 @@
                 <tapGestureRecognizer id="eaK-If-DPH" userLabel="about">
                     <connections>
                         <action selector="AboutUs:" destination="GDD-yN-csg" id="WMI-2y-CYU"/>
-                        <segue destination="xMO-mR-8Mv" kind="show" id="jhB-BF-haf"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="QFD-oR-2Ar" userLabel="view">
@@ -5123,7 +5158,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n6U-yQ-yVP">
-                                <rect key="frame" x="0.0" y="108" width="414" height="705"/>
+                                <rect key="frame" x="0.0" y="112" width="414" height="701"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="53" translatesAutoresizingMaskIntoConstraints="NO" id="oPq-5O-ZWm">
                                         <rect key="frame" x="16" y="200" width="382" height="563"/>
@@ -5432,7 +5467,7 @@
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1H7-I5-yNG">
-                                <rect key="frame" x="0.0" y="88" width="414" height="20"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="20"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No internet connection." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ttl-xp-mdM" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
                                         <rect key="frame" x="20" y="3" width="374" height="14"/>
@@ -5534,7 +5569,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RXQ-Cr-hxi">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
                                 <color key="backgroundColor" red="0.94901961089999998" green="0.94901961089999998" blue="0.94901961089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -5573,7 +5608,7 @@
                     <tabBarItem key="tabBarItem" title="" image="icons8-settings" id="xDO-mv-SAZ" customClass="LanguageTabBarItem" customModule="RealEstates" customModuleProvider="target"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="oaQ-gm-I0u" customClass="NavigationBarLang" customModule="RealEstates" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.1072525257" green="0.20344197880000001" blue="0.32661330100000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -5613,7 +5648,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SjL-1g-7qJ">
-                                <rect key="frame" x="10" y="113" width="394" height="40"/>
+                                <rect key="frame" x="10" y="117" width="394" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete Account" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2g7-Wm-rY4" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
                                         <rect key="frame" x="16" y="10" width="362" height="20"/>
@@ -5655,7 +5690,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vJi-zz-0xs">
-                                <rect key="frame" x="0.0" y="88" width="414" height="20"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="20"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No internet connection." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PHT-Gc-alI" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
                                         <rect key="frame" x="20" y="3" width="374" height="14"/>
@@ -5731,7 +5766,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="iH7-it-hn1">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="721"/>
                                 <color key="backgroundColor" red="0.94901961089999998" green="0.94901961089999998" blue="0.94901961089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
                                     <outlet property="dataSource" destination="IXr-cC-gQF" id="I6i-VZ-LxB"/>
@@ -5775,7 +5810,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pzm-a6-bUg">
-                                <rect key="frame" x="0.0" y="108" width="429" height="1809"/>
+                                <rect key="frame" x="0.0" y="112" width="429" height="1805"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QHO-x6-0dA">
                                         <rect key="frame" x="10" y="10" width="409" height="42"/>
@@ -6868,7 +6903,7 @@
                                                             <constraint firstAttribute="height" constant="15" id="RUN-hR-te6"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="11"/>
-                                                        <color key="textColor" red="0.68034304960000003" green="0.67166205199999995" blue="0.70428970179999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <color key="textColor" red="0.56414399810000004" green="0.55987979470000004" blue="0.59108664769999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="CITY"/>
@@ -6937,7 +6972,7 @@
                                                             <constraint firstAttribute="height" constant="15" id="iul-7C-oA4"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="11"/>
-                                                        <color key="textColor" red="0.68034304960000003" green="0.67166205199999995" blue="0.70428970179999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <color key="textColor" red="0.56414399814819249" green="0.55987979465562543" blue="0.59108664772727271" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="CITY"/>
@@ -7006,7 +7041,7 @@
                                                             <constraint firstAttribute="height" constant="15" id="8c4-wN-fss"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="11"/>
-                                                        <color key="textColor" red="0.68034304960000003" green="0.67166205199999995" blue="0.70428970179999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <color key="textColor" red="0.56414399810000004" green="0.55987979470000004" blue="0.59108664769999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="EnglishText" value="CITY"/>
@@ -7176,7 +7211,7 @@
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pFC-on-FjK">
-                                <rect key="frame" x="0.0" y="88" width="429" height="20"/>
+                                <rect key="frame" x="0.0" y="92" width="429" height="20"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No internet connection." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Deu-4b-sx6" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
                                         <rect key="frame" x="20" y="3" width="389" height="14"/>
@@ -7246,6 +7281,7 @@
                     <connections>
                         <outlet property="Address" destination="cUP-Da-xbf" id="QvG-ub-ZMe"/>
                         <outlet property="AddressLable" destination="ta7-qn-uPZ" id="ot4-co-qqh"/>
+                        <outlet property="AddressLableView" destination="Zen-uy-ugX" id="THn-Mf-eu1"/>
                         <outlet property="Arrow" destination="1uZ-LS-V4S" id="lsy-1M-x2g"/>
                         <outlet property="BondType" destination="yKR-fO-TJb" id="cLZ-TB-Wab"/>
                         <outlet property="Building" destination="wtl-PE-uLL" id="8dP-7m-6R4"/>
@@ -7316,7 +7352,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bNY-ac-4Sf">
-                                <rect key="frame" x="12" y="173" width="390" height="40"/>
+                                <rect key="frame" x="12" y="177" width="390" height="40"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ipg-Yg-caR">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="40"/>
@@ -7360,7 +7396,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTD-5l-dat" customClass="LoadingButton" customModule="MHLoadingButton">
-                                <rect key="frame" x="12" y="239" width="390" height="37"/>
+                                <rect key="frame" x="12" y="243" width="390" height="37"/>
                                 <color key="backgroundColor" red="0.27762734719999999" green="0.45648036050000002" blue="0.7167265921" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="4kj-jp-QNG"/>
@@ -7380,7 +7416,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Y50-jo-XGX">
-                                <rect key="frame" x="37" y="93" width="340" height="60"/>
+                                <rect key="frame" x="37" y="97" width="340" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your confirmation code" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnG-Vh-4nQ" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
                                         <rect key="frame" x="57" y="0.0" width="226.5" height="30"/>
@@ -7450,7 +7486,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="exg-Iq-qXE">
-                                <rect key="frame" x="12" y="100" width="24" height="21"/>
+                                <rect key="frame" x="12" y="104" width="24" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="8TG-k9-clk"/>
                                     <constraint firstAttribute="height" constant="21" id="uoW-f1-5vt"/>
@@ -7508,7 +7544,7 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tu2-m1-6b9">
-                                <rect key="frame" x="0.0" y="88" width="414" height="20"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="20"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No internet connection." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zed-Wa-Py5" customClass="LanguageLable" customModule="RealEstates" customModuleProvider="target">
                                         <rect key="frame" x="20" y="3" width="374" height="14"/>
@@ -7538,7 +7574,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="jc7-zl-CiW">
-                                <rect key="frame" x="0.0" y="108" width="414" height="705"/>
+                                <rect key="frame" x="0.0" y="112" width="414" height="701"/>
                                 <color key="backgroundColor" red="0.94901961089999998" green="0.94901961089999998" blue="0.94901961089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
                                     <outlet property="dataSource" destination="G9g-jK-NSM" id="Cil-nF-7kb"/>
@@ -7671,9 +7707,9 @@
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="bVW-1x-iCi"/>
-        <segue reference="Kzd-dD-rof"/>
+        <segue reference="TET-tT-GAj"/>
         <segue reference="t5N-62-9lD"/>
-        <segue reference="YGm-Ua-7iS"/>
+        <segue reference="uAK-j6-hYl"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="365" width="61" height="61"/>
@@ -7705,8 +7741,8 @@
         <image name="logog" width="216" height="232.66667175292969"/>
         <image name="logoooooooo" width="133" height="178.66667175292969"/>
         <image name="logout5" width="170.66667175292969" height="170.66667175292969"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
-        <image name="mappin.and.ellipse" catalog="system" width="118" height="128"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
+        <image name="mappin.and.ellipse" catalog="system" width="117" height="128"/>
         <image name="photo-1558472306-75b150ac26eb" width="1000" height="1400"/>
         <image name="pin" width="170.66667175292969" height="170.66667175292969"/>
         <image name="png-linea-3" width="930" height="407"/>

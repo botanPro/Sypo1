@@ -86,7 +86,16 @@ class FirstVC: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     
     
     @IBAction func Next(_ sender: Any) {
-        setupCitySelectionAlert()
+        if !CheckInternet.Connection(){
+            let ac = UIAlertController(title: "Connection", message: "Please check your internet connection.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                ac.dismiss(animated: true)
+            }))
+            present(ac, animated: true)
+        }else{
+            setupCitySelectionAlert()
+        }
+        
     }
     
     @IBAction func SharkTeam(_ sender: Any) {
