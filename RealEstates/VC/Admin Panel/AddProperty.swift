@@ -431,8 +431,6 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             self.Address.text = data.address
             
             
-            
-            
 
             
             
@@ -1901,6 +1899,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
     var lang : Int = UserDefaults.standard.integer(forKey: "language")
     var RealDirection = "S"
     @IBAction func Upload(_ sender: Any) {
+        
         if CheckInternet.Connection(){
             UIView.animate(withDuration: 0.3) {
                 self.InternetViewHeight.constant = 0
@@ -2115,6 +2114,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                                     }
                                 }
                             }
+                            
                             self.IsBecomeUpdated = true
                             EstateObject.init(name: self.Name.text!
                                               , id: self.estate_id

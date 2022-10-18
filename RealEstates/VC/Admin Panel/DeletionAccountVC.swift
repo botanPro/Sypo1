@@ -99,7 +99,6 @@ class DeletionAccountVC: UIViewController {
             myAlertin.addAction(UIAlertAction(title: delete, style: .default, handler: { (UIAlertActiokn) in
                 if let officeId = UserDefaults.standard.string(forKey: "OfficeId"){
                     OfficeAip.Remov(id: officeId) { deleted in
-                        print("-1-1-1-1-1-1-1-1-1-1-1-")
                         if self.ProductArray.count != 0{
                             for estate in self.ProductArray{
                                 ProductAip.Remov(id: estate.id ?? "") { deleted in }

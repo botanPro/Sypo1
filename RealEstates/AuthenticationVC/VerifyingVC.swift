@@ -29,7 +29,6 @@ class VerifyingVC: UIViewController {
         super.viewDidLoad()
         
         
-        
         self.Dismiss.isHidden = true
         
         
@@ -111,7 +110,7 @@ class VerifyingVC: UIViewController {
     }
     
     
-var count = 0
+    var count = 0
     var UserTypeFound = false
     @IBAction func Verify(_ sender: Any) {
         self.Verify.isEnabled = false

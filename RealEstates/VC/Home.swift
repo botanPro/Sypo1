@@ -1333,6 +1333,15 @@ extension Home: FSPagerViewDataSource,FSPagerViewDelegate {
         return cell
     }
     
+    
+//    func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {
+//        self.SliderController.currentPage = targetIndex
+//    }
+//
+//    func pagerViewDidEndScrollAnimation(_ pagerView: FSPagerView) {
+//        self.SliderController.currentPage = pagerView.currentIndex
+//    }
+//
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
         if sliderImages.count != 0{
         pagerView.deselectItem(at: index, animated: true)

@@ -972,7 +972,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TGx-LO-TUs" customClass="CosmosView" customModule="Cosmos">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TGx-LO-TUs" customClass="CosmosView" customModule="Cosmos">
                                                 <rect key="frame" x="144" y="319" width="120" height="40"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -7689,27 +7689,12 @@
         <designable name="LTD-5l-dat">
             <size key="intrinsicContentSize" width="31" height="25"/>
         </designable>
-        <designable name="TGx-LO-TUs">
-            <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
-        <designable name="cxj-cr-kPD">
-            <size key="intrinsicContentSize" width="56" height="14"/>
-        </designable>
-        <designable name="dbp-hE-3Ei">
-            <size key="intrinsicContentSize" width="53" height="14"/>
-        </designable>
-        <designable name="gvJ-8u-cm5">
-            <size key="intrinsicContentSize" width="53" height="14"/>
-        </designable>
-        <designable name="y62-vT-gyw">
-            <size key="intrinsicContentSize" width="56" height="14"/>
-        </designable>
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="bVW-1x-iCi"/>
         <segue reference="TET-tT-GAj"/>
         <segue reference="t5N-62-9lD"/>
-        <segue reference="uAK-j6-hYl"/>
+        <segue reference="YGm-Ua-7iS"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="365" width="61" height="61"/>

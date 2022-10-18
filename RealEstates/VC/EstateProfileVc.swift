@@ -523,8 +523,6 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
             FavoriteItemsObjectAip.GetFavoriteItemsById(fire_id: FireId) { item in
                 if item.fire_id == FireId && item.estate_id == self.CommingEstate?.id ?? ""{
                     self.AddToFav.setImage(UIImage(named: "fill_heart"), for: .normal)
-                }else{
-                    self.AddToFav.setImage(UIImage(named: "Heart"), for: .normal)
                 }
             }
         }
@@ -578,7 +576,7 @@ class EstateProfileVc: UIViewController, UITextViewDelegate, WKYTPlayerViewDeleg
     func GetData(){
        
         if let data = CommingEstate{
-            
+            print(JSON(data))
             if data.sold == "1"{
                 self.Sold.isHidden = false
                 self.SoldView.isHidden = false

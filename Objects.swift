@@ -1386,7 +1386,7 @@ class SubscriptionsObject{
     
     
     init(Dictionary : [String : AnyObject]) {
-        self.id   = Dictionary[ "Id" ]   as? String
+        self.id   = Dictionary[ "id" ]   as? String
         self.end_date = Dictionary[ "end_date" ] as? TimeInterval
         self.start_date = Dictionary[ "start_date" ] as? TimeInterval
         self.subscription_type_id = Dictionary[ "subscription_type_id" ] as? String
@@ -1396,7 +1396,7 @@ class SubscriptionsObject{
 
     func MakeDictionary() -> [String : AnyObject] {
         var New  : [String : AnyObject]  = [:]
-        New["Id"]   = self.id       as AnyObject
+        New["id"]   = self.id       as AnyObject
         New["end_date"] = self.end_date     as AnyObject
         New["start_date"] = self.start_date     as AnyObject
         New["subscription_type_id"] = self.subscription_type_id     as AnyObject
@@ -1415,6 +1415,7 @@ class SubscriptionAip{
             guard let documents = Snapshot?.documents else { return }
             for P in documents {
                 if let data = P.data() as [String : AnyObject]? {
+                    print(JSON(data))
                     New.append(SubscriptionsObject(Dictionary: data))
                 }
             }
@@ -1496,7 +1497,7 @@ class SubscriptionsTypeAip{
     }
     
     
-    static func GetSubscriptionsTypeByOfficeId(id : String , completion : @escaping (_ Product : SubscriptionsTypeObject)->()){
+    static func GetSubscriptionsTypeById(id : String , completion : @escaping (_ Product : SubscriptionsTypeObject)->()){
         Firestore.firestore().collection("SubscriptionTypes").whereField("id", isEqualTo: id).getDocuments { (Snapshot, error) in
             if error != nil { print(error.debugDescription) ; return }
             guard let documents = Snapshot?.documents else { return }

@@ -682,10 +682,10 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             self.Name.layer.cornerRadius = 5
             self.Phone.layer.cornerRadius = 3
             
-            if let FireId = UserDefaults.standard.string(forKey: "UserId"){print("=-=-=-=-=-=-=-1111111")
-                if let officeId = UserDefaults.standard.string(forKey: "OfficeId"){print("=-=-=-=-=-=-=-2222222")
+            if let FireId = UserDefaults.standard.string(forKey: "UserId"){print("=-=-=-=-=-=-=-1111111    \(FireId)")
+                if let officeId = UserDefaults.standard.string(forKey: "OfficeId"){print("=-=-=-=-=-=-=-2222222    \(officeId)")
                     OfficeAip.GetOffice(ID: officeId) { [self] office in
-                        if office.type_id == "h9nFfUrHgSwIg17uRwTD"{print("is office-----------------1111")
+                        if office.type_id == "h9nFfUrHgSwIg17uRwTD"{print("is office-----------------1111     \(office.type_id)")
                             self.ProfileRightImage.isHidden = false
                             self.Phone.isHidden = false
                             self.LoginImage.image = UIImage(named: "logout5")
@@ -702,9 +702,10 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                             self.FavoriteItemAction.isEnabled = true
                             
                             
-                            SubscriptionAip.GetAllSubscriptionsType { subscription in
-                                for sub in subscription{
-                                    if sub.user_id == officeId{
+                            SubscriptionAip.GetSubscriptionsByOfficeId(Office_id: officeId) { sub in
+                                        print("sub.user_id:     \(sub.user_id)")
+                                        print("OfficeId:     \(officeId)")
+                                        print("sub id -------: \(sub.id ?? "")")
                                         UIView.animate(withDuration:0.2, delay: 0.0) {
                                             UIView.animate(withDuration: 0.2, delay: 0.0) {
                                                 self.SubscriptionView.isHidden  = false
@@ -714,6 +715,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                                 self.view.layoutIfNeeded()
                                             }
                                             let date = NSDate(timeIntervalSince1970: sub.start_date ?? 0.0)
+                                            print("sub.start_date : \(sub.start_date ?? 0.0)")
                                             let dayTimePeriodFormatter = DateFormatter()
                                             dayTimePeriodFormatter.dateFormat = "dd-MM-YYYY  h:mm"
                                             let dateTimeString = dayTimePeriodFormatter.string(from: date as Date)
@@ -722,6 +724,8 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                             
                                             
                                             let date1 = NSDate(timeIntervalSince1970: sub.end_date ?? 0.0)
+                                            print("sub.end_date : \(sub.end_date ?? 0.0)")
+                                            
                                             let dayTimePeriodFormatter1 = DateFormatter()
                                             dayTimePeriodFormatter1.dateFormat = "dd-MM-YYYY  h:mm"
                                             let dateTimeString1 = dayTimePeriodFormatter1.string(from: date1 as Date)
@@ -729,8 +733,6 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                             self.EndDate.text = "\(dateTime1[0])".convertedDigitsToLocale(Locale(identifier: "EN"))
                                             
                                             
-                                            
-                                            print("dayyyssssss-----------------")
                                             self.days = (Date().days(sinceDate: date1 as Date) ?? 0) * -1
                                             if self.days < 0{
                                                 self.days = 0
@@ -746,8 +748,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                             if let FireId = UserDefaults.standard.string(forKey: "UserId"){
                                                 OfficeAip.GetOfficeById(Id: FireId) { office in
                                                     ProductAip.GetAllMyEstates(office_id: office.id ?? "") { estates in
-                                                        print("sub id -------: \(sub.subscription_type_id ?? "")")
-                                                        
+                                                        print("sub type id -------: \(sub.subscription_type_id ?? "")")
                                                         for estate in estates{
                                                             if Double(estate.Stamp ?? TimeInterval()) >= Double(sub.start_date ?? TimeInterval()) {
                                                                 self.MyEstates.append(estate)
@@ -755,7 +756,9 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                                             
                                                         }
                                                         
-                                                        SubscriptionsTypeAip.GetSubscriptionsTypeByOfficeId(id: sub.subscription_type_id ?? "") { posts in
+                                                        SubscriptionsTypeAip.GetSubscriptionsTypeById(id: sub.subscription_type_id ?? "") { posts in
+                                                            print("sub.subscription_type_id : \(sub.subscription_type_id ?? "")")
+                                                            print("posts : \(posts.number_of_post ?? "")")
                                                             if XLanguage.get() == .Kurdish{
                                                                 self.SubscriptionPosts.text = "\(posts.number_of_post ?? "") /پۆست \(self.MyEstates.count)"
                                                                 self.SubscriptionPosts.font = UIFont(name: "PeshangDes2", size: 12)!
@@ -817,8 +820,6 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                                 }
                                             }
                                             
-                                        }
-                                    }
                                 }
                             }
                             
@@ -911,7 +912,6 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                         self.AllEstate = estate
                         
                         ViewdItemsObjectAip.GeViewdItemById(fire_id: FireId) { [self] Item in
-                            print("]]]]]]]]]]]]]]]]]]]]]]\(self.AllEstate.count)")
                             for i in self.AllEstate{print("=====")
                                 if i.id == Item.estate_id{
                                     ViewdItemCount = ViewdItemCount + 1
@@ -1074,6 +1074,9 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     }
     
     
+    
+    
+    
     var messagee = ""
     var Action = ""
     var cancel = ""
@@ -1201,6 +1204,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     try firebaseAuth.signOut()
                     UserDefaults.standard.set(false, forKey: "Login")
                     UserDefaults.standard.set("", forKey: "UserId")
+                    UserDefaults.standard.set("", forKey: "OfficeId")
                     UserDefaults.standard.set("", forKey: "PhoneNumber")
                     if XLanguage.get() == .English{
                         self.LoginOrLogoutLable.text = "LOGIN"
@@ -1455,7 +1459,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                     OfficeAip.GetOfficeById(Id: FireId) { office in
                                         ProductAip.GetAllMyEstates(office_id: office.id ?? "") { estates in
                                             self.MyEstates = estates
-                                            SubscriptionsTypeAip.GetSubscriptionsTypeByOfficeId(id: sub.subscription_type_id ?? "") { posts in
+                                            SubscriptionsTypeAip.GetSubscriptionsTypeById(id: sub.subscription_type_id ?? "") { posts in
                                                 if XLanguage.get() == .Kurdish{
                                                     self.SubscriptionPosts.text = "\(posts.number_of_post ?? "") /پۆست \(self.MyEstates.count)"
                                                     self.SubscriptionPosts.font = UIFont(name: "PeshangDes2", size: 11)!
