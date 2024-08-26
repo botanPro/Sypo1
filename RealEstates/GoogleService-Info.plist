@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>477851249108-25k59tiact54o206im2bp71tq82s976p.apps.googleusercontent.com</string>
+	<string>589956073019-r2gfts3g7fmvhq7u7gv2cduimbjkqmoi.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.477851249108-25k59tiact54o206im2bp71tq82s976p</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>477851249108-3ed11me0vhkuhvr14rl155r9p1926lde.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.589956073019-r2gfts3g7fmvhq7u7gv2cduimbjkqmoi</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCUL1EGBLmbmTL-q3kSFoY3y36NIwsjxag</string>
+	<string>AIzaSyD8dqgpKbMLvWlKgxaIcQb9dTMLj9Xbr1I</string>
 	<key>GCM_SENDER_ID</key>
-	<string>477851249108</string>
+	<string>589956073019</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.maskani.sharkteam</string>
+	<string>com.sypo.sharkteam</string>
 	<key>PROJECT_ID</key>
-	<string>aqarat-spot</string>
+	<string>sypo-shark</string>
 	<key>STORAGE_BUCKET</key>
-	<string>aqarat-spot.appspot.com</string>
+	<string>sypo-shark.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:477851249108:ios:1452059aa208937204ce41</string>
+	<string>1:589956073019:ios:2648f076b703cc3af43e1e</string>
 </dict>
 </plist>
