@@ -51,15 +51,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         
-        guard let winScene = (scene as? UIWindowScene) else { return }
-        print(winScene)
-        let win = UIWindow(windowScene: winScene)
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newViewController = storyBoard.instantiateViewController(withIdentifier: "DetectVC")
-
-        win.rootViewController = newViewController
-        win.makeKeyAndVisible()
-        window = win
+//        guard let winScene = (scene as? UIWindowScene) else { return }
+//        print(winScene)
+//        let win = UIWindow(windowScene: winScene)
+//        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        let newViewController = storyBoard.instantiateViewController(withIdentifier: "DetectVC")
+//
+//        win.rootViewController = newViewController
+//        win.makeKeyAndVisible()
+//        window = win
 
     }
     

@@ -61,133 +61,26 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     }
     
     
-    //    @IBAction func Logout(_ sender: Any) {
-    //        if UserDefaults.standard.bool(forKey: "Login") == true{
-    //            let myAlert = UIAlertController(title: "Logout?", message: nil, preferredStyle: UIAlertController.Style.alert)
-    //            myAlert.addAction(UIAlertAction(title: "Ok", style:  UIAlertAction.Style.default, handler: { _ in
-    //                let firebaseAuth = Auth.auth()
-    //                do {
-    //                    try firebaseAuth.signOut()
-    //                    UserDefaults.standard.set(false, forKey: "Login")
-    //                    UserDefaults.standard.set("", forKey: "UserId")
-    //
-    //                    self.LangChanged()
-    //                } catch let signOutError as NSError {
-    //                    print ("Error signing out: %@", signOutError)
-    //                }
-    //            }))
-    //
-    //
-    //            myAlert.addAction(UIAlertAction(title: "No", style:  UIAlertAction.Style.cancel, handler: nil))
-    //            self.present(myAlert, animated: true, completion: nil)
-    //        }
-    //    }
-    
-    
     
     var Etitle = ""
     var Atitle = ""
     var Ktitle = ""
     var titlee = ""
+    var Htitle = ""
+    var Ctitle = ""
+    var HItitle = ""
+    var Ptitle = ""
+    var Stitle = ""
+    var GRtitle = ""
+    var Rtitle = ""
+    var Dtitle = ""
+    var Ftitle = ""
+    var SPtitle = ""
+    var GEtitle = ""
     var message = ""
+    
     @IBOutlet weak var LanguageLable: UILabel!
-    @IBAction func ChangLang(_ sender: Any) {
-        let dialog = AZDialogViewController(title: titlee, message: message)
-        dialog.titleColor = .black
-        
-        //set the message color
-        dialog.messageColor = .black
-        
-        //set the dialog background color
-        dialog.alertBackgroundColor = .white
-        
-        //set the gesture dismiss direction
-        dialog.dismissDirection = .bottom
-        
-        //allow dismiss by touching the background
-        dialog.dismissWithOutsideTouch = true
-        
-        //show seperator under the title
-        dialog.showSeparator = false
-        
-        //set the seperator color
-        dialog.separatorColor = UIColor.blue
-        
-        //enable/disable drag
-        dialog.allowDragGesture = false
-        
-        //enable rubber (bounce) effect
-        dialog.rubberEnabled = true
-        
-        //enable/disable backgroud blur
-        dialog.blurBackground = false
-        
-        //set the background blur style
-        dialog.blurEffectStyle = .light
-        
-        
-        
-        dialog.addAction(AZDialogAction(title: self.Ktitle) { (dialog) -> (Void) in
-            self.Etitle = "ئینگلیزی"
-            self.Atitle = "عەرەبی"
-            self.Ktitle = "کوردی"
-            self.titlee = "گۆڕینی زمان"
-            self.message = "زمان"
-            self.LanguageLable.text = self.Ktitle
-            self.LanguageLable.font =  UIFont(name: "PeshangDes2", size: 11)!
-            
-            self.loadingLableMessage = "تكایه‌ چاوه‌ڕێبه‌..."
-            self.LoadingView()
-            XLanguage.set(Language: .Kurdish)
-            self.LanguageLable.text = self.Ktitle
-            UserDefaults.standard.set(1, forKey: "language")
-            self.LangChanged()
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LanguageChanged"), object: nil)
-            self.alert.dismiss(animated: true, completion: nil)
-            dialog.dismiss()
-        })
-        
-        dialog.addAction(AZDialogAction(title: self.Etitle) { (dialog) -> (Void) in
-            self.Etitle = "English"
-            self.Atitle = "Arabic"
-            self.Ktitle = "Kurdish"
-            self.titlee = "Change Language"
-            self.message = "Language"
-            self.LanguageLable.text = self.Etitle
-            self.LanguageLable.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
-            
-            self.loadingLableMessage = "Please wait..."
-            self.LoadingView()
-            XLanguage.set(Language: .English)
-            self.LanguageLable.text = self.Etitle
-            UserDefaults.standard.set(2, forKey: "language")
-            self.LangChanged()
-            self.alert.dismiss(animated: true, completion: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LanguageChanged"), object: nil)
-            dialog.dismiss()
-        })
-        
-        dialog.addAction(AZDialogAction(title: self.Atitle) { (dialog) -> (Void) in
-            self.Etitle = "إنجليزي"
-            self.Atitle = "العربة"
-            self.Ktitle = "الکردیة"
-            self.titlee = "تغيير اللغة"
-            self.message = "لغة"
-            self.LanguageLable.text = self.Atitle
-            self.LanguageLable.font =  UIFont(name: "PeshangDes2", size: 11)!
-            self.loadingLableMessage = "يرجى الانتظار..."
-            self.LoadingView()
-            XLanguage.set(Language: .Arabic)
-            self.LanguageLable.text = self.Atitle
-            UserDefaults.standard.set(3, forKey: "language")
-            self.LangChanged()
-            self.alert.dismiss(animated: true, completion: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LanguageChanged"), object: nil)
-            dialog.dismiss()
-        })
-        
-        self.present(dialog, animated: false, completion: nil)
-    }
+    
     
     
     @IBOutlet weak var Name: UILabel!
@@ -213,14 +106,64 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                         self.NotificationLable.text = "چالاک کراوە"
                         self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
                     }
-                }else{
+                }else if XLanguage.get() == .Arabic{
                     DispatchQueue.main.async {
                         self.NotificationLable.text = "مفعلة"
                         self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
                     }
+                }else if XLanguage.get() == .English {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ON"
+                    }
+                } else if XLanguage.get() == .Dutch {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "AAN" // Dutch for "ON"
+                    }
+                } else if XLanguage.get() == .French {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ACTIVÉ" // French for "ON"
+                    }
+                } else if XLanguage.get() == .Spanish {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ENCENDIDO" // Spanish for "ON"
+                    }
+                } else if XLanguage.get() == .German {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "EIN" // German for "ON"
+                    }
+                } else if XLanguage.get() == .Hebrew {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "פעיל" // Hebrew for "ON"
+                    }
+                } else if XLanguage.get() == .Chinese {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "开" // Simplified Chinese for "ON"
+                    }
+                } else if XLanguage.get() == .Hindi {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "चालू" // Hindi for "ON"
+                    }
+                } else if XLanguage.get() == .Portuguese {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "LIGADO" // Portuguese for "ON"
+                    }
+                } else if XLanguage.get() == .Swedish {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "PÅ" // Swedish for "ON"
+                    }
+                } else if XLanguage.get() == .Greek {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ΕΝΕΡΓΟΠΟΙΗΜΈΝΟ" // Greek for "ON"
+                    }
+                } else if XLanguage.get() == .Russian {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ВКЛ" // Russian for "ON"
+                    }
                 }
+                
             }
             else {
+                self.NotificationLable.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
                 if XLanguage.get() == .English{
                     DispatchQueue.main.async {
                         self.NotificationLable.text = "OFF"
@@ -231,10 +174,54 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                         self.NotificationLable.text = "چالاک کراوە نیە"
                         self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
                     }
-                }else{
+                }else if XLanguage.get() == .Arabic{
                     DispatchQueue.main.async {
                         self.NotificationLable.text = "غیر مفعلة"
                         self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
+                    }
+                }else if XLanguage.get() == .Dutch {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "UIT" // Dutch for "OFF"
+                    }
+                } else if XLanguage.get() == .French {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "DÉSACTIVÉ" // French for "OFF"
+                    }
+                } else if XLanguage.get() == .Spanish {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "APAGADO" // Spanish for "OFF"
+                    }
+                } else if XLanguage.get() == .German {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "AUS" // German for "OFF"
+                    }
+                } else if XLanguage.get() == .Hebrew {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "כבוי" // Hebrew for "OFF"
+                    }
+                } else if XLanguage.get() == .Chinese {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "关" // Simplified Chinese for "OFF"
+                    }
+                } else if XLanguage.get() == .Hindi {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "बंद" // Hindi for "OFF"
+                    }
+                } else if XLanguage.get() == .Portuguese {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "DESLIGADO" // Portuguese for "OFF"
+                    }
+                } else if XLanguage.get() == .Swedish {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "AV" // Swedish for "OFF"
+                    }
+                } else if XLanguage.get() == .Greek {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ΑΠΕΝΕΡΓΟΠΟΙΗΜΈΝΟ" // Greek for "OFF"
+                    }
+                } else if XLanguage.get() == .Russian {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ВЫКЛ" // Russian for "OFF"
                     }
                 }
             }
@@ -258,8 +245,30 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                 myVC.title = "خوازراوەکان"
             }else if XLanguage.get() == .Arabic{
                 myVC.title = "العناصر المفضلة"
-            }else{
+            }else if XLanguage.get() == .English {
                 myVC.title = "FAVORITE ITEMS"
+            } else if XLanguage.get() == .Dutch {
+                myVC.title = "FAVORIETE ITEMS"
+            } else if XLanguage.get() == .French {
+                myVC.title = "ARTICLES FAVORIS"
+            } else if XLanguage.get() == .Spanish {
+                myVC.title = "ÍTEMS FAVORITOS"
+            } else if XLanguage.get() == .German {
+                myVC.title = "LIEBLINGSARTIKEL"
+            } else if XLanguage.get() == .Hebrew {
+                myVC.title = "פריטים מועדפים"
+            } else if XLanguage.get() == .Chinese {
+                myVC.title = "收藏项目"
+            } else if XLanguage.get() == .Hindi {
+                myVC.title = "पसंदीदा आइटम"
+            } else if XLanguage.get() == .Portuguese {
+                myVC.title = "ITENS FAVORITOS"
+            } else if XLanguage.get() == .Swedish {
+                myVC.title = "FAVORITARTIKLAR"
+            } else if XLanguage.get() == .Greek {
+                myVC.title = "ΑΓΑΠΗΜΈΝΑ ΕΊΔΗ"
+            } else if XLanguage.get() == .Russian {
+                myVC.title = "ИЗБРАННЫЕ ТОВАРЫ"
             }
             self.navigationController?.pushViewController(myVC, animated: true)
         }
@@ -290,9 +299,75 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     ac.dismiss(animated: true)
                 }))
                 present(ac, animated: true)
-            }else{
+            }else if XLanguage.get() == .Kurdish{
                 let ac = UIAlertController(title: "هەڵە", message: "تکایە هێڵی ئینتەرنێتەکەت بپشکنە.", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "باشە", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else if XLanguage.get() == .Dutch {
+                let ac = UIAlertController(title: "Fout", message: "Controleer uw internetverbinding.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .French {
+                let ac = UIAlertController(title: "Erreur", message: "Veuillez vérifier votre connexion internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Spanish {
+                let ac = UIAlertController(title: "Error", message: "Por favor, verifica tu conexión a internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .German {
+                let ac = UIAlertController(title: "Fehler", message: "Bitte überprüfen Sie Ihre Internetverbindung.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Hebrew {
+                let ac = UIAlertController(title: "שגיאה", message: "אנא בדוק את חיבור האינטרנט שלך.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "אישור", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Chinese {
+                let ac = UIAlertController(title: "错误", message: "请检查您的互联网连接。", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "确定", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Hindi {
+                let ac = UIAlertController(title: "त्रुटि", message: "कृपया अपना इंटरनेट कनेक्शन जाँच लें।", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ठीक है", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Portuguese {
+                let ac = UIAlertController(title: "Erro", message: "Por favor, verifique sua conexão com a internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Swedish {
+                let ac = UIAlertController(title: "Fel", message: "Vänligen kontrollera din internetanslutning.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Greek {
+                let ac = UIAlertController(title: "Σφάλμα", message: "Παρακαλώ ελέγξτε τη σύνδεσή σας στο διαδίκτυο.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ΟΚ", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Russian {
+                let ac = UIAlertController(title: "Ошибка", message: "Пожалуйста, проверьте ваше интернет-соединение.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ОК", style: .default, handler: { _ in
                     ac.dismiss(animated: true)
                 }))
                 present(ac, animated: true)
@@ -306,7 +381,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     
     
     @IBAction func CntactUs(_ sender: Any) {
-        self.dialNumber(phoneNumber: "+9647514505411")
+        self.dialNumber(phoneNumber: "+9647513164239")
     }
     
     func dialNumber(phoneNumber : String) {
@@ -344,16 +419,16 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     @IBOutlet weak var ViewdItems: UILabel!
     
     
-    
-    @IBOutlet weak var SubscriptionView             : UIView!
-    @IBOutlet weak var SubscriptionDays             : UILabel!
-    @IBOutlet weak var SubscriptionPosts            : UILabel!
-    @IBOutlet weak var StartDate                    : UILabel!
-    @IBOutlet weak var EndDate                      : UILabel!
-    @IBOutlet weak var SubscriptionViewHeightLyout  : NSLayoutConstraint!
-    @IBOutlet weak var SubscriptionViewTopLyout     : NSLayoutConstraint!
-    @IBOutlet weak var SubscriptionViewBottomLyout  : NSLayoutConstraint!
-    
+//
+//    @IBOutlet weak var SubscriptionView             : UIView!
+//    @IBOutlet weak var SubscriptionDays             : UILabel!
+//    @IBOutlet weak var SubscriptionPosts            : UILabel!
+//    @IBOutlet weak var StartDate                    : UILabel!
+//    @IBOutlet weak var EndDate                      : UILabel!
+//    @IBOutlet weak var SubscriptionViewHeightLyout  : NSLayoutConstraint!
+//    @IBOutlet weak var SubscriptionViewTopLyout     : NSLayoutConstraint!
+//    @IBOutlet weak var SubscriptionViewBottomLyout  : NSLayoutConstraint!
+//
     
     
     
@@ -371,94 +446,61 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         let yourBackImage = UIImage(named: "left-chevron")
         self.navigationController?.navigationBar.backIndicatorImage = yourBackImage
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = yourBackImage
-        
-        
-        if XLanguage.get() == .Kurdish{
-            self.Etitle = "ئینگلیزی"
-            self.Atitle = "عەرەبی"
-            self.Ktitle = "کوردی"
-            self.titlee = "گۆڕینی زمان"
-            self.message = "زمان"
-            self.LanguageLable.text = self.Ktitle
-            self.LanguageLable.font =  UIFont(name: "PeshangDes2", size: 11)!
-        }else if XLanguage.get() == .English{
-            self.Etitle = "English"
-            self.Atitle = "Arabic"
-            self.Ktitle = "Kurdish"
-            self.titlee = "Change Language"
-            self.message = "Language"
-            self.LanguageLable.text = self.Etitle
-            self.LanguageLable.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
-        }else{
-            self.Etitle = "إنجليزي"
-            self.Atitle = "العربة"
-            self.Ktitle = "الکردیة"
-            self.titlee = "تغيير اللغة"
-            self.message = "لغة"
-            self.LanguageLable.text = self.Atitle
-            self.LanguageLable.font =  UIFont(name: "PeshangDes2", size: 11)!
-        }
+         
         
         
         
-        
-        if XLanguage.get() == .English{
-            if let cityId = UserDefaults.standard.string(forKey: "CityId"){
-            CityObjectAip.GetCities { cities in
-                    for city in cities {
-                        if city.id == cityId{
-                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
-                                self.Location.text = "\(country.name ?? "")-\(city.name ?? "")".uppercased()
-                                self.Location.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
-                            }
-                        }
-                    }
-                }
-            }
-        }else if XLanguage.get() == .Arabic{
-            if let cityId = UserDefaults.standard.string(forKey: "CityId"){
-            CityObjectAip.GetCities { cities in
-                    for city in cities {
-                        if city.id == cityId{
-                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
-                                self.Location.text = "\(country.ar_name ?? "")-\(city.ar_name ?? "")".uppercased()
-                                self.Location.font = UIFont(name: "PeshangDes2", size: 11)!
-                            }
-                        }
-                    }
-                }
-            }
-        }else{
-            if let cityId = UserDefaults.standard.string(forKey: "CityId"){
-            CityObjectAip.GetCities { cities in
-                    for city in cities {
-                        if city.id == cityId{
-                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
-                                self.Location.text = "\(country.ku_name ?? "")-\(city.ku_name ?? "")".uppercased()
-                                self.Location.font = UIFont(name: "PeshangDes2", size: 11)!
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        
-        
+//        
+//        
+//        if XLanguage.get() == .English{
+//            if let cityId = UserDefaults.standard.string(forKey: "CityId"){
+//            CityObjectAip.GetCities { cities in
+//                    for city in cities {
+//                        if city.id == cityId{
+//                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
+//                                self.Location.text = "\(country.name ?? "")-\(city.name ?? "")".uppercased()
+//                                self.Location.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }else if XLanguage.get() == .Arabic{
+//            if let cityId = UserDefaults.standard.string(forKey: "CityId"){
+//            CityObjectAip.GetCities { cities in
+//                    for city in cities {
+//                        if city.id == cityId{
+//                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
+//                                self.Location.text = "\(country.ar_name ?? "")-\(city.ar_name ?? "")".uppercased()
+//                                self.Location.font = UIFont(name: "PeshangDes2", size: 11)!
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }else{
+//            if let cityId = UserDefaults.standard.string(forKey: "CityId"){
+//            CityObjectAip.GetCities { cities in
+//                    for city in cities {
+//                        if city.id == cityId{
+//                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
+//                                self.Location.text = "\(country.ku_name ?? "")-\(city.ku_name ?? "")".uppercased()
+//                                self.Location.font = UIFont(name: "PeshangDes2", size: 11)!
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
         
         
-        self.SubscriptionView.isHidden             = true
-        self.SubscriptionViewHeightLyout.constant  = 0
-        self.SubscriptionViewTopLyout.constant     = 0
-        self.SubscriptionViewBottomLyout.constant  = 0
-        
-        
-        
-        self.EditProfile.isEnabled = true
         self.GetYATop.constant = 0
-        self.GetYABottom.constant = 12
         self.GetYAHeight.constant = 0
         self.GetYAView.isHidden = true
+        
+  
+        
+        self.EditProfile.isEnabled = true
         self.AddPropertyView.isHidden = false
         self.ViewPropertyVicew.isHidden = false
         self.ProfileRightImage.isHidden = false
@@ -486,7 +528,7 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     
     
     @IBOutlet weak var GetYATop   : NSLayoutConstraint!
-    @IBOutlet weak var GetYABottom: NSLayoutConstraint!
+//    @IBOutlet weak var GetYABottom: NSLayoutConstraint!
     @IBOutlet weak var GetYAHeight: NSLayoutConstraint!
     @IBOutlet weak var GetYAView  : UIView!
     
@@ -516,6 +558,19 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             }
         }
     }
+    
+    var ProductArrayForDeleteAccount : [EstateObject] = []
+    func GetMyEstatesForDeleteAccount(){
+        if let FireId = UserDefaults.standard.string(forKey: "UserId"){
+            OfficeAip.GetOfficeById(Id: FireId) { office in
+                ProductAip.GetMyEstates(office_id: office.id ?? "") { estates in
+                    if estates.archived != "1"{
+                        self.ProductArrayForDeleteAccount.append(estates)
+                    }
+                }
+            }
+        }
+    }
 
     @IBOutlet weak var ProfileRightImage: UIImageView!
     
@@ -525,8 +580,205 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     var IsInternetChecked = false
     @IBOutlet weak var InternetViewHeight: NSLayoutConstraint!
     @IBOutlet weak var InternetConnectionView: UIView!
+    
+    
+    
+    @IBOutlet weak var DeleteAccountView: UIView!
+    @IBAction func DeleteAccount(_ sender: Any) {
+        if CheckInternet.Connection(){
+            UIView.animate(withDuration: 0.3) {
+                self.InternetViewHeight.constant = 0
+                self.InternetConnectionView.isHidden = true
+                self.view.layoutIfNeeded()
+            }
+            
+            var title  = ""
+            var mess   = ""
+            var note    = ""
+            var note_mess = ""
+            var sure   = ""
+            var delete = ""
+            var cancel = ""
+            var no     = ""
+            
+            if XLanguage.get() == .English{
+                title  = "Delete Account"
+                mess   = "Are you sure you want to delete your account?"
+                sure   = "Sure"
+                note    = "Warning"
+                note_mess = "After deleting your account, your estates and information will be Delete, this action cannot be undo."
+                delete = "Delete"
+                cancel = "Cancel"
+                no     = "No"
+            }else if XLanguage.get() == .Kurdish{
+                title  = "سڕینەوەی ئەکاونت"
+                mess   = "ئایا دڵنیای کە دەتەوێت ئەکاونتەکەت بسڕیتەوە؟"
+                sure   = "دڵنیابە"
+                note    = "ئاگادارکردنەوە"
+                note_mess = "دوای سڕینەوەی ئەکاونتەکەت، ئیستێت و زانیارییەکانت دەبێتە سڕینەوە، ئەم کردارە ناتوانرێت پاشەکشە بکرێت."
+                delete = "سڕینەوە"
+                cancel = "هەڵوەشاندنەوە"
+                no     = "نا"
+            }else if XLanguage.get() == .Arabic {
+                title  = "حذف الحساب"
+                mess   = "هل أنت متأكد أنك تريد حذف حسابك؟"
+                sure   = "متأكد"
+                note   = "تحذير"
+                note_mess = "بعد حذف حسابك، سيتم حذف ممتلكاتك ومعلوماتك، هذا الإجراء لا يمكن التراجع عنه."
+                delete = "حذف"
+                cancel = "إلغاء"
+                no     = "لا"
+            }else if XLanguage.get() == .Hebrew {
+                title  = "מחק חשבון"
+                mess   = "האם אתה בטוח שברצונך למחוק את החשבון שלך?"
+                sure   = "בטוח"
+                note   = "אזהרה"
+                note_mess = "לאחר מחיקת החשבון שלך, הנכסים והמידע שלך ימחקו, לא ניתן לבטל פעולה זו."
+                delete = "מחק"
+                cancel = "בטל"
+                no     = "לא"
+            }else if XLanguage.get() == .Chinese {
+                title  = "删除账户"
+                mess   = "您确定要删除您的账户吗？"
+                sure   = "确定"
+                note   = "警告"
+                note_mess = "删除账户后，您的财产和信息将被删除，此操作不能撤销。"
+                delete = "删除"
+                cancel = "取消"
+                no     = "不"
+            }else if XLanguage.get() == .Hindi {
+                title  = "खाता हटाएं"
+                mess   = "क्या आप वाकई अपना खाता हटाना चाहते हैं?"
+                sure   = "निश्चित"
+                note   = "चेतावनी"
+                note_mess = "खाता हटाने के बाद, आपकी संपत्ति और जानकारी हटा दी जाएगी, इस क्रिया को उलटा नहीं किया जा सकता।"
+                delete = "हटाएं"
+                cancel = "रद्द करें"
+                no     = "नहीं"
+            }else if XLanguage.get() == .Portuguese {
+                title  = "Excluir Conta"
+                mess   = "Tem certeza de que deseja excluir sua conta?"
+                sure   = "Certo"
+                note   = "Aviso"
+                note_mess = "Após excluir sua conta, seus bens e informações serão excluídos, esta ação não pode ser desfeita."
+                delete = "Excluir"
+                cancel = "Cancelar"
+                no     = "Não"
+            }else if XLanguage.get() == .Swedish {
+                title  = "Radera konto"
+                mess   = "Är du säker på att du vill radera ditt konto?"
+                sure   = "Säker"
+                note   = "Varning"
+                note_mess = "Efter att ditt konto har raderats kommer dina tillgångar och information att raderas, denna åtgärd kan inte ångras."
+                delete = "Radera"
+                cancel = "Avbryt"
+                no     = "Nej"
+            }else if XLanguage.get() == .Greek {
+                title  = "Διαγραφή Λογαριασμού"
+                mess   = "Είστε σίγουροι ότι θέλετε να διαγράψετε τον λογαριασμό σας;"
+                sure   = "Σίγουρος"
+                note   = "Προειδοποίηση"
+                note_mess = "Μετά τη διαγραφή του λογαριασμού σας, οι περιουσίες και οι πληροφορίες σας θα διαγραφούν, αυτή η ενέργεια δεν μπορεί να αναιρεθεί."
+                delete = "Διαγραφή"
+                cancel = "Ακύρωση"
+                no     = "Όχι"
+            }else if XLanguage.get() == .Russian {
+                title  = "Удалить аккаунт"
+                mess   = "Вы уверены, что хотите удалить свой аккаунт?"
+                sure   = "Уверен"
+                note   = "Внимание"
+                note_mess = "После удаления вашего аккаунта, ваши состояния и информация будут удалены, это действие нельзя отменить."
+                delete = "Удалить"
+                cancel = "Отмена"
+                no     = "Нет"
+            }else if XLanguage.get() == .Dutch {
+                title  = "Account Verwijderen"
+                mess   = "Weet u zeker dat u uw account wilt verwijderen?"
+                sure   = "Zeker"
+                note   = "Waarschuwing"
+                note_mess = "Na het verwijderen van uw account worden uw eigendommen en informatie Verwijderd, deze actie kan niet ongedaan worden gemaakt."
+                delete = "Verwijderen"
+                cancel = "Annuleren"
+                no     = "Nee"
+            }else if XLanguage.get() == .French {
+                title  = "Supprimer le compte"
+                mess   = "Êtes-vous sûr de vouloir supprimer votre compte ?"
+                sure   = "Sûr"
+                note   = "Attention"
+                note_mess = "Après la suppression de votre compte, vos biens et informations seront Supprimés, cette action ne peut pas être annulée."
+                delete = "Supprimer"
+                cancel = "Annuler"
+                no     = "Non"
+            }else if XLanguage.get() == .Spanish {
+                title  = "Eliminar Cuenta"
+                mess   = "¿Estás seguro de que quieres eliminar tu cuenta?"
+                sure   = "Seguro"
+                note   = "Advertencia"
+                note_mess = "Después de eliminar tu cuenta, tus estados e información serán Eliminados, esta acción no puede ser deshecha."
+                delete = "Eliminar"
+                cancel = "Cancelar"
+                no     = "No"
+            }else if XLanguage.get() == .German {
+                title  = "Konto löschen"
+                mess   = "Sind Sie sicher, dass Sie Ihr Konto löschen möchten?"
+                sure   = "Sicher"
+                note   = "Warnung"
+                note_mess = "Nach dem Löschen Ihres Kontos werden Ihre Vermögenswerte und Informationen gelöscht, diese Aktion kann nicht rückgängig gemacht werden."
+                delete = "Löschen"
+                cancel = "Abbrechen"
+                no     = "Nein"
+            }
+            
+            
+            let myAlert = UIAlertController(title: title, message: mess, preferredStyle: UIAlertController.Style.alert)
+            myAlert.addAction(UIAlertAction(title: sure, style: .default, handler: { (UIAlertActionn) in
+                
+                let myAlertin = UIAlertController(title: note, message: note_mess, preferredStyle: UIAlertController.Style.alert)
+                myAlertin.addAction(UIAlertAction(title: delete, style: .default, handler: { (UIAlertActiokn) in
+                    if let officeId = UserDefaults.standard.string(forKey: "OfficeId"){
+                        OfficeAip.Remov(id: officeId) { deleted in
+                            if self.ProductArrayForDeleteAccount.count != 0{
+                                for estate in self.ProductArrayForDeleteAccount{
+                                    ProductAip.Remov(id: estate.id ?? "") { deleted in }
+                                }
+                            }
+                        }
+                        
+                    }
+                    UserDefaults.standard.set(false, forKey: "Login")
+                    UserDefaults.standard.set("", forKey: "UserId")
+                    UserDefaults.standard.set("", forKey: "PhoneNumber")
+                    UserDefaults.standard.set("", forKey: "OfficeId")
+                    UserDefaults.standard.set("", forKey: "UserType")
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "GoToApp")
+                    vc!.modalPresentationStyle = .overFullScreen
+                    vc!.modalTransitionStyle = .crossDissolve
+                    self.present(vc!, animated: true)
+                }))
+                myAlertin.addAction(UIAlertAction(title: cancel, style: .cancel, handler: nil))
+                self.present(myAlertin, animated: true, completion: nil)
+                
+            }))
+            myAlert.addAction(UIAlertAction(title: no, style: .cancel, handler: nil))
+            self.present(myAlert, animated: true, completion: nil)
+        }else{
+            UIView.animate(withDuration: 0.3) {
+                self.InternetViewHeight.constant = 20
+                self.InternetConnectionView.isHidden = false
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        
         
         if CheckInternet.Connection(){
             self.IsInternetChecked = false
@@ -553,7 +805,6 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             if settings.authorizationStatus == .authorized {
-                
                 if XLanguage.get() == .English{
                     DispatchQueue.main.async {
                         self.NotificationLable.text = "ON"
@@ -564,12 +815,61 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                         self.NotificationLable.text = "چالاک کراوە"
                         self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
                     }
-                }else{
+                }else if XLanguage.get() == .Arabic{
                     DispatchQueue.main.async {
-                        self.NotificationLable.text = "مفعّلة"
+                        self.NotificationLable.text = "مفعلة"
                         self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
                     }
+                }else if XLanguage.get() == .English {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ON"
+                    }
+                } else if XLanguage.get() == .Dutch {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "AAN" // Dutch for "ON"
+                    }
+                } else if XLanguage.get() == .French {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ACTIVÉ" // French for "ON"
+                    }
+                } else if XLanguage.get() == .Spanish {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ENCENDIDO" // Spanish for "ON"
+                    }
+                } else if XLanguage.get() == .German {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "EIN" // German for "ON"
+                    }
+                } else if XLanguage.get() == .Hebrew {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "פעיל" // Hebrew for "ON"
+                    }
+                } else if XLanguage.get() == .Chinese {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "开" // Simplified Chinese for "ON"
+                    }
+                } else if XLanguage.get() == .Hindi {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "चालू" // Hindi for "ON"
+                    }
+                } else if XLanguage.get() == .Portuguese {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "LIGADO" // Portuguese for "ON"
+                    }
+                } else if XLanguage.get() == .Swedish {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "PÅ" // Swedish for "ON"
+                    }
+                } else if XLanguage.get() == .Greek {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ΕΝΕΡΓΟΠΟΙΗΜΈΝΟ" // Greek for "ON"
+                    }
+                } else if XLanguage.get() == .Russian {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ВКЛ" // Russian for "ON"
+                    }
                 }
+                
             }
             else {
                 if XLanguage.get() == .English{
@@ -582,10 +882,54 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                         self.NotificationLable.text = "چالاک کراوە نیە"
                         self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
                     }
-                }else{
+                }else if XLanguage.get() == .Arabic{
                     DispatchQueue.main.async {
                         self.NotificationLable.text = "غیر مفعلة"
                         self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
+                    }
+                }else if XLanguage.get() == .Dutch {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "UIT" // Dutch for "OFF"
+                    }
+                } else if XLanguage.get() == .French {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "DÉSACTIVÉ" // French for "OFF"
+                    }
+                } else if XLanguage.get() == .Spanish {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "APAGADO" // Spanish for "OFF"
+                    }
+                } else if XLanguage.get() == .German {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "AUS" // German for "OFF"
+                    }
+                } else if XLanguage.get() == .Hebrew {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "כבוי" // Hebrew for "OFF"
+                    }
+                } else if XLanguage.get() == .Chinese {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "关" // Simplified Chinese for "OFF"
+                    }
+                } else if XLanguage.get() == .Hindi {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "बंद" // Hindi for "OFF"
+                    }
+                } else if XLanguage.get() == .Portuguese {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "DESLIGADO" // Portuguese for "OFF"
+                    }
+                } else if XLanguage.get() == .Swedish {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "AV" // Swedish for "OFF"
+                    }
+                } else if XLanguage.get() == .Greek {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ΑΠΕΝΕΡΓΟΠΟΙΗΜΈΝΟ" // Greek for "OFF"
+                    }
+                } else if XLanguage.get() == .Russian {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ВЫКЛ" // Russian for "OFF"
                     }
                 }
             }
@@ -602,32 +946,68 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         self.FavoriteItemCount = 0
         self.ViewdItemCount = 0
         
-        
-        if XLanguage.get() == .English{
-            //self.Location.text = UserDefaults.standard.string(forKey: "CityName")?.uppercased() ?? ""
-            self.Location.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
-        }else if XLanguage.get() == .Kurdish{
-            //self.Location.text = UserDefaults.standard.string(forKey: "CityName")?.uppercased() ?? ""
-            self.Location.font = UIFont(name: "PeshangDes2", size: 11)!
-        }else{
-            //self.Location.text = UserDefaults.standard.string(forKey: "CityName")?.uppercased() ?? ""
-            self.Location.font = UIFont(name: "PeshangDes2", size: 10)!
-        }
+//        
+//        if XLanguage.get() == .English{
+//            //self.Location.text = UserDefaults.standard.string(forKey: "CityName")?.uppercased() ?? ""
+//            self.Location.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+//        }else if XLanguage.get() == .Kurdish{
+//            //self.Location.text = UserDefaults.standard.string(forKey: "CityName")?.uppercased() ?? ""
+//            self.Location.font = UIFont(name: "PeshangDes2", size: 11)!
+//        }else{
+//            //self.Location.text = UserDefaults.standard.string(forKey: "CityName")?.uppercased() ?? ""
+//            self.Location.font = UIFont(name: "PeshangDes2", size: 10)!
+//        }
         
         GetCity()
-        if UserDefaults.standard.bool(forKey: "Login") == false {print("is not-----------------")
+       
+        if UserDefaults.standard.bool(forKey: "Login") == false {
             if XLanguage.get() == .Kurdish{
                 self.LoginOrLogoutLable.text = "چونه‌ ژووره‌وه‌"
                 self.LoginOrLogoutLable.font = UIFont(name: "PeshangDes2", size: 14)!
             }else if XLanguage.get() == .English{
                 self.LoginOrLogoutLable.text = "LOGIN"
                 self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
-            }else{
+            }else if XLanguage.get() == .Arabic{
                 self.LoginOrLogoutLable.text = "تسجيل الدخول"
                 self.LoginOrLogoutLable.font = UIFont(name: "PeshangDes2", size: 14)!
+            }else if XLanguage.get() == .Dutch {
+                self.LoginOrLogoutLable.text = "INLOGGEN"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .French {
+                self.LoginOrLogoutLable.text = "CONNEXION"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Spanish {
+                self.LoginOrLogoutLable.text = "INICIAR SESIÓN"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .German {
+                self.LoginOrLogoutLable.text = "ANMELDEN"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Hebrew {
+                self.LoginOrLogoutLable.text = "התחברות"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Chinese {
+                self.LoginOrLogoutLable.text = "登录"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Hindi {
+                self.LoginOrLogoutLable.text = "लॉग इन करें"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Portuguese {
+                self.LoginOrLogoutLable.text = "ENTRAR"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Swedish {
+                self.LoginOrLogoutLable.text = "LOGGA IN"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Greek {
+                self.LoginOrLogoutLable.text = "ΣΥΝΔΕΣΗ"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Russian {
+                self.LoginOrLogoutLable.text = "ВХОД"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
             }
+            
             self.LoginImage.image = UIImage(named: "vuesax-bold-login")
             self.ProfileInfoStackView.isHidden = true
+            self.DeleteAccountView.isHidden = true
             self.ProfileInfoStackViewLayout.constant = 0
             self.Profileimageheight.constant = 0
             self.AddPropertyView.alpha = 0.5
@@ -648,36 +1028,122 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                 self.FavoriteItems.text = "0 ITEMS"
                 self.FavoriteItems.font =  UIFont(name: "ArialRoundedMTBold", size: 10)!
                 self.ViewdItems.font =  UIFont(name: "ArialRoundedMTBold", size: 10)!
-            }else{
+            }else  if XLanguage.get() == .Arabic{
                 self.FavoriteItems.text = "0 عناصر"
                 self.ViewdItems.text = "0 عناصر"
                 self.ViewdItems.font =  UIFont(name: "PeshangDes2", size: 10)!
                 self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 10)!
+            }else if XLanguage.get() == .Dutch {
+                self.ViewdItems.text = "0 ITEMS"
+                self.FavoriteItems.text = "0 ITEMS"
+                self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+            } else if XLanguage.get() == .French {
+                self.ViewdItems.text = "0 ARTICLES"
+                self.FavoriteItems.text = "0 ARTICLES"
+                self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+            } else if XLanguage.get() == .Spanish {
+                self.ViewdItems.text = "0 ARTÍCULOS"
+                self.FavoriteItems.text = "0 ARTÍCULOS"
+                self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+            } else if XLanguage.get() == .German {
+                self.ViewdItems.text = "0 ARTIKEL"
+                self.FavoriteItems.text = "0 ARTIKEL"
+                self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+            } else if XLanguage.get() == .Hebrew {
+                self.ViewdItems.text = "0 פריטים"
+                self.FavoriteItems.text = "0 פריטים"
+                self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+            } else if XLanguage.get() == .Chinese {
+                self.ViewdItems.text = "0 项"
+                self.FavoriteItems.text = "0 项"
+                self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+            } else if XLanguage.get() == .Hindi {
+                self.ViewdItems.text = "0 वस्तुएँ"
+                self.FavoriteItems.text = "0 वस्तुएँ"
+                self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+            } else if XLanguage.get() == .Portuguese {
+                self.ViewdItems.text = "0 ITENS"
+                self.FavoriteItems.text = "0 ITENS"
+                self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+            } else if XLanguage.get() == .Swedish {
+                self.ViewdItems.text = "0 FÖREMÅL"
+                self.FavoriteItems.text = "0 FÖREMÅL"
+                self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+            } else if XLanguage.get() == .Greek {
+                self.ViewdItems.text = "0 ΑΝΤΙΚΕΊΜΕΝΑ"
+                self.FavoriteItems.text = "0 ΑΝΤΙΚΕΊΜΕΝΑ"
+                self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+            } else if XLanguage.get() == .Russian {
+                self.ViewdItems.text = "0 ПРЕДМЕТОВ"
+                self.FavoriteItems.text = "0 ПРЕДМЕТОВ"
+                self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
             }
-            self.GetYATop.constant = 0
-            self.GetYABottom.constant = 0
-            self.GetYAHeight.constant = 0
-            self.GetYAView.isHidden = true
-            
-            self.SubscriptionView.isHidden             = true
-            self.SubscriptionViewHeightLyout.constant  = 0
-            self.SubscriptionViewTopLyout.constant     = 0
-            self.SubscriptionViewBottomLyout.constant  = 0
+
             
             
-            
-        }else{print("is -----------------")
+        }else{print("is logined-----------------")
+            GetMyEstatesForDeleteAccount()
             if XLanguage.get() == .Kurdish{
                 self.LoginOrLogoutLable.text = "چوونە دەرەوە"
                 self.LoginOrLogoutLable.font = UIFont(name: "PeshangDes2", size: 14)!
             }else if XLanguage.get() == .English{
                 self.LoginOrLogoutLable.text = "LOGOUT"
                 self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
-            }else{
+            }else if XLanguage.get() == .Arabic{
                 self.LoginOrLogoutLable.text = "تسجيل خروج"
                 self.LoginOrLogoutLable.font = UIFont(name: "PeshangDes2", size: 14)!
+            }else if XLanguage.get() == .Dutch {
+                self.LoginOrLogoutLable.text = "UITLOGGEN"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .French {
+                self.LoginOrLogoutLable.text = "DÉCONNEXION"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Spanish {
+                self.LoginOrLogoutLable.text = "CERRAR SESIÓN"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .German {
+                self.LoginOrLogoutLable.text = "ABMELDEN"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Hebrew {
+                self.LoginOrLogoutLable.text = "התנתקות"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Chinese {
+                self.LoginOrLogoutLable.text = "登出"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Hindi {
+                self.LoginOrLogoutLable.text = "लॉग आउट"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Portuguese {
+                self.LoginOrLogoutLable.text = "SAIR"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Swedish {
+                self.LoginOrLogoutLable.text = "LOGGA UT"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Greek {
+                self.LoginOrLogoutLable.text = "ΑΠΟΣΥΝΔΕΣΗ"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Russian {
+                self.LoginOrLogoutLable.text = "ВЫЙТИ"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
             }
             
+            self.EditProfile.isEnabled = false
+            self.DeleteAccountView.isHidden = false
+            self.GetYATop.constant = 15
+            //self.GetYABottom.constant = 12
+            self.GetYAHeight.constant = 40
+            self.GetYAView.isHidden = false
             
             self.Name.layer.cornerRadius = 5
             self.Phone.layer.cornerRadius = 3
@@ -685,154 +1151,45 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             if let FireId = UserDefaults.standard.string(forKey: "UserId"){print("=-=-=-=-=-=-=-1111111    \(FireId)")
                 if let officeId = UserDefaults.standard.string(forKey: "OfficeId"){print("=-=-=-=-=-=-=-2222222    \(officeId)")
                     OfficeAip.GetOffice(ID: officeId) { [self] office in
-                        if office.type_id == "h9nFfUrHgSwIg17uRwTD"{print("is office-----------------1111     \(office.type_id)")
+                        if office.type_id == "h9nFfUrHgSwIg17uRwTD"{print("is office-----------------1111 \(office.type_id ?? "")")
                             self.ProfileRightImage.isHidden = false
                             self.Phone.isHidden = false
                             self.LoginImage.image = UIImage(named: "logout5")
                             self.ProfileInfoStackView.isHidden = false
                             self.ProfileInfoStackViewLayout.constant = 55
                             self.Profileimageheight.constant = 55
-//                            self.AddPropertyView.alpha = 1
-//                            self.ViewPropertyVicew.alpha = 1
+                            self.AddPropertyView.alpha = 1
+                            self.ViewPropertyVicew.alpha = 1
                             self.ViewditemView.alpha = 1
                             self.FavoriteItemsView.alpha = 1
                             self.ViewdItemAction.isEnabled = true
-//                            self.MyPropertiesAction.isEnabled = true
-//                            self.AddPropetiesAction.isEnabled = true
+                            self.MyPropertiesAction.isEnabled = true
+                            self.AddPropetiesAction.isEnabled = true
                             self.FavoriteItemAction.isEnabled = true
                             
                             
-                            SubscriptionAip.GetSubscriptionsByOfficeId(Office_id: officeId) { sub in
-                                        print("sub.user_id:     \(sub.user_id)")
-                                        print("OfficeId:     \(officeId)")
-                                        print("sub id -------: \(sub.id ?? "")")
-                                        UIView.animate(withDuration:0.2, delay: 0.0) {
-                                            UIView.animate(withDuration: 0.2, delay: 0.0) {
-                                                self.SubscriptionView.isHidden  = false
-                                                self.SubscriptionViewHeightLyout.constant  = 85
-                                                self.SubscriptionViewTopLyout.constant  = 12
-                                                self.SubscriptionViewBottomLyout.constant  = 12
-                                                self.view.layoutIfNeeded()
-                                            }
-                                            let date = NSDate(timeIntervalSince1970: sub.start_date ?? 0.0)
-                                            print("sub.start_date : \(sub.start_date ?? 0.0)")
-                                            let dayTimePeriodFormatter = DateFormatter()
-                                            dayTimePeriodFormatter.dateFormat = "dd-MM-YYYY  h:mm"
-                                            let dateTimeString = dayTimePeriodFormatter.string(from: date as Date)
-                                            let dateTime = dateTimeString.split(separator: ".")
-                                            self.StartDate.text = "\(dateTime[0])".convertedDigitsToLocale(Locale(identifier: "EN"))
-                                            
-                                            
-                                            let date1 = NSDate(timeIntervalSince1970: sub.end_date ?? 0.0)
-                                            print("sub.end_date : \(sub.end_date ?? 0.0)")
-                                            
-                                            let dayTimePeriodFormatter1 = DateFormatter()
-                                            dayTimePeriodFormatter1.dateFormat = "dd-MM-YYYY  h:mm"
-                                            let dateTimeString1 = dayTimePeriodFormatter1.string(from: date1 as Date)
-                                            let dateTime1 = dateTimeString1.split(separator: ".")
-                                            self.EndDate.text = "\(dateTime1[0])".convertedDigitsToLocale(Locale(identifier: "EN"))
-                                            
-                                            
-                                            self.days = (Date().days(sinceDate: date1 as Date) ?? 0) * -1
-                                            if self.days < 0{
-                                                self.days = 0
-                                                self.SubscriptionDays.text = "0"
-                                            }else{
-                                                self.SubscriptionDays.text = "\(self.days)"
-                                            }
-                                            
-                                            print((Date().days(sinceDate: date1 as Date) ?? 0) * -1)
-                                            
-                                            
-                                            self.MyEstates.removeAll()
-                                            if let FireId = UserDefaults.standard.string(forKey: "UserId"){
-                                                OfficeAip.GetOfficeById(Id: FireId) { office in
-                                                    ProductAip.GetAllMyEstates(office_id: office.id ?? "") { estates in
-                                                        print("sub type id -------: \(sub.subscription_type_id ?? "")")
-                                                        for estate in estates{
-                                                            if Double(estate.Stamp ?? TimeInterval()) >= Double(sub.start_date ?? TimeInterval()) {
-                                                                self.MyEstates.append(estate)
-                                                            }
-                                                            
-                                                        }
-                                                        
-                                                        SubscriptionsTypeAip.GetSubscriptionsTypeById(id: sub.subscription_type_id ?? "") { posts in
-                                                            print("sub.subscription_type_id : \(sub.subscription_type_id ?? "")")
-                                                            print("posts : \(posts.number_of_post ?? "")")
-                                                            if XLanguage.get() == .Kurdish{
-                                                                self.SubscriptionPosts.text = "\(posts.number_of_post ?? "") /پۆست \(self.MyEstates.count)"
-                                                                self.SubscriptionPosts.font = UIFont(name: "PeshangDes2", size: 12)!
-                                                            }else if XLanguage.get() == .English{
-                                                                self.SubscriptionPosts.text = "\(self.MyEstates.count) Post /\(posts.number_of_post ?? "")"
-                                                                self.SubscriptionPosts.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-                                                            }else{
-                                                                self.SubscriptionPosts.text = "\(posts.number_of_post ?? "")/ منشور \(self.MyEstates.count)"
-                                                                self.SubscriptionPosts.font = UIFont(name: "PeshangDes2", size: 12)!
-                                                            }
-                                                            
-                                                            if self.days == 0 || Int(posts.number_of_post ?? "") == self.MyEstates.count{
-                                                                self.AddPropertyView.alpha = 0.5
-                                                                self.ViewPropertyVicew.alpha = 0.5
-                                                                self.MyPropertiesAction.isEnabled = false
-                                                                self.AddPropetiesAction.isEnabled = false
-                                                            }else{
-                                                                self.AddPropertyView.alpha = 1
-                                                                self.ViewPropertyVicew.alpha = 1
-                                                                self.MyPropertiesAction.isEnabled = true
-                                                                self.AddPropetiesAction.isEnabled = true
-                                                            }
-                                                            
-                                                            
-                                                            if self.IsSubscriptionAlertShowed == false{
-                                                                self.IsSubscriptionAlertShowed = true
-                                                                if self.days == 0 || Int(posts.number_of_post ?? "") == self.MyEstates.count{
-                                                                var message = ""
-                                                                var action  = ""
-                                                                var cancel  = ""
-                                                                
-                                                                if XLanguage.get() == .English{
-                                                                    message = "Your subscription is expired, contact us to renew."
-                                                                    action  = "Renew"
-                                                                    cancel  = "Later"
-                                                                    
-                                                                }else if XLanguage.get() == .Arabic{
-                                                                    message = "انتهى اشتراكك ، اتصل بنا للتجديد."
-                                                                    action  = "تجديد"
-                                                                    cancel  = "لاحقاً"
-                                                                }else{
-                                                                    message = "بەشداریکردنەکەت بەسەرچووە، پەیوەندیمان پێوە بکە بۆ نوێکردنەوە."
-                                                                    action  = "نوێکردنەوە"
-                                                                    cancel  = "دواتر"
-                                                                }
-                                                            
-                                                                let myAlert = UIAlertController(title: nil, message: message, preferredStyle: UIAlertController.Style.alert)
-                                                                myAlert.addAction(UIAlertAction(title: action, style: .default, handler: { (UIAlertAction) in
-                                                                    self.dialNumber(phoneNumber: "+9647514505411")
-                                                                }))
-                                                                myAlert.addAction(UIAlertAction(title: cancel, style: .cancel, handler: nil))
-                                                                self.present(myAlert, animated: true, completion: nil)
-                                            
-                                                            }
-                                                        }
-                                                        }
-                                                        
-                                                    }
-                                                }
-                                            }
-                                            
-                                }
+                            if office.name == ""{
+                                self.AddPropertyView.alpha = 0.5
+                                self.ViewPropertyVicew.alpha = 0.5
+                                self.MyPropertiesAction.isEnabled = false
+                                self.AddPropetiesAction.isEnabled = false
+                            }else{
+                                self.AddPropertyView.alpha = 1
+                                self.ViewPropertyVicew.alpha = 1
+                                self.MyPropertiesAction.isEnabled = true
+                                self.AddPropetiesAction.isEnabled = true
                             }
                             
                             
+
+                            self.ProfileRightImage.isHidden = true
                             
+                            
+       
                             
                             
                             
                             self.EditProfile.isEnabled = true
-                            self.GetYATop.constant = 0
-                            self.GetYABottom.constant = 12
-                            self.GetYAHeight.constant = 0
-                            self.GetYAView.isHidden = true
                             self.AddPropertyView.isHidden = false
                             self.ViewPropertyVicew.isHidden = false
                             self.ProfileRightImage.isHidden = false
@@ -854,41 +1211,10 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                 self.Image.image = UIImage(named: "4811117-small")
                                 self.Name.text = UserDefaults.standard.string(forKey: "PhoneNumber")
                                 self.Phone.isHidden = true
-                            
-                            
-                            
-                            self.SubscriptionView.isHidden             = true
-                            self.SubscriptionViewHeightLyout.constant  = 0
-                            self.SubscriptionViewTopLyout.constant     = 0
-                            self.SubscriptionViewBottomLyout.constant  = 0
+
                             self.ProfileRightImage.isHidden = true
                             
                             
-                            
-                            self.EditProfile.isEnabled = false
-                            self.GetYATop.constant = 15
-                            self.GetYABottom.constant = 12
-                            self.GetYAHeight.constant = 40
-                            self.GetYAView.isHidden = false
-                            
-                            
-                            
-                            self.GetYA.text = ""
-                            if self.lang == 1{
-                                label.text = "بۆ دروستکردنی ئەکاونتی ئۆفیسی خانووبەرە پەیوەندیمان پێوە بکەن."
-                                label.font = UIFont(name: "PeshangDes2", size: 14)!
-                            }else if self.lang == 2{
-                                label.text = "Contact us for creating a real estate office account."
-                                label.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-                            }else{
-                                label.text = "اتصل بنا لإنشاء حساب مكتب عقارات."
-                                label.font = UIFont(name: "PeshangDes2", size: 14)!
-                            }
-                            label.translatesAutoresizingMaskIntoConstraints = false
-                            label.textColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
-                            label.shimmerColor = .white
-                            self.GetYA.addSubview(label)
-                            self.label.startShimmering()
                             self.Image.image = UIImage(named: "4811117-small")
                             self.Phone.text = UserDefaults.standard.string(forKey: "PhoneNumber")
                             self.AddPropertyView.alpha = 0.5
@@ -921,31 +1247,51 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                             
                             
                             print("=====")
-                            print(ViewdItemCount)
-                            if ViewdItemCount == 1{
+                
+                                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
                                 if XLanguage.get() == .Kurdish{
                                     self.ViewdItems.text = "\(ViewdItemCount) بینراو"
                                     self.ViewdItems.font = UIFont(name: "PeshangDes2", size: 11)!
-                                }else if XLanguage.get() == .English{
-                                    self.ViewdItems.text = "\(ViewdItemCount) ITEM"
-                                    self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
-                                }else{
-                                    self.ViewdItems.text = "\(ViewdItemCount) عنصر"
+                                } else if XLanguage.get() == .Arabic{
+                                    let itemText = ViewdItemCount == 1 ? "عناصر" : "عنصر"
+                                    self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
                                     self.ViewdItems.font = UIFont(name: "PeshangDes2", size: 11)!
+                                }else if XLanguage.get() == .English {
+                                    let itemText = ViewdItemCount == 1 ? "ITEM" : "ITEMS"
+                                    self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
+                                } else if XLanguage.get() == .Dutch {
+                                    let itemText = ViewdItemCount == 1 ? "ITEM" : "ITEMS"
+                                    self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
+                                } else if XLanguage.get() == .French {
+                                    let itemText = ViewdItemCount == 1 ? "ARTICLE" : "ARTICLES"
+                                    self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
+                                } else if XLanguage.get() == .Spanish {
+                                    let itemText = ViewdItemCount == 1 ? "ARTÍCULO" : "ARTÍCULOS"
+                                    self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
+                                } else if XLanguage.get() == .German {
+                                    let itemText = ViewdItemCount == 1 ? "ARTIKEL" : "ARTIKEL"
+                                    self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
+                                } else if XLanguage.get() == .Hebrew {
+                                    let itemText = ViewdItemCount == 1 ? "פריט" : "פריטים"
+                                    self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
+                                } else if XLanguage.get() == .Chinese {
+                                    self.ViewdItems.text = "\(ViewdItemCount) 项"
+                                } else if XLanguage.get() == .Hindi {
+                                    let itemText = ViewdItemCount == 1 ? "आइटम" : "आइटम्स"
+                                    self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
+                                } else if XLanguage.get() == .Portuguese {
+                                    let itemText = ViewdItemCount == 1 ? "ITEM" : "ITENS"
+                                    self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
+                                } else if XLanguage.get() == .Swedish {
+                                    let itemText = ViewdItemCount == 1 ? "FÖREMÅL" : "FÖREMÅL"
+                                    self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
+                                } else if XLanguage.get() == .Greek {
+                                    let itemText = ViewdItemCount == 1 ? "ΑΝΤΙΚΕΊΜΕΝΟ" : "ΑΝΤΙΚΕΊΜΕΝΑ"
+                                    self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
+                                } else if XLanguage.get() == .Russian {
+                                    let itemText = ViewdItemCount == 1 ? "ПРЕДМЕТ" : "ПРЕДМЕТЫ"
+                                    self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
                                 }
-                                
-                            }else{
-                                if XLanguage.get() == .Kurdish{
-                                    self.ViewdItems.text = "\(ViewdItemCount) بینراو"
-                                    self.ViewdItems.font = UIFont(name: "PeshangDes2", size: 11)!
-                                }else if XLanguage.get() == .English{
-                                    self.ViewdItems.text = "\(ViewdItemCount) ITEMS"
-                                    self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
-                                }else{
-                                    self.ViewdItems.text = "\(ViewdItemCount) عناصر"
-                                    self.ViewdItems.font = UIFont(name: "PeshangDes2", size: 11)!
-                                }
-                            }
                         }
                         
                         
@@ -957,33 +1303,56 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                     self.FavoriteItemsEstate.append(i)
                                 }
                             }
-                            //                        if Item.estate_id != ""{
-                            //                            FavoriteItemCount = FavoriteItemCount + 1
-                            //                        }
-                            if FavoriteItemCount == 1{
-                                if XLanguage.get() == .Kurdish{
-                                    self.FavoriteItems.text = "\(FavoriteItemCount) خوازراو"
-                                    self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 11)!
-                                }else if XLanguage.get() == .English{
-                                    self.FavoriteItems.text = "\(FavoriteItemCount) ITEM"
-                                    self.FavoriteItems.font =  UIFont(name: "ArialRoundedMTBold", size: 10)!
-                                }else{
-                                    self.FavoriteItems.text = "\(FavoriteItemCount) عنصر"
-                                    self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 11)!
-                                }
-                            }else{
-                                if XLanguage.get() == .Kurdish{
-                                    self.FavoriteItems.text = "\(FavoriteItemCount) خوازراو"
-                                    self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 11)!
-                                }else if XLanguage.get() == .English{
-                                    self.FavoriteItems.text = "\(FavoriteItemCount) ITEMS"
-                                    self.FavoriteItems.font =  UIFont(name: "ArialRoundedMTBold", size: 10)!
-                                }else{
-                                    self.FavoriteItems.text = "\(FavoriteItemCount) عناصر"
-                                    self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 11)!
-                                }
-                                
+                            
+                            self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                            if XLanguage.get() == .Kurdish{
+                                self.FavoriteItems.text = "\(FavoriteItemCount) خوازراو"
+                                self.FavoriteItems.font = UIFont(name: "PeshangDes2", size: 11)!
+                            } else if XLanguage.get() == .Arabic{
+                                let itemText = FavoriteItemCount == 1 ? "عناصر" : "عنصر"
+                                self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
+                                self.FavoriteItems.font = UIFont(name: "PeshangDes2", size: 11)!
+                            }else if XLanguage.get() == .English {
+                                let itemText = FavoriteItemCount == 1 ? "ITEM" : "ITEMS"
+                                self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
+                            } else if XLanguage.get() == .Dutch {
+                                let itemText = FavoriteItemCount == 1 ? "ITEM" : "ITEMS"
+                                self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
+                            } else if XLanguage.get() == .French {
+                                let itemText = FavoriteItemCount == 1 ? "ARTICLE" : "ARTICLES"
+                                self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
+                            } else if XLanguage.get() == .Spanish {
+                                let itemText = FavoriteItemCount == 1 ? "ARTÍCULO" : "ARTÍCULOS"
+                                self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
+                            } else if XLanguage.get() == .German {
+                                let itemText = FavoriteItemCount == 1 ? "ARTIKEL" : "ARTIKEL"
+                                self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
+                            } else if XLanguage.get() == .Hebrew {
+                                let itemText = FavoriteItemCount == 1 ? "פריט" : "פריטים"
+                                self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
+                            } else if XLanguage.get() == .Chinese {
+                                self.FavoriteItems.text = "\(FavoriteItemCount) 项"
+                            } else if XLanguage.get() == .Hindi {
+                                let itemText = FavoriteItemCount == 1 ? "आइटम" : "आइटम्स"
+                                self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
+                            } else if XLanguage.get() == .Portuguese {
+                                let itemText = FavoriteItemCount == 1 ? "ITEM" : "ITENS"
+                                self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
+                            } else if XLanguage.get() == .Swedish {
+                                let itemText = FavoriteItemCount == 1 ? "FÖREMÅL" : "FÖREMÅL"
+                                self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
+                            } else if XLanguage.get() == .Greek {
+                                let itemText = FavoriteItemCount == 1 ? "ΑΝΤΙΚΕΊΜΕΝΟ" : "ΑΝΤΙΚΕΊΜΕΝΑ"
+                                self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
+                            } else if XLanguage.get() == .Russian {
+                                let itemText = FavoriteItemCount == 1 ? "ПРЕДМЕТ" : "ПРЕДМЕТЫ"
+                                self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
                             }
+                            
+                            
+                            
+                            
+                            
                         }
                         
                     }
@@ -1043,7 +1412,18 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     
     
     @IBAction func CheckVersion(_ sender: Any) {
-        fetchRemoteConfig()
+        //fetchRemoteConfig()
+        
+        if let url = URL(string: "https://apps.apple.com/us/app/sypo/id6479270481"),
+          UIApplication.shared.canOpenURL(url) {
+             if #available(iOS 10, *) {
+               UIApplication.shared.open(url, options: [:], completionHandler:nil)
+              } else {
+                  UIApplication.shared.openURL(url)
+              }
+          } else { }
+        
+        
     }
     
     
@@ -1096,18 +1476,73 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     self.cancel = "ئێستا نا"
                 }else if XLanguage.get() == . English{
                     self.titlee = "Warning"
-                    self.messagee = "A new update is available"
+                    self.messagee = "New update is available"
                     self.Action = "Update"
                     self.cancel = "Not now"
-                }else{
+                }else if XLanguage.get() == .Arabic{
                     self.titlee = "تنبيه"
                     self.messagee = "يتوفر تحديث جديد"
                     self.Action = "تحديث"
                     self.cancel = "ليس الان"
+                }else if XLanguage.get() == .Dutch {
+                    self.titlee = "Waarschuwing"
+                    self.messagee = "Nieuwe update beschikbaar"
+                    self.Action = "Bijwerken"
+                    self.cancel = "Niet nu"
+                } else if XLanguage.get() == .French {
+                    self.titlee = "Avertissement"
+                    self.messagee = "Nouvelle mise à jour disponible"
+                    self.Action = "Mettre à jour"
+                    self.cancel = "Pas maintenant"
+                } else if XLanguage.get() == .Spanish {
+                    self.titlee = "Advertencia"
+                    self.messagee = "Nueva actualización disponible"
+                    self.Action = "Actualizar"
+                    self.cancel = "Ahora no"
+                } else if XLanguage.get() == .German {
+                    self.titlee = "Warnung"
+                    self.messagee = "Neues Update verfügbar"
+                    self.Action = "Aktualisieren"
+                    self.cancel = "Nicht jetzt"
+                } else if XLanguage.get() == .Hebrew {
+                    self.titlee = "אזהרה"
+                    self.messagee = "עדכון חדש זמין"
+                    self.Action = "עדכון"
+                    self.cancel = "לא עכשיו"
+                } else if XLanguage.get() == .Chinese {
+                    self.titlee = "警告"
+                    self.messagee = "有新的更新可用"
+                    self.Action = "更新"
+                    self.cancel = "暂不"
+                } else if XLanguage.get() == .Hindi {
+                    self.titlee = "चेतावनी"
+                    self.messagee = "नया अपडेट उपलब्ध है"
+                    self.Action = "अपडेट करें"
+                    self.cancel = "अभी नहीं"
+                } else if XLanguage.get() == .Portuguese {
+                    self.titlee = "Aviso"
+                    self.messagee = "Nova atualização disponível"
+                    self.Action = "Atualizar"
+                    self.cancel = "Agora não"
+                } else if XLanguage.get() == .Swedish {
+                    self.titlee = "Varning"
+                    self.messagee = "Ny uppdatering tillgänglig"
+                    self.Action = "Uppdatera"
+                    self.cancel = "Inte nu"
+                } else if XLanguage.get() == .Greek {
+                    self.titlee = "Προειδοποίηση"
+                    self.messagee = "Διαθέσιμη νέα ενημέρωση"
+                    self.Action = "Ενημέρωση"
+                    self.cancel = "Όχι τώρα"
+                } else if XLanguage.get() == .Russian {
+                    self.titlee = "Предупреждение"
+                    self.messagee = "Доступно новое обновление"
+                    self.Action = "Обновить"
+                    self.cancel = "Не сейчас"
                 }
                 let alertController = UIAlertController(title: "", message: self.messagee, preferredStyle: .alert)
                 let okAction = UIAlertAction(title:  self.Action, style: UIAlertAction.Style.default) { _ in
-                    if let url = URL(string: "https://apps.apple.com/us/app/maskani/id1602905831"),
+                    if let url = URL(string: "https://apps.apple.com/us/app/sypo/id6479270481"),
                       UIApplication.shared.canOpenURL(url) {
                          if #available(iOS 10, *) {
                            UIApplication.shared.open(url, options: [:], completionHandler:nil)
@@ -1127,14 +1562,58 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                 self.titlee = "نوێکردنەوە"
                 self.messagee = "ئەپەکەت نوێ بووەتەوە"
                 self.Action = "باشە"
-            }else if XLanguage.get() == . English{
+            }else if XLanguage.get() == .English{
                 self.titlee = "Update"
                 self.messagee = "Your app is up to date"
                 self.Action = "Ok"
-            }else{
+            }else if XLanguage.get() == .Arabic{
                 self.titlee = "تحديث"
                 self.messagee = "التطبيق محدث"
                 self.Action = "حسنًا"
+            }else if XLanguage.get() == .Dutch {
+                self.titlee = "Update"
+                self.messagee = "Uw app is up-to-date"
+                self.Action = "Oké"
+            } else if XLanguage.get() == .French {
+                self.titlee = "Mise à jour"
+                self.messagee = "Votre application est à jour"
+                self.Action = "Ok"
+            } else if XLanguage.get() == .Spanish {
+                self.titlee = "Actualizar"
+                self.messagee = "Tu aplicación está actualizada"
+                self.Action = "Ok"
+            } else if XLanguage.get() == .German {
+                self.titlee = "Aktualisieren"
+                self.messagee = "Ihre App ist auf dem neuesten Stand"
+                self.Action = "Ok"
+            } else if XLanguage.get() == .Hebrew {
+                self.titlee = "עדכון"
+                self.messagee = "האפליקציה שלך מעודכנת"
+                self.Action = "אוקיי"
+            } else if XLanguage.get() == .Chinese {
+                self.titlee = "更新"
+                self.messagee = "您的应用程序是最新的"
+                self.Action = "好的"
+            } else if XLanguage.get() == .Hindi {
+                self.titlee = "अपडेट"
+                self.messagee = "आपका ऐप अपडेटेड है"
+                self.Action = "ठीक है"
+            } else if XLanguage.get() == .Portuguese {
+                self.titlee = "Atualização"
+                self.messagee = "Seu aplicativo está atualizado"
+                self.Action = "Ok"
+            } else if XLanguage.get() == .Swedish {
+                self.titlee = "Uppdatera"
+                self.messagee = "Din app är uppdaterad"
+                self.Action = "Ok"
+            } else if XLanguage.get() == .Greek {
+                self.titlee = "Ενημέρωση"
+                self.messagee = "Η εφαρμογή σας είναι ενημερωμένη"
+                self.Action = "Οκ"
+            } else if XLanguage.get() == .Russian {
+                self.titlee = "Обновление"
+                self.messagee = "Ваше приложение обновлено"
+                self.Action = "Ок"
             }
             let alertController = UIAlertController(title: "", message: self.messagee, preferredStyle: .alert)
             let okAction = UIAlertAction(title:  self.Action, style: UIAlertAction.Style.default) { _ in
@@ -1168,9 +1647,75 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     ac.dismiss(animated: true)
                 }))
                 present(ac, animated: true)
-            }else{
+            }else if XLanguage.get() == .Kurdish{
                 let ac = UIAlertController(title: "هەڵە", message: "تکایە هێڵی ئینتەرنێتەکەت بپشکنە.", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "باشە", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else if XLanguage.get() == .Dutch {
+                let ac = UIAlertController(title: "Fout", message: "Controleer uw internetverbinding.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .French {
+                let ac = UIAlertController(title: "Erreur", message: "Veuillez vérifier votre connexion internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Spanish {
+                let ac = UIAlertController(title: "Error", message: "Por favor, verifica tu conexión a internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .German {
+                let ac = UIAlertController(title: "Fehler", message: "Bitte überprüfen Sie Ihre Internetverbindung.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Hebrew {
+                let ac = UIAlertController(title: "שגיאה", message: "אנא בדוק את חיבור האינטרנט שלך.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "אישור", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Chinese {
+                let ac = UIAlertController(title: "错误", message: "请检查您的互联网连接。", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "确定", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Hindi {
+                let ac = UIAlertController(title: "त्रुटि", message: "कृपया अपना इंटरनेट कनेक्शन जाँच लें।", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ठीक है", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Portuguese {
+                let ac = UIAlertController(title: "Erro", message: "Por favor, verifique sua conexão com a internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Swedish {
+                let ac = UIAlertController(title: "Fel", message: "Vänligen kontrollera din internetanslutning.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Greek {
+                let ac = UIAlertController(title: "Σφάλμα", message: "Παρακαλώ ελέγξτε τη σύνδεσή σας στο διαδίκτυο.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ΟΚ", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Russian {
+                let ac = UIAlertController(title: "Ошибка", message: "Пожалуйста, проверьте ваше интернет-соединение.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ОК", style: .default, handler: { _ in
                     ac.dismiss(animated: true)
                 }))
                 present(ac, animated: true)
@@ -1188,11 +1733,66 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                 self.logoutM = "Are you sure you want to logout?"
                 self.Action = "Yes"
                 self.cancel = "No"
-            }else{
+            }else if XLanguage.get() == .Arabic{
                 self.logoutT = "تسجيل خروج"
                 self.logoutM = "هل أنت متأكد أنك تريد تسجيل الخروج؟"
                 self.Action = "نعم"
                 self.cancel = "لا"
+            }else if XLanguage.get() == .Dutch {
+                self.logoutT = "Uitloggen"
+                self.logoutM = "Weet je zeker dat je wilt uitloggen?"
+                self.Action = "Ja"
+                self.cancel = "Nee"
+            } else if XLanguage.get() == .French {
+                self.logoutT = "Déconnexion"
+                self.logoutM = "Êtes-vous sûr de vouloir vous déconnecter ?"
+                self.Action = "Oui"
+                self.cancel = "Non"
+            } else if XLanguage.get() == .Spanish {
+                self.logoutT = "Cerrar sesión"
+                self.logoutM = "¿Estás seguro de que quieres cerrar sesión?"
+                self.Action = "Sí"
+                self.cancel = "No"
+            } else if XLanguage.get() == .German {
+                self.logoutT = "Abmelden"
+                self.logoutM = "Sind Sie sicher, dass Sie sich abmelden möchten?"
+                self.Action = "Ja"
+                self.cancel = "Nein"
+            } else if XLanguage.get() == .Hebrew {
+                self.logoutT = "התנתקות"
+                self.logoutM = "האם אתה בטוח שברצונך להתנתק?"
+                self.Action = "כן"
+                self.cancel = "לא"
+            } else if XLanguage.get() == .Chinese {
+                self.logoutT = "登出"
+                self.logoutM = "您确定要登出吗？"
+                self.Action = "是"
+                self.cancel = "否"
+            } else if XLanguage.get() == .Hindi {
+                self.logoutT = "लॉग आउट"
+                self.logoutM = "क्या आप वाकई लॉग आउट करना चाहते हैं?"
+                self.Action = "हाँ"
+                self.cancel = "नहीं"
+            } else if XLanguage.get() == .Portuguese {
+                self.logoutT = "Sair"
+                self.logoutM = "Tem certeza de que deseja sair?"
+                self.Action = "Sim"
+                self.cancel = "Não"
+            } else if XLanguage.get() == .Swedish {
+                self.logoutT = "Logga ut"
+                self.logoutM = "Är du säker på att du vill logga ut?"
+                self.Action = "Ja"
+                self.cancel = "Nej"
+            } else if XLanguage.get() == .Greek {
+                self.logoutT = "Αποσύνδεση"
+                self.logoutM = "Είστε σίγουροι ότι θέλετε να αποσυνδεθείτε;"
+                self.Action = "Ναι"
+                self.cancel = "Όχι"
+            } else if XLanguage.get() == .Russian {
+                self.logoutT = "Выход"
+                self.logoutM = "Вы уверены, что хотите выйти?"
+                self.Action = "Да"
+                self.cancel = "Нет"
             }
             
    
@@ -1206,12 +1806,53 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     UserDefaults.standard.set("", forKey: "UserId")
                     UserDefaults.standard.set("", forKey: "OfficeId")
                     UserDefaults.standard.set("", forKey: "PhoneNumber")
-                    if XLanguage.get() == .English{
+                    UserDefaults.standard.setValue("", forKey: "CardNumner")
+                    UserDefaults.standard.setValue("", forKey: "Expire")
+                    UserDefaults.standard.setValue("", forKey: "CVV")
+                    
+                    
+                    if XLanguage.get() == .Kurdish{
+                        self.LoginOrLogoutLable.text = "چونه‌ ژووره‌وه‌"
+                        self.LoginOrLogoutLable.font = UIFont(name: "PeshangDes2", size: 14)!
+                    }else if XLanguage.get() == .English{
                         self.LoginOrLogoutLable.text = "LOGIN"
+                        self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
                     }else if XLanguage.get() == .Arabic{
                         self.LoginOrLogoutLable.text = "تسجيل الدخول"
-                    }else{
-                        self.LoginOrLogoutLable.text = "چونه‌ ژووره‌وه‌"
+                        self.LoginOrLogoutLable.font = UIFont(name: "PeshangDes2", size: 14)!
+                    }else if XLanguage.get() == .Dutch {
+                        self.LoginOrLogoutLable.text = "INLOGGEN"
+                        self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+                    } else if XLanguage.get() == .French {
+                        self.LoginOrLogoutLable.text = "CONNEXION"
+                        self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+                    } else if XLanguage.get() == .Spanish {
+                        self.LoginOrLogoutLable.text = "INICIAR SESIÓN"
+                        self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+                    } else if XLanguage.get() == .German {
+                        self.LoginOrLogoutLable.text = "ANMELDEN"
+                        self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+                    } else if XLanguage.get() == .Hebrew {
+                        self.LoginOrLogoutLable.text = "התחברות"
+                        self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+                    } else if XLanguage.get() == .Chinese {
+                        self.LoginOrLogoutLable.text = "登录"
+                        self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+                    } else if XLanguage.get() == .Hindi {
+                        self.LoginOrLogoutLable.text = "लॉग इन करें"
+                        self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+                    } else if XLanguage.get() == .Portuguese {
+                        self.LoginOrLogoutLable.text = "ENTRAR"
+                        self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+                    } else if XLanguage.get() == .Swedish {
+                        self.LoginOrLogoutLable.text = "LOGGA IN"
+                        self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+                    } else if XLanguage.get() == .Greek {
+                        self.LoginOrLogoutLable.text = "ΣΥΝΔΕΣΗ"
+                        self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+                    } else if XLanguage.get() == .Russian {
+                        self.LoginOrLogoutLable.text = "ВХОД"
+                        self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
                     }
                     self.LoginImage.image = UIImage(named: "vuesax-bold-login")
                     self.ProfileInfoStackView.isHidden = true
@@ -1220,16 +1861,12 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     self.ViewPropertyVicew.alpha = 0.5
                     self.ViewditemView.alpha = 0.5
                     self.FavoriteItemsView.alpha = 0.5
+                    self.DeleteAccountView.isHidden = true
+                    
                     self.GetYATop.constant = 0
-                    self.GetYABottom.constant = 12
                     self.GetYAHeight.constant = 0
                     self.GetYAView.isHidden = true
-                    
-                    self.SubscriptionView.isHidden             = true
-                    self.SubscriptionViewHeightLyout.constant  = 0
-                    self.SubscriptionViewTopLyout.constant     = 0
-                    self.SubscriptionViewBottomLyout.constant  = 0
-                    
+
                     if XLanguage.get() == .Kurdish{
                         self.ViewdItems.text = "0 بینراو"
                         self.FavoriteItems.text = "0 خوازراو"
@@ -1240,11 +1877,66 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                         self.FavoriteItems.text = "0 ITEMS"
                         self.FavoriteItems.font =  UIFont(name: "ArialRoundedMTBold", size: 10)!
                         self.ViewdItems.font =  UIFont(name: "ArialRoundedMTBold", size: 10)!
-                    }else{
+                    }else  if XLanguage.get() == .Arabic{
                         self.FavoriteItems.text = "0 عناصر"
                         self.ViewdItems.text = "0 عناصر"
-                        self.ViewdItems.font =  UIFont(name: "PeshangDes2", size: 11)!
-                        self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 11)!
+                        self.ViewdItems.font =  UIFont(name: "PeshangDes2", size: 10)!
+                        self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 10)!
+                    }else if XLanguage.get() == .Dutch {
+                        self.ViewdItems.text = "0 ITEMS"
+                        self.FavoriteItems.text = "0 ITEMS"
+                        self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                        self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                    } else if XLanguage.get() == .French {
+                        self.ViewdItems.text = "0 ARTICLES"
+                        self.FavoriteItems.text = "0 ARTICLES"
+                        self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                        self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                    } else if XLanguage.get() == .Spanish {
+                        self.ViewdItems.text = "0 ARTÍCULOS"
+                        self.FavoriteItems.text = "0 ARTÍCULOS"
+                        self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                        self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                    } else if XLanguage.get() == .German {
+                        self.ViewdItems.text = "0 ARTIKEL"
+                        self.FavoriteItems.text = "0 ARTIKEL"
+                        self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                        self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                    } else if XLanguage.get() == .Hebrew {
+                        self.ViewdItems.text = "0 פריטים"
+                        self.FavoriteItems.text = "0 פריטים"
+                        self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                        self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                    } else if XLanguage.get() == .Chinese {
+                        self.ViewdItems.text = "0 项"
+                        self.FavoriteItems.text = "0 项"
+                        self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                        self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                    } else if XLanguage.get() == .Hindi {
+                        self.ViewdItems.text = "0 वस्तुएँ"
+                        self.FavoriteItems.text = "0 वस्तुएँ"
+                        self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                        self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                    } else if XLanguage.get() == .Portuguese {
+                        self.ViewdItems.text = "0 ITENS"
+                        self.FavoriteItems.text = "0 ITENS"
+                        self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                        self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                    } else if XLanguage.get() == .Swedish {
+                        self.ViewdItems.text = "0 FÖREMÅL"
+                        self.FavoriteItems.text = "0 FÖREMÅL"
+                        self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                        self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                    } else if XLanguage.get() == .Greek {
+                        self.ViewdItems.text = "0 ΑΝΤΙΚΕΊΜΕΝΑ"
+                        self.FavoriteItems.text = "0 ΑΝΤΙΚΕΊΜΕΝΑ"
+                        self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                        self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                    } else if XLanguage.get() == .Russian {
+                        self.ViewdItems.text = "0 ПРЕДМЕТОВ"
+                        self.FavoriteItems.text = "0 ПРЕДМЕТОВ"
+                        self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                        self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
                     }
                     
                 } catch let signOutError as NSError {
@@ -1296,80 +1988,85 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         present(alert, animated: true, completion: nil)
     }
     
-    
-    
-    
-    @objc func LangChanged(){
-        print(self.lang)
+    @objc func LangChanged(notification: Notification){
         
-        if XLanguage.get() == .English{
-            if let cityId = UserDefaults.standard.string(forKey: "CityId"){
-            CityObjectAip.GetCities { cities in
-                    for city in cities {
-                        if city.id == cityId{
-                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
-                                self.Location.text = "\(country.name ?? "")-\(city.name ?? "")".uppercased()
-                                self.Location.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
-                            }
-                        }
-                    }
-                }
-            }else{
-                self.Location.text = "iraq-\(UserDefaults.standard.string(forKey: "CityName") ?? "".uppercased())"
-            }
-        }else if XLanguage.get() == .Arabic{
-            if let cityId = UserDefaults.standard.string(forKey: "CityId"){
-            CityObjectAip.GetCities { cities in
-                    for city in cities {
-                        if city.id == cityId{
-                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
-                                self.Location.text = "\(country.ar_name ?? "")-\(city.ar_name ?? "")".uppercased()
-                                self.Location.font = UIFont(name: "PeshangDes2", size: 11)!
-                            }
-                        }
-                    }
-                }
-            }else{
-                self.Location.text = "iraq-\(UserDefaults.standard.string(forKey: "CityName") ?? "".uppercased())"
-            }
-        }else{
-            if let cityId = UserDefaults.standard.string(forKey: "CityId"){
-            CityObjectAip.GetCities { cities in
-                    for city in cities {
-                        if city.id == cityId{
-                            CountryObjectAip.GeCountryById(id: city.country_id ?? "") { country in
-                                self.Location.text = "\(country.ku_name ?? "")-\(city.ku_name ?? "")".uppercased()
-                                self.Location.font = UIFont(name: "PeshangDes2", size: 11)!
-                            }
-                        }
-                    }
-                }
-            }else{
-                self.Location.text = "iraq-\(UserDefaults.standard.string(forKey: "CityName") ?? "".uppercased())"
+        if let dict = notification.userInfo as NSDictionary? {
+            if let lang = dict["Lang"]{
+                self.LanguageLable.text = lang as? String
+                self.LanguageLable.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
             }
         }
-        
-        
+
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             if settings.authorizationStatus == .authorized {
+                self.NotificationLable.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
                 if XLanguage.get() == .English{
                     DispatchQueue.main.async {
-                    self.NotificationLable.text = "ON"
+                        self.NotificationLable.text = "ON"
                         self.NotificationLable.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
                     }
                 }else if XLanguage.get() == .Kurdish{
                     DispatchQueue.main.async {
-                    self.NotificationLable.text = "چالاک کراوە"
+                        self.NotificationLable.text = "چالاک کراوە"
                         self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
                     }
-                }else{
+                }else if XLanguage.get() == .Arabic{
                     DispatchQueue.main.async {
-                    self.NotificationLable.text = "مفعلة"
+                        self.NotificationLable.text = "مفعلة"
                         self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
+                    }
+                }else if XLanguage.get() == .English {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ON"
+                    }
+                } else if XLanguage.get() == .Dutch {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "AAN" // Dutch for "ON"
+                    }
+                } else if XLanguage.get() == .French {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ACTIVÉ" // French for "ON"
+                    }
+                } else if XLanguage.get() == .Spanish {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ENCENDIDO" // Spanish for "ON"
+                    }
+                } else if XLanguage.get() == .German {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "EIN" // German for "ON"
+                    }
+                } else if XLanguage.get() == .Hebrew {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "פעיל" // Hebrew for "ON"
+                    }
+                } else if XLanguage.get() == .Chinese {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "开" // Simplified Chinese for "ON"
+                    }
+                } else if XLanguage.get() == .Hindi {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "चालू" // Hindi for "ON"
+                    }
+                } else if XLanguage.get() == .Portuguese {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "LIGADO" // Portuguese for "ON"
+                    }
+                } else if XLanguage.get() == .Swedish {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "PÅ" // Swedish for "ON"
+                    }
+                } else if XLanguage.get() == .Greek {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ΕΝΕΡΓΟΠΟΙΗΜΈΝΟ" // Greek for "ON"
+                    }
+                } else if XLanguage.get() == .Russian {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ВКЛ" // Russian for "ON"
                     }
                 }
-            }
-            else {
+                
+            } else {
+                self.NotificationLable.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
                 if XLanguage.get() == .English{
                     DispatchQueue.main.async {
                         self.NotificationLable.text = "OFF"
@@ -1377,110 +2074,170 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     }
                 }else if XLanguage.get() == .Kurdish{
                     DispatchQueue.main.async {
-                    self.NotificationLable.text = "چالاک کراوە نیە"
+                        self.NotificationLable.text = "چالاک کراوە نیە"
                         self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
                     }
-                }else{
+                }else if XLanguage.get() == .Arabic{
                     DispatchQueue.main.async {
-                    self.NotificationLable.text = "غیر مفعلة"
+                        self.NotificationLable.text = "غیر مفعلة"
                         self.NotificationLable.font =  UIFont(name: "PeshangDes2", size: 11)!
+                    }
+                }else if XLanguage.get() == .Dutch {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "UIT" // Dutch for "OFF"
+                    }
+                } else if XLanguage.get() == .French {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "DÉSACTIVÉ" // French for "OFF"
+                    }
+                } else if XLanguage.get() == .Spanish {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "APAGADO" // Spanish for "OFF"
+                    }
+                } else if XLanguage.get() == .German {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "AUS" // German for "OFF"
+                    }
+                } else if XLanguage.get() == .Hebrew {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "כבוי" // Hebrew for "OFF"
+                    }
+                } else if XLanguage.get() == .Chinese {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "关" // Simplified Chinese for "OFF"
+                    }
+                } else if XLanguage.get() == .Hindi {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "बंद" // Hindi for "OFF"
+                    }
+                } else if XLanguage.get() == .Portuguese {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "DESLIGADO" // Portuguese for "OFF"
+                    }
+                } else if XLanguage.get() == .Swedish {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "AV" // Swedish for "OFF"
+                    }
+                } else if XLanguage.get() == .Greek {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ΑΠΕΝΕΡΓΟΠΟΙΗΜΈΝΟ" // Greek for "OFF"
+                    }
+                } else if XLanguage.get() == .Russian {
+                    DispatchQueue.main.async {
+                        self.NotificationLable.text = "ВЫКЛ" // Russian for "OFF"
                     }
                 }
             }
         }
+
+
+        
+        
+        
+        
+        
+        
+
+        
         if XLanguage.get() == .Kurdish{
-            self.Etitle = "ئینگلیزی"
-            self.Atitle = "عەرەبی"
-            self.Ktitle = "کوردی"
-            self.LanguageLable.text = self.Ktitle
-            self.LanguageLable.font =  UIFont(name: "PeshangDes2", size: 11)!
-            
             self.logoutT = "چوونە دەرەوە"
             self.logoutM = "ئایا دڵنیای کە دەتەوێت دەربچیت؟"
             self.Action = "بەڵێ"
             self.cancel = "نەخێر"
-            
-            self.titlee = "گۆڕینی زمان"
-            self.message = "زمان"
-            
             self.loadingLableMessage = "تكایه‌ چاوه‌ڕێبه‌..."
-            
-            self.cityTitle = "شارەکەت هەڵبژێرە"
-            self.cityAction = "بەڵێ"
-        }else if XLanguage.get() == .English{print("001111")
-            self.Etitle = "English"
-            self.Atitle = "Arabic"
-            self.Ktitle = "Kurdish"
-            self.LanguageLable.text = self.Etitle
-            self.LanguageLable.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
+        }else if XLanguage.get() == .English{
             self.logoutT = "logout"
             self.logoutM = "Are you sure you want to logout?"
             self.Action = "Yes"
             self.cancel = "No"
-            
-            self.titlee = "Change Language"
-            self.message = "Language"
-            
             self.loadingLableMessage = "Please wait..."
-            
-            self.cityTitle = "Choose your city"
-            self.cityAction = "Ok"
-        }else{
-            self.Etitle = "إنجليزي"
-            self.Atitle = "العربة"
-            self.Ktitle = "الکردیة"
-            self.LanguageLable.text = self.Atitle
-            self.LanguageLable.font =  UIFont(name: "PeshangDes2", size: 11)!
+        }else if XLanguage.get() == .Arabic{
             self.logoutT = "تسجيل خروج"
             self.logoutM = "هل أنت متأكد أنك تريد تسجيل الخروج؟"
             self.Action = "نعم"
             self.cancel = "لا"
-            
-            self.titlee = "تغيير اللغة"
-            self.message = "لغة"
             self.loadingLableMessage = "يرجى الانتظار..."
-            
-            
-            self.cityTitle = "اختر مدينتك"
-            
-            self.cityAction = "نعم"
+        }else if XLanguage.get() == .Dutch {
+            self.logoutT = "Uitloggen"
+            self.logoutM = "Weet je zeker dat je wilt uitloggen?"
+            self.Action = "Ja"
+            self.cancel = "Nee"
+        } else if XLanguage.get() == .French {
+            self.logoutT = "Déconnexion"
+            self.logoutM = "Êtes-vous sûr de vouloir vous déconnecter ?"
+            self.Action = "Oui"
+            self.cancel = "Non"
+        } else if XLanguage.get() == .Spanish {
+            self.logoutT = "Cerrar sesión"
+            self.logoutM = "¿Estás seguro de que quieres cerrar sesión?"
+            self.Action = "Sí"
+            self.cancel = "No"
+        } else if XLanguage.get() == .German {
+            self.logoutT = "Abmelden"
+            self.logoutM = "Sind Sie sicher, dass Sie sich abmelden möchten?"
+            self.Action = "Ja"
+            self.cancel = "Nein"
+        } else if XLanguage.get() == .Hebrew {
+            self.logoutT = "התנתקות"
+            self.logoutM = "האם אתה בטוח שברצונך להתנתק?"
+            self.Action = "כן"
+            self.cancel = "לא"
+        } else if XLanguage.get() == .Chinese {
+            self.logoutT = "登出"
+            self.logoutM = "您确定要登出吗？"
+            self.Action = "是"
+            self.cancel = "否"
+        } else if XLanguage.get() == .Hindi {
+            self.logoutT = "लॉग आउट"
+            self.logoutM = "क्या आप वाकई लॉग आउट करना चाहते हैं?"
+            self.Action = "हाँ"
+            self.cancel = "नहीं"
+        } else if XLanguage.get() == .Portuguese {
+            self.logoutT = "Sair"
+            self.logoutM = "Tem certeza de que deseja sair?"
+            self.Action = "Sim"
+            self.cancel = "Não"
+        } else if XLanguage.get() == .Swedish {
+            self.logoutT = "Logga ut"
+            self.logoutM = "Är du säker på att du vill logga ut?"
+            self.Action = "Ja"
+            self.cancel = "Nej"
+        } else if XLanguage.get() == .Greek {
+            self.logoutT = "Αποσύνδεση"
+            self.logoutM = "Είστε σίγουροι ότι θέλετε να αποσυνδεθείτε;"
+            self.Action = "Ναι"
+            self.cancel = "Όχι"
+        } else if XLanguage.get() == .Russian {
+            self.logoutT = "Выход"
+            self.logoutM = "Вы уверены, что хотите выйти?"
+            self.Action = "Да"
+            self.cancel = "Нет"
         }
         
-        
-        
-        if let FireId = UserDefaults.standard.string(forKey: "UserId"){
-            if let officeId = UserDefaults.standard.string(forKey: "OfficeId"){
-                OfficeAip.GetOffice(ID: officeId) { [self] office in
-                    if office.type_id == "h9nFfUrHgSwIg17uRwTD"{
-                        SubscriptionAip.GetAllSubscriptionsType { subscription in
-                            for sub in subscription{
-                                if sub.user_id == officeId{
-                                    self.MyEstates.removeAll()
-                                    OfficeAip.GetOfficeById(Id: FireId) { office in
-                                        ProductAip.GetAllMyEstates(office_id: office.id ?? "") { estates in
-                                            self.MyEstates = estates
-                                            SubscriptionsTypeAip.GetSubscriptionsTypeById(id: sub.subscription_type_id ?? "") { posts in
-                                                if XLanguage.get() == .Kurdish{
-                                                    self.SubscriptionPosts.text = "\(posts.number_of_post ?? "") /پۆست \(self.MyEstates.count)"
-                                                    self.SubscriptionPosts.font = UIFont(name: "PeshangDes2", size: 11)!
-                                                }else if XLanguage.get() == .English{
-                                                    self.SubscriptionPosts.text = "\(self.MyEstates.count) Post /\(posts.number_of_post ?? "")"
-                                                    self.SubscriptionPosts.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
-                                                }else{
-                                                    self.SubscriptionPosts.text = "\(posts.number_of_post ?? "")/ منشور \(self.MyEstates.count)"
-                                                    self.SubscriptionPosts.font = UIFont(name: "PeshangDes2", size: 11)!
-                                                }
-                                                
-                                            }
-                                            
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        if XLanguage.get() == .English {
+            self.loadingLableMessage = "Please wait..."
+        } else if XLanguage.get() == .Dutch {
+            self.loadingLableMessage = "Even wachten alstublieft..."
+        } else if XLanguage.get() == .French {
+            self.loadingLableMessage = "Veuillez patienter..."
+        } else if XLanguage.get() == .Spanish {
+            self.loadingLableMessage = "Por favor, espera..."
+        } else if XLanguage.get() == .German {
+            self.loadingLableMessage = "Bitte warten..."
+        } else if XLanguage.get() == .Hebrew {
+            self.loadingLableMessage = "אנא המתן..."
+        } else if XLanguage.get() == .Chinese {
+            self.loadingLableMessage = "请稍候..."
+        } else if XLanguage.get() == .Hindi {
+            self.loadingLableMessage = "कृपया प्रतीक्षा करें..."
+        } else if XLanguage.get() == .Portuguese {
+            self.loadingLableMessage = "Por favor, aguarde..."
+        } else if XLanguage.get() == .Swedish {
+            self.loadingLableMessage = "Var god vänta..."
+        } else if XLanguage.get() == .Greek {
+            self.loadingLableMessage = "Παρακαλώ περιμένετε..."
+        } else if XLanguage.get() == .Russian {
+            self.loadingLableMessage = "Пожалуйста, подождите..."
         }
         
         
@@ -1488,32 +2245,119 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         if UserDefaults.standard.bool(forKey: "Login") == false {
             if XLanguage.get() == .Kurdish{
                 self.LoginOrLogoutLable.text = "چونه‌ ژووره‌وه‌"
-                self.LoginOrLogoutLable.font =  UIFont(name: "PeshangDes2", size: 14)!
+                self.LoginOrLogoutLable.font = UIFont(name: "PeshangDes2", size: 14)!
             }else if XLanguage.get() == .English{
                 self.LoginOrLogoutLable.text = "LOGIN"
-                self.LoginOrLogoutLable.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
-            }else{
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            }else if XLanguage.get() == .Arabic{
                 self.LoginOrLogoutLable.text = "تسجيل الدخول"
-                self.LoginOrLogoutLable.font =  UIFont(name: "PeshangDes2", size: 14)!
+                self.LoginOrLogoutLable.font = UIFont(name: "PeshangDes2", size: 14)!
+            }else if XLanguage.get() == .Dutch {
+                self.LoginOrLogoutLable.text = "INLOGGEN"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .French {
+                self.LoginOrLogoutLable.text = "CONNEXION"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Spanish {
+                self.LoginOrLogoutLable.text = "INICIAR SESIÓN"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .German {
+                self.LoginOrLogoutLable.text = "ANMELDEN"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Hebrew {
+                self.LoginOrLogoutLable.text = "התחברות"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Chinese {
+                self.LoginOrLogoutLable.text = "登录"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Hindi {
+                self.LoginOrLogoutLable.text = "लॉग इन करें"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Portuguese {
+                self.LoginOrLogoutLable.text = "ENTRAR"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Swedish {
+                self.LoginOrLogoutLable.text = "LOGGA IN"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Greek {
+                self.LoginOrLogoutLable.text = "ΣΥΝΔΕΣΗ"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Russian {
+                self.LoginOrLogoutLable.text = "ВХОД"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
             }
             if XLanguage.get() == .Kurdish{
                 self.ViewdItems.text = "0 بینراو"
                 self.FavoriteItems.text = "0 خوازراو"
-                self.ViewdItems.font =     UIFont(name: "PeshangDes2", size: 11)!
+                self.ViewdItems.font =  UIFont(name: "PeshangDes2", size: 11)!
                 self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 11)!
             }else if XLanguage.get() == .English{
                 self.ViewdItems.text = "0 ITEMS"
                 self.FavoriteItems.text = "0 ITEMS"
-                self.ViewdItems.font =  UIFont(name: "ArialRoundedMTBold", size: 10)!
                 self.FavoriteItems.font =  UIFont(name: "ArialRoundedMTBold", size: 10)!
-            }else{
+                self.ViewdItems.font =  UIFont(name: "ArialRoundedMTBold", size: 10)!
+            }else  if XLanguage.get() == .Arabic{
                 self.FavoriteItems.text = "0 عناصر"
                 self.ViewdItems.text = "0 عناصر"
-                self.ViewdItems.font =  UIFont(name: "PeshangDes2", size: 11)!
-                self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 11)!
+                self.ViewdItems.font =  UIFont(name: "PeshangDes2", size: 10)!
+                self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 10)!
+            }else if XLanguage.get() == .Dutch {
+                self.ViewdItems.text = "0 ITEMS"
+                self.FavoriteItems.text = "0 ITEMS"
+                self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+            } else if XLanguage.get() == .French {
+                self.ViewdItems.text = "0 ARTICLES"
+                self.FavoriteItems.text = "0 ARTICLES"
+                self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+            } else if XLanguage.get() == .Spanish {
+                self.ViewdItems.text = "0 ARTÍCULOS"
+                self.FavoriteItems.text = "0 ARTÍCULOS"
+                self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+            } else if XLanguage.get() == .German {
+                self.ViewdItems.text = "0 ARTIKEL"
+                self.FavoriteItems.text = "0 ARTIKEL"
+                self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+            } else if XLanguage.get() == .Hebrew {
+                self.ViewdItems.text = "0 פריטים"
+                self.FavoriteItems.text = "0 פריטים"
+                self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+            } else if XLanguage.get() == .Chinese {
+                self.ViewdItems.text = "0 项"
+                self.FavoriteItems.text = "0 项"
+                self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+            } else if XLanguage.get() == .Hindi {
+                self.ViewdItems.text = "0 वस्तुएँ"
+                self.FavoriteItems.text = "0 वस्तुएँ"
+                self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+            } else if XLanguage.get() == .Portuguese {
+                self.ViewdItems.text = "0 ITENS"
+                self.FavoriteItems.text = "0 ITENS"
+                self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+            } else if XLanguage.get() == .Swedish {
+                self.ViewdItems.text = "0 FÖREMÅL"
+                self.FavoriteItems.text = "0 FÖREMÅL"
+                self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+            } else if XLanguage.get() == .Greek {
+                self.ViewdItems.text = "0 ΑΝΤΙΚΕΊΜΕΝΑ"
+                self.FavoriteItems.text = "0 ΑΝΤΙΚΕΊΜΕΝΑ"
+                self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+            } else if XLanguage.get() == .Russian {
+                self.ViewdItems.text = "0 ПРЕДМЕТОВ"
+                self.FavoriteItems.text = "0 ПРЕДМЕТОВ"
+                self.FavoriteItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
             }
         }else{
-            
             
             
             
@@ -1524,25 +2368,48 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
             
             if XLanguage.get() == .Kurdish{
                 self.LoginOrLogoutLable.text = "چوونە دەرەوە"
-                self.LoginOrLogoutLable.font =  UIFont(name: "PeshangDes2", size: 14)!
-            }else if XLanguage.get() == .English{print("2222")
+                self.LoginOrLogoutLable.font = UIFont(name: "PeshangDes2", size: 14)!
+            }else if XLanguage.get() == .English{
                 self.LoginOrLogoutLable.text = "LOGOUT"
-                self.LoginOrLogoutLable.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
-            }else{
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            }else if XLanguage.get() == .Arabic{
                 self.LoginOrLogoutLable.text = "تسجيل خروج"
-                self.LoginOrLogoutLable.font =  UIFont(name: "PeshangDes2", size: 14)!
+                self.LoginOrLogoutLable.font = UIFont(name: "PeshangDes2", size: 14)!
+            }else if XLanguage.get() == .Dutch {
+                self.LoginOrLogoutLable.text = "UITLOGGEN"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .French {
+                self.LoginOrLogoutLable.text = "DÉCONNEXION"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Spanish {
+                self.LoginOrLogoutLable.text = "CERRAR SESIÓN"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .German {
+                self.LoginOrLogoutLable.text = "ABMELDEN"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Hebrew {
+                self.LoginOrLogoutLable.text = "התנתקות"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Chinese {
+                self.LoginOrLogoutLable.text = "登出"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Hindi {
+                self.LoginOrLogoutLable.text = "लॉग आउट"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Portuguese {
+                self.LoginOrLogoutLable.text = "SAIR"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Swedish {
+                self.LoginOrLogoutLable.text = "LOGGA UT"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Greek {
+                self.LoginOrLogoutLable.text = "ΑΠΟΣΥΝΔΕΣΗ"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            } else if XLanguage.get() == .Russian {
+                self.LoginOrLogoutLable.text = "ВЫЙТИ"
+                self.LoginOrLogoutLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
             }
             
-            if XLanguage.get() == .Kurdish{
-                self.label.text = "بۆ دروستکردنی ئەکاونتی ئۆفیسی خانووبەرە پەیوەندیمان پێوە بکەن."
-                self.label.font =  UIFont(name: "PeshangDes2", size: 11)!
-            }else if XLanguage.get() == .English{
-                self.label.text = "Contact us for creating a real estate office account."
-                self.label.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
-            }else{
-                self.label.text = "اتصل بنا لإنشاء حساب مكتب عقارات."
-                self.label.font =  UIFont(name: "PeshangDes2", size: 11)!
-            }
             
             
             
@@ -1562,30 +2429,51 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                             }
                         }
 
-                        if ViewdItemCount == 1{
-                            if XLanguage.get() == .Kurdish{
-                                self.ViewdItems.text = "\(ViewdItemCount) بینراو"
-                                self.ViewdItems.font =  UIFont(name: "PeshangDes2", size: 11)!
-                            }else if XLanguage.get() == .English{print("44444")
-                                self.ViewdItems.text = "\(ViewdItemCount) ITEM"
-                                self.ViewdItems.font =  UIFont(name: "ArialRoundedMTBold", size: 10)!
-                            }else{
-                                self.ViewdItems.text = "\(ViewdItemCount) عنصر"
-                                self.ViewdItems.font =  UIFont(name: "PeshangDes2", size: 11)!
-                            }
-                            
-                        }else{
-                            if XLanguage.get() == .Kurdish{
-                                self.ViewdItems.text = "\(ViewdItemCount) بینراو"
-                                self.ViewdItems.font =  UIFont(name: "PeshangDes2", size: 11)!
-                            }else if XLanguage.get() == .English{
-                                self.ViewdItems.text = "\(ViewdItemCount) ITEMS"
-                                self.ViewdItems.font =  UIFont(name: "ArialRoundedMTBold", size: 10)!
-                            }else{
-                                self.ViewdItems.text = "\(ViewdItemCount) عناصر"
-                                self.ViewdItems.font =  UIFont(name: "PeshangDes2", size: 11)!
-                            }
+                        self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                        if XLanguage.get() == .Kurdish{
+                            self.ViewdItems.text = "\(ViewdItemCount) بینراو"
+                            self.ViewdItems.font = UIFont(name: "PeshangDes2", size: 11)!
+                        } else if XLanguage.get() == .Arabic{
+                            let itemText = ViewdItemCount == 1 ? "عناصر" : "عنصر"
+                            self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
+                            self.ViewdItems.font = UIFont(name: "PeshangDes2", size: 11)!
+                        }else if XLanguage.get() == .English {
+                            let itemText = ViewdItemCount == 1 ? "ITEM" : "ITEMS"
+                            self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
+                        } else if XLanguage.get() == .Dutch {
+                            let itemText = ViewdItemCount == 1 ? "ITEM" : "ITEMS"
+                            self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
+                        } else if XLanguage.get() == .French {
+                            let itemText = ViewdItemCount == 1 ? "ARTICLE" : "ARTICLES"
+                            self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
+                        } else if XLanguage.get() == .Spanish {
+                            let itemText = ViewdItemCount == 1 ? "ARTÍCULO" : "ARTÍCULOS"
+                            self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
+                        } else if XLanguage.get() == .German {
+                            let itemText = ViewdItemCount == 1 ? "ARTIKEL" : "ARTIKEL"
+                            self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
+                        } else if XLanguage.get() == .Hebrew {
+                            let itemText = ViewdItemCount == 1 ? "פריט" : "פריטים"
+                            self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
+                        } else if XLanguage.get() == .Chinese {
+                            self.ViewdItems.text = "\(ViewdItemCount) 项"
+                        } else if XLanguage.get() == .Hindi {
+                            let itemText = ViewdItemCount == 1 ? "आइटम" : "आइटम्स"
+                            self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
+                        } else if XLanguage.get() == .Portuguese {
+                            let itemText = ViewdItemCount == 1 ? "ITEM" : "ITENS"
+                            self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
+                        } else if XLanguage.get() == .Swedish {
+                            let itemText = ViewdItemCount == 1 ? "FÖREMÅL" : "FÖREMÅL"
+                            self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
+                        } else if XLanguage.get() == .Greek {
+                            let itemText = ViewdItemCount == 1 ? "ΑΝΤΙΚΕΊΜΕΝΟ" : "ΑΝΤΙΚΕΊΜΕΝΑ"
+                            self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
+                        } else if XLanguage.get() == .Russian {
+                            let itemText = ViewdItemCount == 1 ? "ПРЕДМЕТ" : "ПРЕДМЕТЫ"
+                            self.ViewdItems.text = "\(ViewdItemCount) \(itemText)"
                         }
+                        
                     }
                     
                     
@@ -1597,30 +2485,53 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                                 self.FavoriteItemsEstate.append(i)
                             }
                         }
-                        if FavoriteItemCount == 1{
-                            if XLanguage.get() == .Kurdish{
-                                self.FavoriteItems.text = "\(FavoriteItemCount) خوازراو"
-                                self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 11)!
-                            }else if XLanguage.get() == .English{
-                                self.FavoriteItems.text = "\(FavoriteItemCount) ITEM"
-                                self.FavoriteItems.font =  UIFont(name: "ArialRoundedMTBold", size: 10)!
-                            }else{
-                                self.FavoriteItems.text = "\(FavoriteItemCount) عنصر"
-                                self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 11)!
-                            }
-                        }else{
-                            if XLanguage.get() == .Kurdish{
-                                self.FavoriteItems.text = "\(FavoriteItemCount) خوازراو"
-                                self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 11)!
-                            }else if XLanguage.get() == .English{
-                                self.FavoriteItems.text = "\(FavoriteItemCount) ITEMS"
-                                self.FavoriteItems.font =  UIFont(name: "ArialRoundedMTBold", size: 10)!
-                            }else{
-                                self.FavoriteItems.text = "\(FavoriteItemCount) عناصر"
-                                self.FavoriteItems.font =  UIFont(name: "PeshangDes2", size: 11)!
-                            }
-                            
+                        
+                        self.ViewdItems.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
+                        if XLanguage.get() == .Kurdish{
+                            self.FavoriteItems.text = "\(FavoriteItemCount) خوازراو"
+                            self.FavoriteItems.font = UIFont(name: "PeshangDes2", size: 11)!
+                        } else if XLanguage.get() == .Arabic{
+                            let itemText = FavoriteItemCount == 1 ? "عناصر" : "عنصر"
+                            self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
+                            self.FavoriteItems.font = UIFont(name: "PeshangDes2", size: 11)!
+                        }else if XLanguage.get() == .English {
+                            let itemText = FavoriteItemCount == 1 ? "ITEM" : "ITEMS"
+                            self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
+                        } else if XLanguage.get() == .Dutch {
+                            let itemText = FavoriteItemCount == 1 ? "ITEM" : "ITEMS"
+                            self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
+                        } else if XLanguage.get() == .French {
+                            let itemText = FavoriteItemCount == 1 ? "ARTICLE" : "ARTICLES"
+                            self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
+                        } else if XLanguage.get() == .Spanish {
+                            let itemText = FavoriteItemCount == 1 ? "ARTÍCULO" : "ARTÍCULOS"
+                            self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
+                        } else if XLanguage.get() == .German {
+                            let itemText = FavoriteItemCount == 1 ? "ARTIKEL" : "ARTIKEL"
+                            self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
+                        } else if XLanguage.get() == .Hebrew {
+                            let itemText = FavoriteItemCount == 1 ? "פריט" : "פריטים"
+                            self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
+                        } else if XLanguage.get() == .Chinese {
+                            self.FavoriteItems.text = "\(FavoriteItemCount) 项"
+                        } else if XLanguage.get() == .Hindi {
+                            let itemText = FavoriteItemCount == 1 ? "आइटम" : "आइटम्स"
+                            self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
+                        } else if XLanguage.get() == .Portuguese {
+                            let itemText = FavoriteItemCount == 1 ? "ITEM" : "ITENS"
+                            self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
+                        } else if XLanguage.get() == .Swedish {
+                            let itemText = FavoriteItemCount == 1 ? "FÖREMÅL" : "FÖREMÅL"
+                            self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
+                        } else if XLanguage.get() == .Greek {
+                            let itemText = FavoriteItemCount == 1 ? "ΑΝΤΙΚΕΊΜΕΝΟ" : "ΑΝΤΙΚΕΊΜΕΝΑ"
+                            self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
+                        } else if XLanguage.get() == .Russian {
+                            let itemText = FavoriteItemCount == 1 ? "ПРЕДМЕТ" : "ПРЕДМЕТЫ"
+                            self.FavoriteItems.text = "\(FavoriteItemCount) \(itemText)"
                         }
+                        
+                        
                     }
                 }
         }
@@ -1650,9 +2561,75 @@ class Settings: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                     ac.dismiss(animated: true)
                 }))
                 present(ac, animated: true)
-            }else{
+            }else if XLanguage.get() == .Kurdish{
                 let ac = UIAlertController(title: "هەڵە", message: "تکایە هێڵی ئینتەرنێتەکەت بپشکنە.", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "باشە", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else if XLanguage.get() == .Dutch {
+                let ac = UIAlertController(title: "Fout", message: "Controleer uw internetverbinding.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .French {
+                let ac = UIAlertController(title: "Erreur", message: "Veuillez vérifier votre connexion internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Spanish {
+                let ac = UIAlertController(title: "Error", message: "Por favor, verifica tu conexión a internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .German {
+                let ac = UIAlertController(title: "Fehler", message: "Bitte überprüfen Sie Ihre Internetverbindung.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Hebrew {
+                let ac = UIAlertController(title: "שגיאה", message: "אנא בדוק את חיבור האינטרנט שלך.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "אישור", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Chinese {
+                let ac = UIAlertController(title: "错误", message: "请检查您的互联网连接。", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "确定", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Hindi {
+                let ac = UIAlertController(title: "त्रुटि", message: "कृपया अपना इंटरनेट कनेक्शन जाँच लें।", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ठीक है", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Portuguese {
+                let ac = UIAlertController(title: "Erro", message: "Por favor, verifique sua conexão com a internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Swedish {
+                let ac = UIAlertController(title: "Fel", message: "Vänligen kontrollera din internetanslutning.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Greek {
+                let ac = UIAlertController(title: "Σφάλμα", message: "Παρακαλώ ελέγξτε τη σύνδεσή σας στο διαδίκτυο.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ΟΚ", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Russian {
+                let ac = UIAlertController(title: "Ошибка", message: "Пожалуйста, проверьте ваше интернет-соединение.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ОК", style: .default, handler: { _ in
                     ac.dismiss(animated: true)
                 }))
                 present(ac, animated: true)

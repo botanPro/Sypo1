@@ -59,23 +59,60 @@ class AllEstatessCollectionViewCell: UICollectionViewCell {
         guard let imagrUrl = cell.ImageURL, let url = URL(string: imagrUrl[0]) else {return}
         self.Imagee.sd_setImage(with: url, placeholderImage: UIImage(named: "logoPlace"))
         self.Name.text = cell.name
-        print(detectLanguage(for:self.Name.text!))
-        if detectLanguage(for:self.Name.text!) == "Arabic"{
+        if detectLanguage(for:self.Name.text!) == "Arabic" || detectLanguage(for:self.Name.text!) == "Urdu"{
             self.Name.font = UIFont(name: "PeshangDes2", size: 14)!
         }else{
             self.Name.font = UIFont(name: "ArialRoundedMTBold", size: 14)!
         }
+        
+        
         self.Location.text = cell.address
-        if XLanguage.get() == .English{
-            self.rooms = "rooms"
-            self.RoomNumber.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
-        }else if XLanguage.get() == .Arabic{
-            self.rooms = "غرف"
-            self.RoomNumber.font = UIFont(name: "PeshangDes2", size: 11)!
-        }else{
-            self.rooms = "ژوور"
-            self.RoomNumber.font = UIFont(name: "PeshangDes2", size: 11)!
-        }
+
+        
+        if XLanguage.get() == .Arabic{
+           self.rooms = "غرف"
+           self.RoomNumber.font = UIFont(name: "PeshangDes2", size: 11)!
+       }else  if XLanguage.get() == .Kurdish{
+           self.rooms = "ژوور"
+           self.RoomNumber.font = UIFont(name: "PeshangDes2", size: 11)!
+       }else if XLanguage.get() == .English {
+           self.rooms = "rooms"
+           self.RoomNumber.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+       } else if XLanguage.get() == .French {
+           self.rooms = "chambres"
+           self.RoomNumber.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+       } else if XLanguage.get() == .Spanish {
+           self.rooms = "habitaciones"
+           self.RoomNumber.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+       } else if XLanguage.get() == .German {
+           self.rooms = "Zimmer"
+           self.RoomNumber.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+       } else if XLanguage.get() == .Dutch {
+           self.rooms = "kamers"
+           self.RoomNumber.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+       } else if XLanguage.get() == .Portuguese {
+           self.rooms = "quartos"
+           self.RoomNumber.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+       } else if XLanguage.get() == .Russian {
+           self.rooms = "комнаты"
+           self.RoomNumber.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+       } else if XLanguage.get() == .Chinese {
+           self.rooms = "房间"
+           self.RoomNumber.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+       } else if XLanguage.get() == .Hindi {
+           self.rooms = "कमरे"
+           self.RoomNumber.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+       } else if XLanguage.get() == .Swedish {
+           self.rooms = "rum"
+           self.RoomNumber.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+       } else if XLanguage.get() == .Greek {
+           self.rooms = "δωμάτια"
+           self.RoomNumber.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+       } else if XLanguage.get() == .Hebrew {
+           self.rooms = "חדרים"
+           self.RoomNumber.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+       }
+        
         self.RoomNumber.text = "\(cell.RoomNo ?? "") \(self.rooms)"
         let font:UIFont? = UIFont.systemFont(ofSize: 10, weight: .bold)
         let fontSuper:UIFont? = UIFont(name: "Helvetica-bold", size:8)
@@ -83,34 +120,146 @@ class AllEstatessCollectionViewCell: UICollectionViewCell {
         attString.setAttributes([.font:fontSuper!,.baselineOffset:4], range: NSRange(location:(cell.space?.count ?? 0) + 1,length:1))
         self.HomeSize.attributedText = attString
         if cell.RentOrSell == "0"{
+            var longString = ""
+            var longestWord = ""
             if XLanguage.get() == .Kurdish{
-                let longString = "\(cell.price?.description.currencyFormatting() ?? "")/ مانگانە"
-                let longestWord = "مانگانە"
+                longString = "\(cell.price?.description.currencyFormatting() ?? "")/ مانگانە"
+                longestWord = "مانگانە"
                 let longestWordRange = (longString as NSString).range(of: longestWord)
 
-                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 16)!])
+                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 24)!])
 
-                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "PeshangDes2", size: 12)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
+                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "PeshangDes2", size: 16)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
                 
                 self.Price.attributedText = attributedString
-            }else if XLanguage.get() == .English{
-                let longString = "\(cell.price?.description.currencyFormatting() ?? "")/ Monthly"
-                let longestWord = "Monthly"
+            }else if XLanguage.get() == .Arabic{
+                 longString = "\(cell.price?.description.currencyFormatting() ?? "")/ شهريا"
+                 longestWord  = "شهريا"
                 let longestWordRange = (longString as NSString).range(of: longestWord)
 
-                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 16)!])
+                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 24)!])
 
-                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 10)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
+                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "PeshangDes2", size: 16)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
                 
                 self.Price.attributedText = attributedString
-            }else{
-                let longString = "\(cell.price?.description.currencyFormatting() ?? "")/ شهريا"
-                let longestWord  = "شهريا"
+            }else if XLanguage.get() == .English {
+                longestWord = "Monthly"
+                longString = "\(cell.price?.description.currencyFormatting() ?? "")/ \(longestWord)"
                 let longestWordRange = (longString as NSString).range(of: longestWord)
 
-                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 16)!])
+                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 24)!])
 
-                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "PeshangDes2", size: 12)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
+                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 15)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
+                
+                self.Price.attributedText = attributedString
+            } else if XLanguage.get() == .Hebrew {
+                longestWord = "חודשי"
+                longString = "\(cell.price?.description.currencyFormatting() ?? "")/ \(longestWord)"
+                let longestWordRange = (longString as NSString).range(of: longestWord)
+
+                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 24)!])
+
+                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 15)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
+                
+                self.Price.attributedText = attributedString
+            } else if XLanguage.get() == .Chinese {
+                longestWord = "每月"
+                longString = "\(cell.price?.description.currencyFormatting() ?? "")/ \(longestWord)"
+                let longestWordRange = (longString as NSString).range(of: longestWord)
+
+                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 24)!])
+
+                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 15)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
+                
+                self.Price.attributedText = attributedString
+            } else if XLanguage.get() == .Hindi {
+                longestWord = "मासिक"
+                longString = "\(cell.price?.description.currencyFormatting() ?? "")/ \(longestWord)"
+                let longestWordRange = (longString as NSString).range(of: longestWord)
+
+                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 24)!])
+
+                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 15)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
+                
+                self.Price.attributedText = attributedString
+            } else if XLanguage.get() == .Portuguese {
+                longestWord = "Mensal"
+                longString = "\(cell.price?.description.currencyFormatting() ?? "")/ \(longestWord)"
+                let longestWordRange = (longString as NSString).range(of: longestWord)
+
+                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 24)!])
+
+                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 15)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
+                
+                self.Price.attributedText = attributedString
+            } else if XLanguage.get() == .Swedish {
+                longestWord = "Månadsvis"
+                longString = "\(cell.price?.description.currencyFormatting() ?? "")/ \(longestWord)"
+                let longestWordRange = (longString as NSString).range(of: longestWord)
+
+                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 24)!])
+
+                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 15)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
+                
+                self.Price.attributedText = attributedString
+            } else if XLanguage.get() == .Greek {
+                longestWord = "Μηνιαίως"
+                longString = "\(cell.price?.description.currencyFormatting() ?? "")/ \(longestWord)"
+                let longestWordRange = (longString as NSString).range(of: longestWord)
+
+                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 24)!])
+
+                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 15)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
+                
+                self.Price.attributedText = attributedString
+            } else if XLanguage.get() == .Russian {
+                longestWord = "Ежемесячно"
+                longString = "\(cell.price?.description.currencyFormatting() ?? "")/ \(longestWord)"
+                let longestWordRange = (longString as NSString).range(of: longestWord)
+
+                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 24)!])
+
+                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 15)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
+                
+                self.Price.attributedText = attributedString
+            } else if XLanguage.get() == .Dutch {
+                longestWord = "Maandelijks"
+                longString = "\(cell.price?.description.currencyFormatting() ?? "")/ \(longestWord)"
+                let longestWordRange = (longString as NSString).range(of: longestWord)
+
+                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 24)!])
+
+                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 15)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
+                
+                self.Price.attributedText = attributedString
+            } else if XLanguage.get() == .French {
+                longestWord = "Mensuel"
+                longString = "\(cell.price?.description.currencyFormatting() ?? "")/ \(longestWord)"
+                let longestWordRange = (longString as NSString).range(of: longestWord)
+
+                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 24)!])
+
+                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 15)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
+                
+                self.Price.attributedText = attributedString
+            } else if XLanguage.get() == .Spanish {
+                longestWord = "Mensual"
+                longString = "\(cell.price?.description.currencyFormatting() ?? "")/ \(longestWord)"
+                let longestWordRange = (longString as NSString).range(of: longestWord)
+
+                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 24)!])
+
+                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 15)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
+                
+                self.Price.attributedText = attributedString
+            } else if XLanguage.get() == .German {
+                longestWord = "Monatlich"
+                longString = "\(cell.price?.description.currencyFormatting() ?? "")/ \(longestWord)"
+                let longestWordRange = (longString as NSString).range(of: longestWord)
+
+                let attributedString = NSMutableAttributedString(string: longString, attributes: [NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 24)!])
+
+                attributedString.setAttributes([NSAttributedString.Key.font : UIFont(name: "ArialRoundedMTBold", size: 15)!, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)], range: longestWordRange)
                 
                 self.Price.attributedText = attributedString
             }
@@ -119,17 +268,10 @@ class AllEstatessCollectionViewCell: UICollectionViewCell {
         }
         
         EstateTypeAip.GeEstateTypeNameById(id:  cell.estate_type_id ?? "") { type in
-            if XLanguage.get() == .English{
                 self.Typee.text = type.name
-                self.Typee.font =  UIFont(name: "ArialRoundedMTBold", size: 12)!
-            }else if XLanguage.get() == .Arabic{
-                self.Typee.text = type.ar_name
-                self.Typee.font =  UIFont(name: "PeshangDes2", size: 13)!
-            }else{
-                self.Typee.text = type.ku_name
-                self.Typee.font =  UIFont(name: "PeshangDes2", size: 13)!
-            }
+                self.Typee.font =  UIFont(name: "ArialRoundedMTBold", size: 13)!
         }
+        
         let date = NSDate(timeIntervalSince1970: cell.Stamp ?? 0.0)
         let dayTimePeriodFormatter = DateFormatter()
         dayTimePeriodFormatter.dateFormat = "dd MM,YYYY"

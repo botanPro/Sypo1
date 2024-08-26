@@ -38,7 +38,6 @@ class ProjetsVC: UIViewController {
         }
     }
     
-    
 
     var selecteCitycell = ""
     var selecteCity : CityObject?
@@ -65,7 +64,6 @@ class ProjetsVC: UIViewController {
         self.ProjectsCollectionView.isScrollEnabled = false
         GetSliderImages()
         GetCity()
-        GetAllProjects()
         if self.ProjectArray.count == 0{
             self.ScrollView.isHidden = true
             self.LoadingIndecator.startAnimating()
@@ -109,7 +107,7 @@ class ProjetsVC: UIViewController {
             }
         }
         
-        
+        GetAllProjects()
     }
     
     
@@ -135,7 +133,7 @@ class ProjetsVC: UIViewController {
         self.CityCollectionView.reloadData()
     }
 
-    func GetSliderImages(){
+    @objc func GetSliderImages(){
         self.sliderImages.removeAll()
         SlidesAip.GetProjectSlides { SlidesObject in
             self.sliderImages = SlidesObject
@@ -148,33 +146,121 @@ class ProjetsVC: UIViewController {
     
     func GetAllProjects(){
         self.ProjectArray.removeAll()
+        let cityId = UserDefaults.standard.string(forKey: "CityId")
+
         GetAllProjectsAip.GetAllProducts { pro in
-            for proj in pro{
-                if proj.id != "ZlFVOHo5MUXQ8NtnZfZ7"{
-                    let date = NSDate(timeIntervalSince1970: proj.uploaded_date_stamp ?? 0.0)
-                    let days = (Date().days(sinceDate: date as Date) ?? 0) * -1
-                    if days <= 30{
-                        self.NewestProjectArray.append(proj)
+            self.NewestProjectArray.removeAll()
+            self.ProjectArray.removeAll()
+                for proj in pro{
+                    if proj.id != "ZlFVOHo5MUXQ8NtnZfZ7" && proj.city_id == cityId{
+                        let date = NSDate(timeIntervalSince1970: proj.uploaded_date_stamp ?? 0.0)
+                        let days = (Date().days(sinceDate: date as Date) ?? 0) * -1
+                        if days <= 30{
+                            self.NewestProjectArray.append(proj)
+                        }
+                        self.ProjectArray.append(proj)
                     }
-                    self.ProjectArray.append(proj)
                 }
+            
+            if self.ProjectArray.count == 0{
+                self.EmptyStackView.isHidden = false
+                var title = "Empty"
+                var message = "No projects are found"
+                
+              
+                if XLanguage.get() == .Kurdish{
+                    title = "بەتاڵ"
+                    message = "هیچ پرۆژەیەک نەدۆزراوەتەوە"
+                } else if XLanguage.get() == .Arabic{
+                    title = "فارغة"
+                    message = "لم يتم العثور على مشاريع"
+                } else if XLanguage.get() == .English {
+                    title = "Empty"
+                    message = "No projects are found"
+                } else if XLanguage.get() == .Dutch {
+                    title = "Leeg"
+                    message = "Geen projecten gevonden"
+                } else if XLanguage.get() == .French {
+                    title = "Vide"
+                    message = "Aucun projet trouvé"
+                } else if XLanguage.get() == .Spanish {
+                    title = "Vacío"
+                    message = "No se encontraron proyectos"
+                } else if XLanguage.get() == .German {
+                    title = "Leer"
+                    message = "Keine Projekte gefunden"
+                } else if XLanguage.get() == .Hebrew {
+                    title = "ריק"
+                    message = "לא נמצאו פרויקטים"
+                } else if XLanguage.get() == .Chinese {
+                    title = "空的"
+                    message = "未找到任何项目"
+                } else if XLanguage.get() == .Hindi {
+                    title = "खाली"
+                    message = "कोई परियोजनाएं नहीं मिलीं"
+                } else if XLanguage.get() == .Portuguese {
+                    title = "Vazio"
+                    message = "Nenhum projeto encontrado"
+                } else if XLanguage.get() == .Russian {
+                    title = "Пусто"
+                    message = "Проекты не найдены"
+                } else if XLanguage.get() == .Swedish {
+                    title = "Tomt"
+                    message = "Inga projekt hittades"
+                } else if XLanguage.get() == .Greek {
+                    title = "Άδειο"
+                    message = "Δεν βρέθηκαν έργα"
+                }
+                
+                let drop = Drop(
+                    title: title,
+                    subtitle: message,
+                    icon: UIImage(named: "attention"),
+                    action: .init {
+                        print("Drop tapped")
+                        Drops.hideCurrent()
+                    },
+                    position: .bottom,
+                    duration: 3.0,
+                    accessibility: "Alert: Title, Subtitle"
+                )
+                Drops.show(drop)
             }
-            self.ProjectArray.shuffle()
-            self.ScrollView.isHidden = false
-            self.LoadingIndecator.stopAnimating()
-            self.ProjectsCollectionView.reloadData()
-            self.ProjectCollectionView.reloadData()
+            
+                self.ProjectArray.shuffle()
+                self.ScrollView.isHidden = false
+                self.LoadingIndecator.stopAnimating()
+                self.ProjectsCollectionView.reloadData()
+                self.ProjectCollectionView.reloadData()
         }
-        
+        GetCity()
+
     }
+    
     
     
     func GetCity(){
         self.CityArray.removeAll()
-        CityObjectAip.GetCities { city in
-            self.CityArray = city
-            self.CityCollectionView.reloadData()
+        var CountryId = ""
+        let cityId = UserDefaults.standard.string(forKey: "CityId")
+        CityObjectAip.GetCities { cities in
+            self.CityArray.removeAll()
+            for city in cities{
+                if city.id == cityId{
+                    CountryId = city.country_id ?? ""
+                    CityObjectAip.GetCities { cities in
+                        for city in cities{
+                            if city.country_id == CountryId{
+                                self.CityArray.append(city)
+                            }
+                        }
+                        self.CityCollectionView.reloadData()
+                    }
+                }
+            }
         }
+        
+       
         
     }
     
@@ -234,16 +320,10 @@ extension ProjetsVC : UICollectionViewDataSource, UICollectionViewDelegate , UIC
                     cell.Vieww.backgroundColor = .white
                     cell.Name.textColor = #colorLiteral(red: 0.4430069923, green: 0.4869378209, blue: 0.5339931846, alpha: 1)
                 }
-                if XLanguage.get() == .English{
-                    cell.Name.text = CityArray[indexPath.row].name
-                    cell.Name.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
-                }else if XLanguage.get() == .Arabic{
-                    cell.Name.text = CityArray[indexPath.row].ar_name
-                    cell.Name.font =  UIFont(name: "PeshangDes2", size: 11)!
-                }else{
-                    cell.Name.text = CityArray[indexPath.row].ku_name
-                    cell.Name.font =  UIFont(name: "PeshangDes2", size: 11)!
-                }
+                
+                cell.Name.text = CityArray[indexPath.row].name
+                cell.Name.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
+                
             }
             return cell
         }
@@ -275,19 +355,10 @@ extension ProjetsVC : UICollectionViewDataSource, UICollectionViewDelegate , UIC
         }
         
         if collectionView == CityCollectionView{
-            if XLanguage.get() == .English{
             let text = self.CityArray[indexPath.row].name ?? ""
              let width = self.estimatedFrame(text: text, font:  UIFont(name: "ArialRoundedMTBold", size: 11)!).width
              return CGSize(width: width + 50, height: 40)
-            }else if XLanguage.get() == .Arabic{
-                let text = self.CityArray[indexPath.row].ar_name ?? ""
-                 let width = self.estimatedFrame(text: text, font: UIFont(name: "PeshangDes2", size: 11)!).width
-                 return CGSize(width: width + 50, height: 40)
-            }else{
-                let text = self.CityArray[indexPath.row].ku_name ?? ""
-                 let width = self.estimatedFrame(text: text, font: UIFont(name: "PeshangDes2", size: 11)!).width
-                 return CGSize(width: width + 50, height: 40)
-            }
+
         }
         
         if collectionView == ProjectCollectionView{
@@ -365,15 +436,49 @@ extension ProjetsVC : UICollectionViewDataSource, UICollectionViewDelegate , UIC
                             var title = "Empty"
                             var message = "No projects are found"
                             
-                            if XLanguage.get() == .English{
-                                title = "Empty"
-                                message = "No projects are found"
-                            }else if XLanguage.get() == .Kurdish{
+                          
+                            if XLanguage.get() == .Kurdish{
                                 title = "بەتاڵ"
                                 message = "هیچ پرۆژەیەک نەدۆزراوەتەوە"
-                            }else{
+                            } else if XLanguage.get() == .Arabic{
                                 title = "فارغة"
                                 message = "لم يتم العثور على مشاريع"
+                            } else if XLanguage.get() == .English {
+                                title = "Empty"
+                                message = "No projects are found"
+                            } else if XLanguage.get() == .Dutch {
+                                title = "Leeg"
+                                message = "Geen projecten gevonden"
+                            } else if XLanguage.get() == .French {
+                                title = "Vide"
+                                message = "Aucun projet trouvé"
+                            } else if XLanguage.get() == .Spanish {
+                                title = "Vacío"
+                                message = "No se encontraron proyectos"
+                            } else if XLanguage.get() == .German {
+                                title = "Leer"
+                                message = "Keine Projekte gefunden"
+                            } else if XLanguage.get() == .Hebrew {
+                                title = "ריק"
+                                message = "לא נמצאו פרויקטים"
+                            } else if XLanguage.get() == .Chinese {
+                                title = "空的"
+                                message = "未找到任何项目"
+                            } else if XLanguage.get() == .Hindi {
+                                title = "खाली"
+                                message = "कोई परियोजनाएं नहीं मिलीं"
+                            } else if XLanguage.get() == .Portuguese {
+                                title = "Vazio"
+                                message = "Nenhum projeto encontrado"
+                            } else if XLanguage.get() == .Russian {
+                                title = "Пусто"
+                                message = "Проекты не найдены"
+                            } else if XLanguage.get() == .Swedish {
+                                title = "Tomt"
+                                message = "Inga projekt hittades"
+                            } else if XLanguage.get() == .Greek {
+                                title = "Άδειο"
+                                message = "Δεν βρέθηκαν έργα"
                             }
                             
                             let drop = Drop(

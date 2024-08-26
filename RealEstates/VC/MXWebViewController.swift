@@ -27,6 +27,8 @@ class MXWebViewController: UIViewController {
             self.GetEstatesByType()
         }
         NotificationCenter.default.addObserver(self, selector: #selector(self.LanguageChanged), name: NSNotification.Name(rawValue: "LanguageChanged"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GetEstatesByTypeAfterLocationChanged), name: NSNotification.Name(rawValue: "LocationChangedS"), object: nil)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,12 +59,31 @@ class MXWebViewController: UIViewController {
     }
     func GetEstatesByType(){
         self.RentAndSellArray.removeAll()
+        let cityId = UserDefaults.standard.string(forKey: "CityId")
         Firestore.firestore().collection("EstateProducts").whereField("rent_or_sell", isEqualTo: "1").getDocuments { (Snapshot, error) in
             if error != nil { print(error.debugDescription) ; return }
             guard let documents = Snapshot?.documents else { return }
             for P in documents {
                 if let data = P.data() as [String : AnyObject]? {
-                    if EstateObject(Dictionary: data).archived != "1"{
+                    if EstateObject(Dictionary: data).archived != "1" && EstateObject(Dictionary: data).city_id == cityId{
+                         self.RentAndSellArray.append(EstateObject(Dictionary: data))
+                    }
+                }
+            }
+            self.RentAndSellArray.shuffle()
+            self.RentAndSellCollectionView.cr.endHeaderRefresh()
+            self.RentAndSellCollectionView.reloadData()
+        }
+    }
+    @objc func GetEstatesByTypeAfterLocationChanged(){
+        self.RentAndSellArray.removeAll()
+        let cityId = UserDefaults.standard.string(forKey: "CityId")
+        Firestore.firestore().collection("EstateProducts").whereField("rent_or_sell", isEqualTo: "1").getDocuments { (Snapshot, error) in
+            if error != nil { print(error.debugDescription) ; return }
+            guard let documents = Snapshot?.documents else { return }
+            for P in documents {
+                if let data = P.data() as [String : AnyObject]? {
+                    if EstateObject(Dictionary: data).archived != "1" && EstateObject(Dictionary: data).city_id == cityId{
                          self.RentAndSellArray.append(EstateObject(Dictionary: data))
                     }
                 }

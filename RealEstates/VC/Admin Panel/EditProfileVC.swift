@@ -15,7 +15,6 @@ import FirebaseFirestore
 class EditProfileVC: UIViewController ,UITextFieldDelegate, UITextViewDelegate{
 
     
-    
     @IBOutlet weak var ScrollViewLayout: NSLayoutConstraint!
     @IBOutlet weak var EditImage: UIButton!
     @IBOutlet weak var Image: UIImageView!
@@ -25,16 +24,23 @@ class EditProfileVC: UIViewController ,UITextFieldDelegate, UITextViewDelegate{
     @IBOutlet weak var Name: UITextField!
     @IBOutlet weak var Location: UITextField!
     @IBOutlet weak var AboutMe: UITextView!
+    
     var userTypeId = ""
     var Offiecid = ""
     var OfficeImage = ""
+    var subscription_id = ""
+    var contract_image = ""
+    var arabic_name = ""
+    var one_signal_uuid = ""
+    
     @IBOutlet weak var Save: UIBarButtonItem!
     var IsInternetChecked = false
+    
     @IBOutlet weak var InternetViewHeight: NSLayoutConstraint!
     @IBOutlet weak var InternetConnectionView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         self.InternetViewHeight.constant = 0
         self.InternetConnectionView.isHidden = true
@@ -42,16 +48,18 @@ class EditProfileVC: UIViewController ,UITextFieldDelegate, UITextViewDelegate{
     
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+
         
-        if XLanguage.get() == .English{
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "ArialRoundedMTBold", size: 16)!,.foregroundColor: #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)]
-
-        }else if XLanguage.get() == .Arabic{
+        
+        if XLanguage.get() == .Arabic{
             self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "PeshangDes2", size: 16)!,.foregroundColor: #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)]
-
         }else if XLanguage.get() == .Kurdish{
             self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "PeshangDes2", size: 16)!,.foregroundColor: #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)]
+        }else {
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "ArialRoundedMTBold", size: 16)!,.foregroundColor: #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)]
         }
+        
+        
         
         self.Image.layer.cornerRadius = self.Image.bounds.width / 2
         if let FireId = UserDefaults.standard.string(forKey: "UserId"){
@@ -66,6 +74,12 @@ class EditProfileVC: UIViewController ,UITextFieldDelegate, UITextViewDelegate{
                 self.Name.text = office.name ?? ""
                 self.AboutMe.text = office.about ?? ""
                 self.userTypeId = office.type_id ?? ""
+                self.subscription_id = office.subscription_id ?? ""
+                
+                self.contract_image = office.contract_image  ?? ""
+                self.arabic_name = office.arabic_name ?? ""
+                
+                self.one_signal_uuid = office.one_signal_uuid ?? ""
             }
         }
         
@@ -135,16 +149,71 @@ class EditProfileVC: UIViewController ,UITextFieldDelegate, UITextViewDelegate{
             self.message = "ئایا دڵنیای لە نەرزکردنەوەی زانیاریەکان؟"
             self.Action = "بەڵێ"
             self.cancel = "نەخێر"
-        }else if XLanguage.get() == . English{
-            self.titlee = "Upload Information"
-            self.message = "Are you sure to upload?"
-            self.Action = "Yes"
-            self.cancel = "No"
-        }else{
+        }else if XLanguage.get() == .Arabic{
             self.titlee = "رفع المعلومات"
             self.message = "هل أنت متأكد من رفع المعلومات؟"
             self.Action = "نعم"
             self.cancel = "لا"
+        }else if XLanguage.get() == .English {
+            self.titlee = "Upload Information"
+            self.message = "Are you sure to upload?"
+            self.Action = "Yes"
+            self.cancel = "No"
+        } else if XLanguage.get() == .Dutch {
+            self.titlee = "Informatie Uploaden"
+            self.message = "Weet je zeker dat je wilt uploaden?"
+            self.Action = "Ja"
+            self.cancel = "Nee"
+        } else if XLanguage.get() == .French {
+            self.titlee = "Téléverser des Informations"
+            self.message = "Êtes-vous sûr de vouloir téléverser ?"
+            self.Action = "Oui"
+            self.cancel = "Non"
+        } else if XLanguage.get() == .Spanish {
+            self.titlee = "Subir Información"
+            self.message = "¿Estás seguro de que quieres subirlo?"
+            self.Action = "Sí"
+            self.cancel = "No"
+        } else if XLanguage.get() == .German {
+            self.titlee = "Informationen Hochladen"
+            self.message = "Sind Sie sicher, dass Sie hochladen möchten?"
+            self.Action = "Ja"
+            self.cancel = "Nein"
+        } else if XLanguage.get() == .Hebrew {
+            self.titlee = "העלאת מידע"
+            self.message = "האם אתה בטוח שברצונך להעלות?"
+            self.Action = "כן"
+            self.cancel = "לא"
+        } else if XLanguage.get() == .Chinese {
+            self.titlee = "上传信息"
+            self.message = "您确定要上传吗？"
+            self.Action = "是"
+            self.cancel = "否"
+        } else if XLanguage.get() == .Hindi {
+            self.titlee = "जानकारी अपलोड करें"
+            self.message = "क्या आप सुनिश्चित हैं कि अपलोड करना चाहते हैं?"
+            self.Action = "हाँ"
+            self.cancel = "नहीं"
+        } else if XLanguage.get() == .Portuguese {
+            self.titlee = "Carregar Informação"
+            self.message = "Tem certeza de que deseja carregar?"
+            self.Action = "Sim"
+            self.cancel = "Não"
+        } else if XLanguage.get() == .Swedish {
+            self.titlee = "Ladda upp Information"
+            self.message = "Är du säker på att du vill ladda upp?"
+            self.Action = "Ja"
+            self.cancel = "Nej"
+        } else if XLanguage.get() == .Greek {
+            self.titlee = "Ανέβασμα Πληροφοριών"
+            self.message = "Είστε σίγουροι ότι θέλετε να ανεβάσετε;"
+            self.Action = "Ναι"
+            self.cancel = "Όχι"
+        } else if XLanguage.get() == .Russian {
+            self.titlee = "Загрузка Информации"
+            self.message = "Вы уверены, что хотите загрузить?"
+            self.Action = "Да"
+            self.cancel = "Нет"
         }
         
         
@@ -165,16 +234,12 @@ class EditProfileVC: UIViewController ,UITextFieldDelegate, UITextViewDelegate{
                    
                     if let FireId = UserDefaults.standard.string(forKey: "UserId"){
                             if self.Images.count == 0{
-                                OfficesObject.init(name: self.Name.text!, id:self.Offiecid , fire_id: FireId, address: self.Location.text!,about: self.AboutMe.text!, phone1: self.Number1.text!, phone2: self.Number2.text!, ImageURL:self.OfficeImage, type_id: self.userTypeId, archived: "0").Update()
+                                OfficesObject.init(name: self.Name.text!, id:self.Offiecid , fire_id: FireId, address: self.Location.text!,about: self.AboutMe.text!, phone1: self.Number1.text!, phone2: self.Number2.text!, ImageURL:self.OfficeImage, type_id: self.userTypeId, archived: "0",subscription_id: self.subscription_id,contract_image: self.contract_image ,arabic_name: self.arabic_name, one_signal_uuid: self.one_signal_uuid).Update()
                             }else{
                                 print(self.OfficeImage.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
                                 let imageUrl = self.OfficeImage.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
                                 if let range = imageUrl.range(of: "?") {
                                     let ImageId = imageUrl.substring(to: range.lowerBound)
-                                    
-                                    
-                                    
-                                    
                                     Task{
                                         do{
                                             try await Storage.storage().reference().child("Pictures").child(String(ImageId.suffix(36))).delete()
@@ -182,14 +247,10 @@ class EditProfileVC: UIViewController ,UITextFieldDelegate, UITextViewDelegate{
                                             print(error)
                                         }
                                     }
-                                    
-                                    
-                                    
-                                    
                                 }
                                 
                                 self.uploadManyImage { URLs in
-                                    OfficesObject.init(name: self.Name.text!, id:self.Offiecid , fire_id: FireId, address: self.Location.text!,about: self.AboutMe.text!, phone1: self.Number1.text!, phone2: self.Number2.text!, ImageURL:URLs[0], type_id: self.userTypeId, archived: "0").Update()
+                                    OfficesObject.init(name: self.Name.text!, id:self.Offiecid , fire_id: FireId, address: self.Location.text!,about: self.AboutMe.text!, phone1: self.Number1.text!, phone2: self.Number2.text!, ImageURL:URLs[0], type_id: self.userTypeId, archived: "0",subscription_id: self.subscription_id,contract_image: self.contract_image ,arabic_name: self.arabic_name, one_signal_uuid: self.one_signal_uuid).Update()
                                 }
                         }
                         self.navigationController?.popViewController(animated: true)
@@ -200,28 +261,118 @@ class EditProfileVC: UIViewController ,UITextFieldDelegate, UITextViewDelegate{
                 alertController.addAction(cancelAction)
                 self.present(alertController, animated: true, completion: nil)
             }else{
-                if XLanguage.get() == .Kurdish{
-                    let titl = "تکایە ناوی خۆت بنووسە"
-                    let action = "بەڵێ"
-                    let alertController = UIAlertController(title: "", message: titl, preferredStyle: .alert)
-                    let cancelAction = UIAlertAction(title: action, style: UIAlertAction.Style.cancel) { UIAlertAction in }
-                    alertController.addAction(cancelAction)
-                    self.present(alertController, animated: true, completion: nil)
-                }else if XLanguage.get() == . English{
-                    let titl = "Please write your name"
+                
+                let language = XLanguage.get()
+                switch language {
+                case .English:
+                    let title = "Please write your name"
                     let action = "Cancel"
-                    let alertController = UIAlertController(title: "", message: titl, preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "", message: title, preferredStyle: .alert)
                     let cancelAction = UIAlertAction(title: action, style: UIAlertAction.Style.cancel) { UIAlertAction in }
                     alertController.addAction(cancelAction)
                     self.present(alertController, animated: true, completion: nil)
-                }else{
+                case .Dutch:
+                    let title = "Vul alstublieft uw naam in"
+                    let action = "Annuleren"
+                    let alertController = UIAlertController(title: "", message: title, preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: action, style: UIAlertAction.Style.cancel) { UIAlertAction in }
+                    alertController.addAction(cancelAction)
+                    self.present(alertController, animated: true, completion: nil)
+                case .French:
+                    let title = "Veuillez écrire votre nom"
+                    let action = "Annuler"
+                    let alertController = UIAlertController(title: "", message: title, preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: action, style: UIAlertAction.Style.cancel) { UIAlertAction in }
+                    alertController.addAction(cancelAction)
+                    self.present(alertController, animated: true, completion: nil)
+                case .Spanish:
+                    let title = "Por favor, escriba su nombre"
+                    let action = "Cancelar"
+                    let alertController = UIAlertController(title: "", message: title, preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: action, style: UIAlertAction.Style.cancel) { UIAlertAction in }
+                    alertController.addAction(cancelAction)
+                    self.present(alertController, animated: true, completion: nil)
+                case .German:
+                    let title = "Bitte geben Sie Ihren Namen ein"
+                    let action = "Abbrechen"
+                    let alertController = UIAlertController(title: "", message: title, preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: action, style: UIAlertAction.Style.cancel) { UIAlertAction in }
+                    alertController.addAction(cancelAction)
+                    self.present(alertController, animated: true, completion: nil)
+                case .Hebrew:
+                    let title = "אנא כתוב את שמך"
+                    let action = "ביטול"
+                    let alertController = UIAlertController(title: "", message: title, preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: action, style: UIAlertAction.Style.cancel) { UIAlertAction in }
+                    alertController.addAction(cancelAction)
+                    self.present(alertController, animated: true, completion: nil)
+                case .Chinese:
+                    let title = "请写下你的名字"
+                    let action = "取消"
+                    let alertController = UIAlertController(title: "", message: title, preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: action, style: UIAlertAction.Style.cancel) { UIAlertAction in }
+                    alertController.addAction(cancelAction)
+                    self.present(alertController, animated: true, completion: nil)
+                case .Hindi:
+                    let title = "कृपया अपना नाम लिखें"
+                    let action = "रद्द करें"
+                    let alertController = UIAlertController(title: "", message: title, preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: action, style: UIAlertAction.Style.cancel) { UIAlertAction in }
+                    alertController.addAction(cancelAction)
+                    self.present(alertController, animated: true, completion: nil)
+                case .Portuguese:
+                    let title = "Por favor, escreva seu nome"
+                    let action = "Cancelar"
+                    let alertController = UIAlertController(title: "", message: title, preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: action, style: UIAlertAction.Style.cancel) { UIAlertAction in }
+                    alertController.addAction(cancelAction)
+                    self.present(alertController, animated: true, completion: nil)
+                case .Swedish:
+                    let title = "Vänligen skriv ditt namn"
+                    let action = "Avbryt"
+                    let alertController = UIAlertController(title: "", message: title, preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: action, style: UIAlertAction.Style.cancel) { UIAlertAction in }
+                    alertController.addAction(cancelAction)
+                    self.present(alertController, animated: true, completion: nil)
+                case .Greek:
+                    let title = "Παρακαλώ γράψτε το όνομά σας"
+                    let action = "Ακύρωση"
+                    let alertController = UIAlertController(title: "", message: title, preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: action, style: UIAlertAction.Style.cancel) { UIAlertAction in }
+                    alertController.addAction(cancelAction)
+                    self.present(alertController, animated: true, completion: nil)
+                case .Russian:
+                    let title = "Пожалуйста, напишите ваше имя"
+                    let action = "Отмена"
+                    let alertController = UIAlertController(title: "", message: title, preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: action, style: UIAlertAction.Style.cancel) { UIAlertAction in }
+                    alertController.addAction(cancelAction)
+                    self.present(alertController, animated: true, completion: nil)
+                case .Arabic:
                     let titl = "رجاءا اكتب اسمك"
                     let action = "إلغاء"
                     let alertController = UIAlertController(title: "", message: titl, preferredStyle: .alert)
                     let cancelAction = UIAlertAction(title: action, style: UIAlertAction.Style.cancel) { UIAlertAction in }
                     alertController.addAction(cancelAction)
                     self.present(alertController, animated: true, completion: nil)
+                case .Kurdish:
+                    let titl = "تکایە ناوی خۆت بنووسە"
+                    let action = "بەڵێ"
+                    let alertController = UIAlertController(title: "", message: titl, preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: action, style: UIAlertAction.Style.cancel) { UIAlertAction in }
+                    alertController.addAction(cancelAction)
+                    self.present(alertController, animated: true, completion: nil)
+                default:
+                    let title = "Please write your name"
+                    let action = "Cancel"
+                    let alertController = UIAlertController(title: "", message: title, preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: action, style: UIAlertAction.Style.cancel) { UIAlertAction in }
+                    alertController.addAction(cancelAction)
+                    self.present(alertController, animated: true, completion: nil)
                 }
+                
+                
+                
                 
             }
         }else{

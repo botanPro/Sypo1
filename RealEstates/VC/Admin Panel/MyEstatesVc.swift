@@ -45,7 +45,7 @@ class MyEstatesVc: UIViewController {
     }
     
     
-    
+
     
     func GetMyEstates(){
         self.ProductArray.removeAll()
@@ -104,11 +104,56 @@ class MyEstatesVc: UIViewController {
             self.message = "هل أنت متأكد أنك تريد إزالة هذا العنصر من البيع؟"
             self.action = "متأكد"
             self.cancel = "لا"
-        }else{
+        }else if XLanguage.get() == .English {
             self.Title = "Remove"
-            self.message = "Are you sure you wan to remove this item from sale?"
+            self.message = "Are you sure you want to remove this item from sale?"
             self.action = "I'm sure"
             self.cancel = "Cancel"
+        } else if XLanguage.get() == .Dutch {
+            self.Title = "Verwijderen"
+            self.message = "Weet u zeker dat u dit item uit de verkoop wilt halen?"
+            self.action = "Ik ben zeker"
+            self.cancel = "Annuleren"
+        } else if XLanguage.get() == .French {
+            self.Title = "Retirer"
+            self.message = "Êtes-vous sûr de vouloir retirer cet article de la vente?"
+            self.action = "Je suis sûr"
+            self.cancel = "Annuler"
+        } else if XLanguage.get() == .Spanish {
+            self.Title = "Eliminar"
+            self.message = "¿Estás seguro de que quieres quitar este artículo de la venta?"
+            self.action = "Estoy seguro"
+            self.cancel = "Cancelar"
+        } else if XLanguage.get() == .German {
+            self.Title = "Entfernen"
+            self.message = "Sind Sie sicher, dass Sie diesen Artikel aus dem Verkauf entfernen möchten?"
+            self.action = "Ich bin sicher"
+            self.cancel = "Abbrechen"
+        } else if XLanguage.get() == .Hebrew {
+            self.Title = "הסר"
+            self.message = "האם אתה בטוח שברצונך להסיר פריט זה מהמכירה?"
+            self.action = "אני בטוח"
+            self.cancel = "ביטול"
+        } else if XLanguage.get() == .Chinese {
+            self.Title = "移除"
+            self.message = "您确定要将此商品从销售中移除吗？"
+            self.action = "我确定"
+            self.cancel = "取消"
+        } else if XLanguage.get() == .Hindi {
+            self.Title = "निकालें"
+            self.message = "क्या आप वाकई इस वस्तु को बिक्री से हटाना चाहते हैं?"
+            self.action = "मुझे यकीन है"
+            self.cancel = "रद्द करें"
+        } else if XLanguage.get() == .Portuguese {
+            self.Title = "Remover"
+            self.message = "Tem certeza de que deseja remover este item da venda?"
+            self.action = "Tenho certeza"
+            self.cancel = "Cancelar"
+        } else if XLanguage.get() == .Russian {
+            self.Title = "Удалить"
+            self.message = "Вы уверены, что хотите удалить этот товар из продажи?"
+            self.action = "Я уверен"
+            self.cancel = "Отмена"
         }
         
         
@@ -174,11 +219,56 @@ class MyEstatesVc: UIViewController {
                     self.message = "هل أنت متأكد من أنه تم بيع هذه العقار؟"
                     self.action = "متأكد"
                     self.cancel = "لا"
-                }else{
+                }else if XLanguage.get() == .English {
                     self.Title = ""
                     self.message = "Are you sure that this estate has been sold?"
                     self.action = "I'm sure"
                     self.cancel = "Cancel"
+                } else if XLanguage.get() == .Dutch {
+                    self.Title = ""
+                    self.message = "Weet u zeker dat dit vastgoed is verkocht?"
+                    self.action = "Ik ben zeker"
+                    self.cancel = "Annuleren"
+                } else if XLanguage.get() == .French {
+                    self.Title = ""
+                    self.message = "Êtes-vous sûr que ce bien a été vendu?"
+                    self.action = "Je suis sûr"
+                    self.cancel = "Annuler"
+                } else if XLanguage.get() == .Spanish {
+                    self.Title = ""
+                    self.message = "¿Estás seguro de que esta propiedad ha sido vendida?"
+                    self.action = "Estoy seguro"
+                    self.cancel = "Cancelar"
+                } else if XLanguage.get() == .German {
+                    self.Title = ""
+                    self.message = "Sind Sie sicher, dass diese Immobilie verkauft wurde?"
+                    self.action = "Ich bin sicher"
+                    self.cancel = "Abbrechen"
+                } else if XLanguage.get() == .Hebrew {
+                    self.Title = ""
+                    self.message = "האם אתה בטוח שהנכס הזה נמכר?"
+                    self.action = "אני בטוח"
+                    self.cancel = "בטל"
+                } else if XLanguage.get() == .Chinese {
+                    self.Title = ""
+                    self.message = "您确定这个房产已经售出了吗？"
+                    self.action = "我确定"
+                    self.cancel = "取消"
+                } else if XLanguage.get() == .Hindi {
+                    self.Title = ""
+                    self.message = "क्या आप सुनिश्चित हैं कि यह संपत्ति बेच दी गई है?"
+                    self.action = "मुझे यकीन है"
+                    self.cancel = "रद्द करें"
+                } else if XLanguage.get() == .Portuguese {
+                    self.Title = ""
+                    self.message = "Tem certeza de que este imóvel foi vendido?"
+                    self.action = "Tenho certeza"
+                    self.cancel = "Cancelar"
+                } else if XLanguage.get() == .Russian {
+                    self.Title = ""
+                    self.message = "Вы уверены, что этот объект недвижимости был продан?"
+                    self.action = "Я уверен"
+                    self.cancel = "Отмена"
                 }
                 let myAlert = UIAlertController(title: self.Title, message: self.message, preferredStyle: UIAlertController.Style.alert)
                 myAlert.addAction(UIAlertAction(title: self.action, style: .default, handler: { (UIAlertAction) in
@@ -231,6 +321,8 @@ extension MyEstatesVc : UITableViewDelegate , UITableViewDataSource{
         return ProductArray.count
         
     }
+    
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell  = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! FavoriteTableViewCell

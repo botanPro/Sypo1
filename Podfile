@@ -2,17 +2,21 @@
 # platform :ios, '9.0'
 
 
-target 'OneSignalNotificationServiceExtension' do
+#target 'OneSignalNotificationServiceExtension' do
     # Comment the next line if you don't want to use dynamic frameworks
-    use_frameworks!
-    pod 'OneSignalXCFramework', '>= 3.0.0', '< 4.0'
-  end
+    #use_frameworks!
+    #pod 'OneSignalXCFramework', '>= 3.0.0', '< 4.0'
+  #end
 
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
-      config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
+      xcconfig_path = config.base_configuration_reference.real_path
+      xcconfig = File.read(xcconfig_path)
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+      xcconfig_mod = xcconfig.gsub(/DT_TOOLCHAIN_DIR/, "TOOLCHAIN_DIR")
+      File.open(xcconfig_path, "w") { |file| file << xcconfig_mod }
     end
   end
 end
@@ -23,7 +27,7 @@ target 'RealEstates' do
   use_frameworks!
   source 'https://cdn.cocoapods.org/'
   # Pods for RealEstates
-  pod 'OneSignalXCFramework', '>= 3.0.0', '< 4.0'
+  #pod 'OneSignalXCFramework', '>= 3.0.0', '< 4.0'
   
   pod 'Alamofire'
   pod 'SwiftyJSON'
@@ -34,7 +38,9 @@ target 'RealEstates' do
   pod 'MBRadioCheckboxButton'
   pod "CollieGallery"
   pod 'Cosmos'
-  
+  pod 'XP_PDFReader'
+  pod "EPSignature"
+  pod 'PDFReader'
   
   pod 'Firebase'
   pod 'Firebase/Auth'
@@ -90,8 +96,11 @@ target 'RealEstates' do
   
   pod "PullToDismissTransition"
   
-  
   pod 'NSFWDetector'
+  
+  
+  pod 'Stripe'
+  
   
   
   target 'RealEstatesTests' do
@@ -102,5 +111,59 @@ target 'RealEstates' do
   target 'RealEstatesUITests' do
     # Pods for testing
   end
-
+  
+  
+#  gatetoriches@gmail.com
+#  2202Shark@
 end
+
+
+#
+#
+#import Foundation
+#
+#func sendNotification(senderToken: String, recipientToken: String, message: String) {
+#    let serverKey = "YOUR_SERVER_KEY" // Your Firebase Cloud Messaging server key
+#    
+#    let url = URL(string: "https://fcm.googleapis.com/fcm/send")!
+#    var request = URLRequest(url: url)
+#    request.httpMethod = "POST"
+#    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+#    request.setValue("key=\(serverKey)", forHTTPHeaderField: "Authorization")
+#    
+#    let notification = ["title": "New Message",
+#                        "body": message,
+#                        "sender": senderToken] // Add sender information
+#    
+#    let data: [String: Any] = ["to": recipientToken,
+#                               "notification": notification]
+#    
+#    let jsonData = try! JSONSerialization.data(withJSONObject: data)
+#    
+#    let task = URLSession.shared.uploadTask(with: request, from: jsonData) { data, response, error in
+#        if let error = error {
+#            print("Error sending notification: \(error.localizedDescription)")
+#            return
+#        }
+#        
+#        // Check response if necessary
+#        if let httpResponse = response as? HTTPURLResponse {
+#            print("Response status code: \(httpResponse.statusCode)")
+#        }
+#        
+#        // Handle response data if necessary
+#        if let data = data {
+#            let responseData = String(data: data, encoding: .utf8)
+#            print("Response data: \(responseData ?? "")")
+#        }
+#    }
+#    
+#    task.resume()
+#}
+#
+#// Example usage:
+#let senderToken = "SENDER_FCM_TOKEN"
+#let recipientToken = "RECIPIENT_FCM_TOKEN"
+#let message = "Hello, how are you?"
+#
+#sendNotification(senderToken: senderToken, recipientToken: recipientToken, message: message)

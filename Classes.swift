@@ -11,16 +11,13 @@ import PureLayout
 
 class openCartApi{
     let UserName = "ashraf_shark"
-    let key = "c28dd20e65d33b14268e86b8e0318b5ddfbb170f"
-    let RealEstateImages = "http://shark-team.com/maskani/upload/estate/"
-    let OfficeImages = "http://shark-team.com/maskani/upload/office/"
-    let SliderImages = "http://shark-team.com/maskani/upload/slider/"
-    let URL = "http://shark-team.com/maskani/mobile_api.php";
-    let APP_TITLE = "RealEstate"
+    let key = "6a93307dd3c1e66a42deb2a04571002592e00c3a"
+    let URL = "https://sypo-realestate.com/panel/api/mobile_api.php";
+    let APP_TITLE = "Sypo"
 }
 let API = openCartApi();
 
-let APP_TITLE = "RealEstate"
+let APP_TITLE = "Sypo"
 
 extension UITextField{
    @IBInspectable var placeHolderColor: UIColor? {
@@ -75,10 +72,10 @@ extension UIDevice {
         case "iPhone5,1", "iPhone5,2":                        return "iPhone 5"
         case "iPhone5,3", "iPhone5,4":                        return "iPhone 5c"
         case "iPhone6,1", "iPhone6,2":                        return "iPhone 5s"
-        case "iPhone7,2":                                     return "iPhone 6"
-        case "iPhone7,1":                                     return "iPhone 6 Plus"
-        case "iPhone8,1":                                     return "iPhone 6s"
-        case "iPhone8,2":                                     return "iPhone 6s Plus"
+        case "iPhone7,2":                                      return "iPhone 6"
+        case "iPhone7,1":                                      return "iPhone 6 Plus"
+        case "iPhone8,1":                                      return "iPhone 6s"
+        case "iPhone8,2":                                      return "iPhone 6s Plus"
         case "iPhone9,1", "iPhone9,3":                        return "iPhone 7"
         case "iPhone9,2", "iPhone9,4":                        return "iPhone 7 Plus"
         case "iPhone10,1", "iPhone10,4":                      return "iPhone 8"
@@ -87,14 +84,7 @@ extension UIDevice {
         case "iPhone11,2":                                    return "iPhone XS"
         case "iPhone11,4", "iPhone11,6":                      return "iPhone XS Max"
         case "iPhone11,8":                                    return "iPhone XR"
-        case "iPhone12,1":                                    return "iPhone 11"
-        case "iPhone12,3":                                    return "iPhone 11 Pro"
-        case "iPhone12,5":                                    return "iPhone 11 Pro Max"
-        case "iPhone13,1":                                    return "iPhone 12 mini"
-        case "iPhone13,2":                                    return "iPhone 12"
-        case "iPhone13,3":                                    return "iPhone 12 Pro"
-        case "iPhone13,4":                                    return "iPhone 12 Pro Max"
-        case "iPhone14,4":                                    return "iPhone 13 mini"
+        case "iPhone12,1":                                    return "iPhone 13 mini"
         case "iPhone14,5":                                    return "iPhone 13"
         case "iPhone14,2":                                    return "iPhone 13 Pro"
         case "iPhone14,3":                                    return "iPhone 13 Pro Max"

@@ -19,16 +19,16 @@ class FavoritesVC: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.InternetViewHeight.constant = 0
         self.InternetConnectionView.isHidden = true
+ 
         
-        
-        if XLanguage.get() == .English{
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "ArialRoundedMTBold", size: 16)!,.foregroundColor: #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)]
-
-        }else if XLanguage.get() == .Arabic{
+        if XLanguage.get() == .Arabic{
             self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "PeshangDes2", size: 16)!,.foregroundColor: #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)]
 
         }else if XLanguage.get() == .Kurdish{
             self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "PeshangDes2", size: 16)!,.foregroundColor: #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)]
+        }else {
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "ArialRoundedMTBold", size: 16)!,.foregroundColor: #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)]
+
         }
         
         
@@ -90,11 +90,46 @@ class FavoritesVC: UIViewController {
             self.message = "هل أنت متأكد أنك تريد الحذف؟"
             self.action = "متأكد"
             self.cancel = "لا"
-        }else{
+        }else if XLanguage.get() == .English {
             self.Title = "Remove"
-            self.message = "Are you sure you wan to remove?"
+            self.message = "Are you sure you want to remove?"
             self.action = "I'm sure"
             self.cancel = "Cancel"
+        } else if XLanguage.get() == .French {
+            self.Title = "Supprimer"
+            self.message = "Êtes-vous sûr de vouloir supprimer ?"
+            self.action = "Je suis sûr"
+            self.cancel = "Annuler"
+        } else if XLanguage.get() == .Spanish {
+            self.Title = "Eliminar"
+            self.message = "¿Estás seguro de que quieres eliminar?"
+            self.action = "Estoy seguro"
+            self.cancel = "Cancelar"
+        } else if XLanguage.get() == .German {
+            self.Title = "Entfernen"
+            self.message = "Sind Sie sicher, dass Sie entfernen möchten?"
+            self.action = "Ich bin sicher"
+            self.cancel = "Abbrechen"
+        } else if XLanguage.get() == .Portuguese {
+            self.Title = "Remover"
+            self.message = "Tem certeza de que deseja remover?"
+            self.action = "Tenho certeza"
+            self.cancel = "Cancelar"
+        } else if XLanguage.get() == .Russian {
+            self.Title = "Удалить"
+            self.message = "Вы уверены, что хотите удалить?"
+            self.action = "Я уверен"
+            self.cancel = "Отмена"
+        } else if XLanguage.get() == .Dutch {
+            self.Title = "Verwijderen"
+            self.message = "Weet u zeker dat u dit wilt verwijderen?"
+            self.action = "Ik ben zeker"
+            self.cancel = "Annuleren"
+        } else if XLanguage.get() == .Chinese {
+            self.Title = "删除"
+            self.message = "您确定要删除吗？"
+            self.action = "我确定"
+            self.cancel = "取消"
         }
         
         let myAlert = UIAlertController(title: self.Title, message: self.message, preferredStyle: UIAlertController.Style.alert)

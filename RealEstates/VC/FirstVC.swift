@@ -20,10 +20,11 @@ class FirstVC: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
         var pickerLabel: UILabel? = (view as? UILabel)
         if pickerLabel == nil {
             pickerLabel = UILabel()
-            if XLanguage.get() == .English{
-                pickerLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-            }else if XLanguage.get() == .Kurdish || XLanguage.get() == .Arabic{
+            if XLanguage.get() == .Kurdish || XLanguage.get() == .Arabic{
                 pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
+            }else{
+                pickerLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+
             }
             pickerLabel?.textAlignment = .center
         }
@@ -54,7 +55,6 @@ class FirstVC: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
                 UserDefaults.standard.set("false", forKey: "IsFirst")
                 self.performSegue(withIdentifier: "GoToApp", sender: nil)
             }
-            
             UserDefaults.standard.set(pickerValue.id, forKey: "CityId")
             UserDefaults.standard.set(pickerValue.country_id, forKey: "CountryId")
             }
@@ -74,15 +74,23 @@ class FirstVC: UIViewController ,UIPickerViewDelegate , UIPickerViewDataSource{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        GetCity()
-        self.Next.backgroundColor = .clear
-        self.Next.layer.borderWidth = 2
-        self.Next.layer.borderColor = UIColor.white.cgColor
-        self.Next.layer.cornerRadius = 19
-        pickerView.delegate = self
-        pickerView.dataSource = self
+        //GetCity()
+//        self.Next.backgroundColor = .clear
+//        self.Next.layer.borderWidth = 2
+//        self.Next.layer.borderColor = UIColor.white.cgColor
+//        self.Next.layer.cornerRadius = 19
+//        pickerView.delegate = self
+//        pickerView.dataSource = self
     }
     
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+            UserDefaults.standard.set("false", forKey: "IsFirst")
+            self.performSegue(withIdentifier: "GoToApp", sender: nil)
+        })
+    }
     
     
     @IBAction func Next(_ sender: Any) {

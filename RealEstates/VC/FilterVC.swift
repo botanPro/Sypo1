@@ -70,13 +70,8 @@ class FilterVC: UIViewController ,UITextFieldDelegate, RadioButtonDelegate{
         
         self.PriceMin.delegate = self
         self.PriceMax.delegate = self
-
-        if XLanguage.get() == .English{
-            self.RentRadioButton.setTitle("RENT", for: .normal)
-            self.SellRadioButton.setTitle("SELL", for: .normal)
-            self.RentRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-            self.SellRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-        }else if XLanguage.get() == .Arabic{
+        
+       if XLanguage.get() == .Arabic{
             self.RentRadioButton.setTitle("بیع", for: .normal)
             self.SellRadioButton.setTitle("ايجار", for: .normal)
             self.RentRadioButton.titleLabel?.font = UIFont(name: "PeshangDes2", size: 14)!
@@ -86,7 +81,64 @@ class FilterVC: UIViewController ,UITextFieldDelegate, RadioButtonDelegate{
             self.SellRadioButton.setTitle("فروشتن", for: .normal)
             self.RentRadioButton.titleLabel?.font = UIFont(name: "PeshangDes2", size: 14)!
             self.SellRadioButton.titleLabel?.font = UIFont(name: "PeshangDes2", size: 14)!
+        }else if XLanguage.get() == .English {
+            self.RentRadioButton.setTitle("RENT", for: .normal)
+            self.SellRadioButton.setTitle("SELL", for: .normal)
+            self.RentRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            self.SellRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .French {
+            self.RentRadioButton.setTitle("LOUER", for: .normal)
+            self.SellRadioButton.setTitle("VENDRE", for: .normal)
+            self.RentRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            self.SellRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Spanish {
+            self.RentRadioButton.setTitle("ALQUILAR", for: .normal)
+            self.SellRadioButton.setTitle("VENDER", for: .normal)
+            self.RentRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            self.SellRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .German {
+            self.RentRadioButton.setTitle("MIETEN", for: .normal)
+            self.SellRadioButton.setTitle("VERKAUFEN", for: .normal)
+            self.RentRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            self.SellRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Dutch {
+            self.RentRadioButton.setTitle("HUREN", for: .normal)
+            self.SellRadioButton.setTitle("VERKOPEN", for: .normal)
+            self.RentRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            self.SellRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Portuguese {
+            self.RentRadioButton.setTitle("ALUGAR", for: .normal)
+            self.SellRadioButton.setTitle("VENDER", for: .normal)
+            self.RentRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            self.SellRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Russian {
+            self.RentRadioButton.setTitle("СДАТЬ В АРЕНДУ", for: .normal)
+            self.SellRadioButton.setTitle("ПРОДАТЬ", for: .normal)
+            self.RentRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            self.SellRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Chinese {
+            self.RentRadioButton.setTitle("出租", for: .normal)
+            self.SellRadioButton.setTitle("出售", for: .normal)
+            self.RentRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            self.SellRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Hindi {
+            self.RentRadioButton.setTitle("किराये पर देना", for: .normal)
+            self.SellRadioButton.setTitle("बेचना", for: .normal)
+            self.RentRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            self.SellRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Swedish {
+            self.RentRadioButton.setTitle("HYRA", for: .normal)
+            self.SellRadioButton.setTitle("SÄLJA", for: .normal)
+            self.RentRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            self.SellRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Greek {
+            self.RentRadioButton.setTitle("ΕΝΟΙΚΙΑΣΗ", for: .normal)
+            self.SellRadioButton.setTitle("ΠΩΛΗΣΗ", for: .normal)
+            self.RentRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            self.SellRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
         }
+
+        
         setupGroup2()
         
         NumberOfRoomsCollectionView.register(UINib(nibName: "EstateTypeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "NCell")
@@ -255,9 +307,75 @@ class FilterVC: UIViewController ,UITextFieldDelegate, RadioButtonDelegate{
                     ac.dismiss(animated: true)
                 }))
                 present(ac, animated: true)
-            }else{
+            }else if XLanguage.get() == .Kurdish{
                 let ac = UIAlertController(title: "هەڵە", message: "تکایە هێڵی ئینتەرنێتەکەت بپشکنە.", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "باشە", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else if XLanguage.get() == .Dutch {
+                let ac = UIAlertController(title: "Fout", message: "Controleer uw internetverbinding.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .French {
+                let ac = UIAlertController(title: "Erreur", message: "Veuillez vérifier votre connexion internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Spanish {
+                let ac = UIAlertController(title: "Error", message: "Por favor, verifica tu conexión a internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .German {
+                let ac = UIAlertController(title: "Fehler", message: "Bitte überprüfen Sie Ihre Internetverbindung.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Hebrew {
+                let ac = UIAlertController(title: "שגיאה", message: "אנא בדוק את חיבור האינטרנט שלך.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "אישור", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Chinese {
+                let ac = UIAlertController(title: "错误", message: "请检查您的互联网连接。", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "确定", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Hindi {
+                let ac = UIAlertController(title: "त्रुटि", message: "कृपया अपना इंटरनेट कनेक्शन जाँच लें।", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ठीक है", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Portuguese {
+                let ac = UIAlertController(title: "Erro", message: "Por favor, verifique sua conexão com a internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Swedish {
+                let ac = UIAlertController(title: "Fel", message: "Vänligen kontrollera din internetanslutning.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Greek {
+                let ac = UIAlertController(title: "Σφάλμα", message: "Παρακαλώ ελέγξτε τη σύνδεσή σας στο διαδίκτυο.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ΟΚ", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Russian {
+                let ac = UIAlertController(title: "Ошибка", message: "Пожалуйста, проверьте ваше интернет-соединение.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ОК", style: .default, handler: { _ in
                     ac.dismiss(animated: true)
                 }))
                 present(ac, animated: true)
@@ -323,16 +441,50 @@ class FilterVC: UIViewController ,UITextFieldDelegate, RadioButtonDelegate{
             var title = "Empty"
             var message = "No estates are found"
             
-            if XLanguage.get() == .English{
-                title = "Empty"
-                message = "No estates are found"
-            }else if XLanguage.get() == .Kurdish{
+           if XLanguage.get() == .Kurdish{
                 title = "بەتاڵ"
                 message = "هیچ خانوبەرێک نەدۆزراوەتەوە"
-            }else{
+           }else if XLanguage.get() == .Arabic{
                 title = "فارغة"
                 message = "لم يتم العثور على عقار"
+            }else if XLanguage.get() == .English {
+                title = "Empty"
+                message = "No estates are found"
+            } else if XLanguage.get() == .French {
+                title = "Vide"
+                message = "Aucun bien immobilier trouvé"
+            } else if XLanguage.get() == .Spanish {
+                title = "Vacío"
+                message = "No se encontraron propiedades"
+            } else if XLanguage.get() == .German {
+                title = "Leer"
+                message = "Keine Immobilien gefunden"
+            } else if XLanguage.get() == .Dutch {
+                title = "Leeg"
+                message = "Geen vastgoed gevonden"
+            } else if XLanguage.get() == .Portuguese {
+                title = "Vazio"
+                message = "Nenhum imóvel encontrado"
+            } else if XLanguage.get() == .Russian {
+                title = "Пусто"
+                message = "Недвижимость не найдена"
+            } else if XLanguage.get() == .Chinese {
+                title = "空的"
+                message = "未找到房地产"
+            } else if XLanguage.get() == .Hindi {
+                title = "खाली"
+                message = "कोई संपत्ति नहीं मिली"
+            } else if XLanguage.get() == .Swedish {
+                title = "Tom"
+                message = "Inga fastigheter hittades"
+            } else if XLanguage.get() == .Greek {
+                title = "Άδειο"
+                message = "Δεν βρέθηκαν ακίνητα"
+            } else if XLanguage.get() == .Hebrew {
+                title = "ריק"
+                message = "לא נמצאו נכסים"
             }
+
             let drop = Drop(
                 title: title,
                 subtitle: message,
@@ -434,16 +586,10 @@ extension FilterVC : UICollectionViewDataSource, UICollectionViewDelegate , UICo
                     cell.Vieww.backgroundColor = .white
                     cell.Name.textColor = #colorLiteral(red: 0.4430069923, green: 0.4869378209, blue: 0.5339931846, alpha: 1)
                 }
-                if XLanguage.get() == .English{
+                
                     cell.Name.text = EstatesType[indexPath.row].name
                     cell.Name.font =  UIFont(name: "ArialRoundedMTBold", size: 11)!
-                }else if XLanguage.get() == .Arabic{
-                    cell.Name.text = EstatesType[indexPath.row].ar_name
-                    cell.Name.font =  UIFont(name: "PeshangDes2", size: 12)!
-                }else{
-                    cell.Name.text = EstatesType[indexPath.row].ku_name
-                    cell.Name.font =  UIFont(name: "PeshangDes2", size: 12)!
-                }
+                
             }
             return cell
         }

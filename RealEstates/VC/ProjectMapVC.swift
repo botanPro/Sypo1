@@ -62,15 +62,48 @@ class ProjectMapVC: UIViewController , MKMapViewDelegate, CLLocationManagerDeleg
                 var title = "Empty"
                 var message = "No projects are found"
                 
-                if XLanguage.get() == .English{
-                    title = "Empty"
-                    message = "No projects are found"
-                }else if XLanguage.get() == .Kurdish{
+                if XLanguage.get() == .Kurdish{
                     title = "بەتاڵ"
                     message = "هیچ پرۆژەیەک نەدۆزراوەتەوە"
-                }else{
+                } else if XLanguage.get() == .Arabic{
                     title = "فارغة"
                     message = "لم يتم العثور على مشاريع"
+                } else if XLanguage.get() == .English {
+                    title = "Empty"
+                    message = "No projects are found"
+                } else if XLanguage.get() == .Dutch {
+                    title = "Leeg"
+                    message = "Geen projecten gevonden"
+                } else if XLanguage.get() == .French {
+                    title = "Vide"
+                    message = "Aucun projet trouvé"
+                } else if XLanguage.get() == .Spanish {
+                    title = "Vacío"
+                    message = "No se encontraron proyectos"
+                } else if XLanguage.get() == .German {
+                    title = "Leer"
+                    message = "Keine Projekte gefunden"
+                } else if XLanguage.get() == .Hebrew {
+                    title = "ריק"
+                    message = "לא נמצאו פרויקטים"
+                } else if XLanguage.get() == .Chinese {
+                    title = "空的"
+                    message = "未找到任何项目"
+                } else if XLanguage.get() == .Hindi {
+                    title = "खाली"
+                    message = "कोई परियोजनाएं नहीं मिलीं"
+                } else if XLanguage.get() == .Portuguese {
+                    title = "Vazio"
+                    message = "Nenhum projeto encontrado"
+                } else if XLanguage.get() == .Russian {
+                    title = "Пусто"
+                    message = "Проекты не найдены"
+                } else if XLanguage.get() == .Swedish {
+                    title = "Tomt"
+                    message = "Inga projekt hittades"
+                } else if XLanguage.get() == .Greek {
+                    title = "Άδειο"
+                    message = "Δεν βρέθηκαν έργα"
                 }
                 let drop = Drop(
                     title: title,
@@ -89,13 +122,8 @@ class ProjectMapVC: UIViewController , MKMapViewDelegate, CLLocationManagerDeleg
             for pro in AllProjects{
                 let lat = Double(pro.latitude ?? "")
                 let long = Double(pro.longitude ?? "")
-                if XLanguage.get() == .English{
                 self.Locations.append(Place(coordinate: CLLocationCoordinate2D(latitude: lat ?? 0.0, longitude: long ?? 0.0), profileId: pro.id ?? "", title: pro.project_name ?? "", subtitle: pro.address ?? ""))
-                }else if XLanguage.get() == .Arabic{
-                    self.Locations.append(Place(coordinate: CLLocationCoordinate2D(latitude: lat ?? 0.0, longitude: long ?? 0.0), profileId: pro.id ?? "", title: pro.project_ar_name ?? "", subtitle: pro.address ?? ""))
-                }else{
-                    self.Locations.append(Place(coordinate: CLLocationCoordinate2D(latitude: lat ?? 0.0, longitude: long ?? 0.0), profileId: pro.id ?? "", title: pro.project_ku_name ?? "", subtitle: pro.address ?? ""))
-                }
+                
             }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.NVLoaderView.stopAnimating()

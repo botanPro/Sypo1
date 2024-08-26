@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -82,23 +82,30 @@
 		76D3329A26775EC70002E124 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D3329926775EC70002E124 /* FavoritesVC.swift */; };
 		76E55BFE27A2F3BA003E05C0 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E55BFD27A2F3BA003E05C0 /* MapVC.swift */; };
 		76E9463127B176F2006A74AB /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E9463027B176F2006A74AB /* EditProfileVC.swift */; };
+		7D003ABD2C46AF360097DFBF /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D003ABC2C46AF360097DFBF /* PaymentViewController.swift */; };
+		7D003ABF2C46C5A90097DFBF /* MinimumNumbersTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D003ABE2C46C5A90097DFBF /* MinimumNumbersTextField.swift */; };
 		7D0288432894063900A175A8 /* CheckVersionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0288422894063900A175A8 /* CheckVersionClass.swift */; };
-		7D0288482894766700A175A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D0288472894766700A175A8 /* GoogleService-Info.plist */; };
 		7D0EA1842895AACA001E9D9B /* ProjectDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0EA1832895AACA001E9D9B /* ProjectDetailsVC.swift */; };
 		7D305EFC28A43E9000006554 /* ProjectMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D305EFB28A43E9000006554 /* ProjectMapVC.swift */; };
+		7D6F823C2A24ECA900DBB1F0 /* DealVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6F823B2A24ECA900DBB1F0 /* DealVC.swift */; };
+		7D6F823E2A24F71F00DBB1F0 /* SignatureAndArabicName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6F823D2A24F71F00DBB1F0 /* SignatureAndArabicName.swift */; };
+		7D6F82402A24F7BB00DBB1F0 /* NewSignatureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6F823F2A24F7BB00DBB1F0 /* NewSignatureVC.swift */; };
+		7D6F82422A28D48400DBB1F0 /* MyContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6F82412A28D48400DBB1F0 /* MyContracts.swift */; };
+		7D6F82462A28DB0700DBB1F0 /* ContractsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6F82442A28DB0700DBB1F0 /* ContractsTableViewCell.swift */; };
+		7D6F82472A28DB0700DBB1F0 /* ContractsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D6F82452A28DB0700DBB1F0 /* ContractsTableViewCell.xib */; };
+		7D6F82492A28E86900DBB1F0 /* PaymentVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6F82482A28E86900DBB1F0 /* PaymentVc.swift */; };
+		7D6F824B2A28F71400DBB1F0 /* ArchivedContractsVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6F824A2A28F71400DBB1F0 /* ArchivedContractsVc.swift */; };
+		7D708EAB2A22623700FDB07E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D708EAA2A22623700FDB07E /* GoogleService-Info.plist */; };
 		7D9455AC2872273A00CF6A53 /* popup_load_balls.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7D9455AB2872273A00CF6A53 /* popup_load_balls.gif */; };
 		7D9BDBEB28A146340029CEF8 /* CheckInternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9BDBEA28A146340029CEF8 /* CheckInternetConnection.swift */; };
 		7D9BDBF228A14A300029CEF8 /* MessageBox.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D9BDBF028A14A300029CEF8 /* MessageBox.storyboard */; };
 		7D9BDBF328A14A300029CEF8 /* MessageBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9BDBF128A14A300029CEF8 /* MessageBox.swift */; };
-		7DB5FD9228B7D0DB00E14253 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB5FD9128B7D0DB00E14253 /* NotificationService.swift */; };
-		7DB5FD9628B7D0DB00E14253 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7DB5FD8F28B7D0DB00E14253 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7DC5A9ED28C5EF9A0019594D /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5A9EC28C5EF9A0019594D /* LocationService.swift */; };
 		7DCCFDED28AA983B00BAA777 /* DeletionAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCCFDEC28AA983B00BAA777 /* DeletionAccountVC.swift */; };
 		7DCCFDEF28AADE9D00BAA777 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCCFDEE28AADE9D00BAA777 /* TabBarVC.swift */; };
 		7DD0FEE2289B2D9B00E0C971 /* Peshang_Des_2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7DD0FEE1289B2D4200E0C971 /* Peshang_Des_2.ttf */; };
 		7DD81BDA28C23A440049B698 /* HorizantlyProjectsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD81BD828C23A430049B698 /* HorizantlyProjectsCollectionViewCell.swift */; };
 		7DD81BDB28C23A440049B698 /* HorizantlyProjectsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DD81BD928C23A440049B698 /* HorizantlyProjectsCollectionViewCell.xib */; };
-		E02EA725F16041340BD436B1 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76269BC8548F0BC2D2C02971 /* Pods_OneSignalNotificationServiceExtension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,13 +123,6 @@
 			remoteGlobalIDString = 761207C326299EDD00C0CE94;
 			remoteInfo = RealEstates;
 		};
-		7DB5FD9428B7D0DB00E14253 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 761207BC26299EDD00C0CE94 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7DB5FD8E28B7D0DB00E14253;
-			remoteInfo = OneSignalNotificationServiceExtension;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -132,7 +132,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				7DB5FD9628B7D0DB00E14253 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,7 +148,7 @@
 		42F96BF8FF9A94DD12904C2D /* Pods_RealEstates.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RealEstates.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45EB59758464B03F349CC2DF /* Pods-RealEstates.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealEstates.release.xcconfig"; path = "Target Support Files/Pods-RealEstates/Pods-RealEstates.release.xcconfig"; sourceTree = "<group>"; };
 		6EB76C5B2C24FD60A8A94E5C /* Pods-RealEstates.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealEstates.debug.xcconfig"; path = "Target Support Files/Pods-RealEstates/Pods-RealEstates.debug.xcconfig"; sourceTree = "<group>"; };
-		761207C426299EDD00C0CE94 /* RealEstates.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealEstates.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		761207C426299EDD00C0CE94 /* SYPO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SYPO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		761207C726299EDD00C0CE94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		761207C926299EDD00C0CE94 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		761207CB26299EDD00C0CE94 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -228,18 +227,25 @@
 		76D3329926775EC70002E124 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
 		76E55BFD27A2F3BA003E05C0 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		76E9463027B176F2006A74AB /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
+		7D003ABC2C46AF360097DFBF /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
+		7D003ABE2C46C5A90097DFBF /* MinimumNumbersTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimumNumbersTextField.swift; sourceTree = "<group>"; };
 		7D0288422894063900A175A8 /* CheckVersionClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckVersionClass.swift; sourceTree = "<group>"; };
 		7D0288462894634B00A175A8 /* RealEstates.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RealEstates.entitlements; sourceTree = "<group>"; };
-		7D0288472894766700A175A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7D0EA1832895AACA001E9D9B /* ProjectDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailsVC.swift; sourceTree = "<group>"; };
 		7D305EFB28A43E9000006554 /* ProjectMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectMapVC.swift; sourceTree = "<group>"; };
+		7D6F823B2A24ECA900DBB1F0 /* DealVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealVC.swift; sourceTree = "<group>"; };
+		7D6F823D2A24F71F00DBB1F0 /* SignatureAndArabicName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureAndArabicName.swift; sourceTree = "<group>"; };
+		7D6F823F2A24F7BB00DBB1F0 /* NewSignatureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSignatureVC.swift; sourceTree = "<group>"; };
+		7D6F82412A28D48400DBB1F0 /* MyContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContracts.swift; sourceTree = "<group>"; };
+		7D6F82442A28DB0700DBB1F0 /* ContractsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractsTableViewCell.swift; sourceTree = "<group>"; };
+		7D6F82452A28DB0700DBB1F0 /* ContractsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContractsTableViewCell.xib; sourceTree = "<group>"; };
+		7D6F82482A28E86900DBB1F0 /* PaymentVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentVc.swift; sourceTree = "<group>"; };
+		7D6F824A2A28F71400DBB1F0 /* ArchivedContractsVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedContractsVc.swift; sourceTree = "<group>"; };
+		7D708EAA2A22623700FDB07E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7D9455AB2872273A00CF6A53 /* popup_load_balls.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = popup_load_balls.gif; sourceTree = "<group>"; };
 		7D9BDBEA28A146340029CEF8 /* CheckInternetConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInternetConnection.swift; sourceTree = "<group>"; };
 		7D9BDBF028A14A300029CEF8 /* MessageBox.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MessageBox.storyboard; sourceTree = "<group>"; };
 		7D9BDBF128A14A300029CEF8 /* MessageBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageBox.swift; sourceTree = "<group>"; };
-		7DB5FD8F28B7D0DB00E14253 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		7DB5FD9128B7D0DB00E14253 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
-		7DB5FD9328B7D0DB00E14253 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7DC5A9EC28C5EF9A0019594D /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		7DCCFDEC28AA983B00BAA777 /* DeletionAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletionAccountVC.swift; sourceTree = "<group>"; };
 		7DCCFDEE28AADE9D00BAA777 /* TabBarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
@@ -275,20 +281,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7DB5FD8C28B7D0DB00E14253 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E02EA725F16041340BD436B1 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		761207BB26299EDD00C0CE94 = {
 			isa = PBXGroup;
 			children = (
+				7D003ABE2C46C5A90097DFBF /* MinimumNumbersTextField.swift */,
 				7DC5A9EC28C5EF9A0019594D /* LocationService.swift */,
 				7D9BDBEF28A14A300029CEF8 /* AlertMessageBox */,
 				7D0288422894063900A175A8 /* CheckVersionClass.swift */,
@@ -300,7 +299,6 @@
 				761207C626299EDD00C0CE94 /* RealEstates */,
 				761207DD26299EDE00C0CE94 /* RealEstatesTests */,
 				761207E826299EDE00C0CE94 /* RealEstatesUITests */,
-				7DB5FD9028B7D0DB00E14253 /* OneSignalNotificationServiceExtension */,
 				761207C526299EDD00C0CE94 /* Products */,
 				A33E8BFB124D728A02B5DE0E /* Pods */,
 				E96D992297EC12C0C1B7E8A8 /* Frameworks */,
@@ -310,10 +308,9 @@
 		761207C526299EDD00C0CE94 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				761207C426299EDD00C0CE94 /* RealEstates.app */,
+				761207C426299EDD00C0CE94 /* SYPO.app */,
 				761207DA26299EDE00C0CE94 /* RealEstatesTests.xctest */,
 				761207E526299EDE00C0CE94 /* RealEstatesUITests.xctest */,
-				7DB5FD8F28B7D0DB00E14253 /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -335,8 +332,8 @@
 				761207D026299EDE00C0CE94 /* Assets.xcassets */,
 				7D9455AB2872273A00CF6A53 /* popup_load_balls.gif */,
 				761207D226299EDE00C0CE94 /* LaunchScreen.storyboard */,
+				7D708EAA2A22623700FDB07E /* GoogleService-Info.plist */,
 				761207D526299EDE00C0CE94 /* Info.plist */,
-				7D0288472894766700A175A8 /* GoogleService-Info.plist */,
 			);
 			path = RealEstates;
 			sourceTree = "<group>";
@@ -383,6 +380,11 @@
 				7649761027A15DA1005EAEB2 /* MXWebViewController.swift */,
 				76CE459728551CF6005E1C0B /* AllEstateVC.swift */,
 				7DCCFDEE28AADE9D00BAA777 /* TabBarVC.swift */,
+				7D6F823B2A24ECA900DBB1F0 /* DealVC.swift */,
+				7D6F823D2A24F71F00DBB1F0 /* SignatureAndArabicName.swift */,
+				7D6F823F2A24F7BB00DBB1F0 /* NewSignatureVC.swift */,
+				7D6F82482A28E86900DBB1F0 /* PaymentVc.swift */,
+				7D003ABC2C46AF360097DFBF /* PaymentViewController.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -417,6 +419,7 @@
 		761208652629E6DC00C0CE94 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				7D6F82432A28DAD300DBB1F0 /* ContractsTableViewCell */,
 				7668265027A99C3F00519891 /* SearchHistoryTableViewCell */,
 				7655162C266EC36900D8C833 /* CommentTableViewCell */,
 				76B60FDB2637027700C2F73D /* CuntryAndCityTableViewCell */,
@@ -579,12 +582,23 @@
 				761208272629A29E00C0CE94 /* Settings.swift */,
 				76E9463027B176F2006A74AB /* EditProfileVC.swift */,
 				764A466B262B0F0800213B08 /* LanguagesVCViewController.swift */,
+				7D6F82412A28D48400DBB1F0 /* MyContracts.swift */,
 				768AF859263F139200E48A4A /* AboutrVC.swift */,
 				76B7B64227B416120033BAC0 /* AddProperty.swift */,
 				769A417B285A5A460085805F /* MyEstatesVc.swift */,
 				7DCCFDEC28AA983B00BAA777 /* DeletionAccountVC.swift */,
+				7D6F824A2A28F71400DBB1F0 /* ArchivedContractsVc.swift */,
 			);
 			path = "Admin Panel";
+			sourceTree = "<group>";
+		};
+		7D6F82432A28DAD300DBB1F0 /* ContractsTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				7D6F82442A28DB0700DBB1F0 /* ContractsTableViewCell.swift */,
+				7D6F82452A28DB0700DBB1F0 /* ContractsTableViewCell.xib */,
+			);
+			path = ContractsTableViewCell;
 			sourceTree = "<group>";
 		};
 		7D9BDBEF28A14A300029CEF8 /* AlertMessageBox */ = {
@@ -594,15 +608,6 @@
 				7D9BDBF128A14A300029CEF8 /* MessageBox.swift */,
 			);
 			path = AlertMessageBox;
-			sourceTree = "<group>";
-		};
-		7DB5FD9028B7D0DB00E14253 /* OneSignalNotificationServiceExtension */ = {
-			isa = PBXGroup;
-			children = (
-				7DB5FD9128B7D0DB00E14253 /* NotificationService.swift */,
-				7DB5FD9328B7D0DB00E14253 /* Info.plist */,
-			);
-			path = OneSignalNotificationServiceExtension;
 			sourceTree = "<group>";
 		};
 		7DD81BD728C239D80049B698 /* HorizantlyProjectsCollectionviewCell */ = {
@@ -657,11 +662,10 @@
 			buildRules = (
 			);
 			dependencies = (
-				7DB5FD9528B7D0DB00E14253 /* PBXTargetDependency */,
 			);
 			name = RealEstates;
 			productName = RealEstates;
-			productReference = 761207C426299EDD00C0CE94 /* RealEstates.app */;
+			productReference = 761207C426299EDD00C0CE94 /* SYPO.app */;
 			productType = "com.apple.product-type.application";
 		};
 		761207D926299EDE00C0CE94 /* RealEstatesTests */ = {
@@ -703,24 +707,6 @@
 			productReference = 761207E526299EDE00C0CE94 /* RealEstatesUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		7DB5FD8E28B7D0DB00E14253 /* OneSignalNotificationServiceExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7DB5FD9A28B7D0DB00E14253 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
-			buildPhases = (
-				2E5D219B536DA4E6020C6359 /* [CP] Check Pods Manifest.lock */,
-				7DB5FD8B28B7D0DB00E14253 /* Sources */,
-				7DB5FD8C28B7D0DB00E14253 /* Frameworks */,
-				7DB5FD8D28B7D0DB00E14253 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = OneSignalNotificationServiceExtension;
-			productName = OneSignalNotificationServiceExtension;
-			productReference = 7DB5FD8F28B7D0DB00E14253 /* OneSignalNotificationServiceExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -741,9 +727,6 @@
 						CreatedOnToolsVersion = 12.4;
 						TestTargetID = 761207C326299EDD00C0CE94;
 					};
-					7DB5FD8E28B7D0DB00E14253 = {
-						CreatedOnToolsVersion = 13.4.1;
-					};
 				};
 			};
 			buildConfigurationList = 761207BF26299EDD00C0CE94 /* Build configuration list for PBXProject "RealEstates" */;
@@ -762,7 +745,6 @@
 				761207C326299EDD00C0CE94 /* RealEstates */,
 				761207D926299EDE00C0CE94 /* RealEstatesTests */,
 				761207E426299EDE00C0CE94 /* RealEstatesUITests */,
-				7DB5FD8E28B7D0DB00E14253 /* OneSignalNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -785,16 +767,17 @@
 				761208522629C08800C0CE94 /* ProductCollectionViewCell.xib in Resources */,
 				76BA563A27A5A67600959A46 /* FavoriteTableViewCell.xib in Resources */,
 				76B7B64727B41A080033BAC0 /* ExpImagesCollectionViewCell.xib in Resources */,
+				7D708EAB2A22623700FDB07E /* GoogleService-Info.plist in Resources */,
 				761207CF26299EDD00C0CE94 /* Main.storyboard in Resources */,
 				7668EDE6262C5C6000BF4C4D /* DataTableVeiwCell.xib in Resources */,
 				768D77E82780C33100C3034A /* NearCollectionViewCell.xib in Resources */,
 				7DD0FEE2289B2D9B00E0C971 /* Peshang_Des_2.ttf in Resources */,
 				7612086A2629E70E00C0CE94 /* SearchTableViewCell.xib in Resources */,
+				7D6F82472A28DB0700DBB1F0 /* ContractsTableViewCell.xib in Resources */,
 				7DD81BDB28C23A440049B698 /* HorizantlyProjectsCollectionViewCell.xib in Resources */,
 				7683AAC027C158710068E02F /* ProjectsCollectionViewCell.xib in Resources */,
 				7636214F278C94C000E63A3A /* DataCollectionViewCell.xib in Resources */,
 				768D77ED2781DC3800C3034A /* AllEstateCollectionView.xib in Resources */,
-				7D0288482894766700A175A8 /* GoogleService-Info.plist in Resources */,
 				768D77F42781ECED00C3034A /* AllEstatessCollectionViewCell.xib in Resources */,
 				7668265427A99C3F00519891 /* SearchHistoryTableViewCell.xib in Resources */,
 				76551630266EC39B00D8C833 /* CommentTableViewCell.xib in Resources */,
@@ -815,38 +798,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7DB5FD8D28B7D0DB00E14253 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2E5D219B536DA4E6020C6359 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-OneSignalNotificationServiceExtension-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		2FE8EA420EA85A7C4CEAF286 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -955,7 +909,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7649761227A15DA2005EAEB2 /* MXWebViewController.swift in Sources */,
+				7D6F82492A28E86900DBB1F0 /* PaymentVc.swift in Sources */,
+				7D6F823C2A24ECA900DBB1F0 /* DealVC.swift in Sources */,
 				768AF861263F40A200E48A4A /* EstateTypeCollectionViewCell.swift in Sources */,
+				7D6F82422A28D48400DBB1F0 /* MyContracts.swift in Sources */,
 				7649761327A15DA2005EAEB2 /* MXTextViewController.swift in Sources */,
 				764A4671262B8F0100213B08 /* FilterVC.swift in Sources */,
 				769A417C285A5A460085805F /* MyEstatesVc.swift in Sources */,
@@ -980,12 +937,16 @@
 				768D77E32780A4E000C3034A /* Home.swift in Sources */,
 				768D77EC2781DC3800C3034A /* AllEstateCollectionView.swift in Sources */,
 				7668EE07262C93D400BF4C4D /* Classes.swift in Sources */,
+				7D6F823E2A24F71F00DBB1F0 /* SignatureAndArabicName.swift in Sources */,
 				7D9BDBEB28A146340029CEF8 /* CheckInternetConnection.swift in Sources */,
+				7D6F82462A28DB0700DBB1F0 /* ContractsTableViewCell.swift in Sources */,
 				76B60FEC263703A300C2F73D /* CityVC.swift in Sources */,
 				76B60FE72637035E00C2F73D /* CuntryVC.swift in Sources */,
 				76CE4595285505E6005E1C0B /* OfficesVc.swift in Sources */,
+				7D6F82402A24F7BB00DBB1F0 /* NewSignatureVC.swift in Sources */,
 				76362149278C937F00E63A3A /* ImageCollectionViewCell.swift in Sources */,
 				761207C826299EDD00C0CE94 /* AppDelegate.swift in Sources */,
+				7D003ABF2C46C5A90097DFBF /* MinimumNumbersTextField.swift in Sources */,
 				76324E44278B4E4300281936 /* EstateProfileVc.swift in Sources */,
 				76E9463127B176F2006A74AB /* EditProfileVC.swift in Sources */,
 				7638009C27D7D9C30095BCEB /* LoginVCViewController.swift in Sources */,
@@ -1004,10 +965,12 @@
 				7D0EA1842895AACA001E9D9B /* ProjectDetailsVC.swift in Sources */,
 				7638009E27D7E6F90095BCEB /* VerifyingVC.swift in Sources */,
 				764A466C262B0F0800213B08 /* LanguagesVCViewController.swift in Sources */,
+				7D6F824B2A28F71400DBB1F0 /* ArchivedContractsVc.swift in Sources */,
 				7DCCFDED28AA983B00BAA777 /* DeletionAccountVC.swift in Sources */,
 				768BD56B279304A40005FCC4 /* OfficeVC.swift in Sources */,
 				7668EDE5262C5C6000BF4C4D /* DataTableVeiwCell.swift in Sources */,
 				761B99D727D4F8AE009783B8 /* XUploadImage.swift in Sources */,
+				7D003ABD2C46AF360097DFBF /* PaymentViewController.swift in Sources */,
 				7DC5A9ED28C5EF9A0019594D /* LocationService.swift in Sources */,
 				768D77F32781ECED00C3034A /* AllEstatessCollectionViewCell.swift in Sources */,
 				7D9BDBF328A14A300029CEF8 /* MessageBox.swift in Sources */,
@@ -1031,14 +994,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7DB5FD8B28B7D0DB00E14253 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7DB5FD9228B7D0DB00E14253 /* NotificationService.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1051,11 +1006,6 @@
 			isa = PBXTargetDependency;
 			target = 761207C326299EDD00C0CE94 /* RealEstates */;
 			targetProxy = 761207E626299EDE00C0CE94 /* PBXContainerItemProxy */;
-		};
-		7DB5FD9528B7D0DB00E14253 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7DB5FD8E28B7D0DB00E14253 /* OneSignalNotificationServiceExtension */;
-			targetProxy = 7DB5FD9428B7D0DB00E14253 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1134,6 +1084,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = SYPO;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1188,6 +1139,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = SYPO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1199,26 +1151,30 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6EB76C5B2C24FD60A8A94E5C /* Pods-RealEstates.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = RealEstates/RealEstates.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = LSB7R4D9XA;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = RealEstates/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SYPO;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.6;
-				PRODUCT_BUNDLE_IDENTIFIER = com.maskani.sharkteam;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				MARKETING_VERSION = 0.0.9;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sypo.sharkteam;
+				PRODUCT_NAME = SYPO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1228,26 +1184,30 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 45EB59758464B03F349CC2DF /* Pods-RealEstates.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = RealEstates/RealEstates.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = LSB7R4D9XA;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = RealEstates/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SYPO;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.6;
-				PRODUCT_BUNDLE_IDENTIFIER = com.maskani.sharkteam;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				MARKETING_VERSION = 0.0.9;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sypo.sharkteam;
+				PRODUCT_NAME = SYPO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1341,62 +1301,6 @@
 			};
 			name = Release;
 		};
-		7DB5FD9828B7D0DB00E14253 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0DE74678E6AD97A15D4E2ED0 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
-				DEVELOPMENT_TEAM = LSB7R4D9XA;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 0.2.6;
-				PRODUCT_BUNDLE_IDENTIFIER = com.maskani.sharkteam.OneSignalNotificationServiceExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Debug;
-		};
-		7DB5FD9928B7D0DB00E14253 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 948ABD4496635B51A49BD74B /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
-				DEVELOPMENT_TEAM = LSB7R4D9XA;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 0.2.6;
-				PRODUCT_BUNDLE_IDENTIFIER = com.maskani.sharkteam.OneSignalNotificationServiceExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1432,15 +1336,6 @@
 			buildConfigurations = (
 				761207F526299EDE00C0CE94 /* Debug */,
 				761207F626299EDE00C0CE94 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7DB5FD9A28B7D0DB00E14253 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7DB5FD9828B7D0DB00E14253 /* Debug */,
-				7DB5FD9928B7D0DB00E14253 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

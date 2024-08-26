@@ -235,6 +235,22 @@ class ProductAip{
         }
     }
     
+    
+    static func GetNearestProducts(completion : @escaping (_ Product : [EstateObject])->()){
+        var New : [EstateObject] = []
+        Firestore.firestore().collection("EstateProducts").getDocuments { (Snapshot, error) in
+            if error != nil { print("Error") ; return }
+            guard let documents = Snapshot?.documents else { return }
+            for P in documents {
+                if let data = P.data() as [String : AnyObject]? {
+                    New.append(EstateObject(Dictionary: data))
+                }
+            }
+            completion(New)
+        }
+    }
+    
+    
     static func GetAllSectionProducts(TypeId : String , completion : @escaping (_ Product : EstateObject)->()){
         Firestore.firestore().collection("EstateProducts").whereField("estate_type_id", isEqualTo: TypeId).getDocuments { (Snapshot, error) in
             if error != nil { print(error.debugDescription) ; return }
@@ -242,6 +258,8 @@ class ProductAip{
             for P in documents {
                 if let data = P.data() as [String : AnyObject]? {
                     let New = EstateObject(Dictionary: data)
+                    print("---------apartment---------")
+                    print(data)
                     completion(New)
                 }
             }
@@ -330,8 +348,12 @@ class OfficesObject{
     var ImageURL : String?
     var type_id : String?
     var archived : String?
+    var subscription_id : String?
+    var one_signal_uuid : String?
+    var contract_image : String?
+    var arabic_name : String?
     
-    init(name : String,id : String ,fire_id : String , address : String , about : String,phone1:String , phone2 : String , ImageURL : String , type_id : String, archived : String) {
+    init(name : String,id : String ,fire_id : String , address : String , about : String,phone1:String , phone2 : String , ImageURL : String , type_id : String, archived : String,subscription_id : String,contract_image : String,arabic_name : String, one_signal_uuid: String) {
         self.name               = name
         self.id                 = id
         self.fire_id            = fire_id
@@ -343,9 +365,11 @@ class OfficesObject{
         self.address            = address
         self.type_id            = type_id
         self.archived           = archived
+        self.subscription_id   = subscription_id
+        self.arabic_name        = arabic_name
+        self.contract_image     = contract_image
+        self.one_signal_uuid    = one_signal_uuid
     }
-    
-    
     
     init(Dictionary : [String : AnyObject]) {
         self.id             = Dictionary[ "id"               ] as? String
@@ -358,6 +382,10 @@ class OfficesObject{
         self.address        = Dictionary[ "address"          ] as? String
         self.type_id        = Dictionary[ "type_id"          ] as? String
         self.archived       = Dictionary[ "archived"         ] as? String
+        self.subscription_id = Dictionary["subscription_id"] as? String
+        self.arabic_name     = Dictionary[ "arabic_name"         ] as? String
+        self.contract_image = Dictionary["contract_image"] as? String
+        self.one_signal_uuid = Dictionary["one_signal_uuid"] as? String
     }
     
     
@@ -374,6 +402,10 @@ class OfficesObject{
         New["address"          ] = self.address   as AnyObject
         New["type_id"          ] = self.type_id    as AnyObject
         New["archived"         ] = self.archived   as AnyObject
+        New["subscription_id"] = self.subscription_id  as AnyObject
+        New["arabic_name"         ] = self.arabic_name   as AnyObject
+        New["contract_image"] = self.contract_image  as AnyObject
+        New["one_signal_uuid"] = self.one_signal_uuid  as AnyObject
         return New
     }
     
@@ -393,10 +425,16 @@ class OfficesObject{
 
 }
 
+
 //av classa dshet dataya bo ma j firbaseDatabase bynyt bshewe DealsObject
 class OfficeAip{
+    
+    static  func UpdateContractData(id:String,arabic_name: String, contract_image: String, completion : @escaping (_ office : String)->()){
+        Firestore.firestore().collection("OfficesProfile").document(id).setData( ["arabic_name": "\(arabic_name)","contract_image": "\(contract_image)"], merge: true)
+        completion("lol")
+    }
+    
     static func  GetOffice(ID :  String , completion : @escaping (_ office : OfficesObject)->()){
-        print(ID)
         Firestore.firestore().collection("OfficesProfile").document(ID).addSnapshotListener { ( snopshot :  DocumentSnapshot?, error : Error?) in
             if let data = snopshot?.data() as [String: AnyObject ]? {
                 let New = OfficesObject(Dictionary: data)
@@ -427,19 +465,43 @@ class OfficeAip{
     }
     
     static func GetOfficeById(Id : String , completion : @escaping (_ Product : OfficesObject)->()){
+        var New : OfficesObject!
         Firestore.firestore().collection("OfficesProfile").whereField("fire_id", isEqualTo: Id).getDocuments { (Snapshot, error) in
             if error != nil { print(error.debugDescription) ; return }
             guard let documents = Snapshot?.documents else { return }
             if documents != []{
+                for P in documents {
+                    if let data = P.data() as [String : AnyObject]? {
+                        New = OfficesObject(Dictionary: data)
+                        print(JSON(data))
+                        
+                    }
+                }
+                completion(New)
+            }else{
+                completion(OfficesObject.init(name: "", id: "", fire_id: "", address: "", about: "", phone1: "", phone2: "", ImageURL: "", type_id: "", archived: "", subscription_id: "",contract_image: "",arabic_name: "", one_signal_uuid: ""))
+            }
+        }
+    }
+    
+    
+    static func GetOfficeByPhone(phone : String , completion : @escaping (_ Product : OfficesObject)->()){
+        Firestore.firestore().collection("OfficesProfile").whereField("first_phone_number", isEqualTo: phone).getDocuments { (Snapshot, error) in
+            if error != nil { print(error.debugDescription) ; return }
+            guard let documents = Snapshot?.documents else { return }
+            var New : OfficesObject!
+            if documents != []{
             for P in documents {
                 if let data = P.data() as [String : AnyObject]? {
-                    let New = OfficesObject(Dictionary: data)
+                    New = OfficesObject(Dictionary: data)
                     print(JSON(data))
-                    completion(New)
+                    print("---New---")
                 }
             }
+                completion(New)
+                
             }else{
-                completion(OfficesObject.init(name: "", id: "", fire_id: "", address: "", about: "", phone1: "", phone2: "", ImageURL: "", type_id: "", archived: ""))
+                completion(OfficesObject.init(name: "", id: "", fire_id: "", address: "", about: "", phone1: "", phone2: "", ImageURL: "", type_id: "", archived: "", subscription_id: "",contract_image: "",arabic_name: "", one_signal_uuid: ""))
             }
         }
     }
@@ -804,6 +866,7 @@ class CityObject{
     
 }
 
+
 class CityObjectAip{
     static func GetCities(completion : @escaping (_ Product : [CityObject])->()){
         var New : [CityObject] = []
@@ -819,6 +882,8 @@ class CityObjectAip{
         }
     }
 }
+
+
 
 
 
@@ -1330,7 +1395,6 @@ class UsersTypeObject{
     }
     
     
-    
     init(Dictionary : [String : AnyObject]) {
         self.id   = Dictionary[ "Id" ]   as? String
         self.type = Dictionary[ "type" ] as? String
@@ -1443,6 +1507,16 @@ class SubscriptionAip{
         }
     }
     
+    
+    static func GetSubscriptionsById(id : String , completion : @escaping (_ Product : SubscriptionsObject)->()){
+        Firestore.firestore().collection("Subscription").document(id).addSnapshotListener { ( snopshot :  DocumentSnapshot?, error : Error?) in
+            if error != nil { print(error.debugDescription) ; return }
+            if let data = snopshot?.data() as [String: AnyObject ]? {
+                let New = SubscriptionsObject(Dictionary: data)
+                completion(New)
+            }
+        }
+    }
     
     
     
@@ -1674,3 +1748,145 @@ class ProjectStatesAip{
 }
 
 
+class ContracsObject{
+    var id            : String?
+    var buyer_id      : String?
+    var contract_num : String?
+    var estate_id     : String?
+    var sell_date     : String?
+    var buy_date      : String?
+    var seller_id     : String?
+    var archived     : String?
+    
+    init(id: String, buyer_id : String,contract_num : String , estate_id : String , sell_date : String, seller_id : String,archived : String,buy_date : String) {
+        self.id                       = id
+        self.buyer_id               = buyer_id
+        self.contract_num            = contract_num
+        self.estate_id            = estate_id
+        self.sell_date            = sell_date
+        self.seller_id            = seller_id
+        self.archived            = archived
+        self.buy_date            = buy_date
+    }
+    
+    
+    
+    init(Dictionary : [String : AnyObject]) {
+        self.id   = Dictionary[ "id" ]   as? String
+        self.buyer_id   = Dictionary[ "buyer_id" ]   as? String
+        self.contract_num = Dictionary[ "contract_num" ] as? String
+        self.estate_id = Dictionary[ "estate_id" ] as? String
+        self.sell_date = Dictionary[ "sell_date" ] as? String
+        self.seller_id = Dictionary[ "seller_id" ] as? String
+        self.archived = Dictionary[ "archived" ] as? String
+        self.buy_date = Dictionary[ "buy_date" ] as? String
+    }
+    
+    
+    func MakeDictionary() -> [String : AnyObject] {
+        var New  : [String : AnyObject]  = [:]
+        New["id"]             = self.id            as AnyObject
+        New["buyer_id"]      = self.buyer_id       as AnyObject
+        New["contract_num"] = self.contract_num     as AnyObject
+        New["estate_id"]    = self.estate_id            as AnyObject
+        New["sell_date"]  = self.sell_date       as AnyObject
+        New["seller_id"]  = self.seller_id     as AnyObject
+        New["archived"]   = self.archived            as AnyObject
+        New["buy_date"]   = self.buy_date       as AnyObject
+        return New
+    }
+    
+    
+    func Upload() {
+        guard let id = self.id else{ return }
+        Firestore.firestore().collection("contract").document(id).setData( MakeDictionary() )
+    }
+    
+}
+
+
+class ContracsObjectAip{
+    static func GetContracts(completion : @escaping (_ contracts : [ContracsObject])->()){
+        var New : [ContracsObject] = []
+        Firestore.firestore().collection("contract").getDocuments { (Snapshot, error) in
+            if error != nil { print("Error") ; return }
+            guard let documents = Snapshot?.documents else { return }
+            for P in documents {
+                if let data = P.data() as [String : AnyObject]? {
+                    New.append(ContracsObject(Dictionary: data))
+                }
+            }
+            completion(New)
+        }
+    }
+    
+    
+    
+    
+    static func GetContractById(id : String , completion : @escaping (_ Product : ContracsObject)->()){
+        var New : ContracsObject!
+        Firestore.firestore().collection("contract").whereField("id", isEqualTo: id).getDocuments { (Snapshot, error) in
+            if error != nil { print(error.debugDescription) ; return }
+            guard let documents = Snapshot?.documents else { return }
+            if documents != []{
+            for P in documents {
+                if let data = P.data() as [String : AnyObject]? {
+                     New = ContracsObject(Dictionary: data)
+                }
+               }
+                completion(New)
+            }
+        }
+    }
+    
+    
+    static func SellAndArchiv(contract_id : String,estate_id : String, completion : @escaping (_ lol : String)->()){
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        let currentDate = Date()
+        let formattedCurrentDate = dateFormatter.string(from: currentDate)
+        Firestore.firestore().collection("contract").document(contract_id).updateData(["archived": "1","sell_date":formattedCurrentDate])
+        Firestore.firestore().collection("EstateProducts").document(estate_id).updateData(["sold":"1"])
+        
+        ContracsObjectAip.GetContractById(id: contract_id) { data in
+            let BuyerId = data.buyer_id
+            OfficeAip.GetOfficeById(Id: BuyerId ?? "") { BuyerOffice in
+                if let FireId = UserDefaults.standard.string(forKey: "UserId"){
+                    OfficeAip.GetOfficeById(Id: FireId) { office in
+                        
+                        let stringUrl = URL(string: API.URL);
+                        let param: [String: Any] = [
+                            "key":API.key,
+                            "username":API.UserName,
+                            "fun": "generate_contract_pdf",
+                            "date": "",
+                            "contract_num": contract_id,
+                            "buyer_name": BuyerOffice.arabic_name ?? "",
+                            "seller_name":office.arabic_name ?? "",
+                            "buyer_phone": BuyerOffice.phone1 ?? "",
+                            "seller_phone":office.phone1 ?? "",
+                            "buyer_sign": BuyerOffice.contract_image ?? "",
+                            "seller_sign":office.contract_image ?? ""
+                        ]
+                        
+                        AF.request(stringUrl!, method: .post, parameters: param).responseData { (response) in
+                            switch response.result
+                            {
+                            case .success(_):
+                                let jsonData = JSON(response.data ?? "")
+                                print(jsonData)
+                                completion("lol")
+                                
+                            case .failure(let error):
+                                print(error);
+                            }
+                        }
+                    }
+                }
+                
+            }
+        }
+        
+    }
+}

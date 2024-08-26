@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Maskani</string>
+	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -29,7 +29,7 @@
 			<string>Client</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.477851249108-25k59tiact54o206im2bp71tq82s976p</string>
+				<string>com.googleusercontent.apps.589956073019-r2gfts3g7fmvhq7u7gv2cduimbjkqmoi</string>
 			</array>
 		</dict>
 		<dict>
@@ -39,18 +39,29 @@
 			<string>Bundle ID</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.maskani.sharkteam</string>
+				<string>com.sypo.sharkteam</string>
 			</array>
 		</dict>
 	</array>
+    
+    
+    
+    
+    
+    
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>Entitlements File</key>
+	<dict>
+		<key>APN Environment</key>
+		<string>unknown</string>
+	</dict>
 	<key>FirebaseMessagingAutoInitEnabled</key>
 	<string>NO</string>
 	<key>FirebaseScreenReportingEnabled</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>
-	<string></string>
+	<string>public.app-category.lifestyle</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>googlechromes</string>
@@ -82,8 +93,47 @@
 			</dict>
 		</dict>
 	</dict>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <key>NSPrivacyAccessedAPITypes</key>
+    <array>
+        <dict>
+            <key>NSPrivacyAccessedAPIType</key>
+            <string>NSPrivacyAccessedAPICategoryFileTimestamp</string>
+            <key>NSPrivacyAccessedAPITypeReasons</key>
+            <array>
+                <string>C617.1</string>
+            </array>
+        </dict>
+        <dict>
+            <key>NSPrivacyAccessedAPIType</key>
+            <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+            <key>NSPrivacyAccessedAPITypeReasons</key>
+            <array>
+                <string>CA92.1</string>
+            </array>
+        </dict>
+    </array>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 	<key>NSCameraUsageDescription</key>
-	<string>would you like to access to camera?</string>
+	<string>Allow $(PRODUCT_NAME) to access your Camera?  You will need camera if you want to take photos of your estates.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Allow $(PRODUCT_NAME) to use your location? Turning on location services allows app to show you when estates are nearby.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
@@ -91,9 +141,9 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Allow $(PRODUCT_NAME) to use your location? Turning on location services allows app to show you when estates are nearby.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Used to save images into your galery</string>
+	<string>Allow $(PRODUCT_NAME) to access your images?  You will need images when you trying upload the estates.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Allow $(PRODUCT_NAME) to access your images?  You will need images when  you trying upload the estates.</string>
+	<string>Allow $(PRODUCT_NAME) to access your images?  You will need images when you trying upload the estates.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Peshang_Des_2.ttf</string>
@@ -119,12 +169,8 @@
 	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>fetch</string>
-	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
+	<string></string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -138,13 +184,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>

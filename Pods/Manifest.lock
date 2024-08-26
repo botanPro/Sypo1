@@ -616,6 +616,7 @@ PODS:
   - DropDown (2.3.13)
   - Drops (1.5.0)
   - EmptyDataSet-Swift (5.0.0)
+  - EPSignature (1.0.6)
   - FCAlertView (1.4.0)
   - Firebase (9.5.0):
     - Firebase/Core (= 9.5.0)
@@ -849,17 +850,8 @@ PODS:
   - NVActivityIndicatorView (5.1.1):
     - NVActivityIndicatorView/Base (= 5.1.1)
   - NVActivityIndicatorView/Base (5.1.1)
-  - OneSignalXCFramework (3.11.2):
-    - OneSignalXCFramework/OneSignalCore (= 3.11.2)
-    - OneSignalXCFramework/OneSignalExtension (= 3.11.2)
-    - OneSignalXCFramework/OneSignalOutcomes (= 3.11.2)
-  - OneSignalXCFramework/OneSignalCore (3.11.2)
-  - OneSignalXCFramework/OneSignalExtension (3.11.2):
-    - OneSignalXCFramework/OneSignalCore
-    - OneSignalXCFramework/OneSignalOutcomes
-  - OneSignalXCFramework/OneSignalOutcomes (3.11.2):
-    - OneSignalXCFramework/OneSignalCore
   - OTPTextField (1.1.5)
+  - PDFReader (2.5.1)
   - PhoneNumberKit (3.3.4):
     - PhoneNumberKit/PhoneNumberKitCore (= 3.3.4)
     - PhoneNumberKit/UIKit (= 3.3.4)
@@ -876,10 +868,31 @@ PODS:
   - ShimmerLabel (1.0.1)
   - SKPhotoBrowser (7.1.0)
   - Slider2 (0.1.1)
+  - Stripe (23.28.0):
+    - StripeApplePay (= 23.28.0)
+    - StripeCore (= 23.28.0)
+    - StripePayments (= 23.28.0)
+    - StripePaymentsUI (= 23.28.0)
+    - StripeUICore (= 23.28.0)
+  - StripeApplePay (23.28.0):
+    - StripeCore (= 23.28.0)
+  - StripeCore (23.28.0)
+  - StripePayments (23.28.0):
+    - StripeCore (= 23.28.0)
+    - StripePayments/Stripe3DS2 (= 23.28.0)
+  - StripePayments/Stripe3DS2 (23.28.0):
+    - StripeCore (= 23.28.0)
+  - StripePaymentsUI (23.28.0):
+    - StripeCore (= 23.28.0)
+    - StripePayments (= 23.28.0)
+    - StripeUICore (= 23.28.0)
+  - StripeUICore (23.28.0):
+    - StripeCore (= 23.28.0)
   - SwiftyJSON (5.0.1)
   - Toast-Swift (5.0.1)
   - UIView-Shimmer (1.0.4)
   - ValidationTextField (1.0.4)
+  - XP_PDFReader (0.1.0)
   - YoutubePlayer-in-WKWebView (0.2.5)
 
 DEPENDENCIES:
@@ -893,6 +906,7 @@ DEPENDENCIES:
   - DropDown
   - Drops (from `https://github.com/omaralbeik/Drops.git`, tag `1.5.0`)
   - EmptyDataSet-Swift (~> 5.0.0)
+  - EPSignature
   - FCAlertView
   - Firebase
   - Firebase/Analytics
@@ -913,8 +927,8 @@ DEPENDENCIES:
   - MXSegmentedPager
   - NSFWDetector
   - NVActivityIndicatorView
-  - OneSignalXCFramework (< 4.0, >= 3.0.0)
   - OTPTextField
+  - PDFReader
   - PhoneNumberKit (~> 3.3)
   - PullToDismissTransition
   - PureLayout
@@ -923,10 +937,12 @@ DEPENDENCIES:
   - ShimmerLabel (~> 1.0)
   - SKPhotoBrowser
   - Slider2
+  - Stripe
   - SwiftyJSON
   - Toast-Swift (~> 5.0.1)
   - UIView-Shimmer (~> 1.0)
   - ValidationTextField
+  - XP_PDFReader
   - YoutubePlayer-in-WKWebView (~> 0.2.0)
 
 SPEC REPOS:
@@ -944,6 +960,7 @@ SPEC REPOS:
     - CRRefresh
     - DropDown
     - EmptyDataSet-Swift
+    - EPSignature
     - FCAlertView
     - Firebase
     - FirebaseABTesting
@@ -984,8 +1001,8 @@ SPEC REPOS:
     - nanopb
     - NSFWDetector
     - NVActivityIndicatorView
-    - OneSignalXCFramework
     - OTPTextField
+    - PDFReader
     - PhoneNumberKit
     - PromisesObjC
     - PullToDismissTransition
@@ -995,10 +1012,17 @@ SPEC REPOS:
     - ShimmerLabel
     - SKPhotoBrowser
     - Slider2
+    - Stripe
+    - StripeApplePay
+    - StripeCore
+    - StripePayments
+    - StripePaymentsUI
+    - StripeUICore
     - SwiftyJSON
     - Toast-Swift
     - UIView-Shimmer
     - ValidationTextField
+    - XP_PDFReader
     - YoutubePlayer-in-WKWebView
 
 EXTERNAL SOURCES:
@@ -1026,6 +1050,7 @@ SPEC CHECKSUMS:
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   Drops: fe8765e3f42c2bb1b37a15489b2b9574c50e5411
   EmptyDataSet-Swift: eb382c0c87a2d9c678077385a595cec52da38171
+  EPSignature: 3fa3b520c80717b98019723faa60a41794b03fbc
   FCAlertView: fdddd63381898c1d1a5a20c9f084fbd2c6d12f8b
   Firebase: 800f16f07af493d98d017446a315c27af0552f41
   FirebaseABTesting: 8122e553ba229b557acc4659f3c3615538fd9448
@@ -1066,8 +1091,8 @@ SPEC CHECKSUMS:
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   NSFWDetector: d6eca9759743b5e43778818078d53711576e929f
   NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
-  OneSignalXCFramework: 81ceac017a290f23793443323090cfbe888f74ea
   OTPTextField: 9d35010a6356972471298aea37bf8d6d5f9974f7
+  PDFReader: 2c4a845d0560f33221cf911516e3b700967680f6
   PhoneNumberKit: 441e8b26ec88d598e3591de9061eff18f5dd12e8
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   PullToDismissTransition: f0cea5041c447545384450aad967a2b2bd5d5f30
@@ -1077,12 +1102,19 @@ SPEC CHECKSUMS:
   ShimmerLabel: 9a64f4798778db6b365b15cc356781f9ca784b98
   SKPhotoBrowser: cd95b95a6f352fc2a50992721299f75ead77f9ab
   Slider2: cc2c685bbf9da6e0e919cbf1aa687374a1c86612
+  Stripe: 19b9da69d6083c62d195df31f221891d3ca79643
+  StripeApplePay: 2d87e0c737b375fa8f72311e3d42f8f58c64101f
+  StripeCore: 7dcb28820c3ed7dc9e8a07bdfaca4eb8ed814969
+  StripePayments: 376e464c9a2f3e9740d96288745e6a0a59d750c8
+  StripePaymentsUI: 84f5ff706a791dcd82fbb22542f27fc3db2e2847
+  StripeUICore: e2e7407af2dff138c11bcebaa14b93edde8afa73
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   UIView-Shimmer: ff0a32c73d67c7dbdea3d9e530538b10d18aea56
   ValidationTextField: 91bc04170ba4b4358912c372e12d7af4c9143ad5
+  XP_PDFReader: 1d21795645cf8ec42a62772bd467877265bd0897
   YoutubePlayer-in-WKWebView: 4dad12b3ece938a6456fa4374df78942f88b485a
 
-PODFILE CHECKSUM: 84005abcd7bcde7e20249c18bd73e317787f52b5
+PODFILE CHECKSUM: 6ff95f218523560c28902fc5af31cc95f8f7faf4
 
 COCOAPODS: 1.11.3

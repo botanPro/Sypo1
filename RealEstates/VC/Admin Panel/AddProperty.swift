@@ -47,42 +47,19 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                 if self.ProjectArray[row].id == "ZlFVOHo5MUXQ8NtnZfZ7"{
                     pickerLabel?.textColor = #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1)
                 }
-                if XLanguage.get() == .English{
                     pickerLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
                     pickerLabel?.text = self.ProjectArray[row].project_name
-                }else if XLanguage.get() == .Arabic{
-                    pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
-                    pickerLabel?.text = self.ProjectArray[row].project_ar_name
-                }else{
-                    pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
-                    pickerLabel?.text = self.ProjectArray[row].project_ku_name
-                }
+
             }
             
             if pickerView == EstateTypepickerView{
-                if XLanguage.get() == .English{
                     pickerLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
                     pickerLabel?.text = self.EstatesType[row].name
-                }else if XLanguage.get() == .Arabic{
-                    pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
-                    pickerLabel?.text = self.EstatesType[row].ar_name
-                }else{
-                    pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
-                    pickerLabel?.text = self.EstatesType[row].ku_name
-                }
             }
             
             if pickerView == TypepickerView{
-                if XLanguage.get() == .English{
                     pickerLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
                     pickerLabel?.text = self.typees[row].name
-                }else if XLanguage.get() == .Arabic{
-                    pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
-                    pickerLabel?.text = self.typees[row].ar_name
-                }else{
-                    pickerLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
-                    pickerLabel?.text = self.typees[row].ku_name
-                }
             }
         }
         return pickerLabel!
@@ -125,9 +102,75 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                     ac.dismiss(animated: true)
                 }))
                 present(ac, animated: true)
-            }else{
+            }else if XLanguage.get() == .Kurdish{
                 let ac = UIAlertController(title: "هەڵە", message: "تکایە هێڵی ئینتەرنێتەکەت بپشکنە.", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "باشە", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else if XLanguage.get() == .Dutch {
+                let ac = UIAlertController(title: "Fout", message: "Controleer uw internetverbinding.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .French {
+                let ac = UIAlertController(title: "Erreur", message: "Veuillez vérifier votre connexion internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Spanish {
+                let ac = UIAlertController(title: "Error", message: "Por favor, verifica tu conexión a internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .German {
+                let ac = UIAlertController(title: "Fehler", message: "Bitte überprüfen Sie Ihre Internetverbindung.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Hebrew {
+                let ac = UIAlertController(title: "שגיאה", message: "אנא בדוק את חיבור האינטרנט שלך.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "אישור", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Chinese {
+                let ac = UIAlertController(title: "错误", message: "请检查您的互联网连接。", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "确定", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Hindi {
+                let ac = UIAlertController(title: "त्रुटि", message: "कृपया अपना इंटरनेट कनेक्शन जाँच लें।", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ठीक है", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Portuguese {
+                let ac = UIAlertController(title: "Erro", message: "Por favor, verifique sua conexão com a internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Swedish {
+                let ac = UIAlertController(title: "Fel", message: "Vänligen kontrollera din internetanslutning.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Greek {
+                let ac = UIAlertController(title: "Σφάλμα", message: "Παρακαλώ ελέγξτε τη σύνδεσή σας στο διαδίκτυο.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ΟΚ", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Russian {
+                let ac = UIAlertController(title: "Ошибка", message: "Пожалуйста, проверьте ваше интернет-соединение.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ОК", style: .default, handler: { _ in
                     ac.dismiss(animated: true)
                 }))
                 present(ac, animated: true)
@@ -135,14 +178,42 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
         }else{
         if textField == self.Furnished {
             self.view.endEditing(true)
+
             
-            if XLanguage.get() == .Kurdish{
-                dropDown.dataSource = ["مۆبیلیات کراوە", "مۆبیلیات نییە"]
-            }else if XLanguage.get() == .English{
+            
+            switch XLanguage.get() {
+            case .English:
                 dropDown.dataSource = ["Furnished", "Not Furnished"]
-            }else{
+            case .Dutch:
+                dropDown.dataSource = ["Gemeubileerd", "Niet gemeubileerd"]
+            case .Arabic:
                 dropDown.dataSource = ["مفروشة", "غير مفروشة"]
+            case .Kurdish:
+                dropDown.dataSource = ["مۆبیلیات کراوە", "مۆبیلیات نییە"]
+            case .French:
+                dropDown.dataSource = ["Meublé", "Non meublé"]
+            case .Spanish:
+                dropDown.dataSource = ["Amueblado", "No amueblado"]
+            case .German:
+                dropDown.dataSource = ["Möbliert", "Unmöbliert"]
+            case .Hebrew:
+                dropDown.dataSource = ["מרוהט", "לא מרוהט"]
+            case .Chinese:
+                dropDown.dataSource = ["配有家具", "无家具"]
+            case .Hindi:
+                dropDown.dataSource = ["सुसज्जित", "असुसज्जित"]
+            case .Portuguese:
+                dropDown.dataSource = ["Mobiliado", "Não Mobiliado"]
+            case .Swedish:
+                dropDown.dataSource = ["Möblerad", "Omöblerad"]
+            case .Greek:
+                dropDown.dataSource = ["Επιπλωμένο", "Μη επιπλωμένο"]
+            case .Russian:
+                dropDown.dataSource = ["Меблированная", "Немеблированная"]
+            default:
+                dropDown.dataSource = ["Furnished", "Not Furnished"]
             }
+            
             
             dropDown.show()
             dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
@@ -158,14 +229,9 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             BoundTypeAip.GetAllBoundType { bounds in
                 self.BoudTypes = bounds
                 for bound in bounds{
-                    if XLanguage.get() == .English{
-                        self.dropDown1.dataSource.append(bound.en_title ?? "")
-                    }else if XLanguage.get() == .Arabic{
-                        self.dropDown1.dataSource.append(bound.ar_title ?? "")
-                    }else{
-                        self.dropDown1.dataSource.append(bound.ku_title ?? "")
-                    }
                     
+                self.dropDown1.dataSource.append(bound.en_title ?? "")
+                
                 }
                 self.dropDown1.show()
                 self.dropDown1.selectionAction = { [unowned self] (index: Int, item: String) in
@@ -299,25 +365,44 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
         
         
         
-        if XLanguage.get() == .English{
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "ArialRoundedMTBold", size: 16)!,.foregroundColor: #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)]
-            self.RentRadioButton.setTitle("RENT", for: .normal)
-            self.SellRadioButton.setTitle("SELL", for: .normal)
-            self.RentRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-            self.SellRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-        }else if XLanguage.get() == .Arabic{
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "PeshangDes2", size: 16)!,.foregroundColor: #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)]
-            self.RentRadioButton.setTitle("بیع", for: .normal)
-            self.SellRadioButton.setTitle("ايجار", for: .normal)
-            self.RentRadioButton.titleLabel?.font = UIFont(name: "PeshangDes2", size: 14)!
-            self.SellRadioButton.titleLabel?.font = UIFont(name: "PeshangDes2", size: 14)!
-        }else if XLanguage.get() == .Kurdish{
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "PeshangDes2", size: 16)!,.foregroundColor: #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)]
-            self.RentRadioButton.setTitle("کرێ", for: .normal)
-            self.SellRadioButton.setTitle("فروشتن", for: .normal)
-            self.RentRadioButton.titleLabel?.font = UIFont(name: "PeshangDes2", size: 14)!
-            self.SellRadioButton.titleLabel?.font = UIFont(name: "PeshangDes2", size: 14)!
+
+        let language = XLanguage.get()
+        let titles = [
+            "English": ("RENT", "SELL"),
+            "Dutch": ("HUREN", "VERKOPEN"),
+            "French": ("LOUER", "VENDRE"),
+            "Spanish": ("ALQUILAR", "VENDER"),
+            "German": ("MIETEN", "VERKAUFEN"),
+            "Hebrew": ("להשכיר", "למכור"),
+            "Chinese": ("租", "卖"),
+            "Hindi": ("किराये पर लें", "बेचें"),
+            "Portuguese": ("ALUGAR", "VENDER"),
+            "Swedish": ("HYRA", "SÄLJA"),
+            "Greek": ("ΕΝΟΙΚΙΑΣΗ", "ΠΩΛΗΣΗ"),
+            "Russian": ("АРЕНДА", "ПРОДАЖА"),
+            "Kurdish": ("کرێ", "فروشتن"),
+            "Arabic": ("بیع", "ايجار")
+        ]
+
+        if let (rentTitle, sellTitle) = titles[language.rawValue] {
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "ArialRoundedMTBold", size: 16)!, .foregroundColor: UIColor(red: 0.076, green: 0.227, blue: 0.355, alpha: 1)]
+            self.RentRadioButton.setTitle(rentTitle, for: .normal)
+            self.SellRadioButton.setTitle(sellTitle, for: .normal)
+            if XLanguage.get() == .Kurdish{
+                self.RentRadioButton.titleLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
+                self.SellRadioButton.titleLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
+            }else if XLanguage.get() == .Arabic{
+                self.RentRadioButton.titleLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
+                self.SellRadioButton.titleLabel?.font = UIFont(name: "PeshangDes2", size: 12)!
+            }else{
+                self.RentRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+                self.SellRadioButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            }
+           
         }
+        
+        
+        
         NumberOfRoomsCollectionView.register(UINib(nibName: "EstateTypeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "NCell")
         NumberOfWashRoomsCollectionView.register(UINib(nibName: "EstateTypeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "NWCell")
         ImagesCollectionView.register(UINib(nibName: "ExpImagesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ImageCell")
@@ -334,26 +419,92 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
         GetType()
         GetAllProjects()
         
-        if XLanguage.get() == .Kurdish{
+        if XLanguage.get() == .English{
+            self.ImageCount.text = "IMAGES (\(self.CommignImages.count))"
+            self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        }else if XLanguage.get() == .Kurdish{
             self.ImageCount.text = "وێنە (\(self.Images.count))"
             self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
-        }else if XLanguage.get() == .English{
-            self.ImageCount.text = "IMAGES (\(self.Images.count))"
-            self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-        }else{
+        }else if XLanguage.get() == .Arabic{
             self.ImageCount.text = "صور (\(self.Images.count))"
             self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
+        }else if XLanguage.get() == .Dutch {
+            self.ImageCount.text = "AFBEELDINGEN (\(self.Images.count))"
+            self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .French {
+            self.ImageCount.text = "IMAGES (\(self.Images.count))"
+            self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Spanish {
+            self.ImageCount.text = "IMÁGENES (\(self.Images.count))"
+            self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .German {
+            self.ImageCount.text = "BILDER (\(self.Images.count))"
+            self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Hebrew {
+            self.ImageCount.text = "תמונות (\(self.Images.count))"
+            self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Chinese {
+            self.ImageCount.text = "图片 (\(self.Images.count))"
+            self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Hindi {
+            self.ImageCount.text = "छवियाँ (\(self.Images.count))"
+            self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Portuguese {
+            self.ImageCount.text = "IMAGENS (\(self.Images.count))"
+            self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Swedish {
+            self.ImageCount.text = "BILDER (\(self.Images.count))"
+            self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Greek {
+            self.ImageCount.text = "ΕΙΚΟΝΕΣ (\(self.Images.count))"
+            self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Russian {
+            self.ImageCount.text = "ИЗОБРАЖЕНИЯ (\(self.Images.count))"
+            self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
         }
         
-        if XLanguage.get() == .English{
-            self.LatLongAddress.text = "LOCATION ()"
-            self.LatLongAddress.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-        }else if XLanguage.get() == .Arabic{
+        if XLanguage.get() == .Arabic{
             self.LatLongAddress.text = "الموقع ()"
             self.LatLongAddress.font = UIFont(name: "PeshangDes2", size: 12)!
-        }else{
+        }else if XLanguage.get() == .Kurdish{
             self.LatLongAddress.text = "شوێن ()"
             self.LatLongAddress.font = UIFont(name: "PeshangDes2", size: 12)!
+        }else if XLanguage.get() == .English {
+            self.LatLongAddress.text = "LOCATION ()"
+            self.LatLongAddress.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Dutch {
+            self.LatLongAddress.text = "LOCATIE ()"
+            self.LatLongAddress.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .French {
+            self.LatLongAddress.text = "EMPLACEMENT ()"
+            self.LatLongAddress.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Spanish {
+            self.LatLongAddress.text = "UBICACIÓN ()"
+            self.LatLongAddress.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .German {
+            self.LatLongAddress.text = "STANDORT ()"
+            self.LatLongAddress.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Hebrew {
+            self.LatLongAddress.text = "מיקום ()"
+            self.LatLongAddress.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Chinese {
+            self.LatLongAddress.text = "位置 ()"
+            self.LatLongAddress.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Hindi {
+            self.LatLongAddress.text = "स्थान ()"
+            self.LatLongAddress.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Portuguese {
+            self.LatLongAddress.text = "LOCALIZAÇÃO ()"
+            self.LatLongAddress.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Swedish {
+            self.LatLongAddress.text = "PLATS ()"
+            self.LatLongAddress.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Greek {
+            self.LatLongAddress.text = "ΤΟΠΟΘΕΣΙΑ ()"
+            self.LatLongAddress.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+        } else if XLanguage.get() == .Russian {
+            self.LatLongAddress.text = "МЕСТОПОЛОЖЕНИЕ ()"
+            self.LatLongAddress.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
         }
         
         
@@ -403,15 +554,48 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             self.IsUpdate = true
             self.estate_id = data.id ?? ""
             self.CommignImages = data.ImageURL ?? []
-            if XLanguage.get() == .Kurdish{
-                self.ImageCount.text = "وێنە (\(self.CommignImages.count))"
-                self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
-            }else if XLanguage.get() == .English{
+            if XLanguage.get() == .English{
                 self.ImageCount.text = "IMAGES (\(self.CommignImages.count))"
                 self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-            }else{
-                self.ImageCount.text = "صور (\(self.CommignImages.count))"
+            }else if XLanguage.get() == .Kurdish{
+                self.ImageCount.text = "وێنە (\(self.Images.count))"
                 self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
+            }else if XLanguage.get() == .Arabic{
+                self.ImageCount.text = "صور (\(self.Images.count))"
+                self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
+            }else if XLanguage.get() == .Dutch {
+                self.ImageCount.text = "AFBEELDINGEN (\(self.Images.count))"
+                self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            } else if XLanguage.get() == .French {
+                self.ImageCount.text = "IMAGES (\(self.Images.count))"
+                self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            } else if XLanguage.get() == .Spanish {
+                self.ImageCount.text = "IMÁGENES (\(self.Images.count))"
+                self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            } else if XLanguage.get() == .German {
+                self.ImageCount.text = "BILDER (\(self.Images.count))"
+                self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            } else if XLanguage.get() == .Hebrew {
+                self.ImageCount.text = "תמונות (\(self.Images.count))"
+                self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            } else if XLanguage.get() == .Chinese {
+                self.ImageCount.text = "图片 (\(self.Images.count))"
+                self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            } else if XLanguage.get() == .Hindi {
+                self.ImageCount.text = "छवियाँ (\(self.Images.count))"
+                self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            } else if XLanguage.get() == .Portuguese {
+                self.ImageCount.text = "IMAGENS (\(self.Images.count))"
+                self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            } else if XLanguage.get() == .Swedish {
+                self.ImageCount.text = "BILDER (\(self.Images.count))"
+                self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            } else if XLanguage.get() == .Greek {
+                self.ImageCount.text = "ΕΙΚΟΝΕΣ (\(self.Images.count))"
+                self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+            } else if XLanguage.get() == .Russian {
+                self.ImageCount.text = "ИЗОБРАЖЕНИЯ (\(self.Images.count))"
+                self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
             }
             
             if self.CommignImages.count != 0{
@@ -442,13 +626,36 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             self.lat = data.lat ?? ""
             self.long = data.long ?? ""
             
-            if XLanguage.get() == .English{
-                self.LatLongAddress.text = "LOCATION (\(self.lat), \(self.long))"
-            }else if XLanguage.get() == .Arabic{
+           if XLanguage.get() == .Arabic{
                 self.LatLongAddress.text = "الموقع (\(self.lat), \(self.long))"
-            }else{
+            }else if XLanguage.get() == .Kurdish{
                 self.LatLongAddress.text = "شوێن (\(self.lat), \(self.long))"
+            }else if XLanguage.get() == .English {
+                self.LatLongAddress.text = "LOCATION (\(self.lat), \(self.long))"
+            } else if XLanguage.get() == .Dutch {
+                self.LatLongAddress.text = "LOCATIE (\(self.lat), \(self.long))"
+            } else if XLanguage.get() == .French {
+                self.LatLongAddress.text = "EMPLACEMENT (\(self.lat), \(self.long))"
+            } else if XLanguage.get() == .Spanish {
+                self.LatLongAddress.text = "UBICACIÓN (\(self.lat), \(self.long))"
+            } else if XLanguage.get() == .German {
+                self.LatLongAddress.text = "STANDORT (\(self.lat), \(self.long))"
+            } else if XLanguage.get() == .Hebrew {
+                self.LatLongAddress.text = "מיקום (\(self.lat), \(self.long))"
+            } else if XLanguage.get() == .Chinese {
+                self.LatLongAddress.text = "位置 (\(self.lat), \(self.long))"
+            } else if XLanguage.get() == .Hindi {
+                self.LatLongAddress.text = "स्थान (\(self.lat), \(self.long))"
+            } else if XLanguage.get() == .Portuguese {
+                self.LatLongAddress.text = "LOCALIZAÇÃO (\(self.lat), \(self.long))"
+            } else if XLanguage.get() == .Swedish {
+                self.LatLongAddress.text = "PLATS (\(self.lat), \(self.long))"
+            } else if XLanguage.get() == .Greek {
+                self.LatLongAddress.text = "ΤΟΠΟΘΕΣΙΑ (\(self.lat), \(self.long))"
+            } else if XLanguage.get() == .Russian {
+                self.LatLongAddress.text = "МЕСТОПОЛОЖЕНИЕ (\(self.lat), \(self.long))"
             }
+            
             
             if data.Furnished == "0" && XLanguage.get() == .English{
                 self.Furnished.text = "Furnished"
@@ -474,15 +681,100 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             
             
             
+            if data.Furnished == "0" && XLanguage.get() == .Hebrew{
+                self.Furnished.text = "מרוהט"
+                self.SelectedFurnished = "0"
+            }else if data.Furnished == "1" && XLanguage.get() == .Hebrew{
+                self.Furnished.text = "לא מרוהט"
+                self.SelectedFurnished = "1"
+            }
+            if data.Furnished == "0" && XLanguage.get() == .Chinese{
+                self.Furnished.text = "家具"
+                self.SelectedFurnished = "0"
+            }else if data.Furnished == "1" && XLanguage.get() == .Chinese{
+                self.Furnished.text = "没有家具"
+                self.SelectedFurnished = "1"
+            }
+            
+            if data.Furnished == "0" && XLanguage.get() == .Hindi{
+                self.Furnished.text = "सुसज्जित"
+                self.SelectedFurnished = "0"
+            }else if data.Furnished == "1" && XLanguage.get() == .Hindi{
+                self.Furnished.text = "असुसज्जित"
+                self.SelectedFurnished = "1"
+            }
+            
+            
+            if data.Furnished == "0" && XLanguage.get() == .Portuguese{
+                self.Furnished.text = "Mobiliado"
+                self.SelectedFurnished = "0"
+            }else if data.Furnished == "1" && XLanguage.get() == .Portuguese{
+                self.Furnished.text = "Não Mobiliado"
+                self.SelectedFurnished = "1"
+            }
+            
+            
+            if data.Furnished == "0" && XLanguage.get() == .Swedish{
+                self.Furnished.text = "Möblerad"
+                self.SelectedFurnished = "0"
+            }else if data.Furnished == "1" && XLanguage.get() == .Swedish{
+                self.Furnished.text = "Omöblerad"
+                self.SelectedFurnished = "1"
+            }
+            
+            
+            if data.Furnished == "0" && XLanguage.get() == .Greek{
+                self.Furnished.text = "Επιπλωμένο"
+                self.SelectedFurnished = "0"
+            }else if data.Furnished == "1" && XLanguage.get() == .Greek{
+                self.Furnished.text = "Μη επιπλωμένο"
+                self.SelectedFurnished = "1"
+            }
+            
+            if data.Furnished == "0" && XLanguage.get() == .Russian{
+                self.Furnished.text = "Меблированная"
+                self.SelectedFurnished = "0"
+            }else if data.Furnished == "1" && XLanguage.get() == .Russian{
+                self.Furnished.text = "Немеблированная"
+                self.SelectedFurnished = "1"
+            }
+            
+            if data.Furnished == "0" && XLanguage.get() == .Dutch{
+                self.Furnished.text = "Gemeubileerd"
+                self.SelectedFurnished = "0"
+            }else if data.Furnished == "1" && XLanguage.get() == .Dutch{
+                self.Furnished.text = "Niet gemeubileerd"
+                self.SelectedFurnished = "1"
+            }
+            
+            if data.Furnished == "0" && XLanguage.get() == .French{
+                self.Furnished.text = "Meublé"
+                self.SelectedFurnished = "0"
+            }else if data.Furnished == "1" && XLanguage.get() == .French{
+                self.Furnished.text = "Non meublé"
+                self.SelectedFurnished = "1"
+            }
+            
+            if data.Furnished == "0" && XLanguage.get() == .Spanish{
+                self.Furnished.text = "Amueblado"
+                self.SelectedFurnished = "0"
+            }else if data.Furnished == "1" && XLanguage.get() == .Spanish{
+                self.Furnished.text = "Sin amueblar"
+                self.SelectedFurnished = "1"
+            }
+            
+            if data.Furnished == "0" && XLanguage.get() == .German{
+                self.Furnished.text = "Möbliert"
+                self.SelectedFurnished = "0"
+            }else if data.Furnished == "1" && XLanguage.get() == .German{
+                self.Furnished.text = "Unmöbliert"
+                self.SelectedFurnished = "1"
+            }
+   
+            
             BoundTypeAip.GetBoundTypeByOfficeId(id: data.bound_id ?? "") { bound in
                 self.SelectedBoundTypeId = bound.id ?? ""
-                if XLanguage.get() == .English{
                 self.BondType.text = bound.en_title ?? ""
-                }else if XLanguage.get() == .Arabic{
-                    self.BondType.text = bound.ar_title ?? ""
-                }else{
-                    self.BondType.text = bound.ku_title ?? ""
-                }
             }
             
 
@@ -504,35 +796,17 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             self.selecteEstatedcell = EstateTypeObject(name: "", id:data.estate_type_id ??  "",ar_name: "" , ku_name: "")
             
             EstateTypeAip.GeEstateTypeNameById(id: data.estate_type_id ?? "") { estatetype in
-               
-                if XLanguage.get() == .English{
-                    self.EstateTypeLable.text = estatetype.name
-                    self.EstateTypeLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
-                }else if XLanguage.get() == .Arabic{
-                    self.EstateTypeLable.text = estatetype.ar_name
-                    self.EstateTypeLable.font = UIFont(name: "PeshangDes2", size: 11)!
-                }else{
-                    self.EstateTypeLable.text = estatetype.ku_name
-                    self.EstateTypeLable.font = UIFont(name: "PeshangDes2", size: 11)!
-                }
+            self.EstateTypeLable.text = estatetype.name
+            self.EstateTypeLable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+            
+
             }
-            
-            
-          
             
             
             self.TypeId = data.type_id ?? ""
             TypesObjectAip.GetTypeById(id: data.type_id ?? "") { type in
-                if XLanguage.get() == .English{
                     self.Typelable.text = type.name
                     self.Typelable.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
-                }else if XLanguage.get() == .Arabic{
-                    self.Typelable.text = type.ar_name
-                    self.Typelable.font = UIFont(name: "PeshangDes2", size: 11)!
-                }else{
-                    self.Typelable.text = type.ku_name
-                    self.Typelable.font = UIFont(name: "PeshangDes2", size: 11)!
-                }
             }
 
            
@@ -550,16 +824,8 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                 
                 self.ProjectId = data.project_id ?? ""
                 GetAllProjectsAip.GetProjectById(ID: data.project_id ?? "") { project in
-                    if XLanguage.get() == .English{
                         self.ProjectName.text = project.project_name
                         self.ProjectName.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
-                    }else if XLanguage.get() == .Arabic{
-                        self.ProjectName.text = project.project_ar_name
-                        self.ProjectName.font = UIFont(name: "PeshangDes2", size: 11)!
-                    }else{
-                        self.ProjectName.text = project.project_ku_name
-                        self.ProjectName.font = UIFont(name: "PeshangDes2", size: 11)!
-                    }
                 }
                 
                 
@@ -646,9 +912,75 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                     ac.dismiss(animated: true)
                 }))
                 present(ac, animated: true)
-            }else{
+            }else if XLanguage.get() == .Kurdish{
                 let ac = UIAlertController(title: "هەڵە", message: "تکایە هێڵی ئینتەرنێتەکەت بپشکنە.", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "باشە", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else if XLanguage.get() == .Dutch {
+                let ac = UIAlertController(title: "Fout", message: "Controleer uw internetverbinding.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .French {
+                let ac = UIAlertController(title: "Erreur", message: "Veuillez vérifier votre connexion internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Spanish {
+                let ac = UIAlertController(title: "Error", message: "Por favor, verifica tu conexión a internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .German {
+                let ac = UIAlertController(title: "Fehler", message: "Bitte überprüfen Sie Ihre Internetverbindung.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Hebrew {
+                let ac = UIAlertController(title: "שגיאה", message: "אנא בדוק את חיבור האינטרנט שלך.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "אישור", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Chinese {
+                let ac = UIAlertController(title: "错误", message: "请检查您的互联网连接。", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "确定", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Hindi {
+                let ac = UIAlertController(title: "त्रुटि", message: "कृपया अपना इंटरनेट कनेक्शन जाँच लें।", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ठीक है", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Portuguese {
+                let ac = UIAlertController(title: "Erro", message: "Por favor, verifique sua conexão com a internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Swedish {
+                let ac = UIAlertController(title: "Fel", message: "Vänligen kontrollera din internetanslutning.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Greek {
+                let ac = UIAlertController(title: "Σφάλμα", message: "Παρακαλώ ελέγξτε τη σύνδεσή σας στο διαδίκτυο.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ΟΚ", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Russian {
+                let ac = UIAlertController(title: "Ошибка", message: "Пожалуйста, проверьте ваше интернет-соединение.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ОК", style: .default, handler: { _ in
                     ac.dismiss(animated: true)
                 }))
                 present(ac, animated: true)
@@ -674,26 +1006,63 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             self.ProjectsTitle   = "Choose a Type"
             self.ProjectsAction  = "Select"
             self.ProjectsCancel  = "Cancel"
-        }else{
+        }else if XLanguage.get() == .Arabic{
             self.ProjectsTitle   = "اختر نوع"
             self.ProjectsAction  = "تحديد"
             self.ProjectsCancel  = "إلغاء"
+        }else if XLanguage.get() == .Dutch {
+            self.ProjectsTitle = "Kies een Type"
+            self.ProjectsAction = "Selecteer"
+            self.ProjectsCancel = "Annuleren"
+        } else if XLanguage.get() == .French {
+            self.ProjectsTitle = "Choisissez un Type"
+            self.ProjectsAction = "Sélectionner"
+            self.ProjectsCancel = "Annuler"
+        } else if XLanguage.get() == .Spanish {
+            self.ProjectsTitle = "Elija un Tipo"
+            self.ProjectsAction = "Seleccionar"
+            self.ProjectsCancel = "Cancelar"
+        } else if XLanguage.get() == .German {
+            self.ProjectsTitle = "Wählen Sie einen Typ"
+            self.ProjectsAction = "Auswählen"
+            self.ProjectsCancel = "Abbrechen"
+        } else if XLanguage.get() == .Hebrew {
+            self.ProjectsTitle = "בחר סוג"
+            self.ProjectsAction = "בחר"
+            self.ProjectsCancel = "ביטול"
+        } else if XLanguage.get() == .Chinese {
+            self.ProjectsTitle = "选择类型"
+            self.ProjectsAction = "选择"
+            self.ProjectsCancel = "取消"
+        } else if XLanguage.get() == .Hindi {
+            self.ProjectsTitle = "एक प्रकार चुनें"
+            self.ProjectsAction = "चुनें"
+            self.ProjectsCancel = "रद्द करें"
+        } else if XLanguage.get() == .Portuguese {
+            self.ProjectsTitle = "Escolha um Tipo"
+            self.ProjectsAction = "Selecionar"
+            self.ProjectsCancel = "Cancelar"
+        } else if XLanguage.get() == .Swedish {
+            self.ProjectsTitle = "Välj en Typ"
+            self.ProjectsAction = "Välj"
+            self.ProjectsCancel = "Avbryt"
+        } else if XLanguage.get() == .Greek {
+            self.ProjectsTitle = "Επιλέξτε Τύπο"
+            self.ProjectsAction = "Επιλέξτε"
+            self.ProjectsCancel = "Ακύρωση"
+        } else if XLanguage.get() == .Russian {
+            self.ProjectsTitle = "Выберите Тип"
+            self.ProjectsAction = "Выбрать"
+            self.ProjectsCancel = "Отмена"
         }
         let ac = UIAlertController(title:  self.ProjectsTitle, message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         ac.view.addSubview(TypepickerView)
         ac.addAction(UIAlertAction(title:  self.ProjectsAction, style: .default, handler: { _ in
             if self.typees.count != 0{
             let pickerValue = self.typees[self.TypepickerView.selectedRow(inComponent: 0)]
-            if XLanguage.get() == .English{
             self.Typelable.text = pickerValue.name
-                self.Typelable.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-            }else if XLanguage.get() == .Arabic{
-                self.Typelable.text = pickerValue.ar_name
-                self.Typelable.font = UIFont(name: "PeshangDes2", size: 12)!
-            }else{
-                self.Typelable.text = pickerValue.ku_name
-                self.Typelable.font = UIFont(name: "PeshangDes2", size: 12)!
-            }
+            self.Typelable.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+           
             self.TypeId = pickerValue.id ?? ""
             print("Picker value: \(pickerValue) was selected")
             }
@@ -730,9 +1099,75 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                     ac.dismiss(animated: true)
                 }))
                 present(ac, animated: true)
-            }else{
+            }else if XLanguage.get() == .Kurdish{
                 let ac = UIAlertController(title: "هەڵە", message: "تکایە هێڵی ئینتەرنێتەکەت بپشکنە.", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "باشە", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else if XLanguage.get() == .Dutch {
+                let ac = UIAlertController(title: "Fout", message: "Controleer uw internetverbinding.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .French {
+                let ac = UIAlertController(title: "Erreur", message: "Veuillez vérifier votre connexion internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Spanish {
+                let ac = UIAlertController(title: "Error", message: "Por favor, verifica tu conexión a internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .German {
+                let ac = UIAlertController(title: "Fehler", message: "Bitte überprüfen Sie Ihre Internetverbindung.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Hebrew {
+                let ac = UIAlertController(title: "שגיאה", message: "אנא בדוק את חיבור האינטרנט שלך.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "אישור", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Chinese {
+                let ac = UIAlertController(title: "错误", message: "请检查您的互联网连接。", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "确定", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Hindi {
+                let ac = UIAlertController(title: "त्रुटि", message: "कृपया अपना इंटरनेट कनेक्शन जाँच लें।", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ठीक है", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Portuguese {
+                let ac = UIAlertController(title: "Erro", message: "Por favor, verifique sua conexão com a internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Swedish {
+                let ac = UIAlertController(title: "Fel", message: "Vänligen kontrollera din internetanslutning.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Greek {
+                let ac = UIAlertController(title: "Σφάλμα", message: "Παρακαλώ ελέγξτε τη σύνδεσή σας στο διαδίκτυο.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ΟΚ", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Russian {
+                let ac = UIAlertController(title: "Ошибка", message: "Пожалуйста, проверьте ваше интернет-соединение.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ОК", style: .default, handler: { _ in
                     ac.dismiss(animated: true)
                 }))
                 present(ac, animated: true)
@@ -757,26 +1192,64 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             self.ProjectsTitle = "Choose Estate Type"
             self.ProjectsAction = "Select"
             self.ProjectsCancel = "Cancel"
-        }else{
+        }else if XLanguage.get() == .Arabic{
             self.ProjectsTitle = "اختر نوع العقار"
             self.ProjectsAction  = "تحديد"
             self.ProjectsCancel  = "إلغاء"
+        }else if XLanguage.get() == .Dutch {
+            self.ProjectsTitle = "Kies Soort Eigendom"
+            self.ProjectsAction = "Selecteren"
+            self.ProjectsCancel = "Annuleren"
+        } else if XLanguage.get() == .French {
+            self.ProjectsTitle = "Choisir le Type de Bien"
+            self.ProjectsAction = "Sélectionner"
+            self.ProjectsCancel = "Annuler"
+        } else if XLanguage.get() == .Spanish {
+            self.ProjectsTitle = "Elegir Tipo de Propiedad"
+            self.ProjectsAction = "Seleccionar"
+            self.ProjectsCancel = "Cancelar"
+        } else if XLanguage.get() == .German {
+            self.ProjectsTitle = "Immobilientyp Wählen"
+            self.ProjectsAction = "Auswählen"
+            self.ProjectsCancel = "Abbrechen"
+        } else if XLanguage.get() == .Hebrew {
+            self.ProjectsTitle = "בחר סוג נכס"
+            self.ProjectsAction = "בחר"
+            self.ProjectsCancel = "בטל"
+        } else if XLanguage.get() == .Chinese {
+            self.ProjectsTitle = "选择房产类型"
+            self.ProjectsAction = "选择"
+            self.ProjectsCancel = "取消"
+        } else if XLanguage.get() == .Hindi {
+            self.ProjectsTitle = "एस्टेट प्रकार चुनें"
+            self.ProjectsAction = "चुनें"
+            self.ProjectsCancel = "रद्द करें"
+        } else if XLanguage.get() == .Portuguese {
+            self.ProjectsTitle = "Escolher Tipo de Propriedade"
+            self.ProjectsAction = "Selecionar"
+            self.ProjectsCancel = "Cancelar"
+        } else if XLanguage.get() == .Swedish {
+            self.ProjectsTitle = "Välj Fastighetstyp"
+            self.ProjectsAction = "Välj"
+            self.ProjectsCancel = "Avbryt"
+        } else if XLanguage.get() == .Greek {
+            self.ProjectsTitle = "Επιλέξτε Τύπο Ακινήτου"
+            self.ProjectsAction = "Επιλογή"
+            self.ProjectsCancel = "Ακύρωση"
+        } else if XLanguage.get() == .Russian {
+            self.ProjectsTitle = "Выберите Тип Недвижимости"
+            self.ProjectsAction = "Выбрать"
+            self.ProjectsCancel = "Отмена"
         }
         let ac = UIAlertController(title:  self.ProjectsTitle, message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         ac.view.addSubview(EstateTypepickerView)
         ac.addAction(UIAlertAction(title:  self.ProjectsAction, style: .default, handler: { _ in
             if self.EstatesType.count != 0{
             let pickerValue = self.EstatesType[self.EstateTypepickerView.selectedRow(inComponent: 0)]
-            if XLanguage.get() == .English{
+
             self.EstateTypeLable.text = pickerValue.name
-                self.EstateTypeLable.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-            }else if XLanguage.get() == .Arabic{
-                self.EstateTypeLable.text = pickerValue.ar_name
-                self.EstateTypeLable.font = UIFont(name: "PeshangDes2", size: 12)!
-            }else{
-                self.EstateTypeLable.text = pickerValue.ku_name
-                self.EstateTypeLable.font = UIFont(name: "PeshangDes2", size: 12)!
-            }
+            self.EstateTypeLable.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+
             self.selecteEstatedcell = pickerValue
             print(pickerValue.id ?? "")
             if pickerValue.id == "UTY25FYJHkliygt4nvPP"{
@@ -861,13 +1334,37 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                 let arrLong = Array(Long)
                 self.lat = String(arrLat[0..<8])
                 self.long = String(arrLong[0..<8])
-                if XLanguage.get() == .English{
-                    self.LatLongAddress.text = "LOCATION (\(String(arrLat[0..<8])), \(String(arrLong[0..<8])))"
-                }else if XLanguage.get() == .Arabic{
+    
+                if XLanguage.get() == .Arabic{
                     self.LatLongAddress.text = "الموقع (\(String(arrLat[0..<8])), \(String(arrLong[0..<8])))"
-                }else{
+                }else if XLanguage.get() == .Kurdish{
                     self.LatLongAddress.text = "شوێن (\(String(arrLat[0..<8])), \(String(arrLong[0..<8])))"
+                }else if XLanguage.get() == .English {
+                    self.LatLongAddress.text = "LOCATION (\(String(arrLat[0..<8])), \(String(arrLong[0..<8])))"
+                } else if XLanguage.get() == .Dutch {
+                    self.LatLongAddress.text = "LOCATIE (\(String(arrLat[0..<8])), \(String(arrLong[0..<8])))"
+                } else if XLanguage.get() == .French {
+                    self.LatLongAddress.text = "EMPLACEMENT (\(String(arrLat[0..<8])), \(String(arrLong[0..<8])))"
+                } else if XLanguage.get() == .Spanish {
+                    self.LatLongAddress.text = "UBICACIÓN (\(String(arrLat[0..<8])), \(String(arrLong[0..<8])))"
+                } else if XLanguage.get() == .German {
+                    self.LatLongAddress.text = "STANDORT (\(String(arrLat[0..<8])), \(String(arrLong[0..<8])))"
+                } else if XLanguage.get() == .Hebrew {
+                    self.LatLongAddress.text = "מיקום (\(String(arrLat[0..<8])), \(String(arrLong[0..<8])))"
+                } else if XLanguage.get() == .Chinese {
+                    self.LatLongAddress.text = "位置 (\(String(arrLat[0..<8])), \(String(arrLong[0..<8])))"
+                } else if XLanguage.get() == .Hindi {
+                    self.LatLongAddress.text = "स्थान (\(String(arrLat[0..<8])), \(String(arrLong[0..<8])))"
+                } else if XLanguage.get() == .Portuguese {
+                    self.LatLongAddress.text = "LOCALIZAÇÃO (\(String(arrLat[0..<8])), \(String(arrLong[0..<8])))"
+                } else if XLanguage.get() == .Swedish {
+                    self.LatLongAddress.text = "PLATS (\(String(arrLat[0..<8])), \(String(arrLong[0..<8])))"
+                } else if XLanguage.get() == .Greek {
+                    self.LatLongAddress.text = "ΤΟΠΟΘΕΣΙΑ (\(String(arrLat[0..<8])), \(String(arrLong[0..<8])))"
+                } else if XLanguage.get() == .Russian {
+                    self.LatLongAddress.text = "МЕСТОПОЛОЖЕНИЕ (\(String(arrLat[0..<8])), \(String(arrLong[0..<8])))"
                 }
+                
                 self.Address.becomeFirstResponder()
             }
         }
@@ -907,9 +1404,75 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                     ac.dismiss(animated: true)
                 }))
                 present(ac, animated: true)
-            }else{
+            }else if XLanguage.get() == .Kurdish{
                 let ac = UIAlertController(title: "هەڵە", message: "تکایە هێڵی ئینتەرنێتەکەت بپشکنە.", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "باشە", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            }else if XLanguage.get() == .Dutch {
+                let ac = UIAlertController(title: "Fout", message: "Controleer uw internetverbinding.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .French {
+                let ac = UIAlertController(title: "Erreur", message: "Veuillez vérifier votre connexion internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Spanish {
+                let ac = UIAlertController(title: "Error", message: "Por favor, verifica tu conexión a internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .German {
+                let ac = UIAlertController(title: "Fehler", message: "Bitte überprüfen Sie Ihre Internetverbindung.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Hebrew {
+                let ac = UIAlertController(title: "שגיאה", message: "אנא בדוק את חיבור האינטרנט שלך.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "אישור", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Chinese {
+                let ac = UIAlertController(title: "错误", message: "请检查您的互联网连接。", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "确定", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Hindi {
+                let ac = UIAlertController(title: "त्रुटि", message: "कृपया अपना इंटरनेट कनेक्शन जाँच लें।", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ठीक है", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Portuguese {
+                let ac = UIAlertController(title: "Erro", message: "Por favor, verifique sua conexão com a internet.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Swedish {
+                let ac = UIAlertController(title: "Fel", message: "Vänligen kontrollera din internetanslutning.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Greek {
+                let ac = UIAlertController(title: "Σφάλμα", message: "Παρακαλώ ελέγξτε τη σύνδεσή σας στο διαδίκτυο.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ΟΚ", style: .default, handler: { _ in
+                    ac.dismiss(animated: true)
+                }))
+                present(ac, animated: true)
+            } else if XLanguage.get() == .Russian {
+                let ac = UIAlertController(title: "Ошибка", message: "Пожалуйста, проверьте ваше интернет-соединение.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "ОК", style: .default, handler: { _ in
                     ac.dismiss(animated: true)
                 }))
                 present(ac, animated: true)
@@ -932,22 +1495,69 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             self.ProjectsTitle = "پرۆژە هەڵبژێرە"
             self.ProjectsAction  = "هەڵبژێرە"
             self.ProjectsCancel  = "هەڵوەشاندنەوە"
-        }else if XLanguage.get() == .English{
-            self.ProjectsTitle = "Choose project"
-            self.ProjectsAction = "Select"
-            self.ProjectsCancel = "Cancel"
-        }else{
+        }else if XLanguage.get() == .Arabic{
             self.ProjectsTitle = "اختر المشروع"
             self.ProjectsAction = "تحديد"
             self.ProjectsCancel = "إلغاء"
+        }else if XLanguage.get() == .English {
+            self.ProjectsTitle = "Choose project"
+            self.ProjectsAction = "Select"
+            self.ProjectsCancel = "Cancel"
+        } else if XLanguage.get() == .Dutch {
+            self.ProjectsTitle = "Kies project"
+            self.ProjectsAction = "Selecteren"
+            self.ProjectsCancel = "Annuleren"
+        } else if XLanguage.get() == .French {
+            self.ProjectsTitle = "Choisir le projet"
+            self.ProjectsAction = "Sélectionner"
+            self.ProjectsCancel = "Annuler"
+        } else if XLanguage.get() == .Spanish {
+            self.ProjectsTitle = "Elegir proyecto"
+            self.ProjectsAction = "Seleccionar"
+            self.ProjectsCancel = "Cancelar"
+        } else if XLanguage.get() == .German {
+            self.ProjectsTitle = "Projekt wählen"
+            self.ProjectsAction = "Auswählen"
+            self.ProjectsCancel = "Abbrechen"
+        } else if XLanguage.get() == .Hebrew {
+            self.ProjectsTitle = "בחר פרויקט"
+            self.ProjectsAction = "בחר"
+            self.ProjectsCancel = "ביטול"
+        } else if XLanguage.get() == .Chinese {
+            self.ProjectsTitle = "选择项目"
+            self.ProjectsAction = "选择"
+            self.ProjectsCancel = "取消"
+        } else if XLanguage.get() == .Hindi {
+            self.ProjectsTitle = "प्रोजेक्ट चुनें"
+            self.ProjectsAction = "चुनें"
+            self.ProjectsCancel = "रद्द करें"
+        } else if XLanguage.get() == .Portuguese {
+            self.ProjectsTitle = "Escolher projeto"
+            self.ProjectsAction = "Selecionar"
+            self.ProjectsCancel = "Cancelar"
+        } else if XLanguage.get() == .Swedish {
+            self.ProjectsTitle = "Välj projekt"
+            self.ProjectsAction = "Välj"
+            self.ProjectsCancel = "Avbryt"
+        } else if XLanguage.get() == .Greek {
+            self.ProjectsTitle = "Επιλέξτε έργο"
+            self.ProjectsAction = "Επιλογή"
+            self.ProjectsCancel = "Ακύρωση"
+        } else if XLanguage.get() == .Russian {
+            self.ProjectsTitle = "Выбрать проект"
+            self.ProjectsAction = "Выбрать"
+            self.ProjectsCancel = "Отмена"
         }
         
         let ac = UIAlertController(title: self.ProjectsTitle, message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         ac.view.addSubview(ProjectpickerView)
         ac.addAction(UIAlertAction(title: self.ProjectsAction, style: .default, handler: { _ in
             if self.ProjectArray.count != 0{
-            let pickerValue = self.ProjectArray[self.ProjectpickerView.selectedRow(inComponent: 0)]
-            self.ProjectName.text = pickerValue.project_name
+                let pickerValue = self.ProjectArray[self.ProjectpickerView.selectedRow(inComponent: 0)]
+                    self.ProjectName.text = pickerValue.project_name
+                    self.ProjectName.font = UIFont(name: "PeshangDes2", size: 12)!
+
+                    
             self.ProjectId = pickerValue.id ?? ""
             print("Picker value: \(pickerValue) was selected")
             }
@@ -1517,10 +2127,32 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
         
         if XLanguage.get() == .Kurdish{
             self.loadingLableMessage = "تكایه‌ چاوه‌ڕێبه‌..."
-        }else if XLanguage.get() == .English{
-            self.loadingLableMessage = "Please wait..."
-        }else{
+        }else if XLanguage.get() == .Arabic{
             self.loadingLableMessage = "يرجى الانتظار..."
+        }else if XLanguage.get() == .English {
+            self.loadingLableMessage = "Please wait..."
+        } else if XLanguage.get() == .Dutch {
+            self.loadingLableMessage = "Even wachten alstublieft..."
+        } else if XLanguage.get() == .French {
+            self.loadingLableMessage = "Veuillez patienter..."
+        } else if XLanguage.get() == .Spanish {
+            self.loadingLableMessage = "Por favor, espere..."
+        } else if XLanguage.get() == .German {
+            self.loadingLableMessage = "Bitte warten..."
+        } else if XLanguage.get() == .Hebrew {
+            self.loadingLableMessage = "אנא המתן..."
+        } else if XLanguage.get() == .Chinese {
+            self.loadingLableMessage = "请稍候..."
+        } else if XLanguage.get() == .Hindi {
+            self.loadingLableMessage = "कृपया प्रतीक्षा करें..."
+        } else if XLanguage.get() == .Portuguese {
+            self.loadingLableMessage = "Por favor, aguarde..."
+        } else if XLanguage.get() == .Swedish {
+            self.loadingLableMessage = "Var god vänta..."
+        } else if XLanguage.get() == .Greek {
+            self.loadingLableMessage = "Παρακαλώ περιμένετε..."
+        } else if XLanguage.get() == .Russian {
+            self.loadingLableMessage = "Пожалуйста, подождите..."
         }
             let alert = UIAlertController(title: nil, message: self.loadingLableMessage, preferredStyle: .alert)
 
@@ -1576,53 +2208,95 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                 }
                 
                 if self.IsUpdate == false{
-                    if self.Images.count != 1{
-                        if XLanguage.get() == .Kurdish{
-                            self.ImageCount.text = "وێنە (\(self.Images.count))"
-                            self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
-                        }else if XLanguage.get() == .English{
-                            self.ImageCount.text = "IMAGES (\(self.Images.count))"
-                            self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-                        }else{
-                            self.ImageCount.text = "صور (\(self.Images.count))"
-                            self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
-                        }
-                    }else{
-                        if XLanguage.get() == .Kurdish{
-                            self.ImageCount.text = "وێنە (\(self.Images.count))"
-                            self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
-                        }else if XLanguage.get() == .English{
-                            self.ImageCount.text = "IMAGE (\(self.Images.count))"
-                            self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-                        }else{
-                            self.ImageCount.text = "صور (\(self.Images.count))"
-                            self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
-                        }
+                    self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+
+                    let imageCount = self.Images.count
+                    let language = XLanguage.get()
+
+                    var imageText = ""
+
+                    // English as default
+                    if language == .English {
+                        imageText = imageCount == 1 ? "IMAGE (\(imageCount))" : "IMAGES (\(imageCount))"
+                    } else if language == .Dutch {
+                        imageText = imageCount == 1 ? "AFBEELDING (\(imageCount))" : "AFBEELDINGEN (\(imageCount))"
+                    } else if language == .French {
+                        imageText = imageCount == 1 ? "IMAGE (\(imageCount))" : "IMAGES (\(imageCount))"
+                    } else if language == .Spanish {
+                        imageText = imageCount == 1 ? "IMAGEN (\(imageCount))" : "IMÁGENES (\(imageCount))"
+                    } else if language == .German {
+                        imageText = imageCount == 1 ? "BILD (\(imageCount))" : "BILDER (\(imageCount))"
+                    } else if language == .Hebrew {
+                        imageText = imageCount == 1 ? "תמונה (\(imageCount))" : "תמונות (\(imageCount))"
+                    } else if language == .Chinese {
+                        imageText = imageCount == 1 ? "图像 (\(imageCount))" : "图像 (\(imageCount))"
+                    } else if language == .Hindi {
+                        imageText = imageCount == 1 ? "छवि (\(imageCount))" : "छवियाँ (\(imageCount))"
+                    } else if language == .Portuguese {
+                        imageText = imageCount == 1 ? "IMAGEM (\(imageCount))" : "IMAGENS (\(imageCount))"
+                    } else if language == .Swedish {
+                        imageText = imageCount == 1 ? "BILD (\(imageCount))" : "BILDER (\(imageCount))"
+                    } else if language == .Greek {
+                        imageText = imageCount == 1 ? "ΕΙΚΟΝΑ (\(imageCount))" : "ΕΙΚΟΝΕΣ (\(imageCount))"
+                    } else if language == .Russian {
+                        imageText = imageCount == 1 ? "ИЗОБРАЖЕНИЕ (\(imageCount))" : "ИЗОБРАЖЕНИЯ (\(imageCount))"
+                    }else if language == .Arabic {
+                        imageText = imageCount == 1 ? "صور (\(imageCount))" : "صور (\(imageCount))"
+                        self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
+                    } else if language == .Kurdish {
+                        imageText = imageCount == 1 ? "وێنە (\(imageCount))" : "وێنە (\(imageCount))"
+                        self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
                     }
+                    
+                    self.ImageCount.text = imageText
+
+                    
+                    
                 }else{print("555555")
-                    if self.CommignImages.count != 1{
-                        if XLanguage.get() == .Kurdish{
-                            self.ImageCount.text = "وێنە (\(self.CommignImages.count))"
-                            self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
-                        }else if XLanguage.get() == .English{
-                            self.ImageCount.text = "IMAGES (\(self.CommignImages.count))"
-                            self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-                        }else{
-                            self.ImageCount.text = "صور (\(self.CommignImages.count))"
-                            self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
-                        }
-                    }else{
-                        if XLanguage.get() == .Kurdish{
-                            self.ImageCount.text = "وێنە (\(self.CommignImages.count))"
-                            self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
-                        }else if XLanguage.get() == .English{
-                            self.ImageCount.text = "IMAGE (\(self.CommignImages.count))"
-                            self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-                        }else{
-                            self.ImageCount.text = "صور (\(self.CommignImages.count))"
-                            self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
-                        }
+                   
+                    self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+
+                    let imageCount = self.CommignImages.count
+                    let language = XLanguage.get()
+
+                    var imageText = ""
+
+                    // English as default
+                    if language == .English {
+                        imageText = imageCount == 1 ? "IMAGE (\(imageCount))" : "IMAGES (\(imageCount))"
+                    } else if language == .Dutch {
+                        imageText = imageCount == 1 ? "AFBEELDING (\(imageCount))" : "AFBEELDINGEN (\(imageCount))"
+                    } else if language == .French {
+                        imageText = imageCount == 1 ? "IMAGE (\(imageCount))" : "IMAGES (\(imageCount))"
+                    } else if language == .Spanish {
+                        imageText = imageCount == 1 ? "IMAGEN (\(imageCount))" : "IMÁGENES (\(imageCount))"
+                    } else if language == .German {
+                        imageText = imageCount == 1 ? "BILD (\(imageCount))" : "BILDER (\(imageCount))"
+                    } else if language == .Hebrew {
+                        imageText = imageCount == 1 ? "תמונה (\(imageCount))" : "תמונות (\(imageCount))"
+                    } else if language == .Chinese {
+                        imageText = imageCount == 1 ? "图像 (\(imageCount))" : "图像 (\(imageCount))"
+                    } else if language == .Hindi {
+                        imageText = imageCount == 1 ? "छवि (\(imageCount))" : "छवियाँ (\(imageCount))"
+                    } else if language == .Portuguese {
+                        imageText = imageCount == 1 ? "IMAGEM (\(imageCount))" : "IMAGENS (\(imageCount))"
+                    } else if language == .Swedish {
+                        imageText = imageCount == 1 ? "BILD (\(imageCount))" : "BILDER (\(imageCount))"
+                    } else if language == .Greek {
+                        imageText = imageCount == 1 ? "ΕΙΚΟΝΑ (\(imageCount))" : "ΕΙΚΟΝΕΣ (\(imageCount))"
+                    } else if language == .Russian {
+                        imageText = imageCount == 1 ? "ИЗОБРАЖЕНИЕ (\(imageCount))" : "ИЗОБРАЖЕНИЯ (\(imageCount))"
+                    }else if language == .Arabic {
+                        imageText = imageCount == 1 ? "صور (\(imageCount))" : "صور (\(imageCount))"
+                        self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
+                    } else if language == .Kurdish {
+                        imageText = imageCount == 1 ? "وێنە (\(imageCount))" : "وێنە (\(imageCount))"
+                        self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
                     }
+                    
+                    self.ImageCount.text = imageText
+
+                    
                 }
                 self.ImagesCollectionView.reloadData()
             }
@@ -1660,11 +2334,66 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             self.message = "؟هل انت متاكد"
             self.action = "حذف"
             self.cancel = "لا"
-        }else{
+        }else if XLanguage.get() == .English {
             self.Title = "Delete"
             self.message = "Are you sure?"
             self.action = "Yes"
             self.cancel = "Cancel"
+        } else if XLanguage.get() == .Dutch {
+            self.Title = "Verwijderen"
+            self.message = "Weet je het zeker?"
+            self.action = "Ja"
+            self.cancel = "Annuleren"
+        } else if XLanguage.get() == .French {
+            self.Title = "Supprimer"
+            self.message = "Êtes-vous sûr?"
+            self.action = "Oui"
+            self.cancel = "Annuler"
+        } else if XLanguage.get() == .Spanish {
+            self.Title = "Eliminar"
+            self.message = "¿Estás seguro?"
+            self.action = "Sí"
+            self.cancel = "Cancelar"
+        } else if XLanguage.get() == .German {
+            self.Title = "Löschen"
+            self.message = "Sind Sie sicher?"
+            self.action = "Ja"
+            self.cancel = "Abbrechen"
+        } else if XLanguage.get() == .Hebrew {
+            self.Title = "מחק"
+            self.message = "האם אתה בטוח?"
+            self.action = "כן"
+            self.cancel = "ביטול"
+        } else if XLanguage.get() == .Chinese {
+            self.Title = "删除"
+            self.message = "你确定吗？"
+            self.action = "是的"
+            self.cancel = "取消"
+        } else if XLanguage.get() == .Hindi {
+            self.Title = "हटाएं"
+            self.message = "क्या आप सुनिश्चित हैं?"
+            self.action = "हाँ"
+            self.cancel = "रद्द करें"
+        } else if XLanguage.get() == .Portuguese {
+            self.Title = "Excluir"
+            self.message = "Tem certeza?"
+            self.action = "Sim"
+            self.cancel = "Cancelar"
+        } else if XLanguage.get() == .Swedish {
+            self.Title = "Radera"
+            self.message = "Är du säker?"
+            self.action = "Ja"
+            self.cancel = "Avbryt"
+        } else if XLanguage.get() == .Greek {
+            self.Title = "Διαγραφή"
+            self.message = "Είστε σίγουροι;"
+            self.action = "Ναι"
+            self.cancel = "Ακύρωση"
+        } else if XLanguage.get() == .Russian {
+            self.Title = "Удалить"
+            self.message = "Вы уверены?"
+            self.action = "Да"
+            self.cancel = "Отмена"
         }
     }
     
@@ -1679,29 +2408,48 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                     self.view.layoutIfNeeded()
                 }
             }
-            if self.Images.count != 1{
-                if XLanguage.get() == .Kurdish{
-                    self.ImageCount.text = "وێنە (\(self.Images.count))"
-                    self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
-                }else if XLanguage.get() == .English{
-                    self.ImageCount.text = "IMAGES (\(self.Images.count))"
-                    self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-                }else{
-                    self.ImageCount.text = "صور (\(self.Images.count))"
-                    self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
-                }
-            }else{
-                if XLanguage.get() == .Kurdish{
-                    self.ImageCount.text = "وێنە (\(self.Images.count))"
-                    self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
-                }else if XLanguage.get() == .English{
-                    self.ImageCount.text = "IMAGE (\(self.Images.count))"
-                    self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-                }else{
-                    self.ImageCount.text = "صور (\(self.Images.count))"
-                    self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
-                }
+            self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+
+            let imageCount = self.Images.count
+            let language = XLanguage.get()
+
+            var imageText = ""
+
+            // English as default
+            if language == .English {
+                imageText = imageCount == 1 ? "IMAGE (\(imageCount))" : "IMAGES (\(imageCount))"
+            } else if language == .Dutch {
+                imageText = imageCount == 1 ? "AFBEELDING (\(imageCount))" : "AFBEELDINGEN (\(imageCount))"
+            } else if language == .French {
+                imageText = imageCount == 1 ? "IMAGE (\(imageCount))" : "IMAGES (\(imageCount))"
+            } else if language == .Spanish {
+                imageText = imageCount == 1 ? "IMAGEN (\(imageCount))" : "IMÁGENES (\(imageCount))"
+            } else if language == .German {
+                imageText = imageCount == 1 ? "BILD (\(imageCount))" : "BILDER (\(imageCount))"
+            } else if language == .Hebrew {
+                imageText = imageCount == 1 ? "תמונה (\(imageCount))" : "תמונות (\(imageCount))"
+            } else if language == .Chinese {
+                imageText = imageCount == 1 ? "图像 (\(imageCount))" : "图像 (\(imageCount))"
+            } else if language == .Hindi {
+                imageText = imageCount == 1 ? "छवि (\(imageCount))" : "छवियाँ (\(imageCount))"
+            } else if language == .Portuguese {
+                imageText = imageCount == 1 ? "IMAGEM (\(imageCount))" : "IMAGENS (\(imageCount))"
+            } else if language == .Swedish {
+                imageText = imageCount == 1 ? "BILD (\(imageCount))" : "BILDER (\(imageCount))"
+            } else if language == .Greek {
+                imageText = imageCount == 1 ? "ΕΙΚΟΝΑ (\(imageCount))" : "ΕΙΚΟΝΕΣ (\(imageCount))"
+            } else if language == .Russian {
+                imageText = imageCount == 1 ? "ИЗОБРАЖЕНИЕ (\(imageCount))" : "ИЗОБРАЖЕНИЯ (\(imageCount))"
+            }else if language == .Arabic {
+                imageText = imageCount == 1 ? "صور (\(imageCount))" : "صور (\(imageCount))"
+                self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
+            } else if language == .Kurdish {
+                imageText = imageCount == 1 ? "وێنە (\(imageCount))" : "وێنە (\(imageCount))"
+                self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
             }
+            
+            self.ImageCount.text = imageText
+
             self.ImagesCollectionView.reloadData()
         }else{
             self.removdImages.append(sender.accessibilityValue!)
@@ -1712,29 +2460,48 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                     self.view.layoutIfNeeded()
                 }
             }
-            if self.CommignImages.count != 1{
-                if XLanguage.get() == .Kurdish{
-                    self.ImageCount.text = "وێنە (\(self.CommignImages.count))"
-                    self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
-                }else if XLanguage.get() == .English{
-                    self.ImageCount.text = "IMAGES (\(self.CommignImages.count))"
-                    self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-                }else{
-                    self.ImageCount.text = "صور (\(self.CommignImages.count))"
-                    self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
-                }
-            }else{
-                if XLanguage.get() == .Kurdish{
-                    self.ImageCount.text = "وێنە (\(self.CommignImages.count))"
-                    self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
-                }else if XLanguage.get() == .English{
-                    self.ImageCount.text = "IMAGE (\(self.CommignImages.count))"
-                    self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
-                }else{
-                    self.ImageCount.text = "صور (\(self.CommignImages.count))"
-                    self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
-                }
+            self.ImageCount.font = UIFont(name: "ArialRoundedMTBold", size: 12)!
+
+            let imageCount = self.CommignImages.count
+            let language = XLanguage.get()
+
+            var imageText = ""
+
+            // English as default
+            if language == .English {
+                imageText = imageCount == 1 ? "IMAGE (\(imageCount))" : "IMAGES (\(imageCount))"
+            } else if language == .Dutch {
+                imageText = imageCount == 1 ? "AFBEELDING (\(imageCount))" : "AFBEELDINGEN (\(imageCount))"
+            } else if language == .French {
+                imageText = imageCount == 1 ? "IMAGE (\(imageCount))" : "IMAGES (\(imageCount))"
+            } else if language == .Spanish {
+                imageText = imageCount == 1 ? "IMAGEN (\(imageCount))" : "IMÁGENES (\(imageCount))"
+            } else if language == .German {
+                imageText = imageCount == 1 ? "BILD (\(imageCount))" : "BILDER (\(imageCount))"
+            } else if language == .Hebrew {
+                imageText = imageCount == 1 ? "תמונה (\(imageCount))" : "תמונות (\(imageCount))"
+            } else if language == .Chinese {
+                imageText = imageCount == 1 ? "图像 (\(imageCount))" : "图像 (\(imageCount))"
+            } else if language == .Hindi {
+                imageText = imageCount == 1 ? "छवि (\(imageCount))" : "छवियाँ (\(imageCount))"
+            } else if language == .Portuguese {
+                imageText = imageCount == 1 ? "IMAGEM (\(imageCount))" : "IMAGENS (\(imageCount))"
+            } else if language == .Swedish {
+                imageText = imageCount == 1 ? "BILD (\(imageCount))" : "BILDER (\(imageCount))"
+            } else if language == .Greek {
+                imageText = imageCount == 1 ? "ΕΙΚΟΝΑ (\(imageCount))" : "ΕΙΚΟΝΕΣ (\(imageCount))"
+            } else if language == .Russian {
+                imageText = imageCount == 1 ? "ИЗОБРАЖЕНИЕ (\(imageCount))" : "ИЗОБРАЖЕНИЯ (\(imageCount))"
+            }else if language == .Arabic {
+                imageText = imageCount == 1 ? "صور (\(imageCount))" : "صور (\(imageCount))"
+                self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
+            } else if language == .Kurdish {
+                imageText = imageCount == 1 ? "وێنە (\(imageCount))" : "وێنە (\(imageCount))"
+                self.ImageCount.font = UIFont(name: "PeshangDes2", size: 12)!
             }
+            
+            self.ImageCount.text = imageText
+
             self.ImagesCollectionView.reloadData()
         }
     }
@@ -1749,14 +2516,47 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
     func EmptyTextField(_ textfield : UITextField){
         textfield.becomeFirstResponder()
         if XLanguage.get() == .Kurdish{
-            pleaseEnter = "تکایە داخڵ بکە"
+            pleaseEnter = ""
             chooseProject = "تکایە پڕۆژەیەک بۆ موڵکەکەت هەڵبژێرە."
-        }else if XLanguage.get() == .English{
-            pleaseEnter = "Please Enter"
-            chooseProject = "Please choose a project for your estate."
-        }else{
-            pleaseEnter = "من فضلك أدخل"
+        }else if XLanguage.get() == .Arabic{
+            pleaseEnter = ""
             chooseProject = "الرجاء اختيار مشروع لممتلكاتك."
+        }else if XLanguage.get() == .English {
+            pleaseEnter = ""
+            chooseProject = "Please choose a project for your estate."
+        } else if XLanguage.get() == .Dutch {
+            pleaseEnter = ""
+            chooseProject = "Kies alstublieft een project voor uw vastgoed."
+        } else if XLanguage.get() == .French {
+            pleaseEnter = ""
+            chooseProject = "Veuillez choisir un projet pour votre propriété."
+        } else if XLanguage.get() == .Spanish {
+            pleaseEnter = ""
+            chooseProject = "Por favor, elija un proyecto para su inmueble."
+        } else if XLanguage.get() == .German {
+            pleaseEnter = ""
+            chooseProject = "Bitte wählen Sie ein Projekt für Ihr Grundstück aus."
+        } else if XLanguage.get() == .Hebrew {
+            pleaseEnter = ""
+            chooseProject = "אנא בחר פרויקט לנכס שלך."
+        } else if XLanguage.get() == .Chinese {
+            pleaseEnter = ""
+            chooseProject = "请为您的房产选择一个项目。"
+        } else if XLanguage.get() == .Hindi {
+            pleaseEnter = ""
+            chooseProject = "कृपया अपनी संपत्ति के लिए एक परियोजना चुनें।"
+        } else if XLanguage.get() == .Portuguese {
+            pleaseEnter = ""
+            chooseProject = "Por favor, escolha um projeto para o seu imóvel."
+        } else if XLanguage.get() == .Swedish {
+            pleaseEnter = ""
+            chooseProject = "Vänligen välj ett projekt för din fastighet."
+        } else if XLanguage.get() == .Greek {
+            pleaseEnter = ""
+            chooseProject = "Παρακαλώ επιλέξτε ένα έργο για την ιδιοκτησία σας."
+        } else if XLanguage.get() == .Russian {
+            pleaseEnter = ""
+            chooseProject = "Пожалуйста, выберите проект для вашей недвижимости."
         }
         
         var style = ToastStyle()
@@ -1777,12 +2577,34 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
     
     func EmptyLable(_ textfield : UILabel){
         if textfield == self.ProjectName{
-            if XLanguage.get() == .English{
-                self.view.makeToast("Please choose a project for your estate.", duration: 3.0, position: .top)
-            }else if XLanguage.get() == .Arabic{
+             if XLanguage.get() == .Arabic{
                 self.view.makeToast("الرجاء اختيار مشروع لممتلكاتك.", duration: 3.0, position: .top)
-            }else{
+            }else if XLanguage.get() == .Kurdish{
                 self.view.makeToast("تکایە پڕۆژەیەک بۆ موڵکەکەت هەڵبژێرە.", duration: 3.0, position: .top)
+            }else if XLanguage.get() == .English {
+                self.view.makeToast("Please choose a project for your estate.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Dutch {
+                self.view.makeToast("Kies alstublieft een project voor uw vastgoed.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .French {
+                self.view.makeToast("Veuillez choisir un projet pour votre propriété.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Spanish {
+                self.view.makeToast("Por favor, elija un proyecto para su inmueble.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .German {
+                self.view.makeToast("Bitte wählen Sie ein Projekt für Ihr Grundstück aus.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Hebrew {
+                self.view.makeToast("אנא בחר פרויקט לנכס שלך.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Chinese {
+                self.view.makeToast("请为您的房产选择一个项目。", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Hindi {
+                self.view.makeToast("कृपया अपनी संपत्ति के लिए एक परियोजना चुनें।", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Portuguese {
+                self.view.makeToast("Por favor, escolha um projeto para o seu imóvel.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Swedish {
+                self.view.makeToast("Vänligen välj ett projekt för din fastighet.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Greek {
+                self.view.makeToast("Παρακαλώ επιλέξτε ένα έργο για την ιδιοκτησία σας.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Russian {
+                self.view.makeToast("Пожалуйста, выберите проект для вашей недвижимости.", duration: 3.0, position: .top)
             }
             AudioServicesPlaySystemSound(1519);
             ProjectView.layer.borderColor = UIColor.red.cgColor
@@ -1792,12 +2614,34 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             ProjectView.layer.shadowOpacity=0.4
             ProjectView.layer.shadowOffset = CGSize(width: 0, height: 0)
         }else if textfield == self.EstateTypeLable{
-            if XLanguage.get() == .English{
-                self.view.makeToast("Please choose estate type.", duration: 3.0, position: .top)
-            }else if XLanguage.get() == .Arabic{
+             if XLanguage.get() == .Arabic{
                 self.view.makeToast("الرجاء اختيار نوع العقار.", duration: 3.0, position: .top)
-            }else{
+            }else if XLanguage.get() == .Kurdish{
                 self.view.makeToast("تکایە جۆری خانوبەر هەڵبژێرە.", duration: 3.0, position: .top)
+            }else if XLanguage.get() == .English {
+                self.view.makeToast("Please choose estate type.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Dutch {
+                self.view.makeToast("Kies alstublieft het type vastgoed.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .French {
+                self.view.makeToast("Veuillez choisir le type de propriété.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Spanish {
+                self.view.makeToast("Por favor, elija el tipo de propiedad.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .German {
+                self.view.makeToast("Bitte wählen Sie den Immobilientyp.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Hebrew {
+                self.view.makeToast("אנא בחר את סוג הנכס.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Chinese {
+                self.view.makeToast("请选择房产类型。", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Hindi {
+                self.view.makeToast("कृपया संपत्ति का प्रकार चुनें।", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Portuguese {
+                self.view.makeToast("Por favor, escolha o tipo de imóvel.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Swedish {
+                self.view.makeToast("Vänligen välj typ av fastighet.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Greek {
+                self.view.makeToast("Παρακαλώ επιλέξτε τον τύπο ακινήτου.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Russian {
+                self.view.makeToast("Пожалуйста, выберите тип недвижимости.", duration: 3.0, position: .top)
             }
             
             AudioServicesPlaySystemSound(1519);
@@ -1809,12 +2653,34 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             EstateTypeView.layer.shadowOffset = CGSize(width: 0, height: 0)
           
         }else if textfield == Typelable{
-            if XLanguage.get() == .English{
-                self.view.makeToast("Please choose the type of property.", duration: 3.0, position: .top)
-            }else if XLanguage.get() == .Arabic{
+             if XLanguage.get() == .Arabic{
                 self.view.makeToast("الرجاء اختيار نوع الملكية.", duration: 3.0, position: .top)
-            }else{
+            }else if XLanguage.get() == .Kurdish{
                 self.view.makeToast("تکایە جۆری موڵکەکە هەڵبژێرە.", duration: 3.0, position: .top)
+            }else if XLanguage.get() == .English {
+                self.view.makeToast("Please choose the type of property.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Dutch {
+                self.view.makeToast("Kies alstublieft het type eigendom.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .French {
+                self.view.makeToast("Veuillez choisir le type de propriété.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Spanish {
+                self.view.makeToast("Por favor, elija el tipo de propiedad.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .German {
+                self.view.makeToast("Bitte wählen Sie die Art der Eigenschaft.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Hebrew {
+                self.view.makeToast("אנא בחר את סוג הנכס.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Chinese {
+                self.view.makeToast("请选择物业类型。", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Hindi {
+                self.view.makeToast("कृपया संपत्ति के प्रकार का चयन करें।", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Portuguese {
+                self.view.makeToast("Por favor, escolha o tipo de propriedade.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Swedish {
+                self.view.makeToast("Vänligen välj typ av egendom.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Greek {
+                self.view.makeToast("Παρακαλώ επιλέξτε τον τύπο της περιουσίας.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Russian {
+                self.view.makeToast("Пожалуйста, выберите тип собственности.", duration: 3.0, position: .top)
             }
             AudioServicesPlaySystemSound(1519);
             TypeView.layer.borderColor = UIColor.red.cgColor
@@ -1824,12 +2690,34 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             TypeView.layer.shadowOpacity=0.4
             TypeView.layer.shadowOffset = CGSize(width: 0, height: 0)
         }else if textfield == self.AddressLable{
-            if XLanguage.get() == .English{
-                self.view.makeToast("Please choose City.", duration: 3.0, position: .top)
-            }else if XLanguage.get() == .Arabic{
+           if XLanguage.get() == .Arabic{
                 self.view.makeToast("الرجاء اختيار المدينة.", duration: 3.0, position: .top)
-            }else{
+           }else if XLanguage.get() == .Kurdish{
                 self.view.makeToast("تکایە شار هەڵبژێرە.", duration: 3.0, position: .top)
+            }else if XLanguage.get() == .English {
+                self.view.makeToast("Please choose City.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Dutch {
+                self.view.makeToast("Kies alstublieft een stad.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .French {
+                self.view.makeToast("Veuillez choisir une ville.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Spanish {
+                self.view.makeToast("Por favor, elija una ciudad.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .German {
+                self.view.makeToast("Bitte wählen Sie eine Stadt.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Hebrew {
+                self.view.makeToast("אנא בחר עיר.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Chinese {
+                self.view.makeToast("请选择城市。", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Hindi {
+                self.view.makeToast("कृपया शहर चुनें।", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Portuguese {
+                self.view.makeToast("Por favor, escolha uma cidade.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Swedish {
+                self.view.makeToast("Vänligen välj en stad.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Greek {
+                self.view.makeToast("Παρακαλώ επιλέξτε μια πόλη.", duration: 3.0, position: .top)
+            } else if XLanguage.get() == .Russian {
+                self.view.makeToast("Пожалуйста, выберите город.", duration: 3.0, position: .top)
             }
             ToastManager.shared.isTapToDismissEnabled = true
             AudioServicesPlaySystemSound(1519);
@@ -1954,33 +2842,101 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                     myAlert.addAction(UIAlertAction(title: "بەڵێ", style: UIAlertAction.Style.cancel, handler: nil))
                     self.present(myAlert, animated: true, completion: nil)
                     return
-                }else if XLanguage.get() == .English{
-                    let myAlert = UIAlertController(title: "Please choose at least one image.", message: nil, preferredStyle: UIAlertController.Style.alert)
-                    myAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
-                    self.present(myAlert, animated: true, completion: nil)
-                    return
-                }else{
+                }else if XLanguage.get() == .Arabic{
                     let myAlert = UIAlertController(title: "الرجاء اختيار صورة واحدة على الأقل.", message: nil, preferredStyle: UIAlertController.Style.alert)
                     myAlert.addAction(UIAlertAction(title: "إلغاء", style: UIAlertAction.Style.cancel, handler: nil))
                     self.present(myAlert, animated: true, completion: nil)
                     return
+                }else if XLanguage.get() == .English {
+                    let myAlert = UIAlertController(title: "Please choose at least one image.", message: nil, preferredStyle: .alert)
+                    myAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(myAlert, animated: true, completion: nil)
+                    return
+                } else if XLanguage.get() == .Dutch {
+                    let myAlert = UIAlertController(title: "Kies alstublieft minstens één afbeelding.", message: nil, preferredStyle: .alert)
+                    myAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(myAlert, animated: true, completion: nil)
+                    return
+                } else if XLanguage.get() == .French {
+                    let myAlert = UIAlertController(title: "Veuillez choisir au moins une image.", message: nil, preferredStyle: .alert)
+                    myAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(myAlert, animated: true, completion: nil)
+                    return
+                } else if XLanguage.get() == .Spanish {
+                    let myAlert = UIAlertController(title: "Por favor, elija al menos una imagen.", message: nil, preferredStyle: .alert)
+                    myAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(myAlert, animated: true, completion: nil)
+                    return
+                } else if XLanguage.get() == .German {
+                    let myAlert = UIAlertController(title: "Bitte wählen Sie mindestens ein Bild aus.", message: nil, preferredStyle: .alert)
+                    myAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(myAlert, animated: true, completion: nil)
+                    return
+                } else if XLanguage.get() == .Hebrew {
+                    let myAlert = UIAlertController(title: "אנא בחר לפחות תמונה אחת.", message: nil, preferredStyle: .alert)
+                    myAlert.addAction(UIAlertAction(title: "אישור", style: .cancel, handler: nil))
+                    self.present(myAlert, animated: true, completion: nil)
+                    return
+                } else if XLanguage.get() == .Chinese {
+                    let myAlert = UIAlertController(title: "请选择至少一张图片。", message: nil, preferredStyle: .alert)
+                    myAlert.addAction(UIAlertAction(title: "确定", style: .cancel, handler: nil))
+                    self.present(myAlert, animated: true, completion: nil)
+                    return
+                } else if XLanguage.get() == .Hindi {
+                    let myAlert = UIAlertController(title: "कृपया कम से कम एक चित्र चुनें।", message: nil, preferredStyle: .alert)
+                    myAlert.addAction(UIAlertAction(title: "ठीक है", style: .cancel, handler: nil))
+                    self.present(myAlert, animated: true, completion: nil)
+                    return
+                } else if XLanguage.get() == .Portuguese {
+                    let myAlert = UIAlertController(title: "Por favor, escolha pelo menos uma imagem.", message: nil, preferredStyle: .alert)
+                    myAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(myAlert, animated: true, completion: nil)
+                    return
+                } else {
+                    let myAlert = UIAlertController(title: "Пожалуйста, выберите хотя бы одно изображение.", message: nil, preferredStyle: .alert)
+                    myAlert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: nil))
+                    self.present(myAlert, animated: true, completion: nil)
+                    return
                 }
-                
             }
         }
+            
         guard self.Name.text!.isEmpty == false else{EmptyTextField(self.Name); return }
        
-        guard self.Price.text!.isEmpty == false else{EmptyTextField(self.Price);return}
+        guard self.Price.text!.isEmpty == false else{EmptyTextField(self.Price); return }
        
-        guard self.Address.text!.isEmpty == false else{ EmptyTextField(self.Address); return}
+        guard self.Address.text!.isEmpty == false else{ EmptyTextField(self.Address); return }
        
-        if XLanguage.get() == .English{
-            guard self.LatLongAddress.text! != "LOCATION ( )" else{ EmptyLatidute(self.ViewmapButton); return}
-        }else if XLanguage.get() == .Kurdish{
+        let language = XLanguage.get()
+        if language == .Kurdish{
             guard self.LatLongAddress.text! != "شوێن ( )" else{ EmptyLatidute(self.ViewmapButton); return}
-        }else{
+        }else if language == .Arabic{
             guard self.LatLongAddress.text! != "موقعك ( )" else{ EmptyLatidute(self.ViewmapButton); return}
-        }
+        }else if language == .English {
+                guard self.LatLongAddress.text! != "LOCATION ( )" else { EmptyLatidute(self.ViewmapButton); return }
+            } else if language == .Dutch {
+                guard self.LatLongAddress.text! != "LOCATIE ( )" else { EmptyLatidute(self.ViewmapButton); return }
+            } else if language == .French {
+                guard self.LatLongAddress.text! != "EMPLACEMENT ( )" else { EmptyLatidute(self.ViewmapButton); return }
+            } else if language == .Spanish {
+                guard self.LatLongAddress.text! != "UBICACIÓN ( )" else { EmptyLatidute(self.ViewmapButton); return }
+            } else if language == .German {
+                guard self.LatLongAddress.text! != "STANDORT ( )" else { EmptyLatidute(self.ViewmapButton); return }
+            } else if language == .Hebrew {
+                guard self.LatLongAddress.text! != "מיקום ( )" else { EmptyLatidute(self.ViewmapButton); return }
+            } else if language == .Chinese {
+                guard self.LatLongAddress.text! != "位置 ( )" else { EmptyLatidute(self.ViewmapButton); return }
+            } else if language == .Hindi {
+                guard self.LatLongAddress.text! != "स्थान ( )" else { EmptyLatidute(self.ViewmapButton); return }
+            } else if language == .Portuguese {
+                guard self.LatLongAddress.text! != "LOCALIZAÇÃO ( )" else { EmptyLatidute(self.ViewmapButton); return }
+            } else if language == .Swedish {
+                guard self.LatLongAddress.text! != "PLATS ( )" else { EmptyLatidute(self.ViewmapButton); return }
+            } else if language == .Greek {
+                guard self.LatLongAddress.text! != "ΤΟΠΟΘΕΣΙΑ ( )" else { EmptyLatidute(self.ViewmapButton); return }
+            } else if language == .Russian {
+                guard self.LatLongAddress.text! != "МЕСТОПОЛОЖЕНИЕ ( )" else { EmptyLatidute(self.ViewmapButton); return }
+            }
        
             
         guard self.CityId != "" else{EmptyLable(self.AddressLable); return}
@@ -2010,28 +2966,113 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
        
         guard self.PropertyNo.text!.isEmpty == false else{EmptyTextField(self.PropertyNo); return}
         
-        if XLanguage.get() == .Kurdish{
-            self.titlee = "بەرزکردنەوەی زانیاریەکان"
-            self.updatetitlee = "زانیاری نوێکردنەوە"
-            self.updatemessagee = "ئایا دڵنیای لە نوێکردنەوە؟"
-            self.message = "ئایا دڵنیای لە نەرزکردنەوەی زانیاریەکان؟"
-            self.Action = "بەڵێ"
-            self.cancel = "نەخێر"
-        }else if XLanguage.get() == . English{
-            self.titlee = "Upload Information"
-            self.message = "Are you sure to upload?"
-            self.updatetitlee = "Update Information"
-            self.updatemessagee = "Are you sure to update?"
-            self.Action = "Yes"
-            self.cancel = "No"
-        }else{
-            self.titlee = "رفع المعلومات"
-            self.message = "هل أنت متأكد من رفع المعلومات؟"
-            self.updatetitlee = "تحديث المعلومات"
-            self.updatemessagee = "هل أنت متأكد من التحديث؟"
-            self.Action = "نعم"
-            self.cancel = "لا"
-        }
+            if XLanguage.get() == .English {
+                self.titlee = "Upload Information"
+                self.message = "Are you sure you want to upload the information?"
+                self.updatetitlee = "Update Information"
+                self.updatemessagee = "Are you sure you want to update the information?"
+                self.Action = "Yes"
+                self.cancel = "No"
+            } else if XLanguage.get() == .Kurdish {
+                self.titlee = "بارکردنی زانیاری"
+                self.message = "ئایا دڵنیای لە بارکردنی زانیاری؟"
+                self.updatetitlee = "نوێکردنەوەی زانیاری"
+                self.updatemessagee = "ئایا دڵنیای لە نوێکردنەوە؟"
+                self.Action = "بەڵێ"
+                self.cancel = "نەخێر"
+            } else if XLanguage.get() == .Arabic {
+                self.titlee = "رفع المعلومات"
+                self.message = "هل أنت متأكد من رفع المعلومات؟"
+                self.updatetitlee = "تحديث المعلومات"
+                self.updatemessagee = "هل أنت متأكد من التحديث؟"
+                self.Action = "نعم"
+                self.cancel = "لا"
+            } else if XLanguage.get() == .Hebrew {
+                self.titlee = "העלאת מידע"
+                self.message = "האם אתה בטוח שברצונך להעלות את המידע?"
+                self.updatetitlee = "עדכון מידע"
+                self.updatemessagee = "האם אתה בטוח שברצונך לעדכן את המידע?"
+                self.Action = "כן"
+                self.cancel = "לא"
+            } else if XLanguage.get() == .Chinese {
+                self.titlee = "上传信息"
+                self.message = "您确定要上传信息吗？"
+                self.updatetitlee = "更新信息"
+                self.updatemessagee = "您确定要更新信息吗？"
+                self.Action = "是"
+                self.cancel = "否"
+            } else if XLanguage.get() == .Hindi {
+                self.titlee = "जानकारी अपलोड करें"
+                self.message = "क्या आप सुनिश्चित हैं कि आप जानकारी अपलोड करना चाहते हैं?"
+                self.updatetitlee = "जानकारी अपडेट करें"
+                self.updatemessagee = "क्या आप सुनिश्चित हैं कि आप जानकारी अपडेट करना चाहते हैं?"
+                self.Action = "हाँ"
+                self.cancel = "नहीं"
+            } else if XLanguage.get() == .Portuguese {
+                self.titlee = "Carregar Informações"
+                self.message = "Tem certeza de que deseja carregar as informações?"
+                self.updatetitlee = "Atualizar Informações"
+                self.updatemessagee = "Tem certeza de que deseja atualizar as informações?"
+                self.Action = "Sim"
+                self.cancel = "Não"
+            } else if XLanguage.get() == .Swedish {
+                self.titlee = "Ladda upp information"
+                self.message = "Är du säker på att du vill ladda upp informationen?"
+                self.updatetitlee = "Uppdatera information"
+                self.updatemessagee = "Är du säker på att du vill uppdatera informationen?"
+                self.Action = "Ja"
+                self.cancel = "Nej"
+            } else if XLanguage.get() == .Greek {
+                self.titlee = "Ανέβασμα Πληροφοριών"
+                self.message = "Είστε σίγουροι ότι θέλετε να ανεβάσετε τις πληροφορίες;"
+                self.updatetitlee = "Ενημέρωση Πληροφοριών"
+                self.updatemessagee = "Είστε σίγουροι ότι θέλετε να ενημερώσετε τις πληροφορίες;"
+                self.Action = "Ναι"
+                self.cancel = "Όχι"
+            } else if XLanguage.get() == .Russian {
+                self.titlee = "Загрузка информации"
+                self.message = "Вы уверены, что хотите загрузить информацию?"
+                self.updatetitlee = "Обновление информации"
+                self.updatemessagee = "Вы уверены, что хотите обновить информацию?"
+                self.Action = "Да"
+                self.cancel = "Нет"
+            } else if XLanguage.get() == .Dutch {
+                self.titlee = "Informatie Uploaden"
+                self.message = "Weet u zeker dat u de informatie wilt uploaden?"
+                self.updatetitlee = "Informatie Bijwerken"
+                self.updatemessagee = "Weet u zeker dat u de informatie wilt bijwerken?"
+                self.Action = "Ja"
+                self.cancel = "Nee"
+            } else if XLanguage.get() == .French {
+                self.titlee = "Télécharger les informations"
+                self.message = "Êtes-vous sûr de vouloir télécharger les informations?"
+                self.updatetitlee = "Mettre à jour les informations"
+                self.updatemessagee = "Êtes-vous sûr de vouloir mettre à jour les informations?"
+                self.Action = "Oui"
+                self.cancel = "Non"
+            } else if XLanguage.get() == .Spanish {
+                self.titlee = "Subir Información"
+                self.message = "¿Estás seguro de que deseas subir la información?"
+                self.updatetitlee = "Actualizar Información"
+                self.updatemessagee = "¿Estás seguro de que deseas actualizar la información?"
+                self.Action = "Sí"
+                self.cancel = "No"
+            } else if XLanguage.get() == .German {
+                self.titlee = "Informationen Hochladen"
+                self.message = "Sind Sie sicher, dass Sie die Informationen hochladen möchten?"
+                self.updatetitlee = "Informationen Aktualisieren"
+                self.updatemessagee = "Sind Sie sicher, dass Sie die Informationen aktualisieren möchten?"
+                self.Action = "Ja"
+                self.cancel = "Nein"
+            } else {
+                self.titlee = "Upload Information"
+                self.message = "Are you sure you want to upload the information?"
+                self.updatetitlee = "Update Information"
+                self.updatemessagee = "Are you sure you want to update the information?"
+                self.Action = "Yes"
+                self.cancel = "No"
+            }
+
         
         if IsUpdate == false{
             if let FireId = UserDefaults.standard.string(forKey: "UserId"){
@@ -2092,9 +3133,6 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
             }
         }else{
             if let FireId = UserDefaults.standard.string(forKey: "UserId"){
-                OfficeAip.GetOfficeById(Id: FireId) { office in
-                    if office.name != ""{
-                        
                         let alertController = UIAlertController(title: self.updatetitlee, message: self.updatemessagee, preferredStyle: .alert)
                         let okAction = UIAlertAction(title: self.Action, style: UIAlertAction.Style.default) {
                             UIAlertAction in
@@ -2126,7 +3164,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                                               , long: self.long
                                               , price: (self.Price.text!.convertedDigitsToLocale(Locale(identifier: "EN")) as NSString).doubleValue
                                               , desc: self.Desc.text!
-                                              , office_id: office.id ?? ""
+                                              , office_id: UserDefaults.standard.string(forKey: "OfficeId") ?? ""
                                               , fire_id: FireId
                                               , ImageURL: self.CommignImages
                                               , city_id: self.CityId
@@ -2161,9 +3199,7 @@ class AddProperty: UIViewController , RadioButtonDelegate, UITextFieldDelegate ,
                         let myVC = storyboard.instantiateViewController(withIdentifier: "GoToRegisterVC") as! EditProfileVC
                         self.navigationController?.pushViewController(myVC, animated: true)
                     }
-                }
             }
-        }
         }else{
             UIView.animate(withDuration: 0.3) {
                 self.InternetViewHeight.constant = 20

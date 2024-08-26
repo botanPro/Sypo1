@@ -13,10 +13,9 @@ class DetectVC: UIViewController {
         super.viewDidAppear(true)
         let locManager = CLLocationManager()
         locManager.requestWhenInUseAuthorization()
-        print(UserDefaults.standard.string(forKey: "IsFirst"))
-        if UserDefaults.standard.string(forKey: "IsFirst") == "true"{print("[][][][]-------=============[][][][]]][]")
+        if UserDefaults.standard.string(forKey: "IsFirst") == "true"{
             self.performSegue(withIdentifier: "FirstVC", sender: nil)
-        }else{print("[][][][]-------=============[][][][]]][]444444")
+        }else{
             self.performSegue(withIdentifier: "GoToApp", sender: nil)
         }
     }

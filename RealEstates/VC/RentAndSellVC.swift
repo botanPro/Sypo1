@@ -23,6 +23,22 @@ class RentAndSellVC: MXSegmentedPagerController {
     var KArray :[String] = ["فرۆشتن", "کرێ"]
     var EArray :[String] = ["Sell", "Rent"]
     var AArray :[String] = ["البيع", "الايجار"]
+    
+    var HEArray :[String] = ["מכירה", "השכרה"]
+    var CArray :[String] = ["出售", "出租"]
+    var HIArray :[String] = ["बेचना", "किराये पर लेना"]
+    
+    var SPArray :[String] = ["Vender", "Alquilar"]
+    var POArray :[String] = ["Vender", "Alugar"]
+    var SWArray :[String] = ["Sälja", "Hyra ut"]
+    
+    var GRArray :[String] = ["Πώληση", "Ενοικίαση"]
+    var RUArray :[String] = ["Продать", "Сдать в аренду"]
+    var DUArray :[String] = ["Verkopen", "Huren"]
+    
+    var FRArray :[String] = ["Vendre", "Louer"]
+    var GEArray :[String] = ["Verkaufen", "Vermieten"]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -31,12 +47,12 @@ class RentAndSellVC: MXSegmentedPagerController {
         
         segmentedPager.backgroundColor = #colorLiteral(red: 0.95029217, green: 0.95029217, blue: 0.9502920508, alpha: 1)
         segmentedPager.segmentedControl.indicator.lineHeight = 3
-        if XLanguage.get() == .English{
-            segmentedPager.segmentedControl.font = UIFont(name: "ArialRoundedMTBold", size: 14)!
-        }else if XLanguage.get() == .Arabic{
+        if XLanguage.get() == .Arabic{
             segmentedPager.segmentedControl.font = UIFont(name: "PeshangDes2", size: 15)!
         }else if XLanguage.get() == .Kurdish{
             segmentedPager.segmentedControl.font = UIFont(name: "PeshangDes2", size: 15)!
+        }else {
+            segmentedPager.segmentedControl.font = UIFont(name: "ArialRoundedMTBold", size: 14)!
         }
         
         segmentedPager.segmentedControl.indicator.linePosition = .bottom
@@ -49,12 +65,12 @@ class RentAndSellVC: MXSegmentedPagerController {
     
     
     @objc func LanguageChanged(){
-        if XLanguage.get() == .English{
-            segmentedPager.segmentedControl.font = UIFont(name: "ArialRoundedMTBold", size: 14)!
-        }else if XLanguage.get() == .Arabic{
+        if XLanguage.get() == .Arabic{
             segmentedPager.segmentedControl.font = UIFont(name: "PeshangDes2", size: 15)!
         }else if XLanguage.get() == .Kurdish{
             segmentedPager.segmentedControl.font = UIFont(name: "PeshangDes2", size: 15)!
+        }else{
+            segmentedPager.segmentedControl.font = UIFont(name: "ArialRoundedMTBold", size: 14)!
         }
         segmentedPager.segmentedControl.removeAll()
         segmentedPager.reloadData()
@@ -75,8 +91,30 @@ class RentAndSellVC: MXSegmentedPagerController {
             return self.KArray[index]
         }else if XLanguage.get() == .English{
             return self.EArray[index]
-        }else{
+        }else if XLanguage.get() == .Arabic{
             return self.AArray[index]
+        }else if XLanguage.get() == .Hebrew{
+            return self.HEArray[index]
+        }else if XLanguage.get() == .Chinese{
+            return self.CArray[index]
+        }else if XLanguage.get() == .Hindi{
+            return self.HIArray[index]
+        }else if XLanguage.get() == .Portuguese{
+            return self.POArray[index]
+        }else if XLanguage.get() == .Swedish{
+            return self.SWArray[index]
+        }else if XLanguage.get() == .Greek{
+            return self.GRArray[index]
+        }else if XLanguage.get() == .Russian{
+            return self.RUArray[index]
+        }else if XLanguage.get() == .Dutch{
+            return self.DUArray[index]
+        }else if XLanguage.get() == .French{
+            return self.FRArray[index]
+        }else if XLanguage.get() == .Spanish{
+            return self.SPArray[index]
+        }else{
+            return self.GEArray[index]
         }
        
     }

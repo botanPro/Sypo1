@@ -52,9 +52,42 @@ class OfficeVC: UIViewController {
             }else if XLanguage.get() == .Arabic{
                 self.message = "لقد قمت بالفعل بتقييم هذا المكتب من قبل."
                 self.action = "إلغاء"
-            }else{
+            }else if XLanguage.get() == .English{
                 self.message = "you have already rate this office before."
                 self.action = "Cancel"
+            }else if XLanguage.get() == .Hebrew {
+                self.message = "כבר דירגת את המשרד הזה קודם."
+                self.action = "ביטול"
+            } else if XLanguage.get() == .Chinese {
+                self.message = "您之前已经评价过这个办公室了。"
+                self.action = "取消"
+            } else if XLanguage.get() == .Hindi {
+                self.message = "आप पहले ही इस कार्यालय को रेट कर चुके हैं।"
+                self.action = "रद्द करें"
+            } else if XLanguage.get() == .Portuguese {
+                self.message = "Você já avaliou este escritório antes."
+                self.action = "Cancelar"
+            } else if XLanguage.get() == .Swedish {
+                self.message = "Du har redan betygsatt detta kontor tidigare."
+                self.action = "Avbryt"
+            } else if XLanguage.get() == .Greek {
+                self.message = "Έχετε ήδη αξιολογήσει αυτό το γραφείο στο παρελθόν."
+                self.action = "Ακύρωση"
+            } else if XLanguage.get() == .Russian {
+                self.message = "Вы уже оценивали этот офис ранее."
+                self.action = "Отмена"
+            } else if XLanguage.get() == .Dutch {
+                self.message = "U heeft dit kantoor al eerder beoordeeld."
+                self.action = "Annuleren"
+            } else if XLanguage.get() == .French {
+                self.message = "Vous avez déjà évalué ce bureau auparavant."
+                self.action = "Annuler"
+            } else if XLanguage.get() == .Spanish {
+                self.message = "Ya has calificado esta oficina anteriormente."
+                self.action = "Cancelar"
+            } else if XLanguage.get() == .German {
+                self.message = "Sie haben dieses Büro bereits bewertet."
+                self.action = "Abbrechen"
             }
             RatingStars.settings.fillMode = .half
             self.RatingStars.rating = 2.0

@@ -64,34 +64,16 @@ class DeletionAccountVC: UIViewController {
         var cancel = ""
         var no     = ""
         
-        if XLanguage.get() == .Kurdish{
-            title  = "سڕینەوەی ئەکاونت"
-            mess   = "ئایا دڵنیای کە دەتەوێت ئەکاونتەکەت بسڕیتەوە"
-            sure   = "دڵنیام"
-            note    = "تێبینی"
-            note_mess = "دوای سڕینەوەی ئەکاونتەکەت، موڵکەکانت، و زانیارییەکان لە ئەپلیکەیشنەکەدا نیشان نادرێن، پەیوەندیمان پێوە بکە ئەگەر دەتەوێت ئەکاونتەکەت کاردانەوەی هەبێت."
-            delete = "سڕینەوە"
-            cancel = "هەڵوەشاندنەوە"
-            no     = "نەخێر"
-        }else if XLanguage.get() == .English{
+
             title  = "Delete Account"
             mess   = "Are you sure you want to delete your account?"
             sure   = "Sure"
-            note    = "Note"
-            note_mess = "After deleting your account, your estates, and information will not be shown in the application, Contact us if you want to reactive your account."
+            note    = "Warning"
+            note_mess = "After deleting your account, your estates and information will be Delete, this action cannot be undo."
             delete = "Delete"
             cancel = "Cancel"
             no     = "No"
-        }else{
-            title  = "حذف الحساب"
-            mess   = "هل انت متأكد انك تريد حذف حسابك؟"
-            sure   = "بالتأكيد"
-            note    = "ملاحظة"
-            note_mess = "بعد حذف حسابك ، لن يتم عرض عقاراتك ومعلوماتك في التطبيق، اتصل بنا إذا كنت تريد إعادة تنشيط حسابك."
-            delete = "حذف"
-            cancel = "إلغاء"
-            no     = "لا"
-        }
+
         let myAlert = UIAlertController(title: title, message: mess, preferredStyle: UIAlertController.Style.alert)
         myAlert.addAction(UIAlertAction(title: sure, style: .default, handler: { (UIAlertActionn) in
             

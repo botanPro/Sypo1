@@ -23,13 +23,12 @@ class MXTextViewController: UIViewController {
         self.InternetConnectionView.isHidden = true
         RentAndSellCollectionView.register(UINib(nibName: "AllEstatessCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         
-
         self.RentAndSellCollectionView.cr.addHeadRefresh(animator: FastAnimator()) {
             self.GetEstatesByType()
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.LanguageChanged), name: NSNotification.Name(rawValue: "LanguageChanged"), object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(GetEstatesByTypeAfterLocatinChanged), name: NSNotification.Name(rawValue: "LocationChangedS"), object: nil)
     }
     
     @objc func LanguageChanged(){
@@ -57,13 +56,33 @@ class MXTextViewController: UIViewController {
         GetEstatesByType()
     }
     func GetEstatesByType(){
+        let cityId = UserDefaults.standard.string(forKey: "CityId")
         self.RentAndSellArray.removeAll()
         Firestore.firestore().collection("EstateProducts").whereField("rent_or_sell", isEqualTo: "0").getDocuments { (Snapshot, error) in
             if error != nil { print(error.debugDescription) ; return }
             guard let documents = Snapshot?.documents else { return }
             for P in documents {
                 if let data = P.data() as [String : AnyObject]? {
-                    if EstateObject(Dictionary: data).archived != "1"{
+                    if EstateObject(Dictionary: data).archived != "1" && EstateObject(Dictionary: data).city_id == cityId{
+                         self.RentAndSellArray.append(EstateObject(Dictionary: data))
+                    }
+                }
+            }
+            self.RentAndSellArray.shuffle()
+            self.RentAndSellCollectionView.cr.endHeaderRefresh()
+            self.RentAndSellCollectionView.reloadData()
+        }
+    }
+    
+    @objc func GetEstatesByTypeAfterLocatinChanged(){
+        self.RentAndSellArray.removeAll()        
+        let cityId = UserDefaults.standard.string(forKey: "CityId")
+        Firestore.firestore().collection("EstateProducts").whereField("rent_or_sell", isEqualTo: "0").getDocuments { (Snapshot, error) in
+            if error != nil { print(error.debugDescription) ; return }
+            guard let documents = Snapshot?.documents else { return }
+            for P in documents {
+                if let data = P.data() as [String : AnyObject]? {
+                    if EstateObject(Dictionary: data).archived != "1" && EstateObject(Dictionary: data).city_id == cityId{
                          self.RentAndSellArray.append(EstateObject(Dictionary: data))
                     }
                 }

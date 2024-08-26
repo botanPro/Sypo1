@@ -55,7 +55,7 @@ class MapVC: UIViewController ,MKMapViewDelegate ,CLLocationManagerDelegate, UIG
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last! as CLLocation
         self.cordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-      defer { currentLocation = locations.last }
+        defer { currentLocation = locations.last }
 
       if currentLocation == nil {
           if let userLocation = locations.last {
@@ -106,25 +106,69 @@ class MapVC: UIViewController ,MKMapViewDelegate ,CLLocationManagerDelegate, UIG
                  NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CordinateComing"), object: nil , userInfo: Data)
                  self.dismiss(animated: true, completion: nil)
              }else{
-                 if XLanguage.get() == .English{
-                     let ac = UIAlertController(title: "Location not found", message: "Please select location", preferredStyle: .alert)
-                     ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                 var title = ""
+                 var message = ""
+                 var okText = ""
+                     
+                     if XLanguage.get() == .Kurdish {
+                         title = "شوێنەکە نەدۆزرایەوە"
+                         message = "تکایە شوێن هەڵبژێرە"
+                         okText = "باشە"
+                     }else if XLanguage.get() == .Arabic{
+                         title = "لم يتم العثور على الموقع"
+                         message = "الرجاء تحديد الموقع"
+                         okText = "نعم"
+                     }else if XLanguage.get() == .English {
+                         title = "Location not found"
+                         message = "Please select location"
+                         okText = "OK"
+                     } else if XLanguage.get() == .French {
+                         title = "Emplacement non trouvé"
+                         message = "Veuillez sélectionner un emplacement"
+                         okText = "OK"
+                     } else if XLanguage.get() == .Spanish {
+                         title = "Ubicación no encontrada"
+                         message = "Por favor, seleccione ubicación"
+                         okText = "OK"
+                     } else if XLanguage.get() == .German {
+                         title = "Standort nicht gefunden"
+                         message = "Bitte Standort auswählen"
+                         okText = "OK"
+                     } else if XLanguage.get() == .Dutch {
+                         title = "Locatie niet gevonden"
+                         message = "Selecteer alstublieft een locatie"
+                         okText = "OK"
+                     } else if XLanguage.get() == .Portuguese {
+                         title = "Localização não encontrada"
+                         message = "Por favor, selecione a localização"
+                         okText = "OK"
+                     } else if XLanguage.get() == .Russian {
+                         title = "Местоположение не найдено"
+                         message = "Пожалуйста, выберите местоположение"
+                         okText = "ОК"
+                     } else if XLanguage.get() == .Chinese {
+                         title = "未找到位置"
+                         message = "请选择位置"
+                         okText = "确定"
+                     } else if XLanguage.get() == .Hindi {
+                         title = "स्थान नहीं मिला"
+                         message = "कृपया स्थान चुनें"
+                         okText = "ठीक है"
+                     } else if XLanguage.get() == .Swedish {
+                         title = "Platsen hittades inte"
+                         message = "Vänligen välj plats"
+                         okText = "OK"
+                     } else if XLanguage.get() == .Greek {
+                         title = "Η τοποθεσία δεν βρέθηκε"
+                         message = "Επιλέξτε τοποθεσία"
+                         okText = "ΟΚ"
+                     }
+                     
+                     let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                     ac.addAction(UIAlertAction(title: okText, style: .default, handler: { _ in
                          ac.dismiss(animated: true)
                      }))
-                     present(ac, animated: true)
-                 }else if XLanguage.get() == .Arabic{
-                     let ac = UIAlertController(title: "لم يتم العثور على الموقع", message: "الرجاء تحديد الموقع", preferredStyle: .alert)
-                     ac.addAction(UIAlertAction(title: "نعم", style: .default, handler: { _ in
-                         ac.dismiss(animated: true)
-                     }))
-                     present(ac, animated: true)
-                 }else{
-                     let ac = UIAlertController(title: "شوێنەکە نەدۆزرایەوە", message: "تکایە شوێن هەڵبژێرە", preferredStyle: .alert)
-                     ac.addAction(UIAlertAction(title: "باشە", style: .default, handler: { _ in
-                         ac.dismiss(animated: true)
-                     }))
-                     present(ac, animated: true)
-                 }
+                     
              }
          }
     }

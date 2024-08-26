@@ -23,14 +23,14 @@ class AllEstateVC: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
-        if XLanguage.get() == .English{
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "ArialRoundedMTBold", size: 16)!,.foregroundColor: #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)]
-
-        }else if XLanguage.get() == .Arabic{
+        if XLanguage.get() == .Arabic{
             self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "PeshangDes2", size: 17)!,.foregroundColor: #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)]
 
         }else if XLanguage.get() == .Kurdish{
             self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "PeshangDes2", size: 17)!,.foregroundColor: #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)]
+        }else {
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "ArialRoundedMTBold", size: 16)!,.foregroundColor: #colorLiteral(red: 0.07602687925, green: 0.2268401682, blue: 0.3553599715, alpha: 1)]
+
         }
         
         if AllEstate.count != 0{
@@ -47,8 +47,6 @@ class AllEstateVC: UIViewController {
         }
         
         
-        
-        
         self.AllEstateCollectionView.cr.addHeadRefresh(animator: FastAnimator()) {
             if self.EstateType != ""{
                 self.GetEstates(type: self.EstateType)
@@ -59,12 +57,28 @@ class AllEstateVC: UIViewController {
         
         
         self.AllEstate.shuffle()
-      
+        NotificationCenter.default.addObserver(self, selector: #selector(GetEstatesAfterLocationChanged), name: NSNotification.Name(rawValue: "LocationChangedS"), object: nil)
     }
     
+    
     func GetEstates(type : String){
+        let cityId = UserDefaults.standard.string(forKey: "CityId")
         ProductAip.GetAllSectionProducts(TypeId: type) { Product in
-                if Product.archived != "1"{
+                if Product.archived != "1" && Product.city_id == cityId{
+                    self.UnArchivedAllEstate.append(Product)
+                }
+            self.UnArchivedAllEstate.shuffle()
+            self.AllEstateCollectionView.cr.endHeaderRefresh()
+            self.AllEstateCollectionView.reloadData()
+        }
+        
+    }
+    
+    
+    @objc func GetEstatesAfterLocationChanged(){
+        let cityId = UserDefaults.standard.string(forKey: "CityId")
+        ProductAip.GetAllSectionProducts(TypeId: self.EstateType) { Product in
+                if Product.archived != "1" && Product.city_id == cityId{
                     self.UnArchivedAllEstate.append(Product)
                 }
             self.UnArchivedAllEstate.shuffle()

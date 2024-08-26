@@ -8,7 +8,8 @@
 import UIKit
 import CRRefresh
 class CuntryVC: UIViewController {
-    var Cuntry : [CityObject] = []
+    var Cuntry : [CountryObject] = []
+    var IsFromHome = false
     @IBOutlet weak var TableView: UITableView!{didSet{self.TableView.delegate = self; self.TableView.dataSource = self ; GetCuntys()}}
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,13 +24,13 @@ class CuntryVC: UIViewController {
     
     
     func GetCuntys(){
-//        self.Cuntry.removeAll()
-//        CuntryObjectAPI.GetCuntrys { (cuntrys) in
-//            self.Cuntry = cuntrys
-//            print("cuntry count is : \(cuntrys.count)")
-//            self.TableView.reloadData()
-//            self.TableView.cr.endHeaderRefresh()
-//        }
+        self.Cuntry.removeAll()
+        CountryObjectAip.GetCountries{ (cuntrys) in
+            self.Cuntry = cuntrys
+            print("cuntry count is : \(cuntrys.count)")
+            self.TableView.reloadData()
+            self.TableView.cr.endHeaderRefresh()
+        }
     }
     
     
@@ -62,18 +63,23 @@ extension CuntryVC : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if Cuntry.count != 0{
-            callSegueFromProductC(myData: self.Cuntry[indexPath.row].id ?? ""  , name: self.Cuntry[indexPath.row].name ?? "")
+            callSegueFromProductC(id: self.Cuntry[indexPath.row].id ?? ""  , name: self.Cuntry[indexPath.row].name ?? "")
         }
 
     }
     
     
     
-    func callSegueFromProductC(myData: String, name : String) {
+    func callSegueFromProductC(id: String, name : String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let myVC = storyboard.instantiateViewController(withIdentifier: "GoToCityVC") as! CityVC
         let CuntryName : [String : String] = ["Cuntry" : name]
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CuntryName"), object: nil,userInfo: CuntryName)
+        myVC.CountryId = id
+        if IsFromHome == true{
+            myVC.IsFromHome = true
+        }else{
+            myVC.IsFromHome = false
+        }
         self.navigationController?.pushViewController(myVC, animated: true)
     }
     

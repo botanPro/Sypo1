@@ -34,7 +34,7 @@ class EstatesOfficeCollectionViewCell: UICollectionViewCell {
         self.Imagee.sd_setImage(with: url, completed: nil)
         self.Name.text = cell.name
         self.Location.text = cell.address
-        if detectLanguage(for:self.Name.text!) == "Arabic"{
+        if detectLanguage(for:self.Name.text!) == "Arabic" || detectLanguage(for:self.Name.text!) == "Urdu"{
             self.Name.font = UIFont(name: "PeshangDes2", size: 14)!
         }else{
             self.Name.font = UIFont(name: "ArialRoundedMTBold", size: 14)!

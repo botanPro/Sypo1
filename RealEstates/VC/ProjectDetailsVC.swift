@@ -153,13 +153,8 @@ class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDel
             self.sliderImages = data.images ?? []
             self.PagerControl.pages = data.images?.count ?? 0
             
-            if XLanguage.get() == .English{
-                self.Name.text = data.project_name ?? ""
-            }else if XLanguage.get() == .Arabic{
-                self.Name.text = data.project_ar_name ?? ""
-            }else{
-                self.Name.text = data.project_ku_name ?? ""
-            }
+            self.Name.text = data.project_name ?? ""
+            
           
             self.Price.text = "\(data.from_price?.description.currencyFormatting() ?? "") to \(data.to_price?.description.currencyFormatting() ?? "")"
             self.Location.text = data.address ?? ""
@@ -175,13 +170,9 @@ class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDel
                 }
                 self.view.layoutIfNeeded()
             }else{
-                if XLanguage.get() == .English{
+                
                     self.Description.text = data.desc
-                }else if XLanguage.get() == .Arabic{
-                    self.Description.text = data.ar_desc
-                }else{
-                    self.Description.text = data.ku_desc
-                }
+              
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
                     UIView.animate(withDuration: 0.2) {
@@ -207,19 +198,76 @@ class ProjectDetailsVC: UIViewController , WKYTPlayerViewDelegate ,UITextViewDel
                 self.keys.append("کرێی خزمەتگوزارییەکانی مانگانە")
                 self.keys.append("ساڵی دروست کردن")
                 self.keys.append("تەلەفۆنی نووسینگە")
-            }else if XLanguage.get() == .English{
-                self.keys.append("Date")
-                self.keys.append("Buildings No.")
-                self.keys.append("Monthly services fee")
-                self.keys.append("Constraction year")
-                self.keys.append("Office Phone")
-            }else{
+            }else if XLanguage.get() == .Arabic{
                 self.keys.append("تاريخ")
                 self.keys.append("عدد المباني")
                 self.keys.append("رسوم الخدمات الشهرية")
                 self.keys.append("سنة البناء")
                 self.keys.append("هاتف المكتب")
-            }
+            }else if XLanguage.get() == .English {
+                self.keys.append("Date")
+                self.keys.append("Buildings No.")
+                self.keys.append("Monthly services fee")
+                self.keys.append("Construction year")
+                self.keys.append("Office Phone")
+            } else if XLanguage.get() == .Dutch {
+                self.keys.append("Datum")
+                self.keys.append("Aantal gebouwen")
+                self.keys.append("Maandelijkse servicekosten")
+                self.keys.append("Bouwjaar")
+                self.keys.append("Kantoortelefoon")
+            } else if XLanguage.get() == .French {
+                self.keys.append("Date")
+                self.keys.append("N° des bâtiments")
+                self.keys.append("Frais de services mensuels")
+                self.keys.append("Année de construction")
+                self.keys.append("Téléphone de bureau")
+            } else if XLanguage.get() == .Spanish {
+                self.keys.append("Fecha")
+                self.keys.append("No. de edificios")
+                self.keys.append("Cuota de servicios mensuales")
+                self.keys.append("Año de construcción")
+                self.keys.append("Teléfono de oficina")
+            } else if XLanguage.get() == .German {
+                self.keys.append("Datum")
+                self.keys.append("Gebäudenummer")
+                self.keys.append("Monatliche Servicegebühr")
+                self.keys.append("Baujahr")
+                self.keys.append("Bürotelefon")
+            } else if XLanguage.get() == .Hebrew {
+                self.keys.append("תאריך")
+                self.keys.append("מס' בניינים")
+                self.keys.append("דמי שירות חודשיים")
+                self.keys.append("שנת בנייה")
+                self.keys.append("טלפון משרד")
+            } else if XLanguage.get() == .Chinese {
+                self.keys.append("日期")
+                self.keys.append("建筑编号")
+                self.keys.append("每月服务费")
+                self.keys.append("建造年份")
+                self.keys.append("办公电话")
+            } else if XLanguage.get() == .Hindi {
+                self.keys.append("तारीख")
+                self.keys.append("इमारतों का नंबर")
+                self.keys.append("मासिक सेवा शुल्क")
+                self.keys.append("निर्माण वर्ष")
+                self.keys.append("कार्यालय फोन")
+            } else if XLanguage.get() == .Portuguese {
+                self.keys.append("Data")
+                self.keys.append("Nº de edifícios")
+                self.keys.append("Taxa de serviços mensais")
+                self.keys.append("Ano de construção")
+                self.keys.append("Telefone do escritório")
+            } else if XLanguage.get() == .Russian {
+                self.keys.append("Дата")
+                self.keys.append("Номер здания")
+                self.keys.append("Ежемесячная плата за услуги")
+                self.keys.append("Год постройки")
+                self.keys.append("Офисный телефон")
+            } // And so on for other languages...
+
+            // Ensure to add translations and extend the list for other languages supported by your application.
+
             
             self.value.append("\(dateTime[0])".convertedDigitsToLocale(Locale(identifier: "EN")))
             
@@ -381,12 +429,12 @@ extension ProjectDetailsVC : UICollectionViewDataSource, UICollectionViewDelegat
             if XLanguage.get() == .Kurdish{
                 cell.Typee.font = UIFont(name: "PeshangDes2", size: 11)!
                 cell.Value.font = UIFont(name: "PeshangDes2", size: 10)!
-            }else if XLanguage.get() == .English{
-                cell.Typee.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
-                cell.Value.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
-            }else{
+            }else if XLanguage.get() == .Arabic{
                 cell.Typee.font = UIFont(name: "PeshangDes2", size: 11)!
                 cell.Value.font = UIFont(name: "PeshangDes2", size: 10)!
+            }else{
+                cell.Typee.font = UIFont(name: "ArialRoundedMTBold", size: 11)!
+                cell.Value.font = UIFont(name: "ArialRoundedMTBold", size: 10)!
             }
             return cell
         }
